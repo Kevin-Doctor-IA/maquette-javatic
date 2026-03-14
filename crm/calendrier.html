@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1440">
+    <title>JAVATIC — Calendrier des RDV</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="has-disclaimer">
+<div class="disclaimer-banner">Interfaces à usage visuel uniquement — Aperçu non fonctionnel, données fictives</div>
+<div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <span class="sidebar-logo">🍺</span>
+            <span class="sidebar-app-name">JAVATIC CRM</span>
+            <span class="sidebar-chevron">▾</span>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">📊</span>
+                    <span class="sidebar-section-label">Pilotage</span>
+                </div>
+                <a href="../pilotage/dashboard.html" class="sidebar-item">Dashboard financier</a>
+                <a href="../pilotage/zones-potentiel.html" class="sidebar-item">Zones à fort potentiel</a>
+                <a href="../pilotage/todo.html" class="sidebar-item">TODO</a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">💼</span>
+                    <span class="sidebar-section-label">CRM et suivi commercial</span>
+                </div>
+                <a href="../crm/sites.html" class="sidebar-item">Liste des sites</a>
+                <a href="../crm/contacts.html" class="sidebar-item">Liste des contacts</a>
+                <a href="../crm/pipeline.html" class="sidebar-item">Pipeline commercial</a>
+                <a href="../crm/calendrier.html" class="sidebar-item active">Calendrier des RDV</a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">⚙️</span>
+                    <span class="sidebar-section-label">Production</span>
+                </div>
+                <a href="../production/idees-rd.html" class="sidebar-item">Idées R&D</a>
+                <a href="../production/fabrication.html" class="sidebar-item">Suivi fabrication</a>
+                <a href="../production/machines.html" class="sidebar-item">Liste des machines</a>
+                <a href="../production/demandes-validees.html" class="sidebar-item">Demandes clients validées</a>
+                <a href="../production/suivi-operationnel.html" class="sidebar-item">Suivi opérationnel</a>
+            </div>
+        </nav>
+        <div class="sidebar-footer">
+            <span class="sidebar-footer-icon">👤</span>
+            <span class="sidebar-footer-text">Yoann RUAUD</span>
+        </div>
+    </aside>
+
+    <!-- MAIN AREA -->
+    <div class="main-area">
+
+        <!-- PAGE HEADER -->
+        <div class="page-header">
+            <div class="header-left">
+                <div class="breadcrumb">
+                    <span class="breadcrumb-parent">CRM et suivi commercial</span>
+                    <span class="breadcrumb-sep">›</span>
+                    <span class="breadcrumb-current">Calendrier des RDV</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="btn-primary" onclick="alert('Ajouter un RDV')">+ Ajouter un RDV</button>
+            </div>
+        </div>
+
+        <!-- CALENDAR NAV -->
+        <div class="cal-nav">
+            <div class="cal-month-title">Mars 2026</div>
+            <div class="cal-nav-right">
+                <button class="cal-nav-btn">Aujourd'hui</button>
+                <button class="cal-nav-btn">◀</button>
+                <button class="cal-nav-btn">▶</button>
+                <select class="cal-view-select">
+                    <option>Mois</option>
+                    <option>Semaine</option>
+                    <option>Jour</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content-area content-white">
+            <div class="cal-grid">
+                <!-- Header row -->
+                <div class="cal-header-cell">dim</div>
+                <div class="cal-header-cell">lun</div>
+                <div class="cal-header-cell">mar</div>
+                <div class="cal-header-cell">mer</div>
+                <div class="cal-header-cell">jeu</div>
+                <div class="cal-header-cell">ven</div>
+                <div class="cal-header-cell">sam</div>
+
+                <!-- Week 1: Mar 1 (dim) - Mar 7 (sam) -->
+                <div class="cal-cell cal-cell-weekend">
+                    <span class="cal-day-number">1</span>
+                </div>
+                <div class="cal-cell">
+                    <span class="cal-day-number">2</span>
+                    <div class="cal-event cal-event-blue" onclick="openRecord(this)" data-record-name="Appel découverte Zénith Pau">
+                        <span class="cal-event-time">10:00</span>
+                        <span class="cal-event-title">Appel découverte Zénith Pau</span>
+                    </div>
+                </div>
+                <div class="cal-cell">
+                    <span class="cal-day-number">3</span>
+                </div>
+                <div class="cal-cell">
+                    <span class="cal-day-number">4</span>
+                </div>
+                <div class="cal-cell">
+                    <span class="cal-day-number">5</span>
+                    <div class="cal-event cal-event-green" onclick="openRecord(this)" data-record-name="Email relance Garorock">
+                        <span class="cal-event-time">09:00</span>
+                        <span class="cal-event-title">Email relance Garorock</span>
+                    </div>
+                </div>
+                <div class="cal-cell">
+                    <span class="cal-day-number">6</span>
+                </div>
+                <div class="cal-cell cal-cell-weekend">
+                    <span class="cal-day-number">7</span>
+                </div>
+
+                <!-- Week 2: Mar 8 (dim) - Mar 14 (sam) -->
+                <div class="cal-cell cal-cell-weekend">
+                    <span class="cal-day-number">8</span>
+                </div>
+                <div class="cal-cell">
+                    <span class="cal-day-number">9</span>
+                </div>
+                <div class="cal-cell">
+                    <span class="cal-day-number">10</span>
+                    <div class="cal-event cal-event-green" onclick="openRecord(this)" data-record-name="RDV démo Arena Bordeaux">
+                        <span class="cal-event-time">14:00</span>
+                        <span class="cal-event-title">RDV démo Arena Bordeaux</span>
+                    </div>
+                </div>
+                <div class="cal-cell">
+                    <span class="cal-day-number">11</span>
+                </div>
+                <div class="cal-cell">
+                    <span class="cal-day-number">12</span>
+                </div>
+                <div class="cal-cell">
+                    <span class="cal-day-number">13</span>
+                </div>
+                <div class="cal-cell cal-cell-weekend cal-cell-today">
+                    <span class="cal-day-number"><span class="cal-today-number">14</span></span>
+                </div>
+
+                <!-- Week 3: Mar 15 (dim) - Mar 21 (sam) -->
+                <div class="cal-cell cal-cell-weekend">
+                    <span class="cal-day-number">15</span>
+                </div>
+                <div class="cal-cell">
+                    <span class="cal-day-number">16</span>
+                    <div class="cal-event cal-event-blue" onclick="openRecord(this)" data-record-name="Visio Eurockéennes">
+                        <span class="cal-event-time">11:00</span>
+                        <span class="cal-event-title">Visio Eurockéennes</span>
+                    </div>
+                </div>
+                <div class="cal-cell">
+                    <span class="cal-day-number">17</span>
+                </div>
+                <div class="cal-cell">
+                    <span class="cal-day-number">18</span>
+                    <div class="cal-event cal-event-blue" onclick="openRecord(this)" data-record-name="Appel Vieilles Charrues">
+                        <span class="cal-event-time">15:00</span>
+                        <span class="cal-event-title">Appel Vieilles Charrues</span>
+                    </div>
+                </div>
+                <div class="cal-cell">
+                    <span class="cal-day-number">19</span>
+                </div>
+                <div class="cal-cell">
+                    <span class="cal-day-number">20</span>
+                    <div class="cal-event cal-event-blue" onclick="openRecord(this)" data-record-name="RDV physique Hellfest">
+                        <span class="cal-event-time">10:00</span>
+                        <span class="cal-event-title">RDV physique Hellfest</span>
+                    </div>
+                </div>
+                <div class="cal-cell cal-cell-weekend">
+                    <span class="cal-day-number">21</span>
+                </div>
+
+                <!-- Week 4: Mar 22 (dim) - Mar 28 (sam) -->
+                <div class="cal-cell cal-cell-weekend">
+                    <span class="cal-day-number">22</span>
+                </div>
+                <div class="cal-cell">
+                    <span class="cal-day-number">23</span>
+                </div>
+                <div class="cal-cell">
+                    <span class="cal-day-number">24</span>
+                </div>
+                <div class="cal-cell">
+                    <span class="cal-day-number">25</span>
+                    <div class="cal-event cal-event-orange" onclick="openRecord(this)" data-record-name="Salon Pro Bordeaux">
+                        <span class="cal-event-time">09:00</span>
+                        <span class="cal-event-title">Salon Pro Bordeaux</span>
+                    </div>
+                </div>
+                <div class="cal-cell">
+                    <span class="cal-day-number">26</span>
+                </div>
+                <div class="cal-cell">
+                    <span class="cal-day-number">27</span>
+                </div>
+                <div class="cal-cell cal-cell-weekend">
+                    <span class="cal-day-number">28</span>
+                </div>
+
+                <!-- Week 5: Mar 29 (dim) - Apr 4 (sam) -->
+                <div class="cal-cell cal-cell-weekend">
+                    <span class="cal-day-number">29</span>
+                </div>
+                <div class="cal-cell">
+                    <span class="cal-day-number">30</span>
+                    <div class="cal-event cal-event-blue" onclick="openRecord(this)" data-record-name="Relance Stade Matmut">
+                        <span class="cal-event-time">14:00</span>
+                        <span class="cal-event-title">Relance Stade Matmut</span>
+                    </div>
+                </div>
+                <div class="cal-cell">
+                    <span class="cal-day-number">31</span>
+                </div>
+                <div class="cal-cell cal-cell-other">
+                    <span class="cal-day-number">1</span>
+                </div>
+                <div class="cal-cell cal-cell-other">
+                    <span class="cal-day-number">2</span>
+                </div>
+                <div class="cal-cell cal-cell-other">
+                    <span class="cal-day-number">3</span>
+                </div>
+                <div class="cal-cell cal-cell-other cal-cell-weekend">
+                    <span class="cal-day-number">4</span>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- DETAIL PANEL -->
+<div class="detail-panel" id="detailPanel">
+    <div class="detail-panel-header">
+        <span class="detail-panel-title" id="detailTitle">—</span>
+        <div class="detail-panel-actions">
+            <button class="detail-panel-expand" title="Agrandir">⤢</button>
+            <button class="detail-panel-close" onclick="closeDetailPanel()">✕</button>
+        </div>
+    </div>
+    <div class="detail-panel-body" id="detailBody"></div>
+</div>
+
+
+<script>
+/* ============================================
+   DATA — INTERACTIONS
+   ============================================ */
+const interactionData = {
+    'Appel découverte Zénith Pau': {
+        titre: 'Appel découverte Zénith Pau',
+        type: 'Appel téléphonique', typeClass: 'badge-blue',
+        date: '2026-03-02', statut: 'Réalisé', statutClass: 'badge-green',
+        compteRendu: 'Premier appel avec Jean Dupont. Présentation de la solution JAvATIC. Il est intéressé par une démo sur site.\n\nPoints abordés :\n- Problème de files d\'attente confirmé\n- 6 500 places, environ 80 événements/an\n- Budget à valider en interne',
+        prochaineAction: 'Envoyer plaquette commerciale + planifier RDV démo',
+        dateProchaineAction: '2026-03-06',
+        contactsLies: ['Jean Dupont'], siteLie: 'Zénith de Pau', affaireLiee: 'Zénith de Pau — Avril 2026'
+    },
+    'Email relance Garorock': {
+        titre: 'Email relance Garorock',
+        type: 'Email', typeClass: 'badge-gray',
+        date: '2026-03-05', statut: 'Réalisé', statutClass: 'badge-green',
+        compteRendu: 'Email de relance envoyé à Thomas Moreau suite à la rencontre au MaMA Festival.\n\nContenu :\n- Rappel de notre rencontre\n- Présentation succincte de la solution\n- Proposition de RDV visio',
+        prochaineAction: 'Attendre retour de Thomas Moreau',
+        dateProchaineAction: '2026-03-12',
+        contactsLies: ['Thomas Moreau'], siteLie: 'Garorock', affaireLiee: 'Garorock — Juin 2026'
+    },
+    'RDV démo Arena Bordeaux': {
+        titre: 'RDV démo Arena Bordeaux',
+        type: 'RDV physique', typeClass: 'badge-blue',
+        date: '2026-03-10', statut: 'Réalisé', statutClass: 'badge-green',
+        compteRendu: 'Démonstration sur site à l\'Arena de Bordeaux avec Sophie Martin.\n\nRésultats :\n- Démo très concluante, la machine a distribué 120 bières en 30 minutes\n- Sophie convaincue, va transmettre au directeur\n- 3 bars identifiés pour déploiement\n- Contrat signé dans la foulée pour 3 machines',
+        prochaineAction: 'Préparer livraison et installation pour le 20/03',
+        dateProchaineAction: '2026-03-15',
+        contactsLies: ['Sophie Martin'], siteLie: 'Arena de Bordeaux', affaireLiee: 'Arena de Bordeaux — Mars 2026'
+    },
+    'Visio Eurockéennes': {
+        titre: 'Visio Eurockéennes',
+        type: 'Visioconférence', typeClass: 'badge-blue',
+        date: '2026-03-16', statut: 'Planifié', statutClass: 'badge-blue',
+        compteRendu: '',
+        prochaineAction: 'Préparer présentation adaptée festivals plein air',
+        dateProchaineAction: '2026-03-15',
+        contactsLies: ['Claire Bernard'], siteLie: 'Eurockéennes', affaireLiee: 'Eurockéennes — Juillet 2026'
+    },
+    'Appel Vieilles Charrues': {
+        titre: 'Appel Vieilles Charrues',
+        type: 'Appel téléphonique', typeClass: 'badge-blue',
+        date: '2026-03-18', statut: 'Planifié', statutClass: 'badge-blue',
+        compteRendu: '',
+        prochaineAction: 'Préparer questions sur infrastructure bar du festival',
+        dateProchaineAction: '2026-03-17',
+        contactsLies: ['Laura Petit'], siteLie: 'Vieilles Charrues', affaireLiee: 'Vieilles Charrues — Juillet 2026'
+    },
+    'RDV physique Hellfest': {
+        titre: 'RDV physique Hellfest',
+        type: 'RDV physique', typeClass: 'badge-blue',
+        date: '2026-03-20', statut: 'Planifié', statutClass: 'badge-blue',
+        compteRendu: '',
+        prochaineAction: 'Préparer bilan 2025 + proposition 5 machines 2026',
+        dateProchaineAction: '2026-03-19',
+        contactsLies: ['Antoine Roux'], siteLie: 'Hellfest', affaireLiee: 'Hellfest — Juin 2026'
+    },
+    'Salon Pro Bordeaux': {
+        titre: 'Salon Pro Bordeaux',
+        type: 'Salon / Événement', typeClass: 'badge-orange',
+        date: '2026-03-25', statut: 'Planifié', statutClass: 'badge-blue',
+        compteRendu: '',
+        prochaineAction: 'Réserver stand + préparer supports de communication',
+        dateProchaineAction: '2026-03-20',
+        contactsLies: [], siteLie: '', affaireLiee: ''
+    },
+    'Relance Stade Matmut': {
+        titre: 'Relance Stade Matmut',
+        type: 'Appel téléphonique', typeClass: 'badge-blue',
+        date: '2026-03-30', statut: 'Planifié', statutClass: 'badge-blue',
+        compteRendu: '',
+        prochaineAction: 'Préparer argumentaire matchs de rugby',
+        dateProchaineAction: '2026-03-27',
+        contactsLies: ['Pierre Durand'], siteLie: 'Stade Matmut Atlantique', affaireLiee: 'Stade Matmut — Mai 2026'
+    }
+};
+
+
+/* ============================================
+   BUILD INTERACTION PANEL (main, interactive)
+   ============================================ */
+function buildInteractionPanel(d) {
+    const esc = s => (s === undefined || s === null || s === '') ? '—' : s.toString().replace(/</g,'&lt;');
+    const textField = (label, value) => `<div class="detail-field">
+        <div class="detail-field-label">${label}</div>
+        <div class="field-text" onclick="editText(this)"><span class="field-text-display">${esc(value)}</span></div>
+    </div>`;
+    const selectField = (label, value, badgeClass, options) => {
+        const opts = options.map(o => `<div class="field-select-option${o===value?' selected':''}" onclick="selectOption(this,'${badgeClass}')">${o}</div>`).join('');
+        return `<div class="detail-field">
+            <div class="detail-field-label">${label}</div>
+            <div class="field-select" onclick="toggleSelect(this)">
+                <div class="field-select-value"><span class="badge ${badgeClass}">${esc(value)}</span><span class="field-select-arrow">▾</span></div>
+                <div class="field-select-dropdown">${opts}</div>
+            </div>
+        </div>`;
+    };
+    const textareaField = (label, value) => `<div class="detail-field">
+        <div class="detail-field-label">${label}</div>
+        <div class="field-textarea" onclick="editTextarea(this)"><div class="field-textarea-display">${esc(value)}</div></div>
+    </div>`;
+
+    let html = '';
+
+    // Section: Informations
+    html += `<div class="detail-section"><div class="detail-section-title">Informations</div>`;
+    html += textField('Titre', d.titre);
+    html += selectField('Type d\'interaction', d.type, d.typeClass, ['Appel téléphonique', 'Email', 'RDV physique', 'Visioconférence', 'Salon / Événement', 'Autre']);
+    html += textField('Date de l\'interaction', d.date);
+    html += selectField('Statut', d.statut, d.statutClass, ['Planifié', 'Réalisé', 'Annulé']);
+    html += `</div>`;
+
+    // Section: Contenu
+    html += `<div class="detail-section"><div class="detail-section-title">Contenu</div>`;
+    html += textareaField('Compte-rendu', d.compteRendu);
+    html += textField('Prochaine action', d.prochaineAction);
+    html += textField('Date prochaine action', d.dateProchaineAction);
+    html += `</div>`;
+
+    // Section: Enregistrements liés
+    html += `<div class="detail-section"><div class="detail-section-title">Enregistrements liés</div>`;
+    html += `<div class="detail-field"><div class="detail-field-label">Contact(s) lié(s)</div><div class="detail-field-value">`;
+    if (d.contactsLies && d.contactsLies.length) {
+        d.contactsLies.forEach(c => { html += `<span class="detail-linked-record" onclick="alert('Fonctionnalité disponible dans Airtable')">${c}</span>`; });
+    } else {
+        html += '<span style="color:#999;">Aucun</span>';
+    }
+    html += `<span class="field-add-link">+ Ajouter</span></div></div>`;
+
+    html += `<div class="detail-field"><div class="detail-field-label">Site lié</div><div class="detail-field-value">`;
+    if (d.siteLie) {
+        html += `<span class="detail-linked-record" onclick="alert('Fonctionnalité disponible dans Airtable')">${d.siteLie}</span>`;
+    } else {
+        html += '<span style="color:#999;">Aucun</span>';
+    }
+    html += `<span class="field-add-link">+ Ajouter</span></div></div>`;
+
+    html += `<div class="detail-field"><div class="detail-field-label">Affaire liée</div><div class="detail-field-value">`;
+    if (d.affaireLiee) {
+        html += `<span class="detail-linked-record" onclick="alert('Fonctionnalité disponible dans Airtable')">${d.affaireLiee}</span>`;
+    } else {
+        html += '<span style="color:#999;">Aucune</span>';
+    }
+    html += `<span class="field-add-link">+ Ajouter</span></div></div>`;
+    html += `</div>`;
+
+    return html;
+}
+
+
+/* ============================================
+   OPEN / CLOSE
+   ============================================ */
+function openRecord(el) {
+    const name = el.dataset.recordName;
+    const d = interactionData[name];
+    if (!d) return;
+    document.getElementById('detailTitle').textContent = d.titre;
+    document.getElementById('detailBody').innerHTML = buildInteractionPanel(d);
+    document.getElementById('detailPanel').classList.add('open');
+}
+
+function closeDetailPanel() {
+    document.getElementById('detailPanel').classList.remove('open');
+}
+
+/* ============================================
+   INTERACTIVE FIELDS
+   ============================================ */
+function toggleSelect(el) {
+    const dd = el.querySelector('.field-select-dropdown');
+    closeAllDropdowns();
+    dd.classList.toggle('open');
+    event.stopPropagation();
+}
+
+function selectOption(optEl, badgeClass) {
+    const sel = optEl.closest('.field-select');
+    const val = optEl.textContent.trim();
+    sel.querySelector('.field-select-value .badge').textContent = val;
+    sel.querySelector('.field-select-value .badge').className = 'badge ' + badgeClass;
+    sel.querySelectorAll('.field-select-option').forEach(o => o.classList.remove('selected'));
+    optEl.classList.add('selected');
+    sel.querySelector('.field-select-dropdown').classList.remove('open');
+    event.stopPropagation();
+}
+
+function toggleMultiSelect(el) {
+    const dd = el.querySelector('.field-select-dropdown');
+    closeAllDropdowns();
+    dd.classList.toggle('open');
+    event.stopPropagation();
+}
+
+function updateMultiSelect(optEl) {
+    event.stopPropagation();
+    const cb = optEl.querySelector('input[type="checkbox"]');
+    cb.checked = !cb.checked;
+    const ms = optEl.closest('.field-multiselect');
+    const vals = [];
+    ms.querySelectorAll('.field-multiselect-option input:checked').forEach(c => {
+        vals.push(c.parentElement.textContent.trim());
+    });
+    const container = ms.querySelector('.field-multiselect-values');
+    const arrow = '<span class="field-select-arrow">▾</span>';
+    if (vals.length) {
+        container.innerHTML = vals.map(v => `<span class="badge badge-blue">${v}</span>`).join(' ') + arrow;
+    } else {
+        container.innerHTML = '<span style="color:#999;">Aucun</span>' + arrow;
+    }
+}
+
+function editText(el) {
+    const display = el.querySelector('.field-text-display');
+    if (!display) return;
+    const val = display.textContent === '—' ? '' : display.textContent;
+    el.innerHTML = `<input class="field-text-input" value="${val.replace(/"/g,'&quot;')}" onblur="saveText(this)" onkeydown="if(event.key==='Enter')this.blur()">`;
+    el.querySelector('input').focus();
+}
+
+function saveText(input) {
+    const val = input.value || '—';
+    input.parentElement.innerHTML = `<span class="field-text-display">${val.replace(/</g,'&lt;')}</span>`;
+}
+
+function editTextarea(el) {
+    const display = el.querySelector('.field-textarea-display');
+    if (!display) return;
+    const val = display.textContent === '—' ? '' : display.textContent;
+    el.innerHTML = `<textarea class="field-textarea-input" rows="4" onblur="saveTextarea(this)">${val.replace(/</g,'&lt;')}</textarea>`;
+    el.querySelector('textarea').focus();
+}
+
+function saveTextarea(ta) {
+    const val = ta.value || '—';
+    ta.parentElement.innerHTML = `<div class="field-textarea-display">${val.replace(/</g,'&lt;')}</div>`;
+}
+
+function closeAllDropdowns() {
+    document.querySelectorAll('.field-select-dropdown.open').forEach(d => d.classList.remove('open'));
+}
+
+/* ============================================
+   GLOBAL EVENTS
+   ============================================ */
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.field-select') && !e.target.closest('.field-multiselect')) {
+        closeAllDropdowns();
+    }
+});
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeDetailPanel();
+});
+</script>
+</body>
+</html>

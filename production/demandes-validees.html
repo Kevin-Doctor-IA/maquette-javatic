@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1440">
+    <title>JAVATIC — Demandes clients validées — Planning machines</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .gantt-list-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .gantt-list-table thead { position: sticky; top: 0; z-index: 1; }
+        .gantt-list-table th { padding: 8px 12px; text-align: left; font-weight: 500; font-size: 11px; color: #999; text-transform: uppercase; letter-spacing: 0.3px; border-bottom: 1px solid #e5e5e5; background: #fafafa; white-space: nowrap; }
+        .gantt-list-table td { padding: 0 12px; vertical-align: middle; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px; }
+        .gantt-list-row { height: 36px; border-bottom: 1px solid #f0f0f0; cursor: pointer; }
+        .gantt-list-row:hover { background: #f8f9ff; }
+        .gantt-list-group-row { height: 44px; background: #eef2f8; border-bottom: 2px solid #c5d1e0; border-top: 3px solid #b0bdd0; line-height: 44px; }
+        .gantt-list-group-row td { font-weight: 700; color: #166ee1; font-size: 14px; letter-spacing: 0.2px; }
+        .gantt-today-line { position: absolute; top: 0; bottom: 0; width: 2px; background: #ef4444; z-index: 2; }
+        .gantt-timeline-body { position: relative; }
+        .gantt-bar-overlap { opacity: 0.85; border: 2px solid #ef4444 !important; }
+        .gantt-overlap-indicator { position: absolute; top: 0; bottom: 0; background: rgba(239, 68, 68, 0.12); z-index: 1; border-left: 1px dashed #ef4444; border-right: 1px dashed #ef4444; }
+        .gantt-row-group { border-top: 3px solid #b0bdd0; border-bottom: 2px solid #c5d1e0; background: #eef2f8 !important; }
+    </style>
+</head>
+<body class="has-disclaimer">
+<div class="disclaimer-banner">Interfaces à usage visuel uniquement — Aperçu non fonctionnel, données fictives</div>
+<div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <span class="sidebar-logo">🍺</span>
+            <span class="sidebar-app-name">JAVATIC CRM</span>
+            <span class="sidebar-chevron">▾</span>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">📊</span>
+                    <span class="sidebar-section-label">Pilotage</span>
+                </div>
+                <a href="../pilotage/dashboard.html" class="sidebar-item">Dashboard financier</a>
+                <a href="../pilotage/zones-potentiel.html" class="sidebar-item">Zones à fort potentiel</a>
+                <a href="../pilotage/todo.html" class="sidebar-item">TODO</a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">💼</span>
+                    <span class="sidebar-section-label">CRM et suivi commercial</span>
+                </div>
+                <a href="../crm/sites.html" class="sidebar-item">Liste des sites</a>
+                <a href="../crm/contacts.html" class="sidebar-item">Liste des contacts</a>
+                <a href="../crm/pipeline.html" class="sidebar-item">Pipeline commercial</a>
+                <a href="../crm/calendrier.html" class="sidebar-item">Calendrier des RDV</a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">⚙️</span>
+                    <span class="sidebar-section-label">Production</span>
+                </div>
+                <a href="../production/idees-rd.html" class="sidebar-item">Idées R&D</a>
+                <a href="../production/fabrication.html" class="sidebar-item">Suivi fabrication</a>
+                <a href="../production/machines.html" class="sidebar-item">Liste des machines</a>
+                <a href="../production/demandes-validees.html" class="sidebar-item active">Demandes clients validées</a>
+                <a href="../production/suivi-operationnel.html" class="sidebar-item">Suivi opérationnel</a>
+            </div>
+        </nav>
+        <div class="sidebar-footer">
+            <span class="sidebar-footer-icon">👤</span>
+            <span class="sidebar-footer-text">Yoann RUAUD</span>
+        </div>
+    </aside>
+
+    <!-- MAIN AREA -->
+    <div class="main-area">
+
+        <!-- PAGE HEADER -->
+        <div class="page-header">
+            <div class="header-left">
+                <div class="breadcrumb">
+                    <span class="breadcrumb-parent">Production</span>
+                    <span class="breadcrumb-sep">›</span>
+                    <span class="breadcrumb-current">Demandes clients validées — Planning machines</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <span style="font-size:12px; color:#999; padding:4px 10px; background:#f0f0f0; border-radius:4px;">Filtre : Statut commercial = Validé</span>
+            </div>
+        </div>
+
+        <!-- GANTT TOOLBAR -->
+        <div class="gantt-toolbar">
+            <span style="font-size:13px; color:#666;">Groupé par : <strong>Machine assignée</strong></span>
+            <div class="gantt-toolbar-right">
+                <span style="font-size:12px; color:#999;">Mars — Juillet 2026</span>
+            </div>
+        </div>
+
+        <!-- GANTT CONTENT -->
+        <div class="gantt-container">
+            <!-- LEFT: Task list -->
+            <div class="gantt-list" id="gantt-list">
+                <table class="gantt-list-table">
+                    <thead>
+                        <tr style="height:28px;">
+                            <th colspan="4" style="padding:4px 12px;font-size:12px;font-weight:600;color:#333;background:#f5f5f5;border-bottom:1px solid #ddd;text-transform:none;letter-spacing:0;height:28px;">Planning par machine</th>
+                        </tr>
+                        <tr style="height:30px;">
+                            <th style="height:30px;">Affaire</th>
+                            <th style="height:30px;">Site</th>
+                            <th style="height:30px;">Dates</th>
+                            <th style="height:30px;">Jours</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Group: DIST-001 -->
+                        <tr class="gantt-list-group-row">
+                            <td colspan="4">DIST-001 (JAvATIC Alpha)</td>
+                        </tr>
+                        <tr class="gantt-list-row" onclick="openRecord(this)" data-record-name="Arena de Bordeaux — Mars 2026">
+                            <td class="col-primary">Arena de Bordeaux — Mars 2026</td>
+                            <td>Arena de Bordeaux</td>
+                            <td style="font-size:12px;">20/03 — 22/03</td>
+                            <td style="text-align:right;">3</td>
+                        </tr>
+                        <tr class="gantt-list-row" onclick="openRecord(this)" data-record-name="Hellfest — Juin 2026">
+                            <td class="col-primary">Hellfest — Juin 2026</td>
+                            <td>Hellfest</td>
+                            <td style="font-size:12px;">18/06 — 21/06</td>
+                            <td style="text-align:right;">4</td>
+                        </tr>
+                        <tr class="gantt-list-row" onclick="openRecord(this)" data-record-name="Eurockéennes — Juillet 2026">
+                            <td class="col-primary">Eurockéennes — Juillet 2026</td>
+                            <td>Eurockéennes</td>
+                            <td style="font-size:12px;">02/07 — 05/07</td>
+                            <td style="text-align:right;">4</td>
+                        </tr>
+
+                        <!-- Group: DIST-003 -->
+                        <tr class="gantt-list-group-row">
+                            <td colspan="4">DIST-003 (JAvATIC Gamma)</td>
+                        </tr>
+                        <tr class="gantt-list-row" onclick="openRecord(this)" data-record-name="Arena de Bordeaux — Mars 2026">
+                            <td class="col-primary">Arena de Bordeaux — Mars 2026</td>
+                            <td>Arena de Bordeaux</td>
+                            <td style="font-size:12px;">20/03 — 22/03</td>
+                            <td style="text-align:right;">3</td>
+                        </tr>
+                        <tr class="gantt-list-row" onclick="openRecord(this)" data-record-name="Hellfest — Juin 2026">
+                            <td class="col-primary">Hellfest — Juin 2026</td>
+                            <td>Hellfest</td>
+                            <td style="font-size:12px;">18/06 — 21/06</td>
+                            <td style="text-align:right;">4</td>
+                        </tr>
+                        <tr class="gantt-list-row" onclick="openRecord(this)" data-record-name="Eurockéennes — Juillet 2026">
+                            <td class="col-primary">Eurockéennes — Juillet 2026</td>
+                            <td>Eurockéennes</td>
+                            <td style="font-size:12px;">02/07 — 05/07</td>
+                            <td style="text-align:right;">4</td>
+                        </tr>
+                        <tr class="gantt-list-row" onclick="openRecord(this)" data-record-name="Paléo Festival — Juillet 2026">
+                            <td class="col-primary" style="color:#ef4444;">Paléo Festival — Juillet 2026</td>
+                            <td>Paléo Festival</td>
+                            <td style="font-size:12px;">03/07 — 06/07</td>
+                            <td style="text-align:right;">4</td>
+                        </tr>
+
+                        <!-- Group: DIST-004 -->
+                        <tr class="gantt-list-group-row">
+                            <td colspan="4">DIST-004 (JAvATIC Delta)</td>
+                        </tr>
+                        <tr class="gantt-list-row" onclick="openRecord(this)" data-record-name="Hellfest — Juin 2026">
+                            <td class="col-primary">Hellfest — Juin 2026</td>
+                            <td>Hellfest</td>
+                            <td style="font-size:12px;">18/06 — 21/06</td>
+                            <td style="text-align:right;">4</td>
+                        </tr>
+                        <tr class="gantt-list-row" onclick="openRecord(this)" data-record-name="Fête du Vin — Juin 2026">
+                            <td class="col-primary" style="color:#ef4444;">Fête du Vin — Juin 2026</td>
+                            <td>Fête du Vin Bordeaux</td>
+                            <td style="font-size:12px;">19/06 — 22/06</td>
+                            <td style="text-align:right;">4</td>
+                        </tr>
+                        <tr class="gantt-list-row" onclick="openRecord(this)" data-record-name="Eurockéennes — Juillet 2026">
+                            <td class="col-primary">Eurockéennes — Juillet 2026</td>
+                            <td>Eurockéennes</td>
+                            <td style="font-size:12px;">02/07 — 05/07</td>
+                            <td style="text-align:right;">4</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- RIGHT: Timeline -->
+            <div class="gantt-timeline" id="gantt-timeline">
+                <div class="gantt-timeline-header" id="gantt-header">
+                    <!-- Generated by JS -->
+                </div>
+                <div class="gantt-timeline-body" id="gantt-body">
+                    <!-- Generated by JS -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- RECORD MODAL -->
+    <div class="record-modal" id="record-modal">
+        <div class="record-modal-overlay" onclick="closeRecordModal()"></div>
+        <div class="record-modal-content">
+            <div class="record-modal-header">
+                <div class="record-modal-nav">
+                    <button class="record-modal-back" onclick="closeRecordModal()">&#8592; Retour</button>
+                </div>
+                <h2 class="record-modal-title" id="record-modal-title">—</h2>
+                <div class="record-modal-header-actions">
+                    <button class="detail-panel-close" onclick="closeRecordModal()">&#10005;</button>
+                </div>
+            </div>
+            <div class="record-modal-tabs">
+                <button class="record-modal-tab active" onclick="switchModalTab(this, 'general')">Général</button>
+                <button class="record-modal-tab" onclick="switchModalTab(this, 'terrain')">Analyse terrain</button>
+                <button class="record-modal-tab" onclick="switchModalTab(this, 'chiffrage')">Chiffrage</button>
+                <button class="record-modal-tab" onclick="switchModalTab(this, 'relations')">Relations</button>
+            </div>
+            <div class="record-modal-body" id="record-modal-body">
+                <!-- Generated dynamically by buildAffaireModal(data) -->
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<script>
+// ─── GANTT CONFIG ─────────────────────────────────────────
+// Timeline: March 1 to July 31, 2026 (153 days)
+const startDate = new Date(2026, 2, 1); // March 1
+const totalDays = 153;
+const cellWidth = 24;
+const dayNames = ['D','L','M','M','J','V','S'];
+const monthNames = ['Jan','Fév','Mars','Avr','Mai','Juin','Juil','Août','Sep','Oct','Nov','Déc'];
+const groupRowHeight = 44;
+const taskRowHeight = 36;
+
+// Build header — two rows: month names on top, day numbers below
+const headerEl = document.getElementById('gantt-header');
+const bodyEl = document.getElementById('gantt-body');
+
+// Compute month spans for top row
+const months = [];
+let currentMonth = -1;
+for (let i = 0; i < totalDays; i++) {
+    const d = new Date(startDate); d.setDate(d.getDate() + i);
+    const m = d.getMonth();
+    if (m !== currentMonth) {
+        months.push({ month: m, start: i, count: 1 });
+        currentMonth = m;
+    } else {
+        months[months.length - 1].count++;
+    }
+}
+
+let headerHtml = '<div style="display:flex;flex-direction:column;">';
+// Row 1: Month names
+headerHtml += '<div style="display:flex;height:28px;border-bottom:1px solid #ddd;">';
+months.forEach(m => {
+    headerHtml += `<div style="min-width:${m.count * cellWidth}px;max-width:${m.count * cellWidth}px;padding:4px 8px;font-size:12px;font-weight:600;color:#333;border-right:2px solid #ccc;background:#f5f5f5;box-sizing:border-box;height:28px;line-height:20px;">${monthNames[m.month]} 2026</div>`;
+});
+headerHtml += '</div>';
+// Row 2: Day numbers (show every Monday with day number)
+headerHtml += '<div style="display:flex;height:30px;">';
+for (let i = 0; i < totalDays; i++) {
+    const d = new Date(startDate); d.setDate(d.getDate() + i);
+    const dow = d.getDay();
+    const isWeekend = dow === 0 || dow === 6;
+    const isMonday = dow === 1;
+    const dayNum = d.getDate();
+    const isFirstOfMonth = dayNum === 1;
+    const showLabel = isMonday || isFirstOfMonth;
+    headerHtml += `<div class="gantt-date-cell${isWeekend ? ' gantt-weekend' : ''}" style="min-width:${cellWidth}px;max-width:${cellWidth}px;height:30px;padding:6px 0;${isMonday ? 'border-left:1px solid #ccc;' : ''}${isFirstOfMonth ? 'border-left:2px solid #aaa;' : ''}">
+        <div style="font-size:10px;color:${isWeekend ? '#bbb' : '#666'};text-align:center;">${showLabel ? dayNum : ''}</div>
+    </div>`;
+}
+headerHtml += '</div>';
+headerHtml += '</div>';
+headerEl.innerHTML = headerHtml;
+
+// Gantt task data grouped by machine
+const ganttTasks = [
+    // Group: DIST-001
+    { type: 'group', label: 'DIST-001 (JAvATIC Alpha)' },
+    { name: 'Arena de Bordeaux — Mars 2026', start: '2026-03-20', end: '2026-03-22', barClass: 'gantt-bar-blue' },
+    { name: 'Hellfest — Juin 2026', start: '2026-06-18', end: '2026-06-21', barClass: 'gantt-bar-teal' },
+    { name: 'Eurockéennes — Juillet 2026', start: '2026-07-02', end: '2026-07-05', barClass: 'gantt-bar-purple' },
+    // Group: DIST-003
+    { type: 'group', label: 'DIST-003 (JAvATIC Gamma)' },
+    { name: 'Arena de Bordeaux — Mars 2026', start: '2026-03-20', end: '2026-03-22', barClass: 'gantt-bar-blue' },
+    { name: 'Hellfest — Juin 2026', start: '2026-06-18', end: '2026-06-21', barClass: 'gantt-bar-teal' },
+    { name: 'Eurockéennes — Juillet 2026', start: '2026-07-02', end: '2026-07-05', barClass: 'gantt-bar-purple', overlap: true },
+    { name: 'Paléo Festival — Juillet 2026', start: '2026-07-03', end: '2026-07-06', barClass: 'gantt-bar-orange', overlap: true },
+    // Group: DIST-004
+    { type: 'group', label: 'DIST-004 (JAvATIC Delta)' },
+    { name: 'Hellfest — Juin 2026', start: '2026-06-18', end: '2026-06-21', barClass: 'gantt-bar-teal', overlap: true },
+    { name: 'Fête du Vin — Juin 2026', start: '2026-06-19', end: '2026-06-22', barClass: 'gantt-bar-yellow', overlap: true },
+    { name: 'Eurockéennes — Juillet 2026', start: '2026-07-02', end: '2026-07-05', barClass: 'gantt-bar-purple' }
+];
+
+// Build rows
+let bodyHtml = '';
+ganttTasks.forEach(task => {
+    const rowWidth = totalDays * cellWidth;
+    if (task.type === 'group') {
+        const h = groupRowHeight;
+        bodyHtml += `<div class="gantt-row gantt-row-group" style="min-width:${rowWidth}px;height:${h}px;">`;
+        for (let i = 0; i < totalDays; i++) {
+            const d = new Date(startDate); d.setDate(d.getDate() + i);
+            const isWeekend = d.getDay() === 0 || d.getDay() === 6;
+            const isMonday = d.getDay() === 1;
+            const isFirstOfMonth = d.getDate() === 1;
+            bodyHtml += `<div style="min-width:${cellWidth}px;max-width:${cellWidth}px;height:${h}px;border-right:1px solid #e8e8e8;${isWeekend ? 'background:rgba(0,0,0,0.03);' : ''}${isMonday ? 'border-left:1px solid #ddd;' : ''}${isFirstOfMonth ? 'border-left:2px solid #aaa;' : ''}display:inline-block;"></div>`;
+        }
+        bodyHtml += `</div>`;
+    } else {
+        const h = taskRowHeight;
+        const taskStart = new Date(task.start);
+        const taskEnd = new Date(task.end);
+        const startOffset = Math.round((taskStart - startDate) / (1000*60*60*24));
+        const duration = Math.round((taskEnd - taskStart) / (1000*60*60*24)) + 1;
+        const left = startOffset * cellWidth;
+        const width = duration * cellWidth - 4;
+
+        bodyHtml += `<div class="gantt-row" style="min-width:${rowWidth}px;height:${h}px;">`;
+        for (let i = 0; i < totalDays; i++) {
+            const d = new Date(startDate); d.setDate(d.getDate() + i);
+            const isWeekend = d.getDay() === 0 || d.getDay() === 6;
+            const isMonday = d.getDay() === 1;
+            const isFirstOfMonth = d.getDate() === 1;
+            bodyHtml += `<div style="min-width:${cellWidth}px;max-width:${cellWidth}px;height:${h}px;border-right:1px solid #f0f0f0;${isWeekend ? 'background:#fafafa;' : ''}${isMonday ? 'border-left:1px solid #ddd;' : ''}${isFirstOfMonth ? 'border-left:2px solid #aaa;' : ''}display:inline-block;"></div>`;
+        }
+        const overlapClass = task.overlap ? ' gantt-bar-overlap' : '';
+        // Short label for inside bar
+        const shortName = task.name.split('—')[0].trim();
+        bodyHtml += `<div class="gantt-bar ${task.barClass}${overlapClass}" style="left:${left + 2}px;width:${width}px;font-size:10px;overflow:hidden;text-overflow:ellipsis;" title="${task.name}">${shortName}</div>`;
+        bodyHtml += `</div>`;
+    }
+});
+
+// Today line (March 14 2026)
+const today = new Date(2026, 2, 14);
+const todayOffset = Math.round((today - startDate) / (1000*60*60*24));
+bodyHtml += `<div class="gantt-today-line" style="left:${todayOffset * cellWidth + cellWidth/2}px; top:0; height:100%;"></div>`;
+
+bodyEl.innerHTML = bodyHtml;
+
+// Sync scroll
+const ganttList = document.getElementById('gantt-list');
+const ganttTimeline = document.getElementById('gantt-timeline');
+ganttList.addEventListener('scroll', () => { ganttTimeline.scrollTop = ganttList.scrollTop; });
+ganttTimeline.addEventListener('scroll', () => { ganttList.scrollTop = ganttTimeline.scrollTop; });
+
+
+// ─── AFFAIRE DATA ──────────────────────────────────────────
+const affaireData = {
+    'Arena de Bordeaux — Mars 2026': {
+        nom: 'Arena de Bordeaux — Mars 2026',
+        statutCommercial: 'Validé', statutCommercialClass: 'badge-green',
+        statutOperationnel: 'A réaliser', statutOperationnelClass: 'badge-yellow',
+        dateDebut: '2026-03-20', dateFin: '2026-03-22', nbJours: 3, nbMachines: 3,
+        montantEstime: '12 000 €', montantFacture: '12 000 €',
+        obstacleIdentifie: '', commentaires: 'Première prestation réalisée avec succès. Client très satisfait.',
+        emailCommercial: '',
+        problemeFiles: true, convictionJavatic: true,
+        bars: [
+            { nom: 'Bar Hall A', nbTireuses: 3, typeBiere: 'Blonde / IPA', futOuBouteille: 'Fût', commentaire: 'Bar principal' },
+            { nom: 'Bar Hall B', nbTireuses: 2, typeBiere: 'Blonde', futOuBouteille: 'Fût', commentaire: '' },
+            { nom: 'Bar VIP', nbTireuses: 2, typeBiere: 'Craft', futOuBouteille: 'Les deux', commentaire: 'Accès restreint' },
+            { nom: '', nbTireuses: 0, typeBiere: '', futOuBouteille: '', commentaire: '' },
+            { nom: '', nbTireuses: 0, typeBiere: '', futOuBouteille: '', commentaire: '' }
+        ],
+        jaugeAssis: 8000, jaugeDebout: 11300, remplissage: '80%',
+        nbEvenements: 80, horaires: '19h - 23h', panierMoyen: '15,00 €',
+        coutVerre: '6,50 €', nbVisiteursConfirme: 10000,
+        nbFuts: 35, nbTireusesExistantes: 5, pctVerresBiere: '35%',
+        propA_nbDist: '3', propA_gainCA: '4 620 €',
+        propB_nbDist: '4', propB_gainCA: '92 820 €',
+        nbDistributeursRetenus: 3, gainsCA: '280 000 €',
+        site: 'Arena de Bordeaux', contacts: ['Marc Lefèvre'], machines: ['DIST-001', 'DIST-003']
+    },
+    'Eurockéennes — Juillet 2026': {
+        nom: 'Eurockéennes — Juillet 2026',
+        statutCommercial: 'Validé', statutCommercialClass: 'badge-green',
+        statutOperationnel: 'A Préfacturer 30%', statutOperationnelClass: 'badge-cyan',
+        dateDebut: '2026-07-02', dateFin: '2026-07-05', nbJours: 4, nbMachines: 4,
+        montantEstime: '18 000 €', montantFacture: '—',
+        obstacleIdentifie: '', commentaires: 'Contrat validé. 4 machines prévues. Livraison et installation à planifier.',
+        emailCommercial: '',
+        problemeFiles: true, convictionJavatic: true,
+        bars: [
+            { nom: 'Bar Scène 1', nbTireuses: 4, typeBiere: 'Blonde / Blanche', futOuBouteille: 'Fût', commentaire: 'Plus gros bar du festival' },
+            { nom: 'Bar Scène 2', nbTireuses: 3, typeBiere: 'Blonde / IPA', futOuBouteille: 'Fût', commentaire: '' },
+            { nom: 'Bar Camping', nbTireuses: 2, typeBiere: 'Blonde', futOuBouteille: 'Fût', commentaire: 'Ouvert 24h' },
+            { nom: '', nbTireuses: 0, typeBiere: '', futOuBouteille: '', commentaire: '' },
+            { nom: '', nbTireuses: 0, typeBiere: '', futOuBouteille: '', commentaire: '' }
+        ],
+        jaugeAssis: 0, jaugeDebout: 32000, remplissage: '90%',
+        nbEvenements: 1, horaires: '14h - 2h', panierMoyen: '38,00 €',
+        coutVerre: '6,50 €', nbVisiteursConfirme: 32000,
+        nbFuts: 220, nbTireusesExistantes: 8, pctVerresBiere: '42%',
+        propA_nbDist: '4', propA_gainCA: '27 720 €',
+        propB_nbDist: '5', propB_gainCA: '55 440 €',
+        nbDistributeursRetenus: 4, gainsCA: '350 000 €',
+        site: 'Eurockéennes', contacts: ['Claire Bernard'], machines: ['DIST-001', 'DIST-003', 'DIST-004']
+    },
+    'Hellfest — Juin 2026': {
+        nom: 'Hellfest — Juin 2026',
+        statutCommercial: 'Validé', statutCommercialClass: 'badge-green',
+        statutOperationnel: 'Payé', statutOperationnelClass: 'badge-green',
+        dateDebut: '2026-06-18', dateFin: '2026-06-21', nbJours: 4, nbMachines: 5,
+        montantEstime: '25 000 €', montantFacture: '25 000 €',
+        obstacleIdentifie: '', commentaires: 'Client historique. 5 machines confirmées. Augmentation par rapport à 2025.',
+        emailCommercial: '',
+        problemeFiles: true, convictionJavatic: true,
+        bars: [
+            { nom: 'Main Stage Bar', nbTireuses: 5, typeBiere: 'Blonde / Ambrée / IPA', futOuBouteille: 'Fût', commentaire: 'Bar principal 25m linéaires' },
+            { nom: 'Temple Bar', nbTireuses: 4, typeBiere: 'Blonde / Stout', futOuBouteille: 'Fût', commentaire: '' },
+            { nom: 'Valley Bar', nbTireuses: 3, typeBiere: 'Blonde / Craft', futOuBouteille: 'Les deux', commentaire: 'Zone craft beer' },
+            { nom: '', nbTireuses: 0, typeBiere: '', futOuBouteille: '', commentaire: '' },
+            { nom: '', nbTireuses: 0, typeBiere: '', futOuBouteille: '', commentaire: '' }
+        ],
+        jaugeAssis: 0, jaugeDebout: 60000, remplissage: '90%',
+        nbEvenements: 1, horaires: '12h - 3h', panierMoyen: '50,00 €',
+        coutVerre: '7,00 €', nbVisiteursConfirme: 60000,
+        nbFuts: 600, nbTireusesExistantes: 18, pctVerresBiere: '55%',
+        propA_nbDist: '5', propA_gainCA: '63 000 €',
+        propB_nbDist: '7', propB_gainCA: '126 000 €',
+        nbDistributeursRetenus: 5, gainsCA: '800 000 €',
+        site: 'Hellfest', contacts: ['Sophie Martin'], machines: ['DIST-001', 'DIST-003', 'DIST-004']
+    },
+    'Paléo Festival — Juillet 2026': {
+        nom: 'Paléo Festival — Juillet 2026',
+        statutCommercial: 'Validé', statutCommercialClass: 'badge-green',
+        statutOperationnel: 'A Préfacturer 30%', statutOperationnelClass: 'badge-cyan',
+        dateDebut: '2026-07-03', dateFin: '2026-07-06', nbJours: 4, nbMachines: 2,
+        montantEstime: '10 000 €', montantFacture: '—',
+        obstacleIdentifie: 'Chevauchement possible avec Eurockéennes sur DIST-003',
+        commentaires: 'Festival suisse. 2 machines demandées. Dates proches des Eurockéennes — vérifier disponibilité.',
+        emailCommercial: '',
+        problemeFiles: false, convictionJavatic: true,
+        bars: [
+            { nom: 'Bar Grande Scène', nbTireuses: 3, typeBiere: 'Blonde / Ambrée', futOuBouteille: 'Fût', commentaire: '' },
+            { nom: 'Bar Village', nbTireuses: 2, typeBiere: 'Blonde', futOuBouteille: 'Fût', commentaire: '' },
+            { nom: '', nbTireuses: 0, typeBiere: '', futOuBouteille: '', commentaire: '' },
+            { nom: '', nbTireuses: 0, typeBiere: '', futOuBouteille: '', commentaire: '' },
+            { nom: '', nbTireuses: 0, typeBiere: '', futOuBouteille: '', commentaire: '' }
+        ],
+        jaugeAssis: 0, jaugeDebout: 40000, remplissage: '85%',
+        nbEvenements: 1, horaires: '15h - 2h', panierMoyen: '42,00 €',
+        coutVerre: '7,50 €', nbVisiteursConfirme: 38000,
+        nbFuts: 180, nbTireusesExistantes: 6, pctVerresBiere: '40%',
+        propA_nbDist: '2', propA_gainCA: '15 000 €',
+        propB_nbDist: '3', propB_gainCA: '30 000 €',
+        nbDistributeursRetenus: 2, gainsCA: '200 000 €',
+        site: 'Paléo Festival', contacts: ['Thomas Müller'], machines: ['DIST-003']
+    },
+    'Fête du Vin — Juin 2026': {
+        nom: 'Fête du Vin — Juin 2026',
+        statutCommercial: 'Validé', statutCommercialClass: 'badge-green',
+        statutOperationnel: 'A réaliser', statutOperationnelClass: 'badge-yellow',
+        dateDebut: '2026-06-19', dateFin: '2026-06-22', nbJours: 4, nbMachines: 2,
+        montantEstime: '8 000 €', montantFacture: '—',
+        obstacleIdentifie: 'Chevauchement avec Hellfest sur DIST-004 (19-21 juin)',
+        commentaires: 'Fête du vin de Bordeaux. 2 machines demandées. Conflit de planification identifié avec Hellfest.',
+        emailCommercial: '',
+        problemeFiles: false, convictionJavatic: true,
+        bars: [
+            { nom: 'Bar Quais', nbTireuses: 3, typeBiere: 'Blonde / Rosée', futOuBouteille: 'Les deux', commentaire: 'Bar en extérieur sur les quais' },
+            { nom: 'Bar Place', nbTireuses: 2, typeBiere: 'Blonde', futOuBouteille: 'Fût', commentaire: '' },
+            { nom: '', nbTireuses: 0, typeBiere: '', futOuBouteille: '', commentaire: '' },
+            { nom: '', nbTireuses: 0, typeBiere: '', futOuBouteille: '', commentaire: '' },
+            { nom: '', nbTireuses: 0, typeBiere: '', futOuBouteille: '', commentaire: '' }
+        ],
+        jaugeAssis: 0, jaugeDebout: 25000, remplissage: '75%',
+        nbEvenements: 1, horaires: '11h - 23h', panierMoyen: '30,00 €',
+        coutVerre: '6,00 €', nbVisiteursConfirme: 20000,
+        nbFuts: 80, nbTireusesExistantes: 4, pctVerresBiere: '30%',
+        propA_nbDist: '2', propA_gainCA: '9 000 €',
+        propB_nbDist: '3', propB_gainCA: '18 000 €',
+        nbDistributeursRetenus: 2, gainsCA: '120 000 €',
+        site: 'Fête du Vin Bordeaux', contacts: ['Jean-Pierre Duval'], machines: ['DIST-004']
+    }
+};
+
+
+// ─── BUILD AFFAIRE MODAL (4 tabs) ─────────────────────────
+function buildAffaireModal(d) {
+    if (!d) return '<p style="padding:20px;color:#999;">Données non disponibles</p>';
+    const esc = s => (s === undefined || s === null || s === '') ? '—' : s.toString().replace(/</g,'&lt;');
+
+    const statutCommercialOptions = [
+        { label: 'Prospection', badgeClass: 'badge-gray' },
+        { label: 'Qualification', badgeClass: 'badge-blue' },
+        { label: 'A Chiffrer', badgeClass: 'badge-yellow' },
+        { label: 'A Soumettre', badgeClass: 'badge-orange' },
+        { label: 'Validé', badgeClass: 'badge-green' },
+        { label: 'Refusé', badgeClass: 'badge-red' }
+    ];
+    const statutOperationnelOptions = [
+        { label: '—', badgeClass: 'badge-gray' },
+        { label: 'A Préfacturer 30%', badgeClass: 'badge-cyan' },
+        { label: 'A Préfacturer 70%', badgeClass: 'badge-blue' },
+        { label: 'A réaliser', badgeClass: 'badge-yellow' },
+        { label: 'Réalisé', badgeClass: 'badge-teal' },
+        { label: 'En paiement', badgeClass: 'badge-orange' },
+        { label: 'Payé', badgeClass: 'badge-green' }
+    ];
+
+    function buildSelectField(fieldName, currentValue, currentBadgeClass, options) {
+        let optionsHtml = options.map(o =>
+            `<div class="field-select-option${o.label === currentValue ? ' selected' : ''}" data-badge-class="${o.badgeClass}" onclick="selectOption(this, '${fieldName}')">${o.label}</div>`
+        ).join('');
+        return `<div class="field-select" data-field="${fieldName}">
+            <div class="field-select-value" onclick="toggleSelect(this)">
+                <span class="badge ${currentBadgeClass}" id="val-${fieldName}">${esc(currentValue)}</span>
+                <span class="field-select-arrow">▾</span>
+            </div>
+            <div class="field-select-dropdown" id="dropdown-${fieldName}">
+                ${optionsHtml}
+            </div>
+        </div>`;
+    }
+
+    const futOuBouteilleOptions = [
+        { label: 'Fût', badgeClass: 'badge-blue' },
+        { label: 'Bouteille', badgeClass: 'badge-orange' },
+        { label: 'Les deux', badgeClass: 'badge-teal' }
+    ];
+    const problemeFilesOptions = [
+        { label: 'Oui', badgeClass: 'badge-red' },
+        { label: 'Non', badgeClass: 'badge-green' },
+        { label: 'Ne sait pas', badgeClass: 'badge-gray' }
+    ];
+    const convictionOptions = [
+        { label: 'Convaincu', badgeClass: 'badge-green' },
+        { label: 'A convaincre', badgeClass: 'badge-yellow' },
+        { label: 'Réticent', badgeClass: 'badge-red' }
+    ];
+
+    const textField = (label, value, type) => {
+        const t = type || 'text';
+        return `<div class="detail-field">
+            <div class="detail-field-label">${label}</div>
+            <div class="detail-field-value">
+                <div class="field-text" onclick="editText(this)">
+                    <span class="field-text-display">${esc(value)}</span>
+                    <input class="field-text-input" type="${t}" value="${esc(value) === '—' ? '' : esc(value)}" style="display:none" onblur="saveText(this)" onkeydown="if(event.key==='Enter') this.blur()">
+                </div>
+            </div>
+        </div>`;
+    };
+    const displayField = (label, value) => `<div class="detail-field">
+        <div class="detail-field-label">${label}</div>
+        <div class="detail-field-value">${esc(value)}</div>
+    </div>`;
+    const textareaField = (label, value) => `<div class="detail-field">
+        <div class="detail-field-label">${label}</div>
+        <div class="detail-field-value">
+            <div class="field-textarea" onclick="editTextarea(this)">
+                <div class="field-textarea-display">${esc(value)}</div>
+                <textarea class="field-textarea-input" style="display:none" onblur="saveTextarea(this)">${esc(value) === '—' ? '' : esc(value)}</textarea>
+            </div>
+        </div>
+    </div>`;
+
+    let html = '';
+
+    // ─── TAB 1: Général ───
+    html += `<div class="record-modal-tab-content active" id="modal-tab-general">`;
+    html += `<div class="detail-section"><h4 class="detail-section-title">Statuts</h4>`;
+    html += `<div class="detail-field"><div class="detail-field-label">Statut commercial</div><div class="detail-field-value">${buildSelectField('statut-commercial', d.statutCommercial, d.statutCommercialClass, statutCommercialOptions)}</div></div>`;
+    html += `<div class="detail-field"><div class="detail-field-label">Statut opérationnel</div><div class="detail-field-value">${buildSelectField('statut-operationnel', d.statutOperationnel, d.statutOperationnelClass, statutOperationnelOptions)}</div></div>`;
+    html += `</div>`;
+    html += `<div class="detail-section"><h4 class="detail-section-title">Événement</h4>`;
+    html += textField('Date début', d.dateDebut, 'date');
+    html += textField('Date fin', d.dateFin, 'date');
+    html += textField('Nombre de jours de location', d.nbJours, 'number');
+    html += textField('Nombre de machines demandées', d.nbMachines, 'number');
+    html += `</div>`;
+    html += `<div class="detail-section"><h4 class="detail-section-title">Montants</h4>`;
+    html += textField('Montant estimé HT', d.montantEstime);
+    html += textField('Montant facturé HT', d.montantFacture);
+    html += `</div>`;
+    html += `<div class="detail-section"><h4 class="detail-section-title">Commercial</h4>`;
+    html += textareaField('Obstacle identifié', d.obstacleIdentifie);
+    html += textareaField('Commentaires', d.commentaires);
+    html += textareaField('Email commercial généré', d.emailCommercial);
+    html += `</div>`;
+    html += `</div>`;
+
+    // ─── TAB 2: Analyse terrain ───
+    html += `<div class="record-modal-tab-content" id="modal-tab-terrain">`;
+    html += `<div class="detail-section"><h4 class="detail-section-title">Organisation existante</h4>`;
+    const problemeVal = d.problemeFiles === true ? 'Oui' : (d.problemeFiles === false ? 'Non' : 'Ne sait pas');
+    const problemeBadge = d.problemeFiles === true ? 'badge-red' : (d.problemeFiles === false ? 'badge-green' : 'badge-gray');
+    html += `<div class="detail-field"><div class="detail-field-label">Problème files d'attente</div><div class="detail-field-value">${buildSelectField('probleme-files', problemeVal, problemeBadge, problemeFilesOptions)}</div></div>`;
+    const convictionVal = d.convictionJavatic === true ? 'Convaincu' : (d.convictionJavatic === false ? 'Réticent' : 'A convaincre');
+    const convictionBadge = d.convictionJavatic === true ? 'badge-green' : (d.convictionJavatic === false ? 'badge-red' : 'badge-yellow');
+    html += `<div class="detail-field"><div class="detail-field-label">Conviction solution</div><div class="detail-field-value">${buildSelectField('conviction-solution', convictionVal, convictionBadge, convictionOptions)}</div></div>`;
+    const bars = d.bars || [];
+    for (let i = 0; i < 5; i++) {
+        const b = bars[i] || {};
+        html += `<div style="margin:16px 0 8px; font-size:13px; font-weight:600; color:#444; border-bottom:1px solid #eee; padding-bottom:4px;">Bar ${i+1}</div>`;
+        html += textField('Nom bar', b.nom);
+        html += textField('Nb tireuses', b.nbTireuses, 'number');
+        html += textField('Type de bière', b.typeBiere);
+        const futVal = b.futOuBouteille || '—';
+        const futBadge = futVal === 'Fût' ? 'badge-blue' : (futVal === 'Bouteille' ? 'badge-orange' : (futVal === 'Les deux' ? 'badge-teal' : 'badge-gray'));
+        html += `<div class="detail-field"><div class="detail-field-label">Fût ou bouteille</div><div class="detail-field-value">${buildSelectField('fut-bouteille-' + i, futVal, futBadge, futOuBouteilleOptions)}</div></div>`;
+        html += textField('Commentaire bar', b.commentaire);
+    }
+    html += `</div>`;
+    html += `<div class="detail-section"><h4 class="detail-section-title">Affluence</h4>`;
+    html += textField('Jauge max assis', d.jaugeAssis, 'number');
+    html += textField('Jauge max debout', d.jaugeDebout, 'number');
+    html += textField('% remplissage moyen', d.remplissage, 'number');
+    html += textField('Nb événements', d.nbEvenements, 'number');
+    html += textField('Horaires', d.horaires);
+    html += textField('Panier moyen', d.panierMoyen);
+    html += textField('Coût moyen verre', d.coutVerre);
+    html += textField('Nb visiteurs confirmé', d.nbVisiteursConfirme, 'number');
+    html += `</div>`;
+    html += `</div>`;
+
+    // ─── TAB 3: Chiffrage ───
+    html += `<div class="record-modal-tab-content" id="modal-tab-chiffrage">`;
+    html += `<div class="detail-section"><h4 class="detail-section-title">Volume bière</h4>`;
+    html += textField('Nb fûts estimé', d.nbFuts, 'number');
+    html += textField('Nb tireuses existantes', d.nbTireusesExistantes, 'number');
+    html += textField('% verres bière', d.pctVerresBiere, 'number');
+    html += `</div>`;
+    html += `<div class="detail-section"><h4 class="detail-section-title">Propositions (calculés)</h4>`;
+    html += displayField('Proposition A - Nb distributeurs', d.propA_nbDist);
+    html += displayField('Proposition A - Gain CA estimé', d.propA_gainCA);
+    html += displayField('Proposition B - Nb distributeurs', d.propB_nbDist);
+    html += displayField('Proposition B - Gain CA estimé', d.propB_gainCA);
+    html += `</div>`;
+    html += `<div class="detail-section"><h4 class="detail-section-title">Décision</h4>`;
+    html += textField('Nb distributeurs retenus', d.nbDistributeursRetenus, 'number');
+    html += displayField('Gains CA retenus', d.gainsCA);
+    html += `</div>`;
+    html += `</div>`;
+
+    // ─── TAB 4: Relations ───
+    html += `<div class="record-modal-tab-content" id="modal-tab-relations">`;
+    const siteName = d.site || '';
+    html += `<div class="detail-section"><h4 class="detail-section-title">Site lié</h4>`;
+    if (siteName) {
+        html += `<div class="detail-field"><div class="detail-field-value"><span class="detail-linked-record" onclick="alert('Fonctionnalité disponible dans Airtable')">${siteName}</span></div></div>`;
+    } else {
+        html += `<div class="detail-field"><div class="detail-field-value"><span style="color:#999;">Aucun</span></div></div>`;
+    }
+    html += `</div>`;
+    const contacts = d.contacts || [];
+    html += `<div class="detail-section"><h4 class="detail-section-title">Contacts associés</h4>`;
+    if (contacts.length) {
+        html += `<div class="detail-linked-cards">`;
+        contacts.forEach(cName => {
+            html += `<div class="detail-linked-card" onclick="alert('Fonctionnalité disponible dans Airtable')">
+                <div class="detail-linked-card-title">${esc(cName)}</div>
+            </div>`;
+        });
+        html += `</div>`;
+    } else {
+        html += `<div class="detail-field"><div class="detail-field-value"><span style="color:#999;">Aucun</span></div></div>`;
+    }
+    html += `<span class="field-add-link" style="margin-top:8px;display:inline-block;">+ Ajouter</span></div>`;
+    const machines = d.machines || [];
+    html += `<div class="detail-section"><h4 class="detail-section-title">Machines assignées</h4>`;
+    if (machines.length) {
+        html += `<div class="detail-linked-cards">`;
+        machines.forEach(mName => {
+            html += `<div class="detail-linked-card" onclick="alert('Fonctionnalité disponible dans Airtable')">
+                <div class="detail-linked-card-title">${esc(mName)}</div>
+            </div>`;
+        });
+        html += `</div>`;
+    } else {
+        html += `<div class="detail-field"><div class="detail-field-value"><span style="color:#999;">Aucune</span></div></div>`;
+    }
+    html += `<span class="field-add-link" style="margin-top:8px;display:inline-block;">+ Ajouter</span></div>`;
+    html += `</div>`;
+
+    return html;
+}
+
+
+// ─── OPEN / CLOSE RECORD MODAL ───────────────────────────
+function openRecord(el) {
+    const name = el.getAttribute('data-record-name') || '—';
+    const data = affaireData[name];
+    document.getElementById('record-modal-title').textContent = name;
+    document.getElementById('record-modal-body').innerHTML = buildAffaireModal(data);
+    document.querySelectorAll('.record-modal-tab').forEach((t, i) => t.classList.toggle('active', i === 0));
+    document.getElementById('record-modal').classList.add('open');
+}
+
+function closeRecordModal() {
+    document.getElementById('record-modal').classList.remove('open');
+}
+
+function switchModalTab(btn, tabId) {
+    btn.closest('.record-modal-tabs').querySelectorAll('.record-modal-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.record-modal-tab-content').forEach(c => c.classList.remove('active'));
+    document.getElementById('modal-tab-' + tabId).classList.add('active');
+}
+
+
+// ─── INTERACTIVE FIELDS JS ───────────────────────────────
+function toggleSelect(trigger) {
+    const dropdown = trigger.nextElementSibling;
+    const isOpen = dropdown.classList.contains('open');
+    document.querySelectorAll('.field-select-dropdown.open').forEach(d => d.classList.remove('open'));
+    if (!isOpen) {
+        dropdown.classList.add('open');
+        const currentText = trigger.querySelector('[id^="val-"]')?.textContent;
+        dropdown.querySelectorAll('.field-select-option').forEach(opt => {
+            opt.classList.toggle('selected', opt.textContent.trim() === currentText?.trim());
+        });
+    }
+}
+
+function selectOption(option, fieldName) {
+    const text = option.textContent.trim();
+    const badgeClass = option.getAttribute('data-badge-class') || 'badge-gray';
+    const valueEl = document.getElementById('val-' + fieldName);
+    if (valueEl) {
+        valueEl.textContent = text;
+        valueEl.className = 'badge ' + badgeClass;
+    }
+    option.closest('.field-select-dropdown').classList.remove('open');
+}
+
+function toggleMultiSelect(trigger) {
+    const dropdown = trigger.nextElementSibling;
+    const isOpen = dropdown.classList.contains('open');
+    document.querySelectorAll('.field-select-dropdown.open').forEach(d => d.classList.remove('open'));
+    if (!isOpen) dropdown.classList.add('open');
+}
+
+function updateMultiSelect(fieldName, checkbox, badgeClass, label) {
+    const container = document.getElementById('vals-' + fieldName);
+    if (!container) return;
+    container.querySelectorAll('.badge').forEach(b => { if (b.textContent.trim() === label) b.remove(); });
+    if (checkbox.checked) {
+        const arrow = container.querySelector('.field-select-arrow');
+        const badge = document.createElement('span');
+        badge.className = 'badge ' + badgeClass;
+        badge.textContent = label;
+        container.insertBefore(badge, arrow);
+    }
+}
+
+function editText(wrapper) {
+    const display = wrapper.querySelector('.field-text-display');
+    const input = wrapper.querySelector('.field-text-input');
+    if (!input) return;
+    display.style.display = 'none';
+    input.style.display = 'block';
+    input.focus();
+    input.select();
+    wrapper.style.borderColor = '#166ee1';
+}
+
+function saveText(input) {
+    const wrapper = input.closest('.field-text');
+    const display = wrapper.querySelector('.field-text-display');
+    display.textContent = input.value || '—';
+    display.style.display = 'block';
+    input.style.display = 'none';
+    wrapper.style.borderColor = 'transparent';
+}
+
+function editTextarea(wrapper) {
+    const display = wrapper.querySelector('.field-textarea-display');
+    const input = wrapper.querySelector('.field-textarea-input');
+    if (!input) return;
+    display.style.display = 'none';
+    input.style.display = 'block';
+    input.focus();
+    wrapper.style.borderColor = '#166ee1';
+}
+
+function saveTextarea(input) {
+    const wrapper = input.closest('.field-textarea');
+    const display = wrapper.querySelector('.field-textarea-display');
+    display.textContent = input.value || '—';
+    display.style.display = 'block';
+    input.style.display = 'none';
+    wrapper.style.borderColor = 'transparent';
+}
+
+// ─── CLOSE DROPDOWNS ON CLICK OUTSIDE ────────────────────
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.field-select') && !e.target.closest('.field-multiselect')) {
+        document.querySelectorAll('.field-select-dropdown.open').forEach(d => d.classList.remove('open'));
+    }
+});
+
+// ─── ESCAPE ──────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeRecordModal();
+});
+</script>
+</body>
+</html>

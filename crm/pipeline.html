@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1440">
+    <title>JAVATIC — Pipeline commercial</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="has-disclaimer">
+<div class="disclaimer-banner">Interfaces à usage visuel uniquement — Aperçu non fonctionnel, données fictives</div>
+<div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <span class="sidebar-logo">🍺</span>
+            <span class="sidebar-app-name">JAVATIC CRM</span>
+            <span class="sidebar-chevron">▾</span>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">📊</span>
+                    <span class="sidebar-section-label">Pilotage</span>
+                </div>
+                <a href="../pilotage/dashboard.html" class="sidebar-item">Dashboard financier</a>
+                <a href="../pilotage/zones-potentiel.html" class="sidebar-item">Zones à fort potentiel</a>
+                <a href="../pilotage/todo.html" class="sidebar-item">TODO</a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">💼</span>
+                    <span class="sidebar-section-label">CRM et suivi commercial</span>
+                </div>
+                <a href="../crm/sites.html" class="sidebar-item">Liste des sites</a>
+                <a href="../crm/contacts.html" class="sidebar-item">Liste des contacts</a>
+                <a href="../crm/pipeline.html" class="sidebar-item active">Pipeline commercial</a>
+                <a href="../crm/calendrier.html" class="sidebar-item">Calendrier des RDV</a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">⚙️</span>
+                    <span class="sidebar-section-label">Production</span>
+                </div>
+                <a href="../production/idees-rd.html" class="sidebar-item">Idées R&D</a>
+                <a href="../production/fabrication.html" class="sidebar-item">Suivi fabrication</a>
+                <a href="../production/machines.html" class="sidebar-item">Liste des machines</a>
+                <a href="../production/demandes-validees.html" class="sidebar-item">Demandes clients validées</a>
+                <a href="../production/suivi-operationnel.html" class="sidebar-item">Suivi opérationnel</a>
+            </div>
+        </nav>
+        <div class="sidebar-footer">
+            <span class="sidebar-footer-icon">👤</span>
+            <span class="sidebar-footer-text">Yoann RUAUD</span>
+        </div>
+    </aside>
+
+    <!-- MAIN AREA -->
+    <div class="main-area">
+
+        <!-- PAGE HEADER -->
+        <div class="page-header">
+            <div class="header-left">
+                <div class="breadcrumb">
+                    <span class="breadcrumb-parent">CRM et suivi commercial</span>
+                    <span class="breadcrumb-sep">›</span>
+                    <span class="breadcrumb-current">Pipeline commercial</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="header-btn">🔍 Rechercher</button>
+                <button class="header-btn">🗂 Filtrer</button>
+                <button class="btn-primary" onclick="alert('Ajouter une affaire')">+ Ajouter une affaire</button>
+            </div>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content-area content-kanban">
+            <div class="kanban-board">
+
+                <!-- A Chiffrer -->
+                <div class="kanban-column">
+                    <div class="kanban-column-header">
+                        <span class="badge badge-yellow">A Chiffrer</span>
+                        <span class="kanban-count">3</span>
+                    </div>
+                    <div class="kanban-cards">
+                        <div class="kanban-card" onclick="openRecord(this)" data-record-name="Garorock — Juin 2026">
+                            <div class="kanban-card-title">Garorock — Juin 2026</div>
+                            <div class="kanban-card-field"><span class="kanban-card-label">Site</span><span class="kanban-card-value">Garorock</span></div>
+                            <div class="kanban-card-field"><span class="kanban-card-label">Montant</span><span class="kanban-card-value">—</span></div>
+                            <div class="kanban-card-field"><span class="kanban-card-label">Durée</span><span class="kanban-card-value">4 jours</span></div>
+                            <div class="kanban-card-badges"><span class="badge badge-pink">Festival</span></div>
+                        </div>
+                        <div class="kanban-card" onclick="openRecord(this)" data-record-name="Stade Matmut — Mai 2026">
+                            <div class="kanban-card-title">Stade Matmut — Mai 2026</div>
+                            <div class="kanban-card-field"><span class="kanban-card-label">Site</span><span class="kanban-card-value">Stade Matmut Atlantique</span></div>
+                            <div class="kanban-card-field"><span class="kanban-card-label">Montant</span><span class="kanban-card-value">—</span></div>
+                            <div class="kanban-card-field"><span class="kanban-card-label">Durée</span><span class="kanban-card-value">2 jours</span></div>
+                            <div class="kanban-card-badges"><span class="badge badge-cyan">Stade</span></div>
+                        </div>
+                        <div class="kanban-card" onclick="openRecord(this)" data-record-name="Arena Montpellier — Sept 2026">
+                            <div class="kanban-card-title">Arena Montpellier — Sept 2026</div>
+                            <div class="kanban-card-field"><span class="kanban-card-label">Site</span><span class="kanban-card-value">Arena Montpellier</span></div>
+                            <div class="kanban-card-field"><span class="kanban-card-label">Montant</span><span class="kanban-card-value">—</span></div>
+                            <div class="kanban-card-field"><span class="kanban-card-label">Durée</span><span class="kanban-card-value">3 jours</span></div>
+                            <div class="kanban-card-badges"><span class="badge badge-purple">Salle</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- A Soumettre -->
+                <div class="kanban-column">
+                    <div class="kanban-column-header">
+                        <span class="badge badge-orange">A Soumettre</span>
+                        <span class="kanban-count">2</span>
+                    </div>
+                    <div class="kanban-cards">
+                        <div class="kanban-card" onclick="openRecord(this)" data-record-name="Zénith de Pau — Avril 2026">
+                            <div class="kanban-card-title">Zénith de Pau — Avril 2026</div>
+                            <div class="kanban-card-field"><span class="kanban-card-label">Site</span><span class="kanban-card-value">Zénith de Pau</span></div>
+                            <div class="kanban-card-field"><span class="kanban-card-label">Montant</span><span class="kanban-card-value">8 500 €</span></div>
+                            <div class="kanban-card-field"><span class="kanban-card-label">Durée</span><span class="kanban-card-value">3 jours</span></div>
+                            <div class="kanban-card-badges"><span class="badge badge-purple">Salle</span></div>
+                        </div>
+                        <div class="kanban-card" onclick="openRecord(this)" data-record-name="Vieilles Charrues — Juillet 2026">
+                            <div class="kanban-card-title">Vieilles Charrues — Juillet 2026</div>
+                            <div class="kanban-card-field"><span class="kanban-card-label">Site</span><span class="kanban-card-value">Vieilles Charrues</span></div>
+                            <div class="kanban-card-field"><span class="kanban-card-label">Montant</span><span class="kanban-card-value">15 000 €</span></div>
+                            <div class="kanban-card-field"><span class="kanban-card-label">Durée</span><span class="kanban-card-value">4 jours</span></div>
+                            <div class="kanban-card-badges"><span class="badge badge-pink">Festival</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Validé -->
+                <div class="kanban-column" style="background:#f0faf0; border-radius:8px; padding:8px;">
+                    <div class="kanban-column-header">
+                        <span class="badge badge-green">Validé</span>
+                        <span class="kanban-count">3</span>
+                    </div>
+                    <div class="kanban-cards">
+                        <div class="kanban-card" onclick="openRecord(this)" data-record-name="Arena de Bordeaux — Mars 2026">
+                            <div class="kanban-card-title">Arena de Bordeaux — Mars 2026</div>
+                            <div class="kanban-card-field"><span class="kanban-card-label">Site</span><span class="kanban-card-value">Arena de Bordeaux</span></div>
+                            <div class="kanban-card-field"><span class="kanban-card-label">Montant</span><span class="kanban-card-value">12 000 €</span></div>
+                            <div class="kanban-card-field"><span class="kanban-card-label">Durée</span><span class="kanban-card-value">3 jours</span></div>
+                            <div class="kanban-card-badges"><span class="badge badge-purple">Salle</span></div>
+                        </div>
+                        <div class="kanban-card" onclick="openRecord(this)" data-record-name="Eurockéennes — Juillet 2026">
+                            <div class="kanban-card-title">Eurockéennes — Juillet 2026</div>
+                            <div class="kanban-card-field"><span class="kanban-card-label">Site</span><span class="kanban-card-value">Eurockéennes</span></div>
+                            <div class="kanban-card-field"><span class="kanban-card-label">Montant</span><span class="kanban-card-value">18 000 €</span></div>
+                            <div class="kanban-card-field"><span class="kanban-card-label">Durée</span><span class="kanban-card-value">4 jours</span></div>
+                            <div class="kanban-card-badges"><span class="badge badge-pink">Festival</span></div>
+                        </div>
+                        <div class="kanban-card" onclick="openRecord(this)" data-record-name="Hellfest — Juin 2026">
+                            <div class="kanban-card-title">Hellfest — Juin 2026</div>
+                            <div class="kanban-card-field"><span class="kanban-card-label">Site</span><span class="kanban-card-value">Hellfest</span></div>
+                            <div class="kanban-card-field"><span class="kanban-card-label">Montant</span><span class="kanban-card-value">25 000 €</span></div>
+                            <div class="kanban-card-field"><span class="kanban-card-label">Durée</span><span class="kanban-card-value">4 jours</span></div>
+                            <div class="kanban-card-badges"><span class="badge badge-pink">Festival</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Refusé -->
+                <div class="kanban-column" style="background:#faf0f0; border-radius:8px; padding:8px;">
+                    <div class="kanban-column-header">
+                        <span class="badge badge-red">Refusé</span>
+                        <span class="kanban-count">1</span>
+                    </div>
+                    <div class="kanban-cards">
+                        <div class="kanban-card" onclick="openRecord(this)" data-record-name="Stade Pierre Mauroy — Oct 2026">
+                            <div class="kanban-card-title">Stade Pierre Mauroy — Oct 2026</div>
+                            <div class="kanban-card-field"><span class="kanban-card-label">Site</span><span class="kanban-card-value">Stade Pierre Mauroy</span></div>
+                            <div class="kanban-card-field"><span class="kanban-card-label">Montant</span><span class="kanban-card-value">10 000 €</span></div>
+                            <div class="kanban-card-field"><span class="kanban-card-label">Durée</span><span class="kanban-card-value">2 jours</span></div>
+                            <div class="kanban-card-badges"><span class="badge badge-cyan">Stade</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kanban-column-add">+</div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- RECORD MODAL -->
+<div class="record-modal" id="record-modal">
+    <div class="record-modal-overlay" onclick="closeRecordModal()"></div>
+    <div class="record-modal-content">
+        <div class="record-modal-header">
+            <div class="record-modal-nav">
+                <button class="record-modal-back" onclick="closeRecordModal()">&#8592; Retour</button>
+            </div>
+            <h2 class="record-modal-title" id="record-modal-title">—</h2>
+            <div class="record-modal-header-actions">
+                <button class="detail-panel-close" onclick="closeRecordModal()">&#10005;</button>
+            </div>
+        </div>
+        <div class="record-modal-tabs">
+            <button class="record-modal-tab active" onclick="switchModalTab(this, 'general')">Général</button>
+            <button class="record-modal-tab" onclick="switchModalTab(this, 'terrain')">Analyse terrain</button>
+            <button class="record-modal-tab" onclick="switchModalTab(this, 'chiffrage')">Chiffrage</button>
+            <button class="record-modal-tab" onclick="switchModalTab(this, 'relations')">Relations</button>
+        </div>
+        <div class="record-modal-body" id="record-modal-body">
+            <!-- Generated dynamically by buildAffaireModal(data) -->
+        </div>
+    </div>
+</div>
+
+
+<script>
+/* ============================================
+   DATA — AFFAIRES (with all 4-tab fields)
+   ============================================ */
+const affaireData = {
+    'Garorock — Juin 2026': {
+        nom: 'Garorock — Juin 2026',
+        statutCommercial: 'A Chiffrer', statutCommercialClass: 'badge-yellow',
+        statutOperationnel: '—', statutOperationnelClass: 'badge-gray',
+        dateDebut: '2026-06-25', dateFin: '2026-06-28', nbJours: 4, nbMachines: 0,
+        problemeFiles: false, convictionJavatic: false,
+        bars: [
+            { ml: 12, serveurs: 4, doubleBecs: 2, futs: 4, tpe: 2, soft: 1 },
+            { ml: 10, serveurs: 3, doubleBecs: 2, futs: 3, tpe: 1, soft: 1 },
+            { ml: 8, serveurs: 2, doubleBecs: 1, futs: 2, tpe: 1, soft: 1 },
+            { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 },
+            { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 }
+        ],
+        jaugeAssis: 0, jaugeDebout: 25000, jaugeConfirmee: 25000,
+        remplissage: '85%', nbEvenementsMajeurs: 1, moyenneEvenementsMensuel: 0.08,
+        heureOuverture: 14, heureEvacuation: 2, visiteursAnnee: 100000,
+        panierMoyen: '35,00', coutConsommationMoyenne: '6,50',
+        coutBierePetit: '5,00', volumePetit: '0,25', pctPetit: '30%',
+        coutBiereGrand: '7,00', volumeGrand: '0,50', pctGrand: '55%',
+        coutPichet: '18,00', volumePichet: '1,5', pctPichet: '15%',
+        nbVerresEcoresponsables: 50000, litresParFut: 50,
+        pctVerresBieres: '40%',
+        nbDistributeursRetenus: 0, nbFutsParDistributeur: 0,
+        gainCABiereActuel: '—', obstacleIdentifie: 'Pas encore d\'audit sur place. Besoin de visiter le site pour évaluer l\'infrastructure bar.',
+        montantEstime: '—', montantFacture: '—',
+        commentaires: 'Premier contact via Thomas Moreau. Festival intéressé mais en phase de découverte. Audit terrain prévu en avril.',
+        emailCommercial: '',
+        calculs: {
+            nomAffaire: 'Garorock — Juin 2026',
+            jaugeMax: '25 000', jaugeUtilisee: '25 000', nbHeuresDistribution: '12',
+            nbVerresParVisiteur: '2,8', nbVisiteursAnneeCalc: '100 000',
+            nbVerresToutesBoissons: '70 000', caBoissons: '455 000 €',
+            nbMoyenFutsEvenement: '180', nbTireuses2Becs: '6', nbEquivTireusesDoubleBecs: '6',
+            nbFutsParTireuse: '30', nbMoyenFutsMois: '15', nbMoyenFutsAnnee: '180',
+            nbPetitsVerresParFut: '200', nbGrandsVerresParFut: '100', nbPichetsParFut: '33',
+            pctVerresBieresCalc: '40%',
+            nbFutsAvecJavatic: '234', diffFutsJavatic: '+54',
+            nbDistribPropA: '3', nbFutsDistribPropA: '78', nbFutsHeurePropA: '6,5',
+            nbDistribPropB: '4', nbFutsDistribPropB: '59', nbFutsHeurePropB: '4,9',
+            nbFutsTotal: '234',
+            coutSolutionJavatic: '—', gainCAEvenement: '—', gainCANetMois: '—', gainCANetAn: '—', gainCASupp: '—',
+            typeClientLookup: 'Festival'
+        },
+        siteLie: 'Garorock', contactsLies: ['Thomas Moreau'], machinesLiees: []
+    },
+    'Stade Matmut — Mai 2026': {
+        nom: 'Stade Matmut — Mai 2026',
+        statutCommercial: 'A Chiffrer', statutCommercialClass: 'badge-yellow',
+        statutOperationnel: '—', statutOperationnelClass: 'badge-gray',
+        dateDebut: '2026-05-10', dateFin: '2026-05-11', nbJours: 2, nbMachines: 0,
+        problemeFiles: true, convictionJavatic: false,
+        bars: [
+            { ml: 20, serveurs: 8, doubleBecs: 4, futs: 8, tpe: 4, soft: 2 },
+            { ml: 15, serveurs: 6, doubleBecs: 3, futs: 6, tpe: 3, soft: 2 },
+            { ml: 12, serveurs: 4, doubleBecs: 2, futs: 4, tpe: 2, soft: 1 },
+            { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 },
+            { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 }
+        ],
+        jaugeAssis: 35000, jaugeDebout: 42115, jaugeConfirmee: 42115,
+        remplissage: '75%', nbEvenementsMajeurs: 20, moyenneEvenementsMensuel: 1.7,
+        heureOuverture: 17, heureEvacuation: 23, visiteursAnnee: 600000,
+        panierMoyen: '12,00', coutConsommationMoyenne: '7,00',
+        coutBierePetit: '5,50', volumePetit: '0,25', pctPetit: '25%',
+        coutBiereGrand: '8,00', volumeGrand: '0,50', pctGrand: '60%',
+        coutPichet: '—', volumePichet: '—', pctPichet: '—',
+        nbVerresEcoresponsables: 80000, litresParFut: 50,
+        pctVerresBieres: '55%',
+        nbDistributeursRetenus: 0, nbFutsParDistributeur: 0,
+        gainCABiereActuel: '—', obstacleIdentifie: 'Contrainte logistique liée aux accès stade. Nécessite validation sécurité.',
+        montantEstime: '—', montantFacture: '—',
+        commentaires: 'Contact Pierre Durand intéressé pour matchs de rugby. Files d\'attente problématiques confirmées.',
+        emailCommercial: '',
+        calculs: {
+            nomAffaire: 'Stade Matmut — Mai 2026',
+            jaugeMax: '42 115', jaugeUtilisee: '42 115', nbHeuresDistribution: '6',
+            nbVerresParVisiteur: '1,5', nbVisiteursAnneeCalc: '600 000',
+            nbVerresToutesBoissons: '63 173', caBoissons: '442 208 €',
+            nbMoyenFutsEvenement: '350', nbTireuses2Becs: '12', nbEquivTireusesDoubleBecs: '12',
+            nbFutsParTireuse: '29', nbMoyenFutsMois: '58', nbMoyenFutsAnnee: '700',
+            nbPetitsVerresParFut: '200', nbGrandsVerresParFut: '100', nbPichetsParFut: '—',
+            pctVerresBieresCalc: '55%',
+            nbFutsAvecJavatic: '455', diffFutsJavatic: '+105',
+            nbDistribPropA: '4', nbFutsDistribPropA: '114', nbFutsHeurePropA: '19',
+            nbDistribPropB: '6', nbFutsDistribPropB: '76', nbFutsHeurePropB: '12,6',
+            nbFutsTotal: '455',
+            coutSolutionJavatic: '—', gainCAEvenement: '—', gainCANetMois: '—', gainCANetAn: '—', gainCASupp: '—',
+            typeClientLookup: 'Stade'
+        },
+        siteLie: 'Stade Matmut Atlantique', contactsLies: ['Pierre Durand'], machinesLiees: []
+    },
+    'Arena Montpellier — Sept 2026': {
+        nom: 'Arena Montpellier — Sept 2026',
+        statutCommercial: 'A Chiffrer', statutCommercialClass: 'badge-yellow',
+        statutOperationnel: '—', statutOperationnelClass: 'badge-gray',
+        dateDebut: '2026-09-15', dateFin: '2026-09-17', nbJours: 3, nbMachines: 0,
+        problemeFiles: false, convictionJavatic: false,
+        bars: [
+            { ml: 10, serveurs: 4, doubleBecs: 2, futs: 4, tpe: 2, soft: 1 },
+            { ml: 8, serveurs: 3, doubleBecs: 1, futs: 3, tpe: 1, soft: 1 },
+            { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 },
+            { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 },
+            { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 }
+        ],
+        jaugeAssis: 9000, jaugeDebout: 14800, jaugeConfirmee: 14000,
+        remplissage: '70%', nbEvenementsMajeurs: 50, moyenneEvenementsMensuel: 4.2,
+        heureOuverture: 19, heureEvacuation: 23, visiteursAnnee: 500000,
+        panierMoyen: '15,00', coutConsommationMoyenne: '6,00',
+        coutBierePetit: '5,00', volumePetit: '0,25', pctPetit: '35%',
+        coutBiereGrand: '7,50', volumeGrand: '0,50', pctGrand: '55%',
+        coutPichet: '—', volumePichet: '—', pctPichet: '—',
+        nbVerresEcoresponsables: 30000, litresParFut: 50,
+        pctVerresBieres: '35%',
+        nbDistributeursRetenus: 0, nbFutsParDistributeur: 0,
+        gainCABiereActuel: '—', obstacleIdentifie: '',
+        montantEstime: '—', montantFacture: '—',
+        commentaires: 'Prospect récent, à qualifier.',
+        emailCommercial: '',
+        calculs: {
+            nomAffaire: 'Arena Montpellier — Sept 2026',
+            jaugeMax: '14 800', jaugeUtilisee: '14 000', nbHeuresDistribution: '4',
+            nbVerresParVisiteur: '1,8', nbVisiteursAnneeCalc: '500 000',
+            nbVerresToutesBoissons: '25 200', caBoissons: '151 200 €',
+            nbMoyenFutsEvenement: '45', nbTireuses2Becs: '3', nbEquivTireusesDoubleBecs: '3',
+            nbFutsParTireuse: '15', nbMoyenFutsMois: '188', nbMoyenFutsAnnee: '2 250',
+            nbPetitsVerresParFut: '200', nbGrandsVerresParFut: '100', nbPichetsParFut: '—',
+            pctVerresBieresCalc: '35%',
+            nbFutsAvecJavatic: '59', diffFutsJavatic: '+14',
+            nbDistribPropA: '2', nbFutsDistribPropA: '29', nbFutsHeurePropA: '7,3',
+            nbDistribPropB: '3', nbFutsDistribPropB: '20', nbFutsHeurePropB: '5',
+            nbFutsTotal: '59',
+            coutSolutionJavatic: '—', gainCAEvenement: '—', gainCANetMois: '—', gainCANetAn: '—', gainCASupp: '—',
+            typeClientLookup: 'Salle'
+        },
+        siteLie: 'Arena Montpellier', contactsLies: [], machinesLiees: []
+    },
+    'Zénith de Pau — Avril 2026': {
+        nom: 'Zénith de Pau — Avril 2026',
+        statutCommercial: 'A Soumettre', statutCommercialClass: 'badge-orange',
+        statutOperationnel: 'A Préfacturer 30%', statutOperationnelClass: 'badge-blue',
+        dateDebut: '2026-04-15', dateFin: '2026-04-17', nbJours: 3, nbMachines: 2,
+        problemeFiles: true, convictionJavatic: true,
+        bars: [
+            { ml: 8, serveurs: 3, doubleBecs: 2, futs: 3, tpe: 2, soft: 1 },
+            { ml: 6, serveurs: 2, doubleBecs: 1, futs: 2, tpe: 1, soft: 1 },
+            { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 },
+            { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 },
+            { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 }
+        ],
+        jaugeAssis: 4500, jaugeDebout: 6500, jaugeConfirmee: 6000,
+        remplissage: '80%', nbEvenementsMajeurs: 60, moyenneEvenementsMensuel: 5,
+        heureOuverture: 19, heureEvacuation: 23, visiteursAnnee: 350000,
+        panierMoyen: '12,00', coutConsommationMoyenne: '6,00',
+        coutBierePetit: '5,00', volumePetit: '0,25', pctPetit: '35%',
+        coutBiereGrand: '7,00', volumeGrand: '0,50', pctGrand: '55%',
+        coutPichet: '15,00', volumePichet: '1,5', pctPichet: '10%',
+        nbVerresEcoresponsables: 20000, litresParFut: 50,
+        pctVerresBieres: '30%',
+        nbDistributeursRetenus: 2, nbFutsParDistributeur: 6,
+        gainCABiereActuel: '180 000 €', obstacleIdentifie: 'Budget limité, nécessite validation direction générale.',
+        montantEstime: '8 500 €', montantFacture: '—',
+        commentaires: 'Devis en cours de finalisation. Jean Dupont convaincu par la démo.',
+        emailCommercial: 'Objet: Proposition JAvATIC — Zénith de Pau\n\nBonjour Jean,\n\nSuite à notre RDV, veuillez trouver ci-joint notre proposition pour 2 distributeurs JAvATIC sur 3 jours.\n\nCordialement,\nYoann RUAUD',
+        calculs: {
+            nomAffaire: 'Zénith de Pau — Avril 2026',
+            jaugeMax: '6 500', jaugeUtilisee: '6 000', nbHeuresDistribution: '4',
+            nbVerresParVisiteur: '1,8', nbVisiteursAnneeCalc: '350 000',
+            nbVerresToutesBoissons: '10 800', caBoissons: '64 800 €',
+            nbMoyenFutsEvenement: '18', nbTireuses2Becs: '3', nbEquivTireusesDoubleBecs: '3',
+            nbFutsParTireuse: '6', nbMoyenFutsMois: '90', nbMoyenFutsAnnee: '1 080',
+            nbPetitsVerresParFut: '200', nbGrandsVerresParFut: '100', nbPichetsParFut: '33',
+            pctVerresBieresCalc: '30%',
+            nbFutsAvecJavatic: '23', diffFutsJavatic: '+5',
+            nbDistribPropA: '2', nbFutsDistribPropA: '12', nbFutsHeurePropA: '3',
+            nbDistribPropB: '3', nbFutsDistribPropB: '8', nbFutsHeurePropB: '2',
+            nbFutsTotal: '23',
+            coutSolutionJavatic: '8 500 €', gainCAEvenement: '2 100 €', gainCANetMois: '10 500 €', gainCANetAn: '126 000 €', gainCASupp: '37 800 €',
+            typeClientLookup: 'Salle'
+        },
+        siteLie: 'Zénith de Pau', contactsLies: ['Jean Dupont'], machinesLiees: []
+    },
+    'Vieilles Charrues — Juillet 2026': {
+        nom: 'Vieilles Charrues — Juillet 2026',
+        statutCommercial: 'A Soumettre', statutCommercialClass: 'badge-orange',
+        statutOperationnel: 'A Préfacturer 30%', statutOperationnelClass: 'badge-blue',
+        dateDebut: '2026-07-16', dateFin: '2026-07-19', nbJours: 4, nbMachines: 4,
+        problemeFiles: true, convictionJavatic: true,
+        bars: [
+            { ml: 20, serveurs: 8, doubleBecs: 4, futs: 8, tpe: 3, soft: 2 },
+            { ml: 15, serveurs: 6, doubleBecs: 3, futs: 6, tpe: 2, soft: 2 },
+            { ml: 12, serveurs: 5, doubleBecs: 2, futs: 5, tpe: 2, soft: 1 },
+            { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 },
+            { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 }
+        ],
+        jaugeAssis: 0, jaugeDebout: 55000, jaugeConfirmee: 55000,
+        remplissage: '90%', nbEvenementsMajeurs: 1, moyenneEvenementsMensuel: 0.08,
+        heureOuverture: 14, heureEvacuation: 3, visiteursAnnee: 220000,
+        panierMoyen: '40,00', coutConsommationMoyenne: '7,00',
+        coutBierePetit: '5,50', volumePetit: '0,25', pctPetit: '25%',
+        coutBiereGrand: '7,50', volumeGrand: '0,50', pctGrand: '60%',
+        coutPichet: '20,00', volumePichet: '1,5', pctPichet: '15%',
+        nbVerresEcoresponsables: 100000, litresParFut: 50,
+        pctVerresBieres: '45%',
+        nbDistributeursRetenus: 4, nbFutsParDistributeur: 8,
+        gainCABiereActuel: '500 000 €', obstacleIdentifie: 'Logistique d\'installation complexe, terrain en plein air.',
+        montantEstime: '15 000 €', montantFacture: '—',
+        commentaires: 'Laura Petit très motivée. Devis à soumettre au CA de l\'association.',
+        emailCommercial: '',
+        calculs: {
+            nomAffaire: 'Vieilles Charrues — Juillet 2026',
+            jaugeMax: '55 000', jaugeUtilisee: '55 000', nbHeuresDistribution: '13',
+            nbVerresParVisiteur: '3,2', nbVisiteursAnneeCalc: '220 000',
+            nbVerresToutesBoissons: '176 000', caBoissons: '1 232 000 €',
+            nbMoyenFutsEvenement: '400', nbTireuses2Becs: '12', nbEquivTireusesDoubleBecs: '12',
+            nbFutsParTireuse: '33', nbMoyenFutsMois: '33', nbMoyenFutsAnnee: '400',
+            nbPetitsVerresParFut: '200', nbGrandsVerresParFut: '100', nbPichetsParFut: '33',
+            pctVerresBieresCalc: '45%',
+            nbFutsAvecJavatic: '520', diffFutsJavatic: '+120',
+            nbDistribPropA: '4', nbFutsDistribPropA: '130', nbFutsHeurePropA: '10',
+            nbDistribPropB: '6', nbFutsDistribPropB: '87', nbFutsHeurePropB: '6,7',
+            nbFutsTotal: '520',
+            coutSolutionJavatic: '15 000 €', gainCAEvenement: '42 000 €', gainCANetMois: '3 500 €', gainCANetAn: '42 000 €', gainCASupp: '84 000 €',
+            typeClientLookup: 'Festival'
+        },
+        siteLie: 'Vieilles Charrues', contactsLies: ['Laura Petit'], machinesLiees: []
+    },
+    'Arena de Bordeaux — Mars 2026': {
+        nom: 'Arena de Bordeaux — Mars 2026',
+        statutCommercial: 'Validé', statutCommercialClass: 'badge-green',
+        statutOperationnel: 'Réalisé', statutOperationnelClass: 'badge-green',
+        dateDebut: '2026-03-20', dateFin: '2026-03-22', nbJours: 3, nbMachines: 3,
+        problemeFiles: true, convictionJavatic: true,
+        bars: [
+            { ml: 15, serveurs: 6, doubleBecs: 3, futs: 6, tpe: 3, soft: 2 },
+            { ml: 12, serveurs: 5, doubleBecs: 2, futs: 5, tpe: 2, soft: 1 },
+            { ml: 10, serveurs: 4, doubleBecs: 2, futs: 4, tpe: 2, soft: 1 },
+            { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 },
+            { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 }
+        ],
+        jaugeAssis: 8000, jaugeDebout: 11300, jaugeConfirmee: 10000,
+        remplissage: '80%', nbEvenementsMajeurs: 80, moyenneEvenementsMensuel: 6.7,
+        heureOuverture: 19, heureEvacuation: 23, visiteursAnnee: 600000,
+        panierMoyen: '15,00', coutConsommationMoyenne: '6,50',
+        coutBierePetit: '5,50', volumePetit: '0,25', pctPetit: '30%',
+        coutBiereGrand: '8,00', volumeGrand: '0,50', pctGrand: '55%',
+        coutPichet: '18,00', volumePichet: '1,5', pctPichet: '15%',
+        nbVerresEcoresponsables: 40000, litresParFut: 50,
+        pctVerresBieres: '35%',
+        nbDistributeursRetenus: 3, nbFutsParDistributeur: 8,
+        gainCABiereActuel: '280 000 €', obstacleIdentifie: '',
+        montantEstime: '12 000 €', montantFacture: '12 000 €',
+        commentaires: 'Première prestation réalisée avec succès. Client très satisfait. Renouvellement prévu.',
+        emailCommercial: '',
+        calculs: {
+            nomAffaire: 'Arena de Bordeaux — Mars 2026',
+            jaugeMax: '11 300', jaugeUtilisee: '10 000', nbHeuresDistribution: '4',
+            nbVerresParVisiteur: '2,0', nbVisiteursAnneeCalc: '600 000',
+            nbVerresToutesBoissons: '20 000', caBoissons: '130 000 €',
+            nbMoyenFutsEvenement: '35', nbTireuses2Becs: '5', nbEquivTireusesDoubleBecs: '5',
+            nbFutsParTireuse: '7', nbMoyenFutsMois: '233', nbMoyenFutsAnnee: '2 800',
+            nbPetitsVerresParFut: '200', nbGrandsVerresParFut: '100', nbPichetsParFut: '33',
+            pctVerresBieresCalc: '35%',
+            nbFutsAvecJavatic: '46', diffFutsJavatic: '+11',
+            nbDistribPropA: '3', nbFutsDistribPropA: '15', nbFutsHeurePropA: '3,8',
+            nbDistribPropB: '4', nbFutsDistribPropB: '12', nbFutsHeurePropB: '3',
+            nbFutsTotal: '46',
+            coutSolutionJavatic: '12 000 €', gainCAEvenement: '4 620 €', gainCANetMois: '30 940 €', gainCANetAn: '371 280 €', gainCASupp: '92 820 €',
+            typeClientLookup: 'Salle'
+        },
+        siteLie: 'Arena de Bordeaux', contactsLies: ['Sophie Martin'], machinesLiees: ['JAV-003', 'JAV-004', 'JAV-005']
+    },
+    'Eurockéennes — Juillet 2026': {
+        nom: 'Eurockéennes — Juillet 2026',
+        statutCommercial: 'Validé', statutCommercialClass: 'badge-green',
+        statutOperationnel: 'A Préfacturer 30%', statutOperationnelClass: 'badge-blue',
+        dateDebut: '2026-07-02', dateFin: '2026-07-05', nbJours: 4, nbMachines: 4,
+        problemeFiles: true, convictionJavatic: true,
+        bars: [
+            { ml: 18, serveurs: 7, doubleBecs: 4, futs: 7, tpe: 3, soft: 2 },
+            { ml: 14, serveurs: 5, doubleBecs: 3, futs: 5, tpe: 2, soft: 2 },
+            { ml: 10, serveurs: 4, doubleBecs: 2, futs: 4, tpe: 2, soft: 1 },
+            { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 },
+            { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 }
+        ],
+        jaugeAssis: 0, jaugeDebout: 32000, jaugeConfirmee: 32000,
+        remplissage: '90%', nbEvenementsMajeurs: 1, moyenneEvenementsMensuel: 0.08,
+        heureOuverture: 14, heureEvacuation: 2, visiteursAnnee: 128000,
+        panierMoyen: '38,00', coutConsommationMoyenne: '6,50',
+        coutBierePetit: '5,00', volumePetit: '0,25', pctPetit: '30%',
+        coutBiereGrand: '7,00', volumeGrand: '0,50', pctGrand: '55%',
+        coutPichet: '18,00', volumePichet: '1,5', pctPichet: '15%',
+        nbVerresEcoresponsables: 60000, litresParFut: 50,
+        pctVerresBieres: '42%',
+        nbDistributeursRetenus: 4, nbFutsParDistributeur: 8,
+        gainCABiereActuel: '350 000 €', obstacleIdentifie: '',
+        montantEstime: '18 000 €', montantFacture: '—',
+        commentaires: 'Contrat validé. 4 machines prévues. Livraison et installation à planifier.',
+        emailCommercial: '',
+        calculs: {
+            nomAffaire: 'Eurockéennes — Juillet 2026',
+            jaugeMax: '32 000', jaugeUtilisee: '32 000', nbHeuresDistribution: '12',
+            nbVerresParVisiteur: '3,0', nbVisiteursAnneeCalc: '128 000',
+            nbVerresToutesBoissons: '96 000', caBoissons: '624 000 €',
+            nbMoyenFutsEvenement: '220', nbTireuses2Becs: '8', nbEquivTireusesDoubleBecs: '8',
+            nbFutsParTireuse: '28', nbMoyenFutsMois: '18', nbMoyenFutsAnnee: '220',
+            nbPetitsVerresParFut: '200', nbGrandsVerresParFut: '100', nbPichetsParFut: '33',
+            pctVerresBieresCalc: '42%',
+            nbFutsAvecJavatic: '286', diffFutsJavatic: '+66',
+            nbDistribPropA: '4', nbFutsDistribPropA: '72', nbFutsHeurePropA: '6',
+            nbDistribPropB: '5', nbFutsDistribPropB: '57', nbFutsHeurePropB: '4,8',
+            nbFutsTotal: '286',
+            coutSolutionJavatic: '18 000 €', gainCAEvenement: '27 720 €', gainCANetMois: '2 310 €', gainCANetAn: '27 720 €', gainCASupp: '55 440 €',
+            typeClientLookup: 'Festival'
+        },
+        siteLie: 'Eurockéennes', contactsLies: ['Claire Bernard'], machinesLiees: ['JAV-006', 'JAV-007', 'JAV-008', 'JAV-009']
+    },
+    'Hellfest — Juin 2026': {
+        nom: 'Hellfest — Juin 2026',
+        statutCommercial: 'Validé', statutCommercialClass: 'badge-green',
+        statutOperationnel: 'A Préfacturer 30%', statutOperationnelClass: 'badge-blue',
+        dateDebut: '2026-06-18', dateFin: '2026-06-21', nbJours: 4, nbMachines: 5,
+        problemeFiles: true, convictionJavatic: true,
+        bars: [
+            { ml: 25, serveurs: 10, doubleBecs: 5, futs: 10, tpe: 4, soft: 3 },
+            { ml: 20, serveurs: 8, doubleBecs: 4, futs: 8, tpe: 3, soft: 2 },
+            { ml: 18, serveurs: 7, doubleBecs: 3, futs: 7, tpe: 3, soft: 2 },
+            { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 },
+            { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 }
+        ],
+        jaugeAssis: 0, jaugeDebout: 60000, jaugeConfirmee: 60000,
+        remplissage: '90%', nbEvenementsMajeurs: 1, moyenneEvenementsMensuel: 0.08,
+        heureOuverture: 12, heureEvacuation: 3, visiteursAnnee: 240000,
+        panierMoyen: '50,00', coutConsommationMoyenne: '7,00',
+        coutBierePetit: '5,50', volumePetit: '0,25', pctPetit: '20%',
+        coutBiereGrand: '7,50', volumeGrand: '0,50', pctGrand: '65%',
+        coutPichet: '20,00', volumePichet: '1,5', pctPichet: '15%',
+        nbVerresEcoresponsables: 120000, litresParFut: 50,
+        pctVerresBieres: '55%',
+        nbDistributeursRetenus: 5, nbFutsParDistributeur: 10,
+        gainCABiereActuel: '800 000 €', obstacleIdentifie: '',
+        montantEstime: '25 000 €', montantFacture: '—',
+        commentaires: 'Client historique. 5 machines confirmées pour 2026. Augmentation par rapport à 2025 (de 4 à 5 machines). Antoine Roux très satisfait.',
+        emailCommercial: '',
+        calculs: {
+            nomAffaire: 'Hellfest — Juin 2026',
+            jaugeMax: '60 000', jaugeUtilisee: '60 000', nbHeuresDistribution: '15',
+            nbVerresParVisiteur: '4,2', nbVisiteursAnneeCalc: '240 000',
+            nbVerresToutesBoissons: '252 000', caBoissons: '1 764 000 €',
+            nbMoyenFutsEvenement: '600', nbTireuses2Becs: '18', nbEquivTireusesDoubleBecs: '18',
+            nbFutsParTireuse: '33', nbMoyenFutsMois: '50', nbMoyenFutsAnnee: '600',
+            nbPetitsVerresParFut: '200', nbGrandsVerresParFut: '100', nbPichetsParFut: '33',
+            pctVerresBieresCalc: '55%',
+            nbFutsAvecJavatic: '780', diffFutsJavatic: '+180',
+            nbDistribPropA: '5', nbFutsDistribPropA: '156', nbFutsHeurePropA: '10,4',
+            nbDistribPropB: '7', nbFutsDistribPropB: '111', nbFutsHeurePropB: '7,4',
+            nbFutsTotal: '780',
+            coutSolutionJavatic: '25 000 €', gainCAEvenement: '63 000 €', gainCANetMois: '5 250 €', gainCANetAn: '63 000 €', gainCASupp: '126 000 €',
+            typeClientLookup: 'Festival'
+        },
+        siteLie: 'Hellfest', contactsLies: ['Antoine Roux'], machinesLiees: ['JAV-001', 'JAV-002', 'JAV-003', 'JAV-010', 'JAV-011']
+    },
+    'Stade Pierre Mauroy — Oct 2026': {
+        nom: 'Stade Pierre Mauroy — Oct 2026',
+        statutCommercial: 'Refusé', statutCommercialClass: 'badge-red',
+        statutOperationnel: '—', statutOperationnelClass: 'badge-gray',
+        dateDebut: '2026-10-10', dateFin: '2026-10-11', nbJours: 2, nbMachines: 0,
+        problemeFiles: true, convictionJavatic: false,
+        bars: [
+            { ml: 18, serveurs: 6, doubleBecs: 3, futs: 6, tpe: 3, soft: 2 },
+            { ml: 15, serveurs: 5, doubleBecs: 2, futs: 5, tpe: 2, soft: 1 },
+            { ml: 12, serveurs: 4, doubleBecs: 2, futs: 4, tpe: 2, soft: 1 },
+            { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 },
+            { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 }
+        ],
+        jaugeAssis: 50000, jaugeDebout: 0, jaugeConfirmee: 50000,
+        remplissage: '70%', nbEvenementsMajeurs: 25, moyenneEvenementsMensuel: 2.1,
+        heureOuverture: 18, heureEvacuation: 23, visiteursAnnee: 800000,
+        panierMoyen: '10,00', coutConsommationMoyenne: '6,50',
+        coutBierePetit: '5,50', volumePetit: '0,25', pctPetit: '30%',
+        coutBiereGrand: '8,00', volumeGrand: '0,50', pctGrand: '60%',
+        coutPichet: '—', volumePichet: '—', pctPichet: '—',
+        nbVerresEcoresponsables: 100000, litresParFut: 50,
+        pctVerresBieres: '50%',
+        nbDistributeursRetenus: 0, nbFutsParDistributeur: 0,
+        gainCABiereActuel: '400 000 €', obstacleIdentifie: 'Direction a choisi un prestataire concurrent. Contrat pluriannuel en cours.',
+        montantEstime: '10 000 €', montantFacture: '—',
+        commentaires: 'Refusé en septembre 2025. Contrat concurrent en place jusqu\'en 2028. Relancer en 2027.',
+        emailCommercial: '',
+        calculs: {
+            nomAffaire: 'Stade Pierre Mauroy — Oct 2026',
+            jaugeMax: '50 000', jaugeUtilisee: '50 000', nbHeuresDistribution: '5',
+            nbVerresParVisiteur: '1,3', nbVisiteursAnneeCalc: '800 000',
+            nbVerresToutesBoissons: '65 000', caBoissons: '422 500 €',
+            nbMoyenFutsEvenement: '150', nbTireuses2Becs: '7', nbEquivTireusesDoubleBecs: '7',
+            nbFutsParTireuse: '21', nbMoyenFutsMois: '313', nbMoyenFutsAnnee: '3 750',
+            nbPetitsVerresParFut: '200', nbGrandsVerresParFut: '100', nbPichetsParFut: '—',
+            pctVerresBieresCalc: '50%',
+            nbFutsAvecJavatic: '195', diffFutsJavatic: '+45',
+            nbDistribPropA: '4', nbFutsDistribPropA: '49', nbFutsHeurePropA: '9,8',
+            nbDistribPropB: '6', nbFutsDistribPropB: '33', nbFutsHeurePropB: '6,5',
+            nbFutsTotal: '195',
+            coutSolutionJavatic: '10 000 €', gainCAEvenement: '14 625 €', gainCANetMois: '30 469 €', gainCANetAn: '365 625 €', gainCASupp: '146 250 €',
+            typeClientLookup: 'Stade'
+        },
+        siteLie: 'Stade Pierre Mauroy', contactsLies: [], machinesLiees: []
+    }
+};
+
+
+/* ============================================
+   BUILD AFFAIRE MODAL (4 tabs)
+   ============================================ */
+function buildAffaireModal(d) {
+    if (!d) return '<p style="padding:20px;color:#999;">Données non disponibles</p>';
+    const esc = s => (s === undefined || s === null || s === '') ? '—' : s.toString().replace(/</g,'&lt;');
+
+    const statutCommercialOptions = [
+        { label: 'Prospection', badgeClass: 'badge-gray' },
+        { label: 'Qualification', badgeClass: 'badge-blue' },
+        { label: 'A Chiffrer', badgeClass: 'badge-yellow' },
+        { label: 'A Soumettre', badgeClass: 'badge-orange' },
+        { label: 'Validé', badgeClass: 'badge-green' },
+        { label: 'Refusé', badgeClass: 'badge-red' }
+    ];
+    const statutOperationnelOptions = [
+        { label: '—', badgeClass: 'badge-gray' },
+        { label: 'A Préfacturer 30%', badgeClass: 'badge-cyan' },
+        { label: 'A Préfacturer 70%', badgeClass: 'badge-blue' },
+        { label: 'A réaliser', badgeClass: 'badge-yellow' },
+        { label: 'Réalisé', badgeClass: 'badge-teal' },
+        { label: 'En paiement', badgeClass: 'badge-orange' },
+        { label: 'Payé', badgeClass: 'badge-green' }
+    ];
+
+    function buildSelectField(fieldName, currentValue, currentBadgeClass, options) {
+        let optionsHtml = options.map(o =>
+            `<div class="field-select-option${o.label === currentValue ? ' selected' : ''}" data-badge-class="${o.badgeClass}" onclick="selectOption(this, '${fieldName}')">${o.label}</div>`
+        ).join('');
+        return `<div class="field-select" data-field="${fieldName}">
+            <div class="field-select-value" onclick="toggleSelect(this)">
+                <span class="badge ${currentBadgeClass}" id="val-${fieldName}">${esc(currentValue)}</span>
+                <span class="field-select-arrow">▾</span>
+            </div>
+            <div class="field-select-dropdown" id="dropdown-${fieldName}">
+                ${optionsHtml}
+            </div>
+        </div>`;
+    }
+
+    const futOuBouteilleOptions = [
+        { label: 'Fût', badgeClass: 'badge-blue' },
+        { label: 'Bouteille', badgeClass: 'badge-orange' },
+        { label: 'Les deux', badgeClass: 'badge-teal' }
+    ];
+
+    const problemeFilesOptions = [
+        { label: 'Oui', badgeClass: 'badge-red' },
+        { label: 'Non', badgeClass: 'badge-green' },
+        { label: 'Ne sait pas', badgeClass: 'badge-gray' }
+    ];
+
+    const convictionOptions = [
+        { label: 'Convaincu', badgeClass: 'badge-green' },
+        { label: 'A convaincre', badgeClass: 'badge-yellow' },
+        { label: 'Réticent', badgeClass: 'badge-red' }
+    ];
+
+    const textField = (label, value, type) => {
+        const t = type || 'text';
+        return `<div class="detail-field">
+            <div class="detail-field-label">${label}</div>
+            <div class="detail-field-value">
+                <div class="field-text" onclick="editText(this)">
+                    <span class="field-text-display">${esc(value)}</span>
+                    <input class="field-text-input" type="${t}" value="${esc(value) === '—' ? '' : esc(value)}" style="display:none" onblur="saveText(this)" onkeydown="if(event.key==='Enter') this.blur()">
+                </div>
+            </div>
+        </div>`;
+    };
+
+    const displayField = (label, value) => `<div class="detail-field">
+        <div class="detail-field-label">${label}</div>
+        <div class="detail-field-value">${esc(value)}</div>
+    </div>`;
+
+    const textareaField = (label, value) => `<div class="detail-field">
+        <div class="detail-field-label">${label}</div>
+        <div class="detail-field-value">
+            <div class="field-textarea" onclick="editTextarea(this)">
+                <div class="field-textarea-display">${esc(value)}</div>
+                <textarea class="field-textarea-input" style="display:none" onblur="saveTextarea(this)">${esc(value) === '—' ? '' : esc(value)}</textarea>
+            </div>
+        </div>
+    </div>`;
+
+    let html = '';
+
+    // ─── TAB 1: Général ───
+    html += `<div class="record-modal-tab-content active" id="modal-tab-general">`;
+
+    // Section Statuts
+    html += `<div class="detail-section"><h4 class="detail-section-title">Statuts</h4>`;
+    html += `<div class="detail-field"><div class="detail-field-label">Statut commercial</div><div class="detail-field-value">${buildSelectField('statut-commercial', d.statutCommercial, d.statutCommercialClass, statutCommercialOptions)}</div></div>`;
+    html += `<div class="detail-field"><div class="detail-field-label">Statut opérationnel</div><div class="detail-field-value">${buildSelectField('statut-operationnel', d.statutOperationnel, d.statutOperationnelClass, statutOperationnelOptions)}</div></div>`;
+    html += `</div>`;
+
+    // Section Événement
+    html += `<div class="detail-section"><h4 class="detail-section-title">Événement</h4>`;
+    html += textField('Date début', d.dateDebut, 'date');
+    html += textField('Date fin', d.dateFin, 'date');
+    html += textField('Nombre de jours de location', d.nbJours, 'number');
+    html += textField('Nombre de machines demandées', d.nbMachines, 'number');
+    html += `</div>`;
+
+    // Section Montants
+    html += `<div class="detail-section"><h4 class="detail-section-title">Montants</h4>`;
+    html += textField('Montant estimé HT', d.montantEstime);
+    html += textField('Montant facturé HT', d.montantFacture);
+    html += `</div>`;
+
+    // Section Commercial
+    html += `<div class="detail-section"><h4 class="detail-section-title">Commercial</h4>`;
+    html += textareaField('Obstacle identifié', d.obstacleIdentifie);
+    html += textareaField('Commentaires', d.commentaires);
+    html += textareaField('Email commercial généré', d.emailCommercial);
+    html += `</div>`;
+
+    html += `</div>`;
+
+    // ─── TAB 2: Analyse terrain ───
+    html += `<div class="record-modal-tab-content" id="modal-tab-terrain">`;
+
+    // Section Organisation existante
+    html += `<div class="detail-section"><h4 class="detail-section-title">Organisation existante</h4>`;
+    const problemeVal = d.problemeFiles === true ? 'Oui' : (d.problemeFiles === false ? 'Non' : 'Ne sait pas');
+    const problemeBadge = d.problemeFiles === true ? 'badge-red' : (d.problemeFiles === false ? 'badge-green' : 'badge-gray');
+    html += `<div class="detail-field"><div class="detail-field-label">Problème files d'attente</div><div class="detail-field-value">${buildSelectField('probleme-files', problemeVal, problemeBadge, problemeFilesOptions)}</div></div>`;
+    const convictionVal = d.convictionJavatic === true ? 'Convaincu' : (d.convictionJavatic === false ? 'Réticent' : 'A convaincre');
+    const convictionBadge = d.convictionJavatic === true ? 'badge-green' : (d.convictionJavatic === false ? 'badge-red' : 'badge-yellow');
+    html += `<div class="detail-field"><div class="detail-field-label">Conviction solution</div><div class="detail-field-value">${buildSelectField('conviction-solution', convictionVal, convictionBadge, convictionOptions)}</div></div>`;
+
+    // Bars 1-5
+    const bars = d.bars || [];
+    for (let i = 0; i < 5; i++) {
+        const b = bars[i] || {};
+        const hasData = b.nom || b.nbTireuses || (b.ml && b.ml > 0);
+        html += `<div style="margin:16px 0 8px; font-size:13px; font-weight:600; color:#444; border-bottom:1px solid #eee; padding-bottom:4px;">Bar ${i+1}</div>`;
+        html += textField('Nom bar', b.nom || (b.ml > 0 ? ('Bar ' + (i+1)) : ''));
+        html += textField('Nb tireuses', b.nbTireuses || b.doubleBecs || '', 'number');
+        html += textField('Type de bière', b.typeBiere || '');
+        const futVal = b.futOuBouteille || (b.futs > 0 ? 'Fût' : '');
+        const futBadge = futVal === 'Fût' ? 'badge-blue' : (futVal === 'Bouteille' ? 'badge-orange' : (futVal === 'Les deux' ? 'badge-teal' : 'badge-gray'));
+        html += `<div class="detail-field"><div class="detail-field-label">Fût ou bouteille</div><div class="detail-field-value">${buildSelectField('fut-bouteille-' + i, futVal || '—', futBadge, futOuBouteilleOptions)}</div></div>`;
+        html += textField('Commentaire bar', b.commentaire || '');
+    }
+    html += `</div>`;
+
+    // Section Affluence
+    html += `<div class="detail-section"><h4 class="detail-section-title">Affluence</h4>`;
+    html += textField('Jauge max assis', d.jaugeAssis, 'number');
+    html += textField('Jauge max debout', d.jaugeDebout, 'number');
+    html += textField('% remplissage moyen', d.remplissage, 'number');
+    html += textField('Nb événements', d.nbEvenementsMajeurs || d.nbEvenements, 'number');
+    html += textField('Horaires', d.horaires || (d.heureOuverture ? (d.heureOuverture + 'h - ' + d.heureEvacuation + 'h') : ''));
+    html += textField('Panier moyen', d.panierMoyen);
+    html += textField('Coût moyen verre', d.coutVerre || d.coutConsommationMoyenne);
+    html += textField('Nb visiteurs confirmé', d.nbVisiteursConfirme || d.jaugeConfirmee || d.visiteursAnnee, 'number');
+    html += `</div>`;
+
+    html += `</div>`;
+
+    // ─── TAB 3: Chiffrage ───
+    html += `<div class="record-modal-tab-content" id="modal-tab-chiffrage">`;
+
+    // Section Volume bière
+    html += `<div class="detail-section"><h4 class="detail-section-title">Volume bière</h4>`;
+    html += textField('Nb fûts estimé', d.nbFuts || (d.calculs ? d.calculs.nbMoyenFutsEvenement : ''), 'number');
+    html += textField('Nb tireuses existantes', d.nbTireusesExistantes || (d.calculs ? d.calculs.nbTireuses2Becs : ''), 'number');
+    html += textField('% verres bière', d.pctVerresBiere || d.pctVerresBieres, 'number');
+    html += `</div>`;
+
+    // Section Propositions (display only)
+    const c = d.calculs || {};
+    html += `<div class="detail-section"><h4 class="detail-section-title">Propositions (calculés)</h4>`;
+    html += displayField('Proposition A - Nb distributeurs', d.propA_nbDist || c.nbDistribPropA || '—');
+    html += displayField('Proposition A - Gain CA estimé', d.propA_gainCA || c.gainCAEvenement || '—');
+    html += displayField('Proposition B - Nb distributeurs', d.propB_nbDist || c.nbDistribPropB || '—');
+    html += displayField('Proposition B - Gain CA estimé', d.propB_gainCA || c.gainCASupp || '—');
+    html += `</div>`;
+
+    // Section Décision
+    html += `<div class="detail-section"><h4 class="detail-section-title">Décision</h4>`;
+    html += textField('Nb distributeurs retenus', d.nbDistributeursRetenus, 'number');
+    html += displayField('Gains CA retenus', d.gainsCA || d.gainCABiereActuel || '—');
+    html += `</div>`;
+
+    html += `</div>`;
+
+    // ─── TAB 4: Relations ───
+    html += `<div class="record-modal-tab-content" id="modal-tab-relations">`;
+
+    // Site lié
+    const siteName = d.siteLie || d.site || '';
+    html += `<div class="detail-section"><h4 class="detail-section-title">Site lié</h4>`;
+    if (siteName) {
+        html += `<div class="detail-field"><div class="detail-field-value"><span class="detail-linked-record" onclick="alert('Fonctionnalité disponible dans Airtable')">${siteName}</span></div></div>`;
+    } else {
+        html += `<div class="detail-field"><div class="detail-field-value"><span style="color:#999;">Aucun</span></div></div>`;
+    }
+    html += `</div>`;
+
+    // Contacts associés
+    const contacts = d.contactsLies || d.contacts || [];
+    html += `<div class="detail-section"><h4 class="detail-section-title">Contacts associés</h4>`;
+    if (contacts.length) {
+        html += `<div class="detail-linked-cards">`;
+        contacts.forEach(cName => {
+            html += `<div class="detail-linked-card" onclick="alert('Fonctionnalité disponible dans Airtable')">
+                <div class="detail-linked-card-title">${esc(cName)}</div>
+            </div>`;
+        });
+        html += `</div>`;
+    } else {
+        html += `<div class="detail-field"><div class="detail-field-value"><span style="color:#999;">Aucun</span></div></div>`;
+    }
+    html += `<span class="field-add-link" style="margin-top:8px;display:inline-block;">+ Ajouter</span></div>`;
+
+    // Machines assignées
+    const machines = d.machinesLiees || d.machines || [];
+    html += `<div class="detail-section"><h4 class="detail-section-title">Machines assignées</h4>`;
+    if (machines.length) {
+        html += `<div class="detail-linked-cards">`;
+        machines.forEach(mName => {
+            html += `<div class="detail-linked-card" onclick="alert('Fonctionnalité disponible dans Airtable')">
+                <div class="detail-linked-card-title">${esc(mName)}</div>
+            </div>`;
+        });
+        html += `</div>`;
+    } else {
+        html += `<div class="detail-field"><div class="detail-field-value"><span style="color:#999;">Aucune</span></div></div>`;
+    }
+    html += `<span class="field-add-link" style="margin-top:8px;display:inline-block;">+ Ajouter</span></div>`;
+
+    html += `</div>`;
+
+    return html;
+}
+
+
+/* ============================================
+   OPEN / CLOSE RECORD MODAL
+   ============================================ */
+function openRecord(el) {
+    const name = el.dataset.recordName;
+    const d = affaireData[name];
+    if (!d) return;
+    document.getElementById('record-modal-title').textContent = d.nom;
+    document.getElementById('record-modal-body').innerHTML = buildAffaireModal(d);
+    // Reset tabs to first
+    document.querySelectorAll('.record-modal-tab').forEach((t, i) => t.classList.toggle('active', i === 0));
+    document.getElementById('record-modal').classList.add('open');
+}
+
+function closeRecordModal() {
+    document.getElementById('record-modal').classList.remove('open');
+}
+
+function switchModalTab(btn, tabId) {
+    btn.closest('.record-modal-tabs').querySelectorAll('.record-modal-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.record-modal-tab-content').forEach(c => c.classList.remove('active'));
+    document.getElementById('modal-tab-' + tabId).classList.add('active');
+}
+
+
+/* ============================================
+   INTERACTIVE FIELDS
+   ============================================ */
+function toggleSelect(trigger) {
+    const dropdown = trigger.nextElementSibling;
+    const isOpen = dropdown.classList.contains('open');
+    document.querySelectorAll('.field-select-dropdown.open').forEach(d => d.classList.remove('open'));
+    if (!isOpen) {
+        dropdown.classList.add('open');
+        const currentText = trigger.querySelector('[id^="val-"]')?.textContent;
+        dropdown.querySelectorAll('.field-select-option').forEach(opt => {
+            opt.classList.toggle('selected', opt.textContent.trim() === currentText?.trim());
+        });
+    }
+}
+
+function selectOption(option, fieldName) {
+    const text = option.textContent.trim();
+    const badgeClass = option.getAttribute('data-badge-class') || 'badge-gray';
+    const valueEl = document.getElementById('val-' + fieldName);
+    if (valueEl) {
+        valueEl.textContent = text;
+        valueEl.className = 'badge ' + badgeClass;
+    }
+    option.closest('.field-select-dropdown').classList.remove('open');
+}
+
+function toggleMultiSelect(trigger) {
+    const dropdown = trigger.nextElementSibling;
+    const isOpen = dropdown.classList.contains('open');
+    document.querySelectorAll('.field-select-dropdown.open').forEach(d => d.classList.remove('open'));
+    if (!isOpen) dropdown.classList.add('open');
+}
+
+function updateMultiSelect(fieldName, checkbox, badgeClass, label) {
+    const container = document.getElementById('vals-' + fieldName);
+    if (!container) return;
+    container.querySelectorAll('.badge').forEach(b => { if (b.textContent.trim() === label) b.remove(); });
+    if (checkbox.checked) {
+        const arrow = container.querySelector('.field-select-arrow');
+        const badge = document.createElement('span');
+        badge.className = 'badge ' + badgeClass;
+        badge.textContent = label;
+        container.insertBefore(badge, arrow);
+    }
+}
+
+function editText(wrapper) {
+    const display = wrapper.querySelector('.field-text-display');
+    const input = wrapper.querySelector('.field-text-input');
+    if (!input) return;
+    display.style.display = 'none';
+    input.style.display = 'block';
+    input.focus();
+    input.select();
+    wrapper.style.borderColor = '#166ee1';
+}
+
+function saveText(input) {
+    const wrapper = input.closest('.field-text');
+    const display = wrapper.querySelector('.field-text-display');
+    display.textContent = input.value || '—';
+    display.style.display = 'block';
+    input.style.display = 'none';
+    wrapper.style.borderColor = 'transparent';
+}
+
+function editTextarea(wrapper) {
+    const display = wrapper.querySelector('.field-textarea-display');
+    const input = wrapper.querySelector('.field-textarea-input');
+    if (!input) return;
+    display.style.display = 'none';
+    input.style.display = 'block';
+    input.focus();
+    wrapper.style.borderColor = '#166ee1';
+}
+
+function saveTextarea(input) {
+    const wrapper = input.closest('.field-textarea');
+    const display = wrapper.querySelector('.field-textarea-display');
+    display.textContent = input.value || '—';
+    display.style.display = 'block';
+    input.style.display = 'none';
+    wrapper.style.borderColor = 'transparent';
+}
+
+/* ============================================
+   GLOBAL EVENTS
+   ============================================ */
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.field-select') && !e.target.closest('.field-multiselect')) {
+        document.querySelectorAll('.field-select-dropdown.open').forEach(d => d.classList.remove('open'));
+    }
+});
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeRecordModal();
+});
+</script>
+</body>
+</html>

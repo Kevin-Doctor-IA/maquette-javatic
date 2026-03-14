@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1440">
+    <title>JAVATIC — Liste des machines</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="has-disclaimer">
+<div class="disclaimer-banner">Interfaces à usage visuel uniquement — Aperçu non fonctionnel, données fictives</div>
+<div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <span class="sidebar-logo">🍺</span>
+            <span class="sidebar-app-name">JAVATIC CRM</span>
+            <span class="sidebar-chevron">▾</span>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">📊</span>
+                    <span class="sidebar-section-label">Pilotage</span>
+                </div>
+                <a href="../pilotage/dashboard.html" class="sidebar-item">Dashboard financier</a>
+                <a href="../pilotage/zones-potentiel.html" class="sidebar-item">Zones à fort potentiel</a>
+                <a href="../pilotage/todo.html" class="sidebar-item">TODO</a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">💼</span>
+                    <span class="sidebar-section-label">CRM et suivi commercial</span>
+                </div>
+                <a href="../crm/sites.html" class="sidebar-item">Liste des sites</a>
+                <a href="../crm/contacts.html" class="sidebar-item">Liste des contacts</a>
+                <a href="../crm/pipeline.html" class="sidebar-item">Pipeline commercial</a>
+                <a href="../crm/calendrier.html" class="sidebar-item">Calendrier des RDV</a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">⚙️</span>
+                    <span class="sidebar-section-label">Production</span>
+                </div>
+                <a href="../production/idees-rd.html" class="sidebar-item">Idées R&D</a>
+                <a href="../production/fabrication.html" class="sidebar-item">Suivi fabrication</a>
+                <a href="../production/machines.html" class="sidebar-item active">Liste des machines</a>
+                <a href="../production/demandes-validees.html" class="sidebar-item">Demandes clients validées</a>
+                <a href="../production/suivi-operationnel.html" class="sidebar-item">Suivi opérationnel</a>
+            </div>
+        </nav>
+        <div class="sidebar-footer">
+            <span class="sidebar-footer-icon">👤</span>
+            <span class="sidebar-footer-text">Yoann RUAUD</span>
+        </div>
+    </aside>
+
+    <!-- MAIN AREA -->
+    <div class="main-area">
+
+        <!-- PAGE HEADER -->
+        <div class="page-header">
+            <div class="header-left">
+                <div class="breadcrumb">
+                    <span class="breadcrumb-parent">Production</span>
+                    <span class="breadcrumb-sep">›</span>
+                    <span class="breadcrumb-current">Liste des machines</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="btn-primary" onclick="alert('Fonctionnalité disponible dans Airtable')">＋ Ajouter une machine</button>
+            </div>
+        </div>
+
+        <!-- TABS -->
+        <div class="tabs-bar">
+            <button class="tab active" onclick="switchTab(this, 'all')">Toutes</button>
+            <button class="tab" onclick="switchTab(this, 'Disponible')">Disponibles</button>
+            <button class="tab" onclick="switchTab(this, 'En fabrication')">En fabrication</button>
+            <button class="tab" onclick="switchTab(this, 'En maintenance')">En maintenance</button>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content-area content-white">
+            <div class="list-table-wrapper">
+                <table class="list-table" id="main-table">
+                    <thead>
+                        <tr>
+                            <th style="width:40px;" class="col-checkbox"><input type="checkbox"></th>
+                            <th>Référence</th>
+                            <th>Nom</th>
+                            <th>Statut</th>
+                            <th>Container</th>
+                            <th style="text-align:right;">Nb affaires</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        <tr class="list-row" data-statut="Disponible" data-record-name="DIST-001" onclick="openRecord(this)">
+                            <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
+                            <td class="col-primary">DIST-001</td>
+                            <td>JAvATIC Alpha</td>
+                            <td><span class="badge badge-green">Disponible</span></td>
+                            <td>CONT-A1</td>
+                            <td class="col-number">2</td>
+                        </tr>
+                        <tr class="list-row" data-statut="En fabrication" data-record-name="DIST-002" onclick="openRecord(this)">
+                            <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
+                            <td class="col-primary">DIST-002</td>
+                            <td>JAvATIC Beta</td>
+                            <td><span class="badge badge-blue">En fabrication</span></td>
+                            <td>CONT-A2</td>
+                            <td class="col-number">0</td>
+                        </tr>
+                        <tr class="list-row" data-statut="Disponible" data-record-name="DIST-003" onclick="openRecord(this)">
+                            <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
+                            <td class="col-primary">DIST-003</td>
+                            <td>JAvATIC Gamma</td>
+                            <td><span class="badge badge-green">Disponible</span></td>
+                            <td>CONT-A1</td>
+                            <td class="col-number">3</td>
+                        </tr>
+                        <tr class="list-row" data-statut="En maintenance" data-record-name="DIST-004" onclick="openRecord(this)">
+                            <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
+                            <td class="col-primary">DIST-004</td>
+                            <td>JAvATIC Delta</td>
+                            <td><span class="badge badge-orange">En maintenance</span></td>
+                            <td>CONT-B1</td>
+                            <td class="col-number">1</td>
+                        </tr>
+                        <tr class="list-row" data-statut="En fabrication" data-record-name="DIST-005" onclick="openRecord(this)">
+                            <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
+                            <td class="col-primary">DIST-005</td>
+                            <td>JAvATIC Epsilon</td>
+                            <td><span class="badge badge-blue">En fabrication</span></td>
+                            <td>CONT-B1</td>
+                            <td class="col-number">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- DETAIL PANEL -->
+    <div class="detail-panel" id="detail-panel">
+        <div class="detail-panel-header">
+            <h3 class="detail-panel-title" id="detail-panel-title">—</h3>
+            <div class="detail-panel-actions">
+                <button class="detail-panel-expand" title="Ouvrir en plein écran">⤢</button>
+                <button class="detail-panel-close" onclick="closeDetailPanel()">✕</button>
+            </div>
+        </div>
+        <div class="detail-panel-body" id="detail-panel-body">
+            <!-- Generated dynamically -->
+        </div>
+    </div>
+
+
+</div>
+
+<script>
+// ─── DATA ──────────────────────────────────────────────────
+const machineData = {
+    'DIST-001': {
+        ref: 'DIST-001', nom: 'JAvATIC Alpha', photo: '[Photo du distributeur]',
+        description: 'Premier distributeur de bière pression JAvATIC. Modèle historique avec 4 becs de tirage, système de refroidissement standard.',
+        statut: 'Disponible', statutClass: 'badge-green',
+        container: 'CONT-A1', dateMiseEnService: '15/09/2025', nbAffaires: 2,
+        affaires: ['Arena de Bordeaux — Mars 2026', 'Eurockéennes — Juillet 2026'],
+        tachesFab: []
+    },
+    'DIST-002': {
+        ref: 'DIST-002', nom: 'JAvATIC Beta', photo: '[Photo du distributeur]',
+        description: 'Distributeur de 2ème génération avec système de refroidissement amélioré et nouveau module de paiement sans contact.',
+        statut: 'En fabrication', statutClass: 'badge-blue',
+        container: 'CONT-A2', dateMiseEnService: '20/04/2026', nbAffaires: 0,
+        affaires: [],
+        tachesFab: ['Assemblage châssis', 'Câblage électronique']
+    },
+    'DIST-003': {
+        ref: 'DIST-003', nom: 'JAvATIC Gamma', photo: '[Photo du distributeur]',
+        description: 'Distributeur à 6 becs avec écran tactile intégré. Optimisé pour les grands événements et festivals.',
+        statut: 'Disponible', statutClass: 'badge-green',
+        container: 'CONT-A1', dateMiseEnService: '10/01/2026', nbAffaires: 3,
+        affaires: ['Arena de Bordeaux — Mars 2026', 'Eurockéennes — Juillet 2026', 'Hellfest — Juin 2026'],
+        tachesFab: []
+    },
+    'DIST-004': {
+        ref: 'DIST-004', nom: 'JAvATIC Delta', photo: '[Photo du distributeur]',
+        description: 'Distributeur standard en maintenance préventive. Remplacement du compresseur et recalibrage des capteurs de niveau.',
+        statut: 'En maintenance', statutClass: 'badge-orange',
+        container: 'CONT-B1', dateMiseEnService: '05/11/2025', nbAffaires: 1,
+        affaires: ['Hellfest — Juin 2026'],
+        tachesFab: []
+    },
+    'DIST-005': {
+        ref: 'DIST-005', nom: 'JAvATIC Epsilon', photo: '[Photo du distributeur]',
+        description: 'Distributeur compact pour festivals de taille moyenne. Conception allégée, 2 becs de tirage.',
+        statut: 'En fabrication', statutClass: 'badge-blue',
+        container: 'CONT-B1', dateMiseEnService: '05/04/2026', nbAffaires: 0,
+        affaires: [],
+        tachesFab: ['Assemblage châssis', 'Câblage électronique']
+    }
+};
+
+
+// ─── BUILD FUNCTIONS ──────────────────────────────────────
+function buildMachinePanel(data) {
+    if (!data) return '<p style="padding:20px;color:#999;">Données non disponibles</p>';
+
+    const statutOptions = [
+        { label: 'En fabrication', badgeClass: 'badge-blue' },
+        { label: 'Disponible', badgeClass: 'badge-green' },
+        { label: 'En maintenance', badgeClass: 'badge-orange' },
+        { label: 'Indisponible', badgeClass: 'badge-red' }
+    ];
+
+    function buildSelectField(fieldName, currentValue, currentBadgeClass, options) {
+        let optionsHtml = options.map(o =>
+            `<div class="field-select-option${o.label === currentValue ? ' selected' : ''}" data-badge-class="${o.badgeClass}" onclick="selectOption(this, '${fieldName}')">${o.label}</div>`
+        ).join('');
+        return `<div class="field-select" data-field="${fieldName}">
+            <div class="field-select-value" onclick="toggleSelect(this)">
+                <span class="badge ${currentBadgeClass}" id="val-${fieldName}">${currentValue}</span>
+                <span class="field-select-arrow">▾</span>
+            </div>
+            <div class="field-select-dropdown" id="dropdown-${fieldName}">
+                ${optionsHtml}
+            </div>
+        </div>`;
+    }
+
+    // Affaires linked records
+    const affairesHtml = (data.affaires || []).length > 0
+        ? data.affaires.map(a => `<span class="detail-linked-record" onclick="alert('Fonctionnalité disponible dans Airtable')">${a}</span>`).join('')
+        : '<span style="color:#999;">Aucune affaire liée</span>';
+
+    // Tâches fab linked records
+    const tachesFabHtml = (data.tachesFab || []).length > 0
+        ? data.tachesFab.map(t => `<span class="detail-linked-record" onclick="alert('Fonctionnalité disponible dans Airtable')">${t}</span>`).join('')
+        : '<span style="color:#999;">Aucune tâche liée</span>';
+
+    return `
+        <div class="detail-section">
+            <h4 class="detail-section-title">Informations</h4>
+            <div class="detail-field">
+                <div class="detail-field-label">Référence machine</div>
+                <div class="detail-field-value">
+                    <div class="field-text" onclick="editText(this)">
+                        <span class="field-text-display">${data.ref}</span>
+                        <input class="field-text-input" type="text" value="${data.ref}" style="display:none" onblur="saveText(this)" onkeydown="if(event.key==='Enter') this.blur()">
+                    </div>
+                </div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-field-label">Nom</div>
+                <div class="detail-field-value">
+                    <div class="field-text" onclick="editText(this)">
+                        <span class="field-text-display">${data.nom}</span>
+                        <input class="field-text-input" type="text" value="${data.nom}" style="display:none" onblur="saveText(this)" onkeydown="if(event.key==='Enter') this.blur()">
+                    </div>
+                </div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-field-label">Photo</div>
+                <div class="detail-field-value"><span class="field-text-display" style="color:#999; font-style:italic;">${data.photo}</span></div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-field-label">Description</div>
+                <div class="detail-field-value">
+                    <div class="field-textarea" onclick="editTextarea(this)">
+                        <div class="field-textarea-display">${data.description}</div>
+                        <textarea class="field-textarea-input" style="display:none; min-height:80px;" onblur="saveTextarea(this)">${data.description}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-field-label">Statut</div>
+                <div class="detail-field-value">
+                    ${buildSelectField('statut', data.statut, data.statutClass, statutOptions)}
+                </div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-field-label">Container associé</div>
+                <div class="detail-field-value">
+                    <div class="field-text" onclick="editText(this)">
+                        <span class="field-text-display">${data.container}</span>
+                        <input class="field-text-input" type="text" value="${data.container}" style="display:none" onblur="saveText(this)" onkeydown="if(event.key==='Enter') this.blur()">
+                    </div>
+                </div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-field-label">Date de mise en service</div>
+                <div class="detail-field-value">
+                    <div class="field-text" onclick="editText(this)">
+                        <span class="field-text-display">${data.dateMiseEnService}</span>
+                        <input class="field-text-input" type="date" value="${data.dateMiseEnService.split('/').reverse().join('-')}" style="display:none" onblur="saveText(this)" onkeydown="if(event.key==='Enter') this.blur()">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="detail-section">
+            <h4 class="detail-section-title">Champs calculés</h4>
+            <div class="detail-field">
+                <div class="detail-field-label">Nb affaires liées</div>
+                <div class="detail-field-value"><span class="field-text-display">${data.nbAffaires}</span></div>
+            </div>
+        </div>
+        <div class="detail-section">
+            <h4 class="detail-section-title">Enregistrements liés</h4>
+            <div class="detail-field">
+                <div class="detail-field-label">Affaires liées</div>
+                <div class="detail-field-value">
+                    ${affairesHtml}
+                </div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-field-label">Tâches de fabrication liées</div>
+                <div class="detail-field-value">
+                    ${tachesFabHtml}
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+
+// ─── OPEN / CLOSE RECORD ──────────────────────────────────
+function openRecord(el) {
+    const name = el.getAttribute('data-record-name') || '—';
+    document.getElementById('detail-panel-title').textContent = name;
+    const data = machineData[name];
+    document.getElementById('detail-panel-body').innerHTML = buildMachinePanel(data);
+    document.getElementById('detail-panel').classList.add('open');
+}
+
+function closeDetailPanel() {
+    document.getElementById('detail-panel').classList.remove('open');
+}
+
+// ─── TABS ─────────────────────────────────────────────────
+function switchTab(tabEl, filterStatut) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    tabEl.classList.add('active');
+
+    const rows = document.querySelectorAll('#table-body tr.list-row');
+    rows.forEach(row => {
+        const statut = row.getAttribute('data-statut');
+        const visible = filterStatut === 'all' || statut === filterStatut;
+        row.style.display = visible ? '' : 'none';
+    });
+}
+
+// ─── INTERACTIVE FIELDS JS ───────────────────────────────
+function toggleSelect(trigger) {
+    const dropdown = trigger.nextElementSibling;
+    const isOpen = dropdown.classList.contains('open');
+    document.querySelectorAll('.field-select-dropdown.open').forEach(d => d.classList.remove('open'));
+    if (!isOpen) {
+        dropdown.classList.add('open');
+        const currentText = trigger.querySelector('[id^="val-"]')?.textContent;
+        dropdown.querySelectorAll('.field-select-option').forEach(opt => {
+            opt.classList.toggle('selected', opt.textContent.trim() === currentText?.trim());
+        });
+    }
+}
+
+function selectOption(option, fieldName) {
+    const text = option.textContent.trim();
+    const badgeClass = option.getAttribute('data-badge-class') || 'badge-gray';
+    const valueEl = document.getElementById('val-' + fieldName);
+    if (valueEl) {
+        valueEl.textContent = text;
+        valueEl.className = 'badge ' + badgeClass;
+    }
+    option.closest('.field-select-dropdown').classList.remove('open');
+}
+
+function toggleMultiSelect(trigger) {
+    const dropdown = trigger.nextElementSibling;
+    const isOpen = dropdown.classList.contains('open');
+    document.querySelectorAll('.field-select-dropdown.open').forEach(d => d.classList.remove('open'));
+    if (!isOpen) dropdown.classList.add('open');
+}
+
+function updateMultiSelect(fieldName, checkbox, badgeClass, label) {
+    const container = document.getElementById('vals-' + fieldName);
+    if (!container) return;
+    container.querySelectorAll('.badge').forEach(b => { if (b.textContent.trim() === label) b.remove(); });
+    if (checkbox.checked) {
+        const arrow = container.querySelector('.field-select-arrow');
+        const badge = document.createElement('span');
+        badge.className = 'badge ' + badgeClass;
+        badge.textContent = label;
+        container.insertBefore(badge, arrow);
+    }
+}
+
+function editText(wrapper) {
+    const display = wrapper.querySelector('.field-text-display');
+    const input = wrapper.querySelector('.field-text-input');
+    if (!input) return;
+    display.style.display = 'none';
+    input.style.display = 'block';
+    input.focus();
+    input.select();
+    wrapper.style.borderColor = '#166ee1';
+}
+
+function saveText(input) {
+    const wrapper = input.closest('.field-text');
+    const display = wrapper.querySelector('.field-text-display');
+    display.textContent = input.value || '—';
+    display.style.display = 'block';
+    input.style.display = 'none';
+    wrapper.style.borderColor = 'transparent';
+}
+
+function editTextarea(wrapper) {
+    const display = wrapper.querySelector('.field-textarea-display');
+    const input = wrapper.querySelector('.field-textarea-input');
+    if (!input) return;
+    display.style.display = 'none';
+    input.style.display = 'block';
+    input.focus();
+    wrapper.style.borderColor = '#166ee1';
+}
+
+function saveTextarea(input) {
+    const wrapper = input.closest('.field-textarea');
+    const display = wrapper.querySelector('.field-textarea-display');
+    display.textContent = input.value || '—';
+    display.style.display = 'block';
+    input.style.display = 'none';
+    wrapper.style.borderColor = 'transparent';
+}
+
+// ─── CLOSE DROPDOWNS ON CLICK OUTSIDE ────────────────────
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.field-select') && !e.target.closest('.field-multiselect')) {
+        document.querySelectorAll('.field-select-dropdown.open').forEach(d => d.classList.remove('open'));
+    }
+});
+
+// ─── ESCAPE ───────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeDetailPanel();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1440">
+    <title>JAVATIC — TODO</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="has-disclaimer">
+<div class="disclaimer-banner">Interfaces à usage visuel uniquement — Aperçu non fonctionnel, données fictives</div>
+<div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <span class="sidebar-logo">🍺</span>
+            <span class="sidebar-app-name">JAVATIC CRM</span>
+            <span class="sidebar-chevron">▾</span>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">📊</span>
+                    <span class="sidebar-section-label">Pilotage</span>
+                </div>
+                <a href="../pilotage/dashboard.html" class="sidebar-item">Dashboard financier</a>
+                <a href="../pilotage/zones-potentiel.html" class="sidebar-item">Zones à fort potentiel</a>
+                <a href="../pilotage/todo.html" class="sidebar-item active">TODO</a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">💼</span>
+                    <span class="sidebar-section-label">CRM et suivi commercial</span>
+                </div>
+                <a href="../crm/sites.html" class="sidebar-item">Liste des sites</a>
+                <a href="../crm/contacts.html" class="sidebar-item">Liste des contacts</a>
+                <a href="../crm/pipeline.html" class="sidebar-item">Pipeline commercial</a>
+                <a href="../crm/calendrier.html" class="sidebar-item">Calendrier des RDV</a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">⚙️</span>
+                    <span class="sidebar-section-label">Production</span>
+                </div>
+                <a href="../production/idees-rd.html" class="sidebar-item">Idées R&D</a>
+                <a href="../production/fabrication.html" class="sidebar-item">Suivi fabrication</a>
+                <a href="../production/machines.html" class="sidebar-item">Liste des machines</a>
+                <a href="../production/demandes-validees.html" class="sidebar-item">Demandes clients validées</a>
+                <a href="../production/suivi-operationnel.html" class="sidebar-item">Suivi opérationnel</a>
+            </div>
+        </nav>
+        <div class="sidebar-footer">
+            <span class="sidebar-footer-icon">👤</span>
+            <span class="sidebar-footer-text">Yoann RUAUD</span>
+        </div>
+    </aside>
+
+    <!-- MAIN AREA -->
+    <div class="main-area">
+
+        <!-- PAGE HEADER -->
+        <div class="page-header">
+            <div class="header-left">
+                <div class="breadcrumb">
+                    <span class="breadcrumb-parent">Pilotage</span>
+                    <span class="breadcrumb-sep">›</span>
+                    <span class="breadcrumb-current">TODO</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="btn-primary" onclick="alert('Fonctionnalité disponible dans Airtable')">+ Ajouter une tâche</button>
+            </div>
+        </div>
+
+        <!-- TABS -->
+        <div class="tabs-bar">
+            <button class="tab active" onclick="switchTab(this, 'A faire')">A faire</button>
+            <button class="tab" onclick="switchTab(this, 'En cours')">En cours</button>
+            <button class="tab" onclick="switchTab(this, 'Fait')">Fait</button>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content-area content-white">
+            <div class="list-table-wrapper">
+                <table class="list-table" id="main-table">
+                    <thead>
+                        <tr>
+                            <th style="width:40px;" class="col-checkbox"><input type="checkbox"></th>
+                            <th>Titre</th>
+                            <th>Priorité</th>
+                            <th>Échéance</th>
+                            <th>Type</th>
+                            <th>Responsable</th>
+                            <th>Affaire</th>
+                            <th>Contact</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        <tr class="list-row" data-statut="A faire" data-record-name="Relancer M. Dupont pour devis Zénith Pau" onclick="openRecord(this)">
+                            <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
+                            <td class="col-primary">Relancer M. Dupont pour devis Zénith Pau</td>
+                            <td><span class="badge badge-red">Haute</span></td>
+                            <td>18/03/2026</td>
+                            <td><span class="badge badge-yellow">Relance commerciale</span></td>
+                            <td>Yoann</td>
+                            <td><span class="col-link">Zénith de Pau — Avril 2026</span></td>
+                            <td><span class="col-link">Jean Dupont</span></td>
+                        </tr>
+                        <tr class="list-row" data-statut="A faire" data-record-name="Préparer démo Arena Bordeaux" onclick="openRecord(this)">
+                            <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
+                            <td class="col-primary">Préparer démo Arena Bordeaux</td>
+                            <td><span class="badge badge-red">Haute</span></td>
+                            <td>15/03/2026</td>
+                            <td><span class="badge badge-blue">Action affaire</span></td>
+                            <td>Yoann</td>
+                            <td><span class="col-link">Arena Bordeaux — Mars 2026</span></td>
+                            <td><span class="col-link">Sophie Martin</span></td>
+                        </tr>
+                        <tr class="list-row" data-statut="A faire" data-record-name="Mettre à jour base festivals Nouvelle-Aquitaine" onclick="openRecord(this)">
+                            <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
+                            <td class="col-primary">Mettre à jour base festivals Nouvelle-Aquitaine</td>
+                            <td><span class="badge badge-orange">Moyenne</span></td>
+                            <td>20/03/2026</td>
+                            <td><span class="badge badge-purple">Tâche interne</span></td>
+                            <td>Yoann</td>
+                            <td>—</td>
+                            <td>—</td>
+                        </tr>
+                        <tr class="list-row" data-statut="A faire" data-record-name="Envoyer proposition Garorock" onclick="openRecord(this)">
+                            <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
+                            <td class="col-primary">Envoyer proposition Garorock</td>
+                            <td><span class="badge badge-red">Haute</span></td>
+                            <td>17/03/2026</td>
+                            <td><span class="badge badge-yellow">Relance commerciale</span></td>
+                            <td>Yoann</td>
+                            <td><span class="col-link">Garorock — Juin 2026</span></td>
+                            <td><span class="col-link">Thomas Moreau</span></td>
+                        </tr>
+                        <tr class="list-row" data-statut="En cours" data-record-name="Commander pièces DIST-002" onclick="openRecord(this)">
+                            <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
+                            <td class="col-primary">Commander pièces DIST-002</td>
+                            <td><span class="badge badge-red">Haute</span></td>
+                            <td>10/03/2026</td>
+                            <td><span class="badge badge-blue">Action affaire</span></td>
+                            <td>Yoann</td>
+                            <td>—</td>
+                            <td>—</td>
+                        </tr>
+                        <tr class="list-row" data-statut="A faire" data-record-name="Relancer Festival Vieilles Charrues" onclick="openRecord(this)">
+                            <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
+                            <td class="col-primary">Relancer Festival Vieilles Charrues</td>
+                            <td><span class="badge badge-orange">Moyenne</span></td>
+                            <td>22/03/2026</td>
+                            <td><span class="badge badge-yellow">Relance commerciale</span></td>
+                            <td>Yoann</td>
+                            <td><span class="col-link">Vieilles Charrues — Juillet 2026</span></td>
+                            <td><span class="col-link">Laura Petit</span></td>
+                        </tr>
+                        <tr class="list-row" data-statut="A faire" data-record-name="Préparer présentation stade Matmut" onclick="openRecord(this)">
+                            <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
+                            <td class="col-primary">Préparer présentation stade Matmut</td>
+                            <td><span class="badge badge-orange">Moyenne</span></td>
+                            <td>19/03/2026</td>
+                            <td><span class="badge badge-blue">Action affaire</span></td>
+                            <td>Yoann</td>
+                            <td><span class="col-link">Stade Matmut — Mai 2026</span></td>
+                            <td><span class="col-link">Pierre Durand</span></td>
+                        </tr>
+                        <tr class="list-row" data-statut="A faire" data-record-name="Répondre email Arena Montpellier" onclick="openRecord(this)">
+                            <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
+                            <td class="col-primary">Répondre email Arena Montpellier</td>
+                            <td><span class="badge badge-gray">Basse</span></td>
+                            <td>21/03/2026</td>
+                            <td><span class="badge badge-gray">Autre</span></td>
+                            <td>Yoann</td>
+                            <td><span class="col-link">Arena Montpellier — Sept 2026</span></td>
+                            <td>—</td>
+                        </tr>
+                        <tr class="list-row" data-statut="Fait" data-record-name="Vérifier stock containers" onclick="openRecord(this)">
+                            <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
+                            <td class="col-primary">Vérifier stock containers</td>
+                            <td><span class="badge badge-gray">Basse</span></td>
+                            <td>25/03/2026</td>
+                            <td><span class="badge badge-purple">Tâche interne</span></td>
+                            <td>Yoann</td>
+                            <td>—</td>
+                            <td>—</td>
+                        </tr>
+                        <tr class="list-row" data-statut="En cours" data-record-name="Appeler Hellfest pour planning" onclick="openRecord(this)">
+                            <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
+                            <td class="col-primary">Appeler Hellfest pour planning</td>
+                            <td><span class="badge badge-orange">Moyenne</span></td>
+                            <td>16/03/2026</td>
+                            <td><span class="badge badge-yellow">Relance commerciale</span></td>
+                            <td>Yoann</td>
+                            <td><span class="col-link">Hellfest — Juin 2026</span></td>
+                            <td><span class="col-link">Antoine Roux</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- DETAIL PANEL -->
+    <div class="detail-panel" id="detail-panel">
+        <div class="detail-panel-header">
+            <h3 class="detail-panel-title" id="detail-panel-title">—</h3>
+            <div class="detail-panel-actions">
+                <button class="detail-panel-expand" title="Ouvrir en plein écran">⤢</button>
+                <button class="detail-panel-close" onclick="closeDetailPanel()">✕</button>
+            </div>
+        </div>
+        <div class="detail-panel-body" id="detail-panel-body">
+            <!-- Generated dynamically -->
+        </div>
+    </div>
+
+
+</div>
+
+<script>
+// ─── DATA ──────────────────────────────────────────────────
+const todoData = {
+    'Relancer M. Dupont pour devis Zénith Pau': {
+        titre: 'Relancer M. Dupont pour devis Zénith Pau',
+        statut: 'A faire', statutClass: 'badge-gray',
+        priorite: 'Haute', prioriteClass: 'badge-red',
+        echeance: '2026-03-18', echeanceDisplay: '18/03/2026',
+        type: 'Relance commerciale', typeClass: 'badge-yellow',
+        responsable: 'Yoann', responsableClass: 'badge-blue',
+        description: 'Relancer Jean Dupont suite à notre rencontre au salon. Il semblait intéressé par notre solution de distribution pour le Zénith. Envoyer le devis personnalisé avec options containers.',
+        affaire: 'Zénith de Pau — Avril 2026',
+        contact: 'Jean Dupont',
+        site: 'Zénith de Pau'
+    },
+    'Préparer démo Arena Bordeaux': {
+        titre: 'Préparer démo Arena Bordeaux',
+        statut: 'A faire', statutClass: 'badge-gray',
+        priorite: 'Haute', prioriteClass: 'badge-red',
+        echeance: '2026-03-15', echeanceDisplay: '15/03/2026',
+        type: 'Action affaire', typeClass: 'badge-blue',
+        responsable: 'Yoann', responsableClass: 'badge-blue',
+        description: 'Préparer la démonstration technique de notre distributeur DIST-003 pour la présentation à l\'Arena de Bordeaux. Prévoir vidéo et documentation technique.',
+        affaire: 'Arena Bordeaux — Mars 2026',
+        contact: 'Sophie Martin',
+        site: 'Arena Bordeaux'
+    },
+    'Mettre à jour base festivals Nouvelle-Aquitaine': {
+        titre: 'Mettre à jour base festivals Nouvelle-Aquitaine',
+        statut: 'A faire', statutClass: 'badge-gray',
+        priorite: 'Moyenne', prioriteClass: 'badge-orange',
+        echeance: '2026-03-20', echeanceDisplay: '20/03/2026',
+        type: 'Tâche interne', typeClass: 'badge-purple',
+        responsable: 'Yoann', responsableClass: 'badge-blue',
+        description: 'Mettre à jour la liste des festivals de la région Nouvelle-Aquitaine pour la saison 2026. Vérifier capacités, dates et contacts.',
+        affaire: '',
+        contact: '',
+        site: ''
+    },
+    'Envoyer proposition Garorock': {
+        titre: 'Envoyer proposition Garorock',
+        statut: 'A faire', statutClass: 'badge-gray',
+        priorite: 'Haute', prioriteClass: 'badge-red',
+        echeance: '2026-03-17', echeanceDisplay: '17/03/2026',
+        type: 'Relance commerciale', typeClass: 'badge-yellow',
+        responsable: 'Yoann', responsableClass: 'badge-blue',
+        description: 'Envoyer la proposition commerciale complète pour le festival Garorock. Inclure 2 distributeurs + containers logistique.',
+        affaire: 'Garorock — Juin 2026',
+        contact: 'Thomas Moreau',
+        site: 'Garorock'
+    },
+    'Commander pièces DIST-002': {
+        titre: 'Commander pièces DIST-002',
+        statut: 'En cours', statutClass: 'badge-blue',
+        priorite: 'Haute', prioriteClass: 'badge-red',
+        echeance: '2026-03-10', echeanceDisplay: '10/03/2026',
+        type: 'Action affaire', typeClass: 'badge-blue',
+        responsable: 'Yoann', responsableClass: 'badge-blue',
+        description: 'Commander les pièces de rechange pour le distributeur DIST-002. Robinets, joints et pompes à remplacer avant la saison.',
+        affaire: '',
+        contact: '',
+        site: ''
+    },
+    'Relancer Festival Vieilles Charrues': {
+        titre: 'Relancer Festival Vieilles Charrues',
+        statut: 'A faire', statutClass: 'badge-gray',
+        priorite: 'Moyenne', prioriteClass: 'badge-orange',
+        echeance: '2026-03-22', echeanceDisplay: '22/03/2026',
+        type: 'Relance commerciale', typeClass: 'badge-yellow',
+        responsable: 'Yoann', responsableClass: 'badge-blue',
+        description: 'Relancer Laura Petit pour le dossier Vieilles Charrues. Le festival a lieu en juillet, il faut avancer sur la logistique.',
+        affaire: 'Vieilles Charrues — Juillet 2026',
+        contact: 'Laura Petit',
+        site: 'Vieilles Charrues'
+    },
+    'Préparer présentation stade Matmut': {
+        titre: 'Préparer présentation stade Matmut',
+        statut: 'A faire', statutClass: 'badge-gray',
+        priorite: 'Moyenne', prioriteClass: 'badge-orange',
+        echeance: '2026-03-19', echeanceDisplay: '19/03/2026',
+        type: 'Action affaire', typeClass: 'badge-blue',
+        responsable: 'Yoann', responsableClass: 'badge-blue',
+        description: 'Préparer la présentation commerciale pour le stade Matmut Atlantique. Adapter l\'offre au contexte stade (volumes plus importants).',
+        affaire: 'Stade Matmut — Mai 2026',
+        contact: 'Pierre Durand',
+        site: 'Stade Matmut Atlantique'
+    },
+    'Répondre email Arena Montpellier': {
+        titre: 'Répondre email Arena Montpellier',
+        statut: 'A faire', statutClass: 'badge-gray',
+        priorite: 'Basse', prioriteClass: 'badge-gray',
+        echeance: '2026-03-21', echeanceDisplay: '21/03/2026',
+        type: 'Autre', typeClass: 'badge-gray',
+        responsable: 'Yoann', responsableClass: 'badge-blue',
+        description: 'Répondre au mail de demande d\'informations de l\'Arena Montpellier. Questions sur les spécifications techniques et les délais.',
+        affaire: 'Arena Montpellier — Sept 2026',
+        contact: '',
+        site: 'Arena Montpellier'
+    },
+    'Vérifier stock containers': {
+        titre: 'Vérifier stock containers',
+        statut: 'Fait', statutClass: 'badge-green',
+        priorite: 'Basse', prioriteClass: 'badge-gray',
+        echeance: '2026-03-25', echeanceDisplay: '25/03/2026',
+        type: 'Tâche interne', typeClass: 'badge-purple',
+        responsable: 'Yoann', responsableClass: 'badge-blue',
+        description: 'Faire l\'inventaire des containers disponibles en stock. Vérifier l\'état et la disponibilité pour la saison estivale.',
+        affaire: '',
+        contact: '',
+        site: ''
+    },
+    'Appeler Hellfest pour planning': {
+        titre: 'Appeler Hellfest pour planning',
+        statut: 'En cours', statutClass: 'badge-blue',
+        priorite: 'Moyenne', prioriteClass: 'badge-orange',
+        echeance: '2026-03-16', echeanceDisplay: '16/03/2026',
+        type: 'Relance commerciale', typeClass: 'badge-yellow',
+        responsable: 'Yoann', responsableClass: 'badge-blue',
+        description: 'Appeler Antoine Roux pour caler le planning d\'installation sur le site du Hellfest. Besoin de confirmer les dates d\'accès au site.',
+        affaire: 'Hellfest — Juin 2026',
+        contact: 'Antoine Roux',
+        site: 'Hellfest'
+    }
+};
+
+
+// ─── BUILD FUNCTIONS ──────────────────────────────────────
+function buildTodoPanel(data) {
+    if (!data) return '<p style="padding:20px;color:#999;">Données non disponibles</p>';
+
+    const statutOptions = [
+        { label: 'A faire', badgeClass: 'badge-gray' },
+        { label: 'En cours', badgeClass: 'badge-blue' },
+        { label: 'Fait', badgeClass: 'badge-green' }
+    ];
+    const prioriteOptions = [
+        { label: 'Haute', badgeClass: 'badge-red' },
+        { label: 'Moyenne', badgeClass: 'badge-orange' },
+        { label: 'Basse', badgeClass: 'badge-gray' }
+    ];
+    const typeOptions = [
+        { label: 'Relance commerciale', badgeClass: 'badge-yellow' },
+        { label: 'Action affaire', badgeClass: 'badge-blue' },
+        { label: 'Tâche interne', badgeClass: 'badge-purple' },
+        { label: 'Autre', badgeClass: 'badge-gray' }
+    ];
+    const responsableOptions = [
+        { label: 'Yoann', badgeClass: 'badge-blue' }
+    ];
+
+    function buildSelectField(fieldName, currentValue, currentBadgeClass, options) {
+        let optionsHtml = options.map(o =>
+            `<div class="field-select-option${o.label === currentValue ? ' selected' : ''}" data-badge-class="${o.badgeClass}" onclick="selectOption(this, '${fieldName}')">${o.label}</div>`
+        ).join('');
+        return `<div class="field-select" data-field="${fieldName}">
+            <div class="field-select-value" onclick="toggleSelect(this)">
+                <span class="badge ${currentBadgeClass}" id="val-${fieldName}">${currentValue}</span>
+                <span class="field-select-arrow">▾</span>
+            </div>
+            <div class="field-select-dropdown" id="dropdown-${fieldName}">
+                ${optionsHtml}
+            </div>
+        </div>`;
+    }
+
+    const affaireHtml = data.affaire
+        ? `<span class="detail-linked-record" onclick="alert('Fonctionnalité disponible dans Airtable')">${data.affaire}</span>`
+        : '<span style="color:#999;">—</span>';
+
+    const contactHtml = data.contact
+        ? `<span class="detail-linked-record" onclick="alert('Fonctionnalité disponible dans Airtable')">${data.contact}</span>`
+        : '<span style="color:#999;">—</span>';
+
+    const siteHtml = data.site
+        ? `<span class="detail-linked-record" onclick="alert('Fonctionnalité disponible dans Airtable')">${data.site}</span>`
+        : '<span style="color:#999;">—</span>';
+
+    return `
+        <div class="detail-section">
+            <h4 class="detail-section-title">Informations</h4>
+            <div class="detail-field">
+                <div class="detail-field-label">Titre</div>
+                <div class="detail-field-value">
+                    <div class="field-text" onclick="editText(this)">
+                        <span class="field-text-display">${data.titre}</span>
+                        <input class="field-text-input" type="text" value="${data.titre}" style="display:none" onblur="saveText(this)" onkeydown="if(event.key==='Enter') this.blur()">
+                    </div>
+                </div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-field-label">Statut</div>
+                <div class="detail-field-value">
+                    ${buildSelectField('statut', data.statut, data.statutClass, statutOptions)}
+                </div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-field-label">Priorité</div>
+                <div class="detail-field-value">
+                    ${buildSelectField('priorite', data.priorite, data.prioriteClass, prioriteOptions)}
+                </div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-field-label">Date d'échéance</div>
+                <div class="detail-field-value">
+                    <div class="field-text" onclick="editText(this)">
+                        <span class="field-text-display">${data.echeanceDisplay}</span>
+                        <input class="field-text-input" type="date" value="${data.echeance}" style="display:none" onblur="saveText(this)">
+                    </div>
+                </div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-field-label">Type de tâche</div>
+                <div class="detail-field-value">
+                    ${buildSelectField('type-tache', data.type, data.typeClass, typeOptions)}
+                </div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-field-label">Responsable</div>
+                <div class="detail-field-value">
+                    ${buildSelectField('responsable', data.responsable, data.responsableClass, responsableOptions)}
+                </div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-field-label">Description</div>
+                <div class="detail-field-value">
+                    <div class="field-textarea" onclick="editTextarea(this)">
+                        <div class="field-textarea-display">${data.description}</div>
+                        <textarea class="field-textarea-input" style="display:none" onblur="saveTextarea(this)" rows="4">${data.description}</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-section">
+            <h4 class="detail-section-title">Contexte</h4>
+            <div class="detail-field">
+                <div class="detail-field-label">Affaire liée</div>
+                <div class="detail-field-value">${affaireHtml}</div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-field-label">Contact lié</div>
+                <div class="detail-field-value">${contactHtml}</div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-field-label">Site lié</div>
+                <div class="detail-field-value">${siteHtml}</div>
+            </div>
+        </div>
+    `;
+}
+
+
+// ─── OPEN / CLOSE RECORD ──────────────────────────────────
+function openRecord(el) {
+    const name = el.getAttribute('data-record-name') || '—';
+    document.getElementById('detail-panel-title').textContent = name;
+    const data = todoData[name];
+    document.getElementById('detail-panel-body').innerHTML = buildTodoPanel(data);
+    document.getElementById('detail-panel').classList.add('open');
+}
+
+function closeDetailPanel() {
+    document.getElementById('detail-panel').classList.remove('open');
+}
+
+// ─── TABS ─────────────────────────────────────────────────
+function switchTab(tabEl, filterStatut) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    tabEl.classList.add('active');
+
+    document.querySelectorAll('#table-body .list-row').forEach(row => {
+        const statut = row.getAttribute('data-statut');
+        row.style.display = statut === filterStatut ? '' : 'none';
+    });
+}
+
+// Initialize: show "A faire" tab
+document.addEventListener('DOMContentLoaded', function() {
+    switchTab(document.querySelector('.tab.active'), 'A faire');
+});
+
+// ─── INTERACTIVE FIELDS JS ───────────────────────────────
+function toggleSelect(trigger) {
+    const dropdown = trigger.nextElementSibling;
+    const isOpen = dropdown.classList.contains('open');
+    document.querySelectorAll('.field-select-dropdown.open').forEach(d => d.classList.remove('open'));
+    if (!isOpen) {
+        dropdown.classList.add('open');
+        const currentText = trigger.querySelector('[id^="val-"]')?.textContent;
+        dropdown.querySelectorAll('.field-select-option').forEach(opt => {
+            opt.classList.toggle('selected', opt.textContent.trim() === currentText?.trim());
+        });
+    }
+}
+
+function selectOption(option, fieldName) {
+    const text = option.textContent.trim();
+    const badgeClass = option.getAttribute('data-badge-class') || 'badge-gray';
+    const valueEl = document.getElementById('val-' + fieldName);
+    if (valueEl) {
+        valueEl.textContent = text;
+        valueEl.className = 'badge ' + badgeClass;
+    }
+    option.closest('.field-select-dropdown').classList.remove('open');
+}
+
+function toggleMultiSelect(trigger) {
+    const dropdown = trigger.nextElementSibling;
+    const isOpen = dropdown.classList.contains('open');
+    document.querySelectorAll('.field-select-dropdown.open').forEach(d => d.classList.remove('open'));
+    if (!isOpen) dropdown.classList.add('open');
+}
+
+function updateMultiSelect(fieldName, checkbox, badgeClass, label) {
+    const container = document.getElementById('vals-' + fieldName);
+    if (!container) return;
+    container.querySelectorAll('.badge').forEach(b => {
+        if (b.textContent.trim() === label) b.remove();
+    });
+    if (checkbox.checked) {
+        const arrow = container.querySelector('.field-select-arrow');
+        const badge = document.createElement('span');
+        badge.className = 'badge ' + badgeClass;
+        badge.textContent = label;
+        container.insertBefore(badge, arrow);
+    }
+}
+
+function editText(wrapper) {
+    const display = wrapper.querySelector('.field-text-display');
+    const input = wrapper.querySelector('.field-text-input');
+    if (!input) return;
+    display.style.display = 'none';
+    input.style.display = 'block';
+    input.focus();
+    input.select();
+    wrapper.style.borderColor = '#166ee1';
+}
+
+function saveText(input) {
+    const wrapper = input.closest('.field-text');
+    const display = wrapper.querySelector('.field-text-display');
+    display.textContent = input.value || '—';
+    display.style.display = 'block';
+    input.style.display = 'none';
+    wrapper.style.borderColor = 'transparent';
+}
+
+function editTextarea(wrapper) {
+    const display = wrapper.querySelector('.field-textarea-display');
+    const input = wrapper.querySelector('.field-textarea-input');
+    if (!input) return;
+    display.style.display = 'none';
+    input.style.display = 'block';
+    input.focus();
+    wrapper.style.borderColor = '#166ee1';
+}
+
+function saveTextarea(input) {
+    const wrapper = input.closest('.field-textarea');
+    const display = wrapper.querySelector('.field-textarea-display');
+    display.textContent = input.value || '—';
+    display.style.display = 'block';
+    input.style.display = 'none';
+    wrapper.style.borderColor = 'transparent';
+}
+
+// ─── CLOSE DROPDOWNS ON CLICK OUTSIDE ────────────────────
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.field-select') && !e.target.closest('.field-multiselect')) {
+        document.querySelectorAll('.field-select-dropdown.open').forEach(d => d.classList.remove('open'));
+    }
+});
+
+// ─── ESCAPE ───────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeDetailPanel();
+});
+</script>
+</body>
+</html>

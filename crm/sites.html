@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1440">
+    <title>JAVATIC — Liste des sites</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="has-disclaimer">
+<div class="disclaimer-banner">Interfaces à usage visuel uniquement — Aperçu non fonctionnel, données fictives</div>
+<div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <span class="sidebar-logo">🍺</span>
+            <span class="sidebar-app-name">JAVATIC CRM</span>
+            <span class="sidebar-chevron">▾</span>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">📊</span>
+                    <span class="sidebar-section-label">Pilotage</span>
+                </div>
+                <a href="../pilotage/dashboard.html" class="sidebar-item">Dashboard financier</a>
+                <a href="../pilotage/zones-potentiel.html" class="sidebar-item">Zones à fort potentiel</a>
+                <a href="../pilotage/todo.html" class="sidebar-item">TODO</a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">💼</span>
+                    <span class="sidebar-section-label">CRM et suivi commercial</span>
+                </div>
+                <a href="../crm/sites.html" class="sidebar-item active">Liste des sites</a>
+                <a href="../crm/contacts.html" class="sidebar-item">Liste des contacts</a>
+                <a href="../crm/pipeline.html" class="sidebar-item">Pipeline commercial</a>
+                <a href="../crm/calendrier.html" class="sidebar-item">Calendrier des RDV</a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">⚙️</span>
+                    <span class="sidebar-section-label">Production</span>
+                </div>
+                <a href="../production/idees-rd.html" class="sidebar-item">Idées R&D</a>
+                <a href="../production/fabrication.html" class="sidebar-item">Suivi fabrication</a>
+                <a href="../production/machines.html" class="sidebar-item">Liste des machines</a>
+                <a href="../production/demandes-validees.html" class="sidebar-item">Demandes clients validées</a>
+                <a href="../production/suivi-operationnel.html" class="sidebar-item">Suivi opérationnel</a>
+            </div>
+        </nav>
+        <div class="sidebar-footer">
+            <span class="sidebar-footer-icon">👤</span>
+            <span class="sidebar-footer-text">Yoann RUAUD</span>
+        </div>
+    </aside>
+
+    <!-- MAIN AREA -->
+    <div class="main-area">
+
+        <!-- PAGE HEADER -->
+        <div class="page-header">
+            <div class="header-left">
+                <div class="breadcrumb">
+                    <span class="breadcrumb-parent">CRM et suivi commercial</span>
+                    <span class="breadcrumb-sep">›</span>
+                    <span class="breadcrumb-current">Liste des sites</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="header-btn">🔍 Rechercher</button>
+                <button class="header-btn">🗂 Filtrer</button>
+                <button class="header-btn">↕ Trier</button>
+                <button class="btn-primary" onclick="alert('Ajouter un site')">+ Ajouter un site</button>
+            </div>
+        </div>
+
+        <!-- TABS -->
+        <div class="tabs-bar">
+            <button class="tab active" data-tab="all" onclick="switchTab(this)">Tous</button>
+            <button class="tab" data-tab="froid" onclick="switchTab(this)">Prospects froids</button>
+            <button class="tab" data-tab="interesse" onclick="switchTab(this)">Prospects intéressés</button>
+            <button class="tab" data-tab="client" onclick="switchTab(this)">Clients</button>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content-area content-white">
+            <div class="list-table-wrapper">
+                <table class="list-table">
+                    <thead>
+                        <tr>
+                            <th class="col-checkbox"><input type="checkbox"></th>
+                            <th>Nom</th>
+                            <th>Type</th>
+                            <th>Statut</th>
+                            <th>Commune</th>
+                            <th>Région</th>
+                            <th>Email</th>
+                            <th>Téléphone</th>
+                            <th>Nb affaires</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="list-row" data-statut="interesse" onclick="openRecord(this)" data-record-name="Zénith de Pau">
+                            <td class="col-checkbox"><input type="checkbox"></td>
+                            <td class="col-primary">Zénith de Pau</td>
+                            <td><span class="badge badge-purple">Salle</span></td>
+                            <td><span class="badge badge-blue">Prospect intéressé</span></td>
+                            <td>Pau</td>
+                            <td>Nouvelle-Aquitaine</td>
+                            <td class="col-email">contact@zenith-pau.fr</td>
+                            <td class="col-phone">05 59 12 34 56</td>
+                            <td class="col-number">1</td>
+                        </tr>
+                        <tr class="list-row" data-statut="client" onclick="openRecord(this)" data-record-name="Arena de Bordeaux">
+                            <td class="col-checkbox"><input type="checkbox"></td>
+                            <td class="col-primary">Arena de Bordeaux</td>
+                            <td><span class="badge badge-purple">Salle</span></td>
+                            <td><span class="badge badge-teal">Client</span></td>
+                            <td>Bordeaux</td>
+                            <td>Nouvelle-Aquitaine</td>
+                            <td class="col-email">info@arena-bordeaux.fr</td>
+                            <td class="col-phone">05 56 98 76 54</td>
+                            <td class="col-number">2</td>
+                        </tr>
+                        <tr class="list-row" data-statut="interesse" onclick="openRecord(this)" data-record-name="Stade Matmut Atlantique">
+                            <td class="col-checkbox"><input type="checkbox"></td>
+                            <td class="col-primary">Stade Matmut Atlantique</td>
+                            <td><span class="badge badge-cyan">Stade</span></td>
+                            <td><span class="badge badge-blue">Prospect intéressé</span></td>
+                            <td>Bordeaux</td>
+                            <td>Nouvelle-Aquitaine</td>
+                            <td class="col-email">contact@matmut-atlantique.fr</td>
+                            <td class="col-phone">05 56 11 22 33</td>
+                            <td class="col-number">1</td>
+                        </tr>
+                        <tr class="list-row" data-statut="froid" onclick="openRecord(this)" data-record-name="Stade Marcel Michelin">
+                            <td class="col-checkbox"><input type="checkbox"></td>
+                            <td class="col-primary">Stade Marcel Michelin</td>
+                            <td><span class="badge badge-cyan">Stade</span></td>
+                            <td><span class="badge badge-gray">Prospect froid</span></td>
+                            <td>Clermont-Ferrand</td>
+                            <td>Auvergne-Rhône-Alpes</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td class="col-number">0</td>
+                        </tr>
+                        <tr class="list-row" data-statut="client" onclick="openRecord(this)" data-record-name="Eurockéennes">
+                            <td class="col-checkbox"><input type="checkbox"></td>
+                            <td class="col-primary">Eurockéennes</td>
+                            <td><span class="badge badge-pink">Festival</span></td>
+                            <td><span class="badge badge-teal">Client</span></td>
+                            <td>Belfort</td>
+                            <td>Bourgogne-Franche-Comté</td>
+                            <td class="col-email">contact@eurockeennes.fr</td>
+                            <td class="col-phone">03 84 22 33 44</td>
+                            <td class="col-number">1</td>
+                        </tr>
+                        <tr class="list-row" data-statut="interesse" onclick="openRecord(this)" data-record-name="Garorock">
+                            <td class="col-checkbox"><input type="checkbox"></td>
+                            <td class="col-primary">Garorock</td>
+                            <td><span class="badge badge-pink">Festival</span></td>
+                            <td><span class="badge badge-blue">Prospect intéressé</span></td>
+                            <td>Marmande</td>
+                            <td>Nouvelle-Aquitaine</td>
+                            <td class="col-email">info@garorock.com</td>
+                            <td class="col-phone">05 53 98 76 54</td>
+                            <td class="col-number">1</td>
+                        </tr>
+                        <tr class="list-row" data-statut="interesse" onclick="openRecord(this)" data-record-name="Vieilles Charrues">
+                            <td class="col-checkbox"><input type="checkbox"></td>
+                            <td class="col-primary">Vieilles Charrues</td>
+                            <td><span class="badge badge-pink">Festival</span></td>
+                            <td><span class="badge badge-blue">Prospect intéressé</span></td>
+                            <td>Carhaix</td>
+                            <td>Bretagne</td>
+                            <td class="col-email">contact@vieillescharrues.asso.fr</td>
+                            <td class="col-phone">02 98 93 00 93</td>
+                            <td class="col-number">1</td>
+                        </tr>
+                        <tr class="list-row" data-statut="froid" onclick="openRecord(this)" data-record-name="Rock en Seine">
+                            <td class="col-checkbox"><input type="checkbox"></td>
+                            <td class="col-primary">Rock en Seine</td>
+                            <td><span class="badge badge-pink">Festival</span></td>
+                            <td><span class="badge badge-gray">Prospect froid</span></td>
+                            <td>Saint-Cloud</td>
+                            <td>Île-de-France</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td class="col-number">0</td>
+                        </tr>
+                        <tr class="list-row" data-statut="client" onclick="openRecord(this)" data-record-name="Hellfest">
+                            <td class="col-checkbox"><input type="checkbox"></td>
+                            <td class="col-primary">Hellfest</td>
+                            <td><span class="badge badge-pink">Festival</span></td>
+                            <td><span class="badge badge-teal">Client</span></td>
+                            <td>Clisson</td>
+                            <td>Pays de la Loire</td>
+                            <td class="col-email">contact@hellfest.fr</td>
+                            <td class="col-phone">02 40 54 00 00</td>
+                            <td class="col-number">1</td>
+                        </tr>
+                        <tr class="list-row" data-statut="froid" onclick="openRecord(this)" data-record-name="Zénith de Toulouse">
+                            <td class="col-checkbox"><input type="checkbox"></td>
+                            <td class="col-primary">Zénith de Toulouse</td>
+                            <td><span class="badge badge-purple">Salle</span></td>
+                            <td><span class="badge badge-gray">Prospect froid</span></td>
+                            <td>Toulouse</td>
+                            <td>Occitanie</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td class="col-number">0</td>
+                        </tr>
+                        <tr class="list-row" data-statut="interesse" onclick="openRecord(this)" data-record-name="Arena Montpellier">
+                            <td class="col-checkbox"><input type="checkbox"></td>
+                            <td class="col-primary">Arena Montpellier</td>
+                            <td><span class="badge badge-purple">Salle</span></td>
+                            <td><span class="badge badge-blue">Prospect intéressé</span></td>
+                            <td>Montpellier</td>
+                            <td>Occitanie</td>
+                            <td class="col-email">info@arena-montpellier.fr</td>
+                            <td class="col-phone">04 67 12 34 56</td>
+                            <td class="col-number">1</td>
+                        </tr>
+                        <tr class="list-row" data-statut="froid" onclick="openRecord(this)" data-record-name="Stade Pierre Mauroy">
+                            <td class="col-checkbox"><input type="checkbox"></td>
+                            <td class="col-primary">Stade Pierre Mauroy</td>
+                            <td><span class="badge badge-cyan">Stade</span></td>
+                            <td><span class="badge badge-gray">Prospect froid</span></td>
+                            <td>Villeneuve-d'Ascq</td>
+                            <td>Hauts-de-France</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td class="col-number">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- RECORD MODAL (replaces detail-panel) -->
+<div class="record-modal" id="record-modal">
+    <div class="record-modal-overlay" onclick="closeRecordModal()"></div>
+    <div class="record-modal-content">
+        <div class="record-modal-header">
+            <div class="record-modal-nav">
+                <button class="record-modal-back" onclick="closeRecordModal()">← Retour</button>
+            </div>
+            <h2 class="record-modal-title" id="record-modal-title">—</h2>
+            <div class="record-modal-header-actions">
+                <button class="detail-panel-close" onclick="closeRecordModal()">✕</button>
+            </div>
+        </div>
+        <div class="record-modal-tabs">
+            <button class="record-modal-tab active" onclick="switchModalTab(this, 'general')">Général</button>
+            <button class="record-modal-tab" onclick="switchModalTab(this, 'caracteristiques')">Caractéristiques</button>
+            <button class="record-modal-tab" onclick="switchModalTab(this, 'relations')">Relations</button>
+        </div>
+        <div class="record-modal-body" id="record-modal-body">
+            <!-- Generated dynamically by buildSiteModal(data) -->
+        </div>
+    </div>
+</div>
+
+<script>
+/* ============================================
+   DATA
+   ============================================ */
+const siteData = {
+    'Zénith de Pau': {
+        nom: 'Zénith de Pau', type: 'Salle', typeClass: 'badge-blue',
+        statut: 'Prospect intéressé', statutClass: 'badge-yellow',
+        denomination: 'SAS Zénith de Pau', societe: 'Vega', proprietaire: 'Communauté d\'Agglomération Pau Béarn Pyrénées',
+        modeGestion: 'DSP', siren: '812 345 678',
+        adressePostale: '21 Boulevard du Cami Salié', codePostal: '64000',
+        commune: 'Pau', departement: 'Pyrénées-Atlantiques (64)', region: 'Nouvelle-Aquitaine',
+        email: 'contact@zenith-pau.fr', telephone: '05 59 12 34 56', web: 'www.zenith-pau.com',
+        source: 'Site officiel, CNM', commentaires: 'Zénith récent, intéressé par l\'optimisation du service bière en salle.',
+        capacite: 6500, nbEvenements: 80, categorieJauge: '5000-15000', visiteursAnnuels: 350000,
+        typologieInterne: 'Zénith', typeEquipement: 'Salle de spectacle',
+        periodeFestival: '', nbJoursOuverture: '', capaciteJournaliere: '', estimationVisiteurs: '',
+        genreProgrammation: '', typeEquipFestival: '',
+        ratioJauge: '2', moyenneEvenements: '6,7', potentielJoursLocation: '80', moyenneVisiteursJour: '4 375', nbAffairesLiees: 1,
+        contacts: ['Jean Dupont'],
+        affaires: [
+            { nom: 'Zénith de Pau — Avril 2026', statut: 'A Soumettre', statutClass: 'badge-orange', montant: '8 500 €' }
+        ]
+    },
+    'Arena de Bordeaux': {
+        nom: 'Arena de Bordeaux', type: 'Salle', typeClass: 'badge-blue',
+        statut: 'Client', statutClass: 'badge-green',
+        denomination: 'SAS Bordeaux Métropole Arena', societe: 'GL Events', proprietaire: 'Bordeaux Métropole',
+        modeGestion: 'DSP', siren: '823 456 789',
+        adressePostale: '48 avenue Jean Alfonséa', codePostal: '33270',
+        commune: 'Bordeaux', departement: 'Gironde (33)', region: 'Nouvelle-Aquitaine',
+        email: 'info@arena-bordeaux.fr', telephone: '05 56 98 76 54', web: 'www.bordeaux-metropole-arena.com',
+        source: 'Site officiel, Capacité officielle', commentaires: 'Client validé. Très satisfait de la première prestation en mars 2026.',
+        capacite: 11300, nbEvenements: 100, categorieJauge: '5000-15000', visiteursAnnuels: 600000,
+        typologieInterne: 'Arena', typeEquipement: 'Salle de spectacle',
+        periodeFestival: '', nbJoursOuverture: '', capaciteJournaliere: '', estimationVisiteurs: '',
+        genreProgrammation: '', typeEquipFestival: '',
+        ratioJauge: '3', moyenneEvenements: '8,3', potentielJoursLocation: '100', moyenneVisiteursJour: '6 000', nbAffairesLiees: 2,
+        contacts: ['Sophie Martin'],
+        affaires: [
+            { nom: 'Arena de Bordeaux — Mars 2026', statut: 'Validé', statutClass: 'badge-green', montant: '12 000 €' }
+        ]
+    },
+    'Stade Matmut Atlantique': {
+        nom: 'Stade Matmut Atlantique', type: 'Stade', typeClass: 'badge-orange',
+        statut: 'Prospect intéressé', statutClass: 'badge-yellow',
+        denomination: 'SBA SAS', societe: 'SBA (Stade Bordeaux Atlantique)', proprietaire: 'Bordeaux Métropole',
+        modeGestion: 'Concession', siren: '523 456 789',
+        adressePostale: 'Cours Jules Ladoumègue', codePostal: '33300',
+        commune: 'Bordeaux', departement: 'Gironde (33)', region: 'Nouvelle-Aquitaine',
+        email: 'contact@matmut-atlantique.fr', telephone: '05 56 11 22 33', web: 'www.matmut-atlantique.com',
+        source: 'LinkedIn', commentaires: 'Grand stade multifonction, potentiel pour événements sportifs et concerts.',
+        capacite: 42115, nbEvenements: 45, categorieJauge: 'Plus de 15000', visiteursAnnuels: 1200000,
+        typologieInterne: '', typeEquipement: 'Stade',
+        periodeFestival: '', nbJoursOuverture: '', capaciteJournaliere: '', estimationVisiteurs: '',
+        genreProgrammation: '', typeEquipFestival: '',
+        ratioJauge: '6', moyenneEvenements: '3,8', potentielJoursLocation: '45', moyenneVisiteursJour: '26 667', nbAffairesLiees: 1,
+        contacts: ['Pierre Durand'],
+        affaires: [
+            { nom: 'Stade Matmut — Mai 2026', statut: 'Prospection', statutClass: 'badge-gray', montant: '15 000 €' }
+        ]
+    },
+    'Stade Marcel Michelin': {
+        nom: 'Stade Marcel Michelin', type: 'Stade', typeClass: 'badge-orange',
+        statut: 'Prospect froid', statutClass: 'badge-gray',
+        denomination: 'ASM Omnisports', societe: 'ASM Clermont Auvergne', proprietaire: 'Ville de Clermont-Ferrand',
+        modeGestion: 'Concession', siren: '445 678 901',
+        adressePostale: 'Rue Abbé de l\'Épée', codePostal: '63000',
+        commune: 'Clermont-Ferrand', departement: 'Puy-de-Dôme (63)', region: 'Auvergne-Rhône-Alpes',
+        email: '—', telephone: '—', web: 'www.asm-rugby.com',
+        source: 'Site officiel', commentaires: 'Stade de rugby historique, rénovation en cours.',
+        capacite: 18000, nbEvenements: 30, categorieJauge: 'Plus de 15000', visiteursAnnuels: 400000,
+        typologieInterne: '', typeEquipement: 'Stade',
+        periodeFestival: '', nbJoursOuverture: '', capaciteJournaliere: '', estimationVisiteurs: '',
+        genreProgrammation: '', typeEquipFestival: '',
+        ratioJauge: '3', moyenneEvenements: '2,5', potentielJoursLocation: '30', moyenneVisiteursJour: '13 333', nbAffairesLiees: 0,
+        contacts: [],
+        affaires: []
+    },
+    'Eurockéennes': {
+        nom: 'Eurockéennes', type: 'Festival', typeClass: 'badge-green',
+        statut: 'Client', statutClass: 'badge-green',
+        denomination: 'Territoire de Musiques', societe: 'Territoire de Musiques', proprietaire: 'Territoire de Musiques',
+        modeGestion: 'Association', siren: '384 567 890',
+        adressePostale: 'Presqu\'île du Malsaucy', codePostal: '90300',
+        commune: 'Belfort', departement: 'Territoire de Belfort (90)', region: 'Bourgogne-Franche-Comté',
+        email: 'contact@eurockeennes.fr', telephone: '03 84 22 33 44', web: 'www.eurockeennes.fr',
+        source: 'Site officiel, Presse locale', commentaires: 'Festival emblématique. 4 machines en 2026.',
+        capacite: '', nbEvenements: '', categorieJauge: '', visiteursAnnuels: '',
+        typologieInterne: '', typeEquipement: 'Festival',
+        periodeFestival: 'Juillet', nbJoursOuverture: 4, capaciteJournaliere: 32000, estimationVisiteurs: 128000,
+        genreProgrammation: 'Rock, Pop, Électro, Indé', typeEquipFestival: 'Plein air',
+        ratioJauge: '5', moyenneEvenements: '—', potentielJoursLocation: '4', moyenneVisiteursJour: '32 000', nbAffairesLiees: 1,
+        contacts: ['Claire Bernard'],
+        affaires: [
+            { nom: 'Eurockéennes — Juillet 2026', statut: 'Validé', statutClass: 'badge-green', montant: '18 000 €' }
+        ]
+    },
+    'Garorock': {
+        nom: 'Garorock', type: 'Festival', typeClass: 'badge-green',
+        statut: 'Prospect intéressé', statutClass: 'badge-yellow',
+        denomination: 'Association Garorock', societe: 'Garorock', proprietaire: 'Association Garorock',
+        modeGestion: 'Association', siren: '412 678 901',
+        adressePostale: 'Plaine de la Filhole', codePostal: '47200',
+        commune: 'Marmande', departement: 'Lot-et-Garonne (47)', region: 'Nouvelle-Aquitaine',
+        email: 'info@garorock.com', telephone: '05 53 98 76 54', web: 'www.garorock.com',
+        source: 'Site officiel, Presse régionale', commentaires: 'Rencontré Thomas Moreau au MaMA Festival. Intéressé par la solution pour optimiser la distribution bière.',
+        capacite: '', nbEvenements: '', categorieJauge: '', visiteursAnnuels: '',
+        typologieInterne: '', typeEquipement: 'Festival',
+        periodeFestival: 'Juin', nbJoursOuverture: 4, capaciteJournaliere: 25000, estimationVisiteurs: 100000,
+        genreProgrammation: 'Rock, Électro, Pop, Urbain', typeEquipFestival: 'Plein air',
+        ratioJauge: '4', moyenneEvenements: '—', potentielJoursLocation: '4', moyenneVisiteursJour: '25 000', nbAffairesLiees: 1,
+        contacts: ['Thomas Moreau'],
+        affaires: [
+            { nom: 'Garorock — Juin 2026', statut: 'A Chiffrer', statutClass: 'badge-yellow', montant: '—' }
+        ]
+    },
+    'Vieilles Charrues': {
+        nom: 'Vieilles Charrues', type: 'Festival', typeClass: 'badge-green',
+        statut: 'Prospect intéressé', statutClass: 'badge-yellow',
+        denomination: 'Association Vieilles Charrues', societe: 'Association Vieilles Charrues', proprietaire: '—',
+        modeGestion: 'Association', siren: '345 678 901',
+        adressePostale: 'Kerampuilh', codePostal: '29270',
+        commune: 'Carhaix', departement: 'Finistère (29)', region: 'Bretagne',
+        email: 'contact@vieillescharrues.asso.fr', telephone: '02 98 93 00 93', web: 'www.vieillescharrues.asso.fr',
+        source: 'Presse régionale', commentaires: 'Plus grand festival de France en termes de fréquentation.',
+        capacite: '', nbEvenements: '', categorieJauge: '', visiteursAnnuels: '',
+        typologieInterne: '', typeEquipement: 'Festival',
+        periodeFestival: 'Juillet', nbJoursOuverture: 4, capaciteJournaliere: 55000, estimationVisiteurs: 280000,
+        genreProgrammation: 'Rock, Pop, Électro, Variété', typeEquipFestival: 'Plein air',
+        ratioJauge: '7', moyenneEvenements: '—', potentielJoursLocation: '4', moyenneVisiteursJour: '70 000', nbAffairesLiees: 1,
+        contacts: ['Laura Petit'],
+        affaires: [
+            { nom: 'Vieilles Charrues — Juillet 2026', statut: 'Qualification', statutClass: 'badge-blue', montant: '14 000 €' }
+        ]
+    },
+    'Rock en Seine': {
+        nom: 'Rock en Seine', type: 'Festival', typeClass: 'badge-green',
+        statut: 'Prospect froid', statutClass: 'badge-gray',
+        denomination: 'Nous Productions SAS', societe: 'Nous Productions', proprietaire: '—',
+        modeGestion: 'Privé', siren: '456 789 012',
+        adressePostale: 'Domaine national de Saint-Cloud', codePostal: '92210',
+        commune: 'Saint-Cloud', departement: 'Hauts-de-Seine (92)', region: 'Île-de-France',
+        email: '—', telephone: '—', web: 'www.rockenseine.com',
+        source: 'Site officiel', commentaires: 'Festival parisien historique. Pas encore de contact établi.',
+        capacite: '', nbEvenements: '', categorieJauge: '', visiteursAnnuels: '',
+        typologieInterne: '', typeEquipement: 'Festival',
+        periodeFestival: 'Août', nbJoursOuverture: 3, capaciteJournaliere: 40000, estimationVisiteurs: 120000,
+        genreProgrammation: 'Rock, Pop, Indé', typeEquipFestival: 'Plein air',
+        ratioJauge: '6', moyenneEvenements: '—', potentielJoursLocation: '3', moyenneVisiteursJour: '40 000', nbAffairesLiees: 0,
+        contacts: [],
+        affaires: []
+    },
+    'Hellfest': {
+        nom: 'Hellfest', type: 'Festival', typeClass: 'badge-green',
+        statut: 'Client', statutClass: 'badge-green',
+        denomination: 'Hellfest Productions SAS', societe: 'Hellfest Productions', proprietaire: 'Hellfest Productions',
+        modeGestion: 'Privé', siren: '501 234 567',
+        adressePostale: 'Le Val de Moine', codePostal: '44190',
+        commune: 'Clisson', departement: 'Loire-Atlantique (44)', region: 'Pays de la Loire',
+        email: 'contact@hellfest.fr', telephone: '02 40 54 00 00', web: 'www.hellfest.fr',
+        source: 'Site officiel, Presse locale, Capacité officielle', commentaires: 'Client historique. 5 machines déployées en 2025, très satisfait. Renouvellement confirmé pour 2026.',
+        capacite: '', nbEvenements: '', categorieJauge: '', visiteursAnnuels: '',
+        typologieInterne: '', typeEquipement: 'Festival',
+        periodeFestival: 'Juin', nbJoursOuverture: 4, capaciteJournaliere: 60000, estimationVisiteurs: 240000,
+        genreProgrammation: 'Rock, Métal', typeEquipFestival: 'Plein air',
+        ratioJauge: '8', moyenneEvenements: '—', potentielJoursLocation: '4', moyenneVisiteursJour: '60 000', nbAffairesLiees: 1,
+        contacts: ['Antoine Roux'],
+        affaires: [
+            { nom: 'Hellfest — Juin 2026', statut: 'Validé', statutClass: 'badge-green', montant: '25 000 €' }
+        ]
+    },
+    'Zénith de Toulouse': {
+        nom: 'Zénith de Toulouse', type: 'Salle', typeClass: 'badge-blue',
+        statut: 'Prospect froid', statutClass: 'badge-gray',
+        denomination: 'SA Zénith de Toulouse', societe: 'Zénith de Toulouse Métropole', proprietaire: 'Toulouse Métropole',
+        modeGestion: 'DSP', siren: '567 890 123',
+        adressePostale: '11 avenue Raymond Badiou', codePostal: '31300',
+        commune: 'Toulouse', departement: 'Haute-Garonne (31)', region: 'Occitanie',
+        email: '—', telephone: '—', web: 'www.zenith-toulouse.com',
+        source: 'Site officiel', commentaires: 'Pas encore de contact établi. À prospecter.',
+        capacite: 9000, nbEvenements: 90, categorieJauge: '5000-15000', visiteursAnnuels: 450000,
+        typologieInterne: 'Zénith', typeEquipement: 'Salle de spectacle',
+        periodeFestival: '', nbJoursOuverture: '', capaciteJournaliere: '', estimationVisiteurs: '',
+        genreProgrammation: '', typeEquipFestival: '',
+        ratioJauge: '2', moyenneEvenements: '7,5', potentielJoursLocation: '90', moyenneVisiteursJour: '5 000', nbAffairesLiees: 0,
+        contacts: [],
+        affaires: []
+    },
+    'Arena Montpellier': {
+        nom: 'Arena Montpellier', type: 'Salle', typeClass: 'badge-blue',
+        statut: 'Prospect intéressé', statutClass: 'badge-yellow',
+        denomination: 'Sud de France Arena SAS', societe: 'Sud de France Arena', proprietaire: 'Montpellier Méditerranée Métropole',
+        modeGestion: 'DSP', siren: '634 567 890',
+        adressePostale: 'Avenue de la Pompignane', codePostal: '34000',
+        commune: 'Montpellier', departement: 'Hérault (34)', region: 'Occitanie',
+        email: 'info@arena-montpellier.fr', telephone: '04 67 12 34 56', web: 'www.arena-montpellier.com',
+        source: 'Site officiel', commentaires: 'Arena récente, forte activité événementielle.',
+        capacite: 14800, nbEvenements: 90, categorieJauge: '5000-15000', visiteursAnnuels: 500000,
+        typologieInterne: 'Arena', typeEquipement: 'Salle de spectacle',
+        periodeFestival: '', nbJoursOuverture: '', capaciteJournaliere: '', estimationVisiteurs: '',
+        genreProgrammation: '', typeEquipFestival: '',
+        ratioJauge: '3', moyenneEvenements: '7,5', potentielJoursLocation: '90', moyenneVisiteursJour: '5 556', nbAffairesLiees: 1,
+        contacts: [],
+        affaires: [
+            { nom: 'Arena Montpellier — Sept 2026', statut: 'Prospection', statutClass: 'badge-gray', montant: '9 000 €' }
+        ]
+    },
+    'Stade Pierre Mauroy': {
+        nom: 'Stade Pierre Mauroy', type: 'Stade', typeClass: 'badge-orange',
+        statut: 'Prospect froid', statutClass: 'badge-gray',
+        denomination: 'SASP LOSC Lille', societe: 'ELISA (Exploitant Lille Stade)', proprietaire: 'Métropole Européenne de Lille',
+        modeGestion: 'Concession', siren: '678 901 234',
+        adressePostale: '261 Boulevard de Tournai', codePostal: '59650',
+        commune: 'Villeneuve-d\'Ascq', departement: 'Nord (59)', region: 'Hauts-de-France',
+        email: '—', telephone: '—', web: 'www.stade-pierre-mauroy.com',
+        source: 'Site officiel', commentaires: 'Stade multifonction avec toit rétractable. Potentiel important.',
+        capacite: 50157, nbEvenements: 50, categorieJauge: 'Plus de 15000', visiteursAnnuels: 1500000,
+        typologieInterne: '', typeEquipement: 'Stade',
+        periodeFestival: '', nbJoursOuverture: '', capaciteJournaliere: '', estimationVisiteurs: '',
+        genreProgrammation: '', typeEquipFestival: '',
+        ratioJauge: '7', moyenneEvenements: '4,2', potentielJoursLocation: '50', moyenneVisiteursJour: '30 000', nbAffairesLiees: 0,
+        contacts: [],
+        affaires: []
+    }
+};
+
+/* ============================================
+   TAB SWITCHING
+   ============================================ */
+function switchTab(btn) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.tab;
+    document.querySelectorAll('.list-row').forEach(row => {
+        if (filter === 'all') { row.style.display = ''; }
+        else { row.style.display = row.dataset.statut === filter ? '' : 'none'; }
+    });
+}
+
+/* ============================================
+   BUILD SITE MODAL (3 tabs)
+   ============================================ */
+function buildSiteModal(d) {
+    if (!d) return '<p style="padding:20px;color:#999;">Données non disponibles</p>';
+
+    const esc = s => (s === undefined || s === null || s === '') ? '—' : String(s).replace(/</g, '&lt;');
+
+    const typeOptions = [
+        { label: 'Salle', badgeClass: 'badge-blue' },
+        { label: 'Stade', badgeClass: 'badge-orange' },
+        { label: 'Festival', badgeClass: 'badge-green' },
+        { label: 'Brasserie', badgeClass: 'badge-yellow' },
+        { label: 'Autre', badgeClass: 'badge-gray' }
+    ];
+    const statutOptions = [
+        { label: 'Prospect froid', badgeClass: 'badge-gray' },
+        { label: 'Prospect intéressé', badgeClass: 'badge-yellow' },
+        { label: 'Client', badgeClass: 'badge-green' }
+    ];
+    const modeOptions = [
+        { label: 'Privé', badgeClass: 'badge-gray' },
+        { label: 'DSP', badgeClass: 'badge-blue' },
+        { label: 'SPL', badgeClass: 'badge-cyan' },
+        { label: 'Régie', badgeClass: 'badge-purple' },
+        { label: 'Association', badgeClass: 'badge-green' },
+        { label: 'SEM', badgeClass: 'badge-teal' },
+        { label: 'Concession', badgeClass: 'badge-orange' },
+        { label: 'Autre', badgeClass: 'badge-gray' }
+    ];
+    const categorieJaugeOptions = [
+        { label: 'Moins de 5000', badgeClass: 'badge-gray' },
+        { label: '5000-15000', badgeClass: 'badge-blue' },
+        { label: 'Plus de 15000', badgeClass: 'badge-purple' }
+    ];
+    const typologieInterneOptions = [
+        { label: 'Zénith', badgeClass: 'badge-blue' },
+        { label: 'Arena', badgeClass: 'badge-purple' },
+        { label: 'Salle polyvalente', badgeClass: 'badge-gray' },
+        { label: 'Théâtre', badgeClass: 'badge-teal' },
+        { label: 'Autre', badgeClass: 'badge-gray' }
+    ];
+    const typeEquipementOptions = [
+        { label: 'Salle de spectacle', badgeClass: 'badge-blue' },
+        { label: 'Stade', badgeClass: 'badge-orange' },
+        { label: 'Festival', badgeClass: 'badge-green' }
+    ];
+    const typeEquipFestivalOptions = [
+        { label: 'Plein air', badgeClass: 'badge-green' },
+        { label: 'Couvert', badgeClass: 'badge-blue' },
+        { label: 'Mixte', badgeClass: 'badge-teal' }
+    ];
+
+    function buildSelectField(fieldName, currentValue, currentBadgeClass, options) {
+        let optionsHtml = options.map(o =>
+            `<div class="field-select-option${o.label === currentValue ? ' selected' : ''}" data-badge-class="${o.badgeClass}" onclick="selectOption(this, '${fieldName}')">${o.label}</div>`
+        ).join('');
+        return `<div class="field-select" data-field="${fieldName}">
+            <div class="field-select-value" onclick="toggleSelect(this)">
+                <span class="badge ${currentBadgeClass}" id="val-${fieldName}">${esc(currentValue)}</span>
+                <span class="field-select-arrow">▾</span>
+            </div>
+            <div class="field-select-dropdown" id="dropdown-${fieldName}">
+                ${optionsHtml}
+            </div>
+        </div>`;
+    }
+
+    function textField(label, value, type) {
+        const t = type || 'text';
+        const v = esc(value);
+        return `<div class="detail-field">
+            <div class="detail-field-label">${label}</div>
+            <div class="detail-field-value">
+                <div class="field-text" onclick="editText(this)">
+                    <span class="field-text-display">${v}</span>
+                    <input class="field-text-input" type="${t}" value="${v === '—' ? '' : v}" style="display:none" onblur="saveText(this)" onkeydown="if(event.key==='Enter') this.blur()">
+                </div>
+            </div>
+        </div>`;
+    }
+
+    function displayField(label, value) {
+        return `<div class="detail-field">
+            <div class="detail-field-label">${label}</div>
+            <div class="detail-field-value"><span class="field-text-display">${esc(value)}</span></div>
+        </div>`;
+    }
+
+    function textareaField(label, value) {
+        const v = esc(value);
+        return `<div class="detail-field">
+            <div class="detail-field-label">${label}</div>
+            <div class="detail-field-value">
+                <div class="field-textarea" onclick="editTextarea(this)">
+                    <div class="field-textarea-display">${v}</div>
+                    <textarea class="field-textarea-input" style="display:none" onblur="saveTextarea(this)">${v === '—' ? '' : v}</textarea>
+                </div>
+            </div>
+        </div>`;
+    }
+
+    function selectField(label, fieldName, value, options) {
+        const match = options.find(o => o.label === value);
+        const badgeClass = match ? match.badgeClass : 'badge-gray';
+        return `<div class="detail-field">
+            <div class="detail-field-label">${label}</div>
+            <div class="detail-field-value">
+                ${buildSelectField(fieldName, value || '—', badgeClass, options)}
+            </div>
+        </div>`;
+    }
+
+    // ─── TAB 1: Général ───
+    let tabGeneral = `<div class="record-modal-tab-content active" id="modal-tab-general">`;
+
+    tabGeneral += `<div class="detail-section"><h4 class="detail-section-title">Informations générales</h4>`;
+    tabGeneral += textField('Nom du site', d.nom);
+    tabGeneral += textField('Dénomination sociale', d.denomination);
+    tabGeneral += textField('Société exploitante', d.societe);
+    tabGeneral += textField('Propriétaire de l\'équipement', d.proprietaire);
+    tabGeneral += selectField('Type de client', 'type-client', d.type, typeOptions);
+    tabGeneral += selectField('Mode de gestion', 'mode-gestion', d.modeGestion, modeOptions);
+    tabGeneral += selectField('Statut global', 'statut-global', d.statut, statutOptions);
+    tabGeneral += textField('SIREN', d.siren);
+    tabGeneral += `</div>`;
+
+    tabGeneral += `<div class="detail-section"><h4 class="detail-section-title">Adresse</h4>`;
+    tabGeneral += textField('Adresse postale', d.adressePostale);
+    tabGeneral += textField('Code postal', d.codePostal);
+    tabGeneral += textField('Commune', d.commune);
+    tabGeneral += displayField('Département', d.departement);
+    tabGeneral += displayField('Région', d.region);
+    tabGeneral += `</div>`;
+
+    tabGeneral += `<div class="detail-section"><h4 class="detail-section-title">Coordonnées</h4>`;
+    tabGeneral += textField('Email', d.email, 'email');
+    tabGeneral += textField('Téléphone', d.telephone);
+    tabGeneral += textField('Site web', d.web);
+    tabGeneral += `</div>`;
+
+    tabGeneral += `<div class="detail-section"><h4 class="detail-section-title">Prospection</h4>`;
+    tabGeneral += textField('Source des informations', d.source);
+    tabGeneral += textareaField('Commentaires', d.commentaires);
+    tabGeneral += `</div>`;
+
+    tabGeneral += `</div>`;
+
+    // ─── TAB 2: Caractéristiques ───
+    let tabCarac = `<div class="record-modal-tab-content" id="modal-tab-caracteristiques">`;
+
+    tabCarac += `<div class="detail-section"><h4 class="detail-section-title">Données techniques</h4>`;
+    tabCarac += textField('Capacité d\'accueil max', d.capacite, 'number');
+    tabCarac += textField('Nombre d\'événements annuels', d.nbEvenements, 'number');
+    tabCarac += selectField('Catégorie de jauge', 'categorie-jauge', d.categorieJauge, categorieJaugeOptions);
+    tabCarac += textField('Visiteurs annuels', d.visiteursAnnuels, 'number');
+    if (d.type === 'Salle') {
+        tabCarac += selectField('Typologie interne', 'typologie-interne', d.typologieInterne, typologieInterneOptions);
+    }
+    tabCarac += selectField('Type d\'équipement', 'type-equipement', d.typeEquipement, typeEquipementOptions);
+    tabCarac += `</div>`;
+
+    if (d.type === 'Festival') {
+        tabCarac += `<div class="detail-section"><h4 class="detail-section-title">Données festival</h4>`;
+        tabCarac += textField('Période', d.periodeFestival);
+        tabCarac += textField('Nb jours ouverture', d.nbJoursOuverture, 'number');
+        tabCarac += textField('Capacité journalière', d.capaciteJournaliere, 'number');
+        tabCarac += textField('Estimation visiteurs totaux', d.estimationVisiteurs, 'number');
+        tabCarac += textField('Genre/programmation', d.genreProgrammation);
+        tabCarac += selectField('Type équipement festival', 'type-equip-festival', d.typeEquipFestival, typeEquipFestivalOptions);
+        tabCarac += `</div>`;
+    }
+
+    tabCarac += `<div class="detail-section"><h4 class="detail-section-title">Indicateurs calculés</h4>`;
+    tabCarac += displayField('Ratio Jauge théorique Machine MAX', d.ratioJauge);
+    tabCarac += displayField('Moyenne d\'événements mensuelle', d.moyenneEvenements);
+    tabCarac += displayField('Potentiel nombre de jours location Total', d.potentielJoursLocation);
+    tabCarac += displayField('Moyenne visiteurs jour', d.moyenneVisiteursJour);
+    tabCarac += displayField('Nb affaires liées', d.nbAffairesLiees);
+    tabCarac += `</div>`;
+
+    tabCarac += `</div>`;
+
+    // ─── TAB 3: Relations ───
+    let tabRelations = `<div class="record-modal-tab-content" id="modal-tab-relations">`;
+
+    const contactsHtml = (d.contacts || []).length > 0
+        ? d.contacts.map(c => {
+            return `<div class="linked-card" onclick="alert('Fonctionnalité disponible dans Airtable')">
+                <div class="linked-card-title">${c}</div>
+                <div class="linked-card-field"><span class="linked-card-label">Fonction :</span> —</div>
+            </div>`;
+        }).join('')
+        : '<span style="color:#999;">Aucun contact lié</span>';
+
+    const affairesHtml = (d.affaires || []).length > 0
+        ? d.affaires.map(a => `<div class="linked-card" onclick="alert('Fonctionnalité disponible dans Airtable')">
+            <div class="linked-card-title">${a.nom}</div>
+            <div class="linked-card-field"><span class="linked-card-label">Statut :</span> <span class="badge ${a.statutClass}">${a.statut}</span></div>
+            <div class="linked-card-field"><span class="linked-card-label">Montant :</span> ${a.montant}</div>
+        </div>`).join('')
+        : '<span style="color:#999;">Aucune affaire liée</span>';
+
+    tabRelations += `<div class="detail-section"><h4 class="detail-section-title">Contacts liés</h4>`;
+    tabRelations += `<div class="detail-field"><div class="detail-field-value">${contactsHtml}</div></div>`;
+    tabRelations += `</div>`;
+
+    tabRelations += `<div class="detail-section"><h4 class="detail-section-title">Affaires liées</h4>`;
+    tabRelations += `<div class="detail-field"><div class="detail-field-value">${affairesHtml}</div></div>`;
+    tabRelations += `</div>`;
+
+    tabRelations += `</div>`;
+
+    return tabGeneral + tabCarac + tabRelations;
+}
+
+/* ============================================
+   OPEN / CLOSE RECORD MODAL
+   ============================================ */
+function openRecord(el) {
+    const name = el.dataset.recordName;
+    const d = siteData[name];
+    if (!d) return;
+    document.getElementById('record-modal-title').textContent = d.nom;
+    document.getElementById('record-modal-body').innerHTML = buildSiteModal(d);
+    document.getElementById('record-modal').classList.add('open');
+    // Reset tabs to first
+    document.querySelectorAll('.record-modal-tab').forEach((t, i) => t.classList.toggle('active', i === 0));
+}
+
+function closeRecordModal() {
+    document.getElementById('record-modal').classList.remove('open');
+}
+
+function switchModalTab(btn, tabId) {
+    btn.closest('.record-modal-tabs').querySelectorAll('.record-modal-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.record-modal-tab-content').forEach(c => c.classList.remove('active'));
+    document.getElementById('modal-tab-' + tabId).classList.add('active');
+}
+
+/* ============================================
+   INTERACTIVE FIELDS
+   ============================================ */
+function toggleSelect(trigger) {
+    const dropdown = trigger.nextElementSibling;
+    const isOpen = dropdown.classList.contains('open');
+    closeAllDropdowns();
+    if (!isOpen) {
+        dropdown.classList.add('open');
+        const currentText = trigger.querySelector('[id^="val-"]')?.textContent;
+        dropdown.querySelectorAll('.field-select-option').forEach(opt => {
+            opt.classList.toggle('selected', opt.textContent.trim() === currentText?.trim());
+        });
+    }
+}
+
+function selectOption(option, fieldName) {
+    const text = option.textContent.trim();
+    const badgeClass = option.getAttribute('data-badge-class') || 'badge-gray';
+    const valueEl = document.getElementById('val-' + fieldName);
+    if (valueEl) {
+        valueEl.textContent = text;
+        valueEl.className = 'badge ' + badgeClass;
+    }
+    option.closest('.field-select-dropdown').classList.remove('open');
+}
+
+function editText(wrapper) {
+    const display = wrapper.querySelector('.field-text-display');
+    const input = wrapper.querySelector('.field-text-input');
+    if (!input) return;
+    display.style.display = 'none';
+    input.style.display = 'block';
+    input.focus();
+    input.select();
+    wrapper.style.borderColor = '#166ee1';
+}
+
+function saveText(input) {
+    const wrapper = input.closest('.field-text');
+    const display = wrapper.querySelector('.field-text-display');
+    display.textContent = input.value || '—';
+    display.style.display = 'block';
+    input.style.display = 'none';
+    wrapper.style.borderColor = 'transparent';
+}
+
+function editTextarea(wrapper) {
+    const display = wrapper.querySelector('.field-textarea-display');
+    const input = wrapper.querySelector('.field-textarea-input');
+    if (!input) return;
+    display.style.display = 'none';
+    input.style.display = 'block';
+    input.focus();
+    wrapper.style.borderColor = '#166ee1';
+}
+
+function saveTextarea(input) {
+    const wrapper = input.closest('.field-textarea');
+    const display = wrapper.querySelector('.field-textarea-display');
+    display.textContent = input.value || '—';
+    display.style.display = 'block';
+    input.style.display = 'none';
+    wrapper.style.borderColor = 'transparent';
+}
+
+function closeAllDropdowns() {
+    document.querySelectorAll('.field-select-dropdown.open').forEach(d => d.classList.remove('open'));
+}
+
+/* ============================================
+   GLOBAL EVENTS
+   ============================================ */
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.field-select') && !e.target.closest('.field-multiselect')) {
+        closeAllDropdowns();
+    }
+});
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeRecordModal();
+        closeAllDropdowns();
+    }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1440">
+    <title>JAVATIC — Dashboard financier</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="has-disclaimer">
+<div class="disclaimer-banner">Interfaces à usage visuel uniquement — Aperçu non fonctionnel, données fictives</div>
+<div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <span class="sidebar-logo">🍺</span>
+            <span class="sidebar-app-name">JAVATIC CRM</span>
+            <span class="sidebar-chevron">▾</span>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">📊</span>
+                    <span class="sidebar-section-label">Pilotage</span>
+                </div>
+                <a href="../pilotage/dashboard.html" class="sidebar-item active">Dashboard financier</a>
+                <a href="../pilotage/zones-potentiel.html" class="sidebar-item">Zones à fort potentiel</a>
+                <a href="../pilotage/todo.html" class="sidebar-item">TODO</a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">💼</span>
+                    <span class="sidebar-section-label">CRM et suivi commercial</span>
+                </div>
+                <a href="../crm/sites.html" class="sidebar-item">Liste des sites</a>
+                <a href="../crm/contacts.html" class="sidebar-item">Liste des contacts</a>
+                <a href="../crm/pipeline.html" class="sidebar-item">Pipeline commercial</a>
+                <a href="../crm/calendrier.html" class="sidebar-item">Calendrier des RDV</a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">⚙️</span>
+                    <span class="sidebar-section-label">Production</span>
+                </div>
+                <a href="../production/idees-rd.html" class="sidebar-item">Idées R&D</a>
+                <a href="../production/fabrication.html" class="sidebar-item">Suivi fabrication</a>
+                <a href="../production/machines.html" class="sidebar-item">Liste des machines</a>
+                <a href="../production/demandes-validees.html" class="sidebar-item">Demandes clients validées</a>
+                <a href="../production/suivi-operationnel.html" class="sidebar-item">Suivi opérationnel</a>
+            </div>
+        </nav>
+        <div class="sidebar-footer">
+            <span class="sidebar-footer-icon">👤</span>
+            <span class="sidebar-footer-text">Yoann RUAUD</span>
+        </div>
+    </aside>
+
+    <!-- MAIN AREA -->
+    <div class="main-area">
+
+        <!-- PAGE HEADER -->
+        <div class="page-header">
+            <div class="header-left">
+                <div class="breadcrumb">
+                    <span class="breadcrumb-parent">Pilotage</span>
+                    <span class="breadcrumb-sep">›</span>
+                    <span class="breadcrumb-current">Dashboard financier</span>
+                </div>
+            </div>
+            <div class="header-right"></div>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content-area content-dashboard">
+
+            <!-- TITLE -->
+            <h2 class="dashboard-title">Dashboard financier — 12 mois glissants</h2>
+            <h3 class="dashboard-card-title" style="color: red; margin-bottom: 24px">Calculs chiffres à préciser par client (vis à vis dates 12 mois glissant)</h3>
+
+            <!-- 3 TABLEAUX DE SUIVI PAR TYPE (CDC §3.1 Interface 1) -->
+            <div class="kpi-row" style="grid-template-columns: repeat(3, 1fr);">
+
+                <!-- Salles -->
+                <div class="dashboard-card">
+                    <div class="dashboard-card-header">
+                        <span class="dashboard-card-title">🏟️ Salles</span>
+                    </div>
+                    <table class="dashboard-table">
+                        <thead>
+                            <tr>
+                                <th>Indicateur</th>
+                                <th style="text-align:right;">Valeur</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Nb prospects</td><td style="text-align:right;">4</td></tr>
+                            <tr><td>Nb clients</td><td style="text-align:right;">1</td></tr>
+                            <tr><td>Nb jours prévisionnel</td><td style="text-align:right;">12</td></tr>
+                            <tr><td>Nb jours facturé</td><td style="text-align:right;">6</td></tr>
+                            <tr><td>CA prévisionnel</td><td style="text-align:right;">28 500 €</td></tr>
+                            <tr><td>CA facturé</td><td style="text-align:right;">12 000 €</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Stades -->
+                <div class="dashboard-card">
+                    <div class="dashboard-card-header">
+                        <span class="dashboard-card-title">🏟️ Stades</span>
+                    </div>
+                    <table class="dashboard-table">
+                        <thead>
+                            <tr>
+                                <th>Indicateur</th>
+                                <th style="text-align:right;">Valeur</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Nb prospects</td><td style="text-align:right;">3</td></tr>
+                            <tr><td>Nb clients</td><td style="text-align:right;">0</td></tr>
+                            <tr><td>Nb jours prévisionnel</td><td style="text-align:right;">8</td></tr>
+                            <tr><td>Nb jours facturé</td><td style="text-align:right;">0</td></tr>
+                            <tr><td>CA prévisionnel</td><td style="text-align:right;">24 000 €</td></tr>
+                            <tr><td>CA facturé</td><td style="text-align:right;">0 €</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Festivals -->
+                <div class="dashboard-card">
+                    <div class="dashboard-card-header">
+                        <span class="dashboard-card-title">🎵 Festivals</span>
+                    </div>
+                    <table class="dashboard-table">
+                        <thead>
+                            <tr>
+                                <th>Indicateur</th>
+                                <th style="text-align:right;">Valeur</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Nb prospects</td><td style="text-align:right;">5</td></tr>
+                            <tr><td>Nb clients</td><td style="text-align:right;">2</td></tr>
+                            <tr><td>Nb jours prévisionnel</td><td style="text-align:right;">25</td></tr>
+                            <tr><td>Nb jours facturé</td><td style="text-align:right;">12</td></tr>
+                            <tr><td>CA prévisionnel</td><td style="text-align:right;">35 000 €</td></tr>
+                            <tr><td>CA facturé</td><td style="text-align:right;">20 000 €</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            <!-- CHARTS ROW -->
+            <div class="chart-row">
+
+                <!-- Bar Chart -->
+                <div class="dashboard-card chart-card">
+                    <div class="dashboard-card-header">
+                        <span class="dashboard-card-title">Répartition CA prévisionnel</span>
+                    </div>
+                    <div class="bar-chart">
+                        <div class="bar-item">
+                            <span class="bar-label">Salles</span>
+                            <div class="bar-track">
+                                <div class="bar-fill" style="width:33%; background:#166ee1;"></div>
+                            </div>
+                            <span class="bar-value">28 500 € (33%)</span>
+                        </div>
+                        <div class="bar-item">
+                            <span class="bar-label">Stades</span>
+                            <div class="bar-track">
+                                <div class="bar-fill" style="width:27%; background:#f59e0b;"></div>
+                            </div>
+                            <span class="bar-value">24 000 € (27%)</span>
+                        </div>
+                        <div class="bar-item">
+                            <span class="bar-label">Festivals</span>
+                            <div class="bar-track">
+                                <div class="bar-fill" style="width:40%; background:#10b981;"></div>
+                            </div>
+                            <span class="bar-value">35 000 € (40%)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pie Chart -->
+                <div class="dashboard-card chart-card">
+                    <div class="dashboard-card-header">
+                        <span class="dashboard-card-title">Répartition par type de client</span>
+                    </div>
+                    <div class="pie-chart-container">
+                        <div class="pie-chart" style="background: conic-gradient(#166ee1 0% 33%, #f59e0b 33% 60%, #10b981 60% 100%);"></div>
+                        <div class="pie-legend">
+                            <div class="pie-legend-item">
+                                <span class="pie-dot" style="background:#166ee1;"></span>
+                                Salles — 33%
+                            </div>
+                            <div class="pie-legend-item">
+                                <span class="pie-dot" style="background:#f59e0b;"></span>
+                                Stades — 27%
+                            </div>
+                            <div class="pie-legend-item">
+                                <span class="pie-dot" style="background:#10b981;"></span>
+                                Festivals — 40%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

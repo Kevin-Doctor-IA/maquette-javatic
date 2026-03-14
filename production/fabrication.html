@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1440">
+    <title>JAVATIC — Suivi fabrication machines</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .gantt-list-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .gantt-list-table th { padding: 8px 12px; text-align: left; font-weight: 500; font-size: 11px; color: #999; text-transform: uppercase; letter-spacing: 0.3px; border-bottom: 1px solid #e5e5e5; background: #fafafa; white-space: nowrap; }
+        .gantt-list-table td { padding: 0 12px; vertical-align: middle; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 150px; }
+        .gantt-list-row { height: 36px; border-bottom: 1px solid #f0f0f0; cursor: pointer; }
+        .gantt-list-row:hover { background: #f8f9ff; }
+        .gantt-list-group-row { height: 36px; background: #fafafa; border-bottom: 1px solid #f0f0f0; }
+        .gantt-list-group-row td { font-weight: 600; color: #166ee1; font-size: 13px; }
+        .gantt-today-line { position: absolute; top: 0; bottom: 0; width: 2px; background: #ef4444; z-index: 2; }
+        .gantt-timeline-body { position: relative; }
+    </style>
+</head>
+<body class="has-disclaimer">
+<div class="disclaimer-banner">Interfaces à usage visuel uniquement — Aperçu non fonctionnel, données fictives</div>
+<div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <span class="sidebar-logo">🍺</span>
+            <span class="sidebar-app-name">JAVATIC CRM</span>
+            <span class="sidebar-chevron">▾</span>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">📊</span>
+                    <span class="sidebar-section-label">Pilotage</span>
+                </div>
+                <a href="../pilotage/dashboard.html" class="sidebar-item">Dashboard financier</a>
+                <a href="../pilotage/zones-potentiel.html" class="sidebar-item">Zones à fort potentiel</a>
+                <a href="../pilotage/todo.html" class="sidebar-item">TODO</a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">💼</span>
+                    <span class="sidebar-section-label">CRM et suivi commercial</span>
+                </div>
+                <a href="../crm/sites.html" class="sidebar-item">Liste des sites</a>
+                <a href="../crm/contacts.html" class="sidebar-item">Liste des contacts</a>
+                <a href="../crm/pipeline.html" class="sidebar-item">Pipeline commercial</a>
+                <a href="../crm/calendrier.html" class="sidebar-item">Calendrier des RDV</a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">⚙️</span>
+                    <span class="sidebar-section-label">Production</span>
+                </div>
+                <a href="../production/idees-rd.html" class="sidebar-item">Idées R&D</a>
+                <a href="../production/fabrication.html" class="sidebar-item active">Suivi fabrication</a>
+                <a href="../production/machines.html" class="sidebar-item">Liste des machines</a>
+                <a href="../production/demandes-validees.html" class="sidebar-item">Demandes clients validées</a>
+                <a href="../production/suivi-operationnel.html" class="sidebar-item">Suivi opérationnel</a>
+            </div>
+        </nav>
+        <div class="sidebar-footer">
+            <span class="sidebar-footer-icon">👤</span>
+            <span class="sidebar-footer-text">Yoann RUAUD</span>
+        </div>
+    </aside>
+
+    <!-- MAIN AREA -->
+    <div class="main-area">
+
+        <!-- PAGE HEADER -->
+        <div class="page-header">
+            <div class="header-left">
+                <div class="breadcrumb">
+                    <span class="breadcrumb-parent">Production</span>
+                    <span class="breadcrumb-sep">›</span>
+                    <span class="breadcrumb-current">Suivi fabrication machines</span>
+                </div>
+            </div>
+            <div class="header-right">
+                    <button class="btn-primary">＋ Ajouter une machine</button>
+                </div>
+        </div>
+
+        <!-- GANTT TOOLBAR -->
+        <div class="gantt-toolbar">
+            <span style="font-size:13px; color:#666;">Groupé par : <strong>Machine liée</strong></span>
+            <div class="gantt-toolbar-right">
+                <span style="font-size:12px; color:#999;">Mars — Avril 2026</span>
+            </div>
+        </div>
+
+        <!-- GANTT CONTENT -->
+        <div class="gantt-container">
+            <!-- LEFT: Task list -->
+            <div class="gantt-list" id="gantt-list">
+                <table class="gantt-list-table">
+                    <thead>
+                        <tr>
+                            <th>Tâche</th>
+                            <th>Statut</th>
+                            <th>Durée</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Group: DIST-002 -->
+                        <tr class="gantt-list-group-row">
+                            <td colspan="3">DIST-002 (JAvATIC Beta)</td>
+                        </tr>
+                        <tr class="gantt-list-row" onclick="openRecord(this)" data-record-name="Assemblage châssis|DIST-002">
+                            <td class="col-primary">Assemblage châssis</td>
+                            <td><span class="badge badge-gray">A faire</span></td>
+                            <td>5j</td>
+                        </tr>
+                        <tr class="gantt-list-row" onclick="openRecord(this)" data-record-name="Installation système réfrigération|DIST-002">
+                            <td class="col-primary">Installation système réfrigération</td>
+                            <td><span class="badge badge-gray">A faire</span></td>
+                            <td>5j</td>
+                        </tr>
+                        <tr class="gantt-list-row" onclick="openRecord(this)" data-record-name="Câblage électronique|DIST-002">
+                            <td class="col-primary">Câblage électronique</td>
+                            <td><span class="badge badge-gray">A faire</span></td>
+                            <td>5j</td>
+                        </tr>
+                        <tr class="gantt-list-row" onclick="openRecord(this)" data-record-name="Programmation logiciel embarqué|DIST-002">
+                            <td class="col-primary">Programmation logiciel embarqué</td>
+                            <td><span class="badge badge-gray">A faire</span></td>
+                            <td>5j</td>
+                        </tr>
+                        <tr class="gantt-list-row" onclick="openRecord(this)" data-record-name="Tests fonctionnels|DIST-002">
+                            <td class="col-primary">Tests fonctionnels</td>
+                            <td><span class="badge badge-gray">A faire</span></td>
+                            <td>3j</td>
+                        </tr>
+                        <!-- Group: DIST-005 -->
+                        <tr class="gantt-list-group-row">
+                            <td colspan="3">DIST-005 (JAvATIC Epsilon)</td>
+                        </tr>
+                        <tr class="gantt-list-row" onclick="openRecord(this)" data-record-name="Assemblage châssis|DIST-005">
+                            <td class="col-primary">Assemblage châssis</td>
+                            <td><span class="badge badge-green">Fait</span></td>
+                            <td>5j</td>
+                        </tr>
+                        <tr class="gantt-list-row" onclick="openRecord(this)" data-record-name="Installation système réfrigération|DIST-005">
+                            <td class="col-primary">Installation système réfrigération</td>
+                            <td><span class="badge badge-green">Fait</span></td>
+                            <td>5j</td>
+                        </tr>
+                        <tr class="gantt-list-row" onclick="openRecord(this)" data-record-name="Câblage électronique|DIST-005">
+                            <td class="col-primary">Câblage électronique</td>
+                            <td><span class="badge badge-blue">En cours</span></td>
+                            <td>5j</td>
+                        </tr>
+                        <tr class="gantt-list-row" onclick="openRecord(this)" data-record-name="Programmation logiciel embarqué|DIST-005">
+                            <td class="col-primary">Programmation logiciel embarqué</td>
+                            <td><span class="badge badge-gray">A faire</span></td>
+                            <td>5j</td>
+                        </tr>
+                        <tr class="gantt-list-row" onclick="openRecord(this)" data-record-name="Tests fonctionnels|DIST-005">
+                            <td class="col-primary">Tests fonctionnels</td>
+                            <td><span class="badge badge-gray">A faire</span></td>
+                            <td>3j</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- RIGHT: Timeline -->
+            <div class="gantt-timeline" id="gantt-timeline">
+                <div class="gantt-timeline-header" id="gantt-header">
+                    <!-- Generated by JS -->
+                </div>
+                <div class="gantt-timeline-body" id="gantt-body">
+                    <!-- Generated by JS -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- DETAIL PANEL -->
+    <div class="detail-panel" id="detail-panel">
+        <div class="detail-panel-header">
+            <h3 class="detail-panel-title" id="detail-panel-title">—</h3>
+            <div class="detail-panel-actions">
+                <button class="detail-panel-expand" title="Ouvrir en plein écran">⤢</button>
+                <button class="detail-panel-close" onclick="closeDetailPanel()">✕</button>
+            </div>
+        </div>
+        <div class="detail-panel-body" id="detail-panel-body">
+            <!-- Generated dynamically -->
+        </div>
+    </div>
+
+
+</div>
+
+<script>
+// ─── GANTT CONFIG ─────────────────────────────────────────
+// Timeline: March 1 2026 to April 15 2026 (46 days)
+const startDate = new Date(2026, 2, 1); // March 1
+const totalDays = 46;
+const dayNames = ['D','L','M','M','J','V','S'];
+
+// Build header
+const headerEl = document.getElementById('gantt-header');
+const bodyEl = document.getElementById('gantt-body');
+let headerHtml = '';
+for (let i = 0; i < totalDays; i++) {
+    const d = new Date(startDate);
+    d.setDate(d.getDate() + i);
+    const dow = d.getDay();
+    const isWeekend = dow === 0 || dow === 6;
+    const dayNum = d.getDate();
+    const monthLabel = dayNum === 1 ? (d.getMonth() === 2 ? 'Mars' : 'Avr') : '';
+    headerHtml += `<div class="gantt-date-cell${isWeekend ? ' gantt-weekend' : ''}">
+        <div style="font-size:9px;color:#bbb;">${monthLabel}</div>
+        <div>${dayNum}</div>
+        <div style="font-size:9px;">${dayNames[dow]}</div>
+    </div>`;
+}
+headerEl.innerHTML = headerHtml;
+
+// Task data for gantt bars
+const ganttTasks = [
+    // Group DIST-002
+    { type: 'group', label: 'DIST-002 (JAvATIC Beta)' },
+    { name: 'Assemblage châssis', start: '2026-03-16', end: '2026-03-20', status: 'A faire', barClass: 'gantt-bar-gray', machine: 'DIST-002' },
+    { name: 'Installation système réfrigération', start: '2026-03-23', end: '2026-03-27', status: 'A faire', barClass: 'gantt-bar-gray', machine: 'DIST-002' },
+    { name: 'Câblage électronique', start: '2026-03-30', end: '2026-04-03', status: 'A faire', barClass: 'gantt-bar-gray', machine: 'DIST-002' },
+    { name: 'Programmation logiciel embarqué', start: '2026-04-06', end: '2026-04-10', status: 'A faire', barClass: 'gantt-bar-gray', machine: 'DIST-002' },
+    { name: 'Tests fonctionnels', start: '2026-04-13', end: '2026-04-15', status: 'A faire', barClass: 'gantt-bar-gray', machine: 'DIST-002' },
+    // Group DIST-005
+    { type: 'group', label: 'DIST-005 (JAvATIC Epsilon)' },
+    { name: 'Assemblage châssis', start: '2026-03-02', end: '2026-03-06', status: 'Fait', barClass: 'gantt-bar-green', machine: 'DIST-005' },
+    { name: 'Installation système réfrigération', start: '2026-03-09', end: '2026-03-13', status: 'Fait', barClass: 'gantt-bar-green', machine: 'DIST-005' },
+    { name: 'Câblage électronique', start: '2026-03-16', end: '2026-03-20', status: 'En cours', barClass: 'gantt-bar-blue', machine: 'DIST-005' },
+    { name: 'Programmation logiciel embarqué', start: '2026-03-23', end: '2026-03-27', status: 'A faire', barClass: 'gantt-bar-gray', machine: 'DIST-005' },
+    { name: 'Tests fonctionnels', start: '2026-03-30', end: '2026-04-01', status: 'A faire', barClass: 'gantt-bar-gray', machine: 'DIST-005' }
+];
+
+// Build rows
+let bodyHtml = '';
+const cellWidth = 36;
+ganttTasks.forEach(task => {
+    if (task.type === 'group') {
+        bodyHtml += `<div class="gantt-row gantt-row-group" style="min-width:${totalDays * cellWidth}px;">`;
+        for (let i = 0; i < totalDays; i++) {
+            const d = new Date(startDate); d.setDate(d.getDate() + i);
+            const isWeekend = d.getDay() === 0 || d.getDay() === 6;
+            bodyHtml += `<div style="min-width:${cellWidth}px;height:36px;border-right:1px solid #f0f0f0;${isWeekend ? 'background:#f8f8f8;' : ''}display:inline-block;"></div>`;
+        }
+        bodyHtml += `</div>`;
+    } else {
+        const taskStart = new Date(task.start);
+        const taskEnd = new Date(task.end);
+        const startOffset = Math.round((taskStart - startDate) / (1000*60*60*24));
+        const duration = Math.round((taskEnd - taskStart) / (1000*60*60*24)) + 1;
+        const left = startOffset * cellWidth;
+        const width = duration * cellWidth - 4;
+
+        bodyHtml += `<div class="gantt-row" style="min-width:${totalDays * cellWidth}px;">`;
+        for (let i = 0; i < totalDays; i++) {
+            const d = new Date(startDate); d.setDate(d.getDate() + i);
+            const isWeekend = d.getDay() === 0 || d.getDay() === 6;
+            bodyHtml += `<div style="min-width:${cellWidth}px;height:36px;border-right:1px solid #f0f0f0;${isWeekend ? 'background:#f8f8f8;' : ''}display:inline-block;"></div>`;
+        }
+        bodyHtml += `<div class="gantt-bar ${task.barClass}" style="left:${left + 2}px;width:${width}px;">${task.name}</div>`;
+        bodyHtml += `</div>`;
+    }
+});
+
+// Today line
+const today = new Date(2026, 2, 14); // March 14 2026
+const todayOffset = Math.round((today - startDate) / (1000*60*60*24));
+bodyHtml += `<div class="gantt-today-line" style="left:${todayOffset * cellWidth + cellWidth/2}px; top:0; height:100%;"></div>`;
+
+bodyEl.innerHTML = bodyHtml;
+
+// Sync scroll
+const ganttList = document.getElementById('gantt-list');
+const ganttTimeline = document.getElementById('gantt-timeline');
+ganttList.addEventListener('scroll', () => { ganttTimeline.scrollTop = ganttList.scrollTop; });
+ganttTimeline.addEventListener('scroll', () => { ganttList.scrollTop = ganttTimeline.scrollTop; });
+
+// ─── TASK DATA ──────────────────────────────────────────
+const taskData = {
+    'Assemblage châssis|DIST-002': { nom: 'Assemblage châssis', ordre: 1, statut: 'A faire', statutClass: 'badge-gray', duree: 5, dateDebutPrevue: '16/03/2026', dateFinPrevue: '20/03/2026', dateDebutReelle: '', dateFinReelle: '', machine: 'DIST-002', machineNom: 'JAvATIC Beta', commentaires: 'Préparation du châssis en aluminium et assemblage de la structure principale du distributeur.' },
+    'Installation système réfrigération|DIST-002': { nom: 'Installation système réfrigération', ordre: 2, statut: 'A faire', statutClass: 'badge-gray', duree: 5, dateDebutPrevue: '23/03/2026', dateFinPrevue: '27/03/2026', dateDebutReelle: '', dateFinReelle: '', machine: 'DIST-002', machineNom: 'JAvATIC Beta', commentaires: 'Installation du groupe froid et du circuit de refroidissement rapide (nouveau brevet).' },
+    'Câblage électronique|DIST-002': { nom: 'Câblage électronique', ordre: 3, statut: 'A faire', statutClass: 'badge-gray', duree: 5, dateDebutPrevue: '30/03/2026', dateFinPrevue: '03/04/2026', dateDebutReelle: '', dateFinReelle: '', machine: 'DIST-002', machineNom: 'JAvATIC Beta', commentaires: 'Câblage du système de commande, capteurs de niveau, module de paiement.' },
+    'Programmation logiciel embarqué|DIST-002': { nom: 'Programmation logiciel embarqué', ordre: 4, statut: 'A faire', statutClass: 'badge-gray', duree: 5, dateDebutPrevue: '06/04/2026', dateFinPrevue: '10/04/2026', dateDebutReelle: '', dateFinReelle: '', machine: 'DIST-002', machineNom: 'JAvATIC Beta', commentaires: 'Flash du firmware et configuration de la carte de contrôle embarquée.' },
+    'Tests fonctionnels|DIST-002': { nom: 'Tests fonctionnels', ordre: 5, statut: 'A faire', statutClass: 'badge-gray', duree: 3, dateDebutPrevue: '13/04/2026', dateFinPrevue: '15/04/2026', dateDebutReelle: '', dateFinReelle: '', machine: 'DIST-002', machineNom: 'JAvATIC Beta', commentaires: 'Tests complets : distribution, température, paiement, nettoyage automatique.' },
+    'Assemblage châssis|DIST-005': { nom: 'Assemblage châssis', ordre: 1, statut: 'Fait', statutClass: 'badge-green', duree: 5, dateDebutPrevue: '02/03/2026', dateFinPrevue: '06/03/2026', dateDebutReelle: '02/03/2026', dateFinReelle: '06/03/2026', machine: 'DIST-005', machineNom: 'JAvATIC Epsilon', commentaires: 'Assemblage terminé dans les délais. RAS.' },
+    'Installation système réfrigération|DIST-005': { nom: 'Installation système réfrigération', ordre: 2, statut: 'Fait', statutClass: 'badge-green', duree: 5, dateDebutPrevue: '09/03/2026', dateFinPrevue: '13/03/2026', dateDebutReelle: '09/03/2026', dateFinReelle: '13/03/2026', machine: 'DIST-005', machineNom: 'JAvATIC Epsilon', commentaires: 'Installation OK. Système compact adapté aux festivals de taille moyenne.' },
+    'Câblage électronique|DIST-005': { nom: 'Câblage électronique', ordre: 3, statut: 'En cours', statutClass: 'badge-blue', duree: 5, dateDebutPrevue: '16/03/2026', dateFinPrevue: '20/03/2026', dateDebutReelle: '16/03/2026', dateFinReelle: '', machine: 'DIST-005', machineNom: 'JAvATIC Epsilon', commentaires: 'En cours. Retard possible sur le module NFC (livraison en attente).' },
+    'Programmation logiciel embarqué|DIST-005': { nom: 'Programmation logiciel embarqué', ordre: 4, statut: 'A faire', statutClass: 'badge-gray', duree: 5, dateDebutPrevue: '23/03/2026', dateFinPrevue: '27/03/2026', dateDebutReelle: '', dateFinReelle: '', machine: 'DIST-005', machineNom: 'JAvATIC Epsilon', commentaires: '' },
+    'Tests fonctionnels|DIST-005': { nom: 'Tests fonctionnels', ordre: 5, statut: 'A faire', statutClass: 'badge-gray', duree: 3, dateDebutPrevue: '30/03/2026', dateFinPrevue: '01/04/2026', dateDebutReelle: '', dateFinReelle: '', machine: 'DIST-005', machineNom: 'JAvATIC Epsilon', commentaires: '' }
+};
+
+
+// ─── BUILD FUNCTIONS ──────────────────────────────────────
+function buildTachePanel(data) {
+    if (!data) return '<p style="padding:20px;color:#999;">Données non disponibles</p>';
+
+    const statutOptions = [
+        { label: 'A faire', badgeClass: 'badge-gray' },
+        { label: 'En cours', badgeClass: 'badge-blue' },
+        { label: 'Fait', badgeClass: 'badge-green' }
+    ];
+
+    function buildSelectField(fieldName, currentValue, currentBadgeClass, options) {
+        let optionsHtml = options.map(o =>
+            `<div class="field-select-option${o.label === currentValue ? ' selected' : ''}" data-badge-class="${o.badgeClass}" onclick="selectOption(this, '${fieldName}')">${o.label}</div>`
+        ).join('');
+        return `<div class="field-select" data-field="${fieldName}">
+            <div class="field-select-value" onclick="toggleSelect(this)">
+                <span class="badge ${currentBadgeClass}" id="val-${fieldName}">${currentValue}</span>
+                <span class="field-select-arrow">▾</span>
+            </div>
+            <div class="field-select-dropdown" id="dropdown-${fieldName}">
+                ${optionsHtml}
+            </div>
+        </div>`;
+    }
+
+    return `
+        <div class="detail-section">
+            <h4 class="detail-section-title">Informations</h4>
+            <div class="detail-field">
+                <div class="detail-field-label">Nom de la tâche</div>
+                <div class="detail-field-value">
+                    <div class="field-text" onclick="editText(this)">
+                        <span class="field-text-display">${data.nom}</span>
+                        <input class="field-text-input" type="text" value="${data.nom}" style="display:none" onblur="saveText(this)" onkeydown="if(event.key==='Enter') this.blur()">
+                    </div>
+                </div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-field-label">Ordre de l'étape</div>
+                <div class="detail-field-value">
+                    <div class="field-text" onclick="editText(this)">
+                        <span class="field-text-display">${data.ordre}</span>
+                        <input class="field-text-input" type="number" value="${data.ordre}" style="display:none" onblur="saveText(this)" onkeydown="if(event.key==='Enter') this.blur()">
+                    </div>
+                </div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-field-label">Statut</div>
+                <div class="detail-field-value">
+                    ${buildSelectField('statut', data.statut, data.statutClass, statutOptions)}
+                </div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-field-label">Durée prévue (jours)</div>
+                <div class="detail-field-value">
+                    <div class="field-text" onclick="editText(this)">
+                        <span class="field-text-display">${data.duree}</span>
+                        <input class="field-text-input" type="number" value="${data.duree}" style="display:none" onblur="saveText(this)" onkeydown="if(event.key==='Enter') this.blur()">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="detail-section">
+            <h4 class="detail-section-title">Dates prévues</h4>
+            <div class="detail-field">
+                <div class="detail-field-label">Date de début prévue</div>
+                <div class="detail-field-value">
+                    <div class="field-text" onclick="editText(this)">
+                        <span class="field-text-display">${data.dateDebutPrevue || '—'}</span>
+                        <input class="field-text-input" type="date" value="${data.dateDebutPrevue ? data.dateDebutPrevue.split('/').reverse().join('-') : ''}" style="display:none" onblur="saveText(this)" onkeydown="if(event.key==='Enter') this.blur()">
+                    </div>
+                </div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-field-label">Date de fin prévue</div>
+                <div class="detail-field-value">
+                    <div class="field-text" onclick="editText(this)">
+                        <span class="field-text-display">${data.dateFinPrevue || '—'}</span>
+                        <input class="field-text-input" type="date" value="${data.dateFinPrevue ? data.dateFinPrevue.split('/').reverse().join('-') : ''}" style="display:none" onblur="saveText(this)" onkeydown="if(event.key==='Enter') this.blur()">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="detail-section">
+            <h4 class="detail-section-title">Dates réelles</h4>
+            <div class="detail-field">
+                <div class="detail-field-label">Date de début réelle</div>
+                <div class="detail-field-value">
+                    <div class="field-text" onclick="editText(this)">
+                        <span class="field-text-display">${data.dateDebutReelle || '—'}</span>
+                        <input class="field-text-input" type="date" value="${data.dateDebutReelle ? data.dateDebutReelle.split('/').reverse().join('-') : ''}" style="display:none" onblur="saveText(this)" onkeydown="if(event.key==='Enter') this.blur()">
+                    </div>
+                </div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-field-label">Date de fin réelle</div>
+                <div class="detail-field-value">
+                    <div class="field-text" onclick="editText(this)">
+                        <span class="field-text-display">${data.dateFinReelle || '—'}</span>
+                        <input class="field-text-input" type="date" value="${data.dateFinReelle ? data.dateFinReelle.split('/').reverse().join('-') : ''}" style="display:none" onblur="saveText(this)" onkeydown="if(event.key==='Enter') this.blur()">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="detail-section">
+            <h4 class="detail-section-title">Contexte</h4>
+            <div class="detail-field">
+                <div class="detail-field-label">Machine liée</div>
+                <div class="detail-field-value">
+                    <span class="detail-linked-record" onclick="alert('Fonctionnalité disponible dans Airtable')">${data.machine} — ${data.machineNom}</span>
+                </div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-field-label">Commentaires</div>
+                <div class="detail-field-value">
+                    <div class="field-textarea" onclick="editTextarea(this)">
+                        <div class="field-textarea-display">${data.commentaires || '—'}</div>
+                        <textarea class="field-textarea-input" style="display:none; min-height:60px;" onblur="saveTextarea(this)">${data.commentaires || ''}</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+
+// ─── OPEN / CLOSE RECORD ──────────────────────────────────
+function openRecord(el) {
+    const name = el.getAttribute('data-record-name') || '—';
+    const displayName = name.split('|')[0];
+    document.getElementById('detail-panel-title').textContent = displayName;
+    const data = taskData[name];
+    document.getElementById('detail-panel-body').innerHTML = buildTachePanel(data);
+    document.getElementById('detail-panel').classList.add('open');
+}
+
+function closeDetailPanel() {
+    document.getElementById('detail-panel').classList.remove('open');
+}
+
+// ─── INTERACTIVE FIELDS JS ───────────────────────────────
+function toggleSelect(trigger) {
+    const dropdown = trigger.nextElementSibling;
+    const isOpen = dropdown.classList.contains('open');
+    document.querySelectorAll('.field-select-dropdown.open').forEach(d => d.classList.remove('open'));
+    if (!isOpen) {
+        dropdown.classList.add('open');
+        const currentText = trigger.querySelector('[id^="val-"]')?.textContent;
+        dropdown.querySelectorAll('.field-select-option').forEach(opt => {
+            opt.classList.toggle('selected', opt.textContent.trim() === currentText?.trim());
+        });
+    }
+}
+
+function selectOption(option, fieldName) {
+    const text = option.textContent.trim();
+    const badgeClass = option.getAttribute('data-badge-class') || 'badge-gray';
+    const valueEl = document.getElementById('val-' + fieldName);
+    if (valueEl) {
+        valueEl.textContent = text;
+        valueEl.className = 'badge ' + badgeClass;
+    }
+    option.closest('.field-select-dropdown').classList.remove('open');
+}
+
+function toggleMultiSelect(trigger) {
+    const dropdown = trigger.nextElementSibling;
+    const isOpen = dropdown.classList.contains('open');
+    document.querySelectorAll('.field-select-dropdown.open').forEach(d => d.classList.remove('open'));
+    if (!isOpen) dropdown.classList.add('open');
+}
+
+function updateMultiSelect(fieldName, checkbox, badgeClass, label) {
+    const container = document.getElementById('vals-' + fieldName);
+    if (!container) return;
+    container.querySelectorAll('.badge').forEach(b => { if (b.textContent.trim() === label) b.remove(); });
+    if (checkbox.checked) {
+        const arrow = container.querySelector('.field-select-arrow');
+        const badge = document.createElement('span');
+        badge.className = 'badge ' + badgeClass;
+        badge.textContent = label;
+        container.insertBefore(badge, arrow);
+    }
+}
+
+function editText(wrapper) {
+    const display = wrapper.querySelector('.field-text-display');
+    const input = wrapper.querySelector('.field-text-input');
+    if (!input) return;
+    display.style.display = 'none';
+    input.style.display = 'block';
+    input.focus();
+    input.select();
+    wrapper.style.borderColor = '#166ee1';
+}
+
+function saveText(input) {
+    const wrapper = input.closest('.field-text');
+    const display = wrapper.querySelector('.field-text-display');
+    display.textContent = input.value || '—';
+    display.style.display = 'block';
+    input.style.display = 'none';
+    wrapper.style.borderColor = 'transparent';
+}
+
+function editTextarea(wrapper) {
+    const display = wrapper.querySelector('.field-textarea-display');
+    const input = wrapper.querySelector('.field-textarea-input');
+    if (!input) return;
+    display.style.display = 'none';
+    input.style.display = 'block';
+    input.focus();
+    wrapper.style.borderColor = '#166ee1';
+}
+
+function saveTextarea(input) {
+    const wrapper = input.closest('.field-textarea');
+    const display = wrapper.querySelector('.field-textarea-display');
+    display.textContent = input.value || '—';
+    display.style.display = 'block';
+    input.style.display = 'none';
+    wrapper.style.borderColor = 'transparent';
+}
+
+// ─── CLOSE DROPDOWNS ON CLICK OUTSIDE ────────────────────
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.field-select') && !e.target.closest('.field-multiselect')) {
+        document.querySelectorAll('.field-select-dropdown.open').forEach(d => d.classList.remove('open'));
+    }
+});
+
+// ─── ESCAPE ───────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeDetailPanel();
+});
+</script>
+</body>
+</html>

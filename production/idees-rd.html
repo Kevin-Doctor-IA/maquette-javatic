@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1440">
+    <title>JAVATIC — Idées R&D</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="has-disclaimer">
+<div class="disclaimer-banner">Interfaces à usage visuel uniquement — Aperçu non fonctionnel, données fictives</div>
+<div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <span class="sidebar-logo">🍺</span>
+            <span class="sidebar-app-name">JAVATIC CRM</span>
+            <span class="sidebar-chevron">▾</span>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">📊</span>
+                    <span class="sidebar-section-label">Pilotage</span>
+                </div>
+                <a href="../pilotage/dashboard.html" class="sidebar-item">Dashboard financier</a>
+                <a href="../pilotage/zones-potentiel.html" class="sidebar-item">Zones à fort potentiel</a>
+                <a href="../pilotage/todo.html" class="sidebar-item">TODO</a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">💼</span>
+                    <span class="sidebar-section-label">CRM et suivi commercial</span>
+                </div>
+                <a href="../crm/sites.html" class="sidebar-item">Liste des sites</a>
+                <a href="../crm/contacts.html" class="sidebar-item">Liste des contacts</a>
+                <a href="../crm/pipeline.html" class="sidebar-item">Pipeline commercial</a>
+                <a href="../crm/calendrier.html" class="sidebar-item">Calendrier des RDV</a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">⚙️</span>
+                    <span class="sidebar-section-label">Production</span>
+                </div>
+                <a href="../production/idees-rd.html" class="sidebar-item active">Idées R&D</a>
+                <a href="../production/fabrication.html" class="sidebar-item">Suivi fabrication</a>
+                <a href="../production/machines.html" class="sidebar-item">Liste des machines</a>
+                <a href="../production/demandes-validees.html" class="sidebar-item">Demandes clients validées</a>
+                <a href="../production/suivi-operationnel.html" class="sidebar-item">Suivi opérationnel</a>
+            </div>
+        </nav>
+        <div class="sidebar-footer">
+            <span class="sidebar-footer-icon">👤</span>
+            <span class="sidebar-footer-text">Yoann RUAUD</span>
+        </div>
+    </aside>
+
+    <!-- MAIN AREA -->
+    <div class="main-area">
+
+        <!-- PAGE HEADER -->
+        <div class="page-header">
+            <div class="header-left">
+                <div class="breadcrumb">
+                    <span class="breadcrumb-parent">Production</span>
+                    <span class="breadcrumb-sep">›</span>
+                    <span class="breadcrumb-current">Idées R&D</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="btn-primary" onclick="alert('Fonctionnalité disponible dans Airtable')">＋ Ajouter une idée</button>
+            </div>
+        </div>
+
+        <!-- TABS -->
+        <div class="tabs-bar">
+            <button class="tab active" onclick="switchTab(this, 'all')">Toutes</button>
+            <button class="tab" onclick="switchTab(this, 'Pas fait')">Pas fait</button>
+            <button class="tab" onclick="switchTab(this, 'En cours')">En cours</button>
+            <button class="tab" onclick="switchTab(this, 'Fait')">Fait</button>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content-area content-white">
+            <div class="list-table-wrapper">
+                <table class="list-table" id="main-table">
+                    <thead>
+                        <tr>
+                            <th style="width:40px;" class="col-checkbox"><input type="checkbox"></th>
+                            <th>Nom</th>
+                            <th>Famille</th>
+                            <th>Phase</th>
+                            <th>Priorité</th>
+                            <th>Statut</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        <tr class="list-row" data-statut="En cours" data-record-name="Capteur de niveau fût intelligent" onclick="openRecord(this)">
+                            <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
+                            <td class="col-primary">Capteur de niveau fût intelligent</td>
+                            <td><span class="badge badge-purple">Électronique / IoT</span></td>
+                            <td>Prototypage</td>
+                            <td><span class="badge badge-red">P1 (Haute)</span></td>
+                            <td><span class="badge badge-blue">En cours</span></td>
+                            <td>15/01/2026</td>
+                        </tr>
+                        <tr class="list-row" data-statut="Pas fait" data-record-name="Application mobile gestion tournée" onclick="openRecord(this)">
+                            <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
+                            <td class="col-primary">Application mobile gestion tournée</td>
+                            <td><span class="badge badge-purple">Logiciel embarqué</span></td>
+                            <td>Idéation</td>
+                            <td><span class="badge badge-orange">P2 (Moyenne)</span></td>
+                            <td><span class="badge badge-gray">Pas fait</span></td>
+                            <td>02/02/2026</td>
+                        </tr>
+                        <tr class="list-row" data-statut="Fait" data-record-name="Système de refroidissement rapide" onclick="openRecord(this)">
+                            <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
+                            <td class="col-primary">Système de refroidissement rapide</td>
+                            <td><span class="badge badge-purple">Conception mécanique</span></td>
+                            <td>Validation</td>
+                            <td><span class="badge badge-red">P1 (Haute)</span></td>
+                            <td><span class="badge badge-green">Fait</span></td>
+                            <td>10/11/2025</td>
+                        </tr>
+                        <tr class="list-row" data-statut="Pas fait" data-record-name="Tracking GPS containers" onclick="openRecord(this)">
+                            <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
+                            <td class="col-primary">Tracking GPS containers</td>
+                            <td><span class="badge badge-purple">Logistique / Transport</span></td>
+                            <td>Idéation</td>
+                            <td><span class="badge badge-gray">P3 (Basse)</span></td>
+                            <td><span class="badge badge-gray">Pas fait</span></td>
+                            <td>20/02/2026</td>
+                        </tr>
+                        <tr class="list-row" data-statut="En cours" data-record-name="Interface client commande en ligne" onclick="openRecord(this)">
+                            <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
+                            <td class="col-primary">Interface client commande en ligne</td>
+                            <td><span class="badge badge-purple">Agenda de location (UI/UX)</span></td>
+                            <td>Conception initiale</td>
+                            <td><span class="badge badge-orange">P2 (Moyenne)</span></td>
+                            <td><span class="badge badge-blue">En cours</span></td>
+                            <td>05/03/2026</td>
+                        </tr>
+                        <tr class="list-row" data-statut="Pas fait" data-record-name="Module paiement sans contact v2" onclick="openRecord(this)">
+                            <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
+                            <td class="col-primary">Module paiement sans contact v2</td>
+                            <td><span class="badge badge-purple">Électronique / IoT</span></td>
+                            <td>Tests & Itérations</td>
+                            <td><span class="badge badge-red">P1 (Haute)</span></td>
+                            <td><span class="badge badge-gray">Pas fait</span></td>
+                            <td>28/02/2026</td>
+                        </tr>
+                        <tr class="list-row" data-statut="En cours" data-record-name="Optimisation isolation thermique" onclick="openRecord(this)">
+                            <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
+                            <td class="col-primary">Optimisation isolation thermique</td>
+                            <td><span class="badge badge-purple">Conception mécanique</span></td>
+                            <td>Optimisation</td>
+                            <td><span class="badge badge-orange">P2 (Moyenne)</span></td>
+                            <td><span class="badge badge-blue">En cours</span></td>
+                            <td>12/12/2025</td>
+                        </tr>
+                        <tr class="list-row" data-statut="Pas fait" data-record-name="Kit marketing salon pro" onclick="openRecord(this)">
+                            <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
+                            <td class="col-primary">Kit marketing salon pro</td>
+                            <td><span class="badge badge-purple">Commercial / Marketing</span></td>
+                            <td>Idéation</td>
+                            <td><span class="badge badge-gray">P3 (Basse)</span></td>
+                            <td><span class="badge badge-gray">Pas fait</span></td>
+                            <td>01/03/2026</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- DETAIL PANEL -->
+    <div class="detail-panel" id="detail-panel">
+        <div class="detail-panel-header">
+            <h3 class="detail-panel-title" id="detail-panel-title">—</h3>
+            <div class="detail-panel-actions">
+                <button class="detail-panel-expand" title="Ouvrir en plein écran">⤢</button>
+                <button class="detail-panel-close" onclick="closeDetailPanel()">✕</button>
+            </div>
+        </div>
+        <div class="detail-panel-body" id="detail-panel-body">
+            <!-- Generated dynamically -->
+        </div>
+    </div>
+
+</div>
+
+<script>
+// ─── DATA ──────────────────────────────────────────────────
+const recordData = {
+    'Capteur de niveau fût intelligent': {
+        nom: 'Capteur de niveau fût intelligent',
+        description: 'Développer un capteur IoT permettant de mesurer en temps réel le niveau de bière restant dans chaque fût connecté au distributeur JAvATIC. Transmission des données via LoRaWAN.',
+        famille: 'Électronique / IoT', familleClass: 'badge-purple',
+        priorite: 'P1 (Haute)', prioriteClass: 'badge-red',
+        statut: 'En cours', statutClass: 'badge-blue',
+        phase: 'Prototypage',
+        commentaires: 'Premier prototype fonctionnel attendu fin février. Collaboration avec un labo de Bordeaux en cours.',
+        dateCreation: '15/01/2026'
+    },
+    'Application mobile gestion tournée': {
+        nom: 'Application mobile gestion tournée',
+        description: 'Application mobile pour les techniciens de terrain permettant de gérer les tournées de maintenance, rechargement et installation des distributeurs.',
+        famille: 'Logiciel embarqué', familleClass: 'badge-purple',
+        priorite: 'P2 (Moyenne)', prioriteClass: 'badge-orange',
+        statut: 'Pas fait', statutClass: 'badge-gray',
+        phase: 'Idéation',
+        commentaires: 'À cadrer avec l\'équipe terrain. Voir benchmark des apps existantes (Yuso, Optimo Route).',
+        dateCreation: '02/02/2026'
+    },
+    'Système de refroidissement rapide': {
+        nom: 'Système de refroidissement rapide',
+        description: 'Nouveau système de refroidissement permettant d\'atteindre la température de service en moins de 30 minutes après mise en route, contre 2h actuellement.',
+        famille: 'Conception mécanique', familleClass: 'badge-purple',
+        priorite: 'P1 (Haute)', prioriteClass: 'badge-red',
+        statut: 'Fait', statutClass: 'badge-green',
+        phase: 'Validation',
+        commentaires: 'Validé avec succès. Intégré dans la nouvelle version DIST-002. Temps de refroidissement mesuré : 25 min.',
+        dateCreation: '10/11/2025'
+    },
+    'Tracking GPS containers': {
+        nom: 'Tracking GPS containers',
+        description: 'Ajouter un module GPS sur chaque container de transport pour suivre les livraisons et localisations en temps réel.',
+        famille: 'Logistique / Transport', familleClass: 'badge-purple',
+        priorite: 'P3 (Basse)', prioriteClass: 'badge-gray',
+        statut: 'Pas fait', statutClass: 'badge-gray',
+        phase: 'Idéation',
+        commentaires: 'Idée remontée par Yoann après la perte temporaire d\'un container en transit.',
+        dateCreation: '20/02/2026'
+    },
+    'Interface client commande en ligne': {
+        nom: 'Interface client commande en ligne',
+        description: 'Développer une interface web permettant aux clients (salles, festivals) de réserver un distributeur JAvATIC en ligne avec choix des dates et du nombre de machines.',
+        famille: 'Agenda de location (UI/UX)', familleClass: 'badge-purple',
+        priorite: 'P2 (Moyenne)', prioriteClass: 'badge-orange',
+        statut: 'En cours', statutClass: 'badge-blue',
+        phase: 'Conception initiale',
+        commentaires: 'Wireframes en cours. Intégration prévue avec le module calendrier Airtable.',
+        dateCreation: '05/03/2026'
+    },
+    'Module paiement sans contact v2': {
+        nom: 'Module paiement sans contact v2',
+        description: 'Mise à jour du module de paiement sans contact pour supporter les dernières normes NFC et le paiement par QR code dynamique.',
+        famille: 'Électronique / IoT', familleClass: 'badge-purple',
+        priorite: 'P1 (Haute)', prioriteClass: 'badge-red',
+        statut: 'Pas fait', statutClass: 'badge-gray',
+        phase: 'Tests & Itérations',
+        commentaires: 'En attente de la réception des nouveaux modules NFC commandés chez le fournisseur.',
+        dateCreation: '28/02/2026'
+    },
+    'Optimisation isolation thermique': {
+        nom: 'Optimisation isolation thermique',
+        description: 'Améliorer l\'isolation thermique du distributeur pour réduire la consommation énergétique et maintenir la chaîne du froid en cas de coupure.',
+        famille: 'Conception mécanique', familleClass: 'badge-purple',
+        priorite: 'P2 (Moyenne)', prioriteClass: 'badge-orange',
+        statut: 'En cours', statutClass: 'badge-blue',
+        phase: 'Optimisation',
+        commentaires: 'Tests en cours avec un nouveau matériau isolant (mousse PUR haute densité). Résultats prometteurs.',
+        dateCreation: '12/12/2025'
+    },
+    'Kit marketing salon pro': {
+        nom: 'Kit marketing salon pro',
+        description: 'Concevoir un kit de démonstration complet pour les salons professionnels : mini-distributeur fonctionnel, plaquettes, vidéo de présentation.',
+        famille: 'Commercial / Marketing', familleClass: 'badge-purple',
+        priorite: 'P3 (Basse)', prioriteClass: 'badge-gray',
+        statut: 'Pas fait', statutClass: 'badge-gray',
+        phase: 'Idéation',
+        commentaires: 'À planifier pour le salon EquipHotel en novembre 2026.',
+        dateCreation: '01/03/2026'
+    }
+};
+
+// ─── BUILD PANEL ──────────────────────────────────────────
+function buildIdeePanel(data) {
+    if (!data) return '<p style="padding:20px;color:#999;">Données non disponibles</p>';
+
+    const familleOptions = [
+        { label: 'Conception mécanique', badgeClass: 'badge-purple' },
+        { label: 'Électronique / IoT', badgeClass: 'badge-purple' },
+        { label: 'Logiciel embarqué', badgeClass: 'badge-purple' },
+        { label: 'Logistique / Transport', badgeClass: 'badge-purple' },
+        { label: 'Commercial / Marketing', badgeClass: 'badge-purple' },
+        { label: 'Qualité / Tests', badgeClass: 'badge-purple' },
+        { label: 'Agenda de location (UI/UX)', badgeClass: 'badge-purple' }
+    ];
+    const prioriteOptions = [
+        { label: 'P1 (Haute)', badgeClass: 'badge-red' },
+        { label: 'P2 (Moyenne)', badgeClass: 'badge-orange' },
+        { label: 'P3 (Basse)', badgeClass: 'badge-gray' }
+    ];
+    const statutOptions = [
+        { label: 'Pas fait', badgeClass: 'badge-gray' },
+        { label: 'En cours', badgeClass: 'badge-blue' },
+        { label: 'Fait', badgeClass: 'badge-green' }
+    ];
+    const phaseOptions = [
+        { label: 'Idéation', badgeClass: 'badge-gray' },
+        { label: 'Conception initiale', badgeClass: 'badge-blue' },
+        { label: 'Prototypage', badgeClass: 'badge-blue' },
+        { label: 'Tests & Itérations', badgeClass: 'badge-orange' },
+        { label: 'Optimisation', badgeClass: 'badge-yellow' },
+        { label: 'Validation', badgeClass: 'badge-green' },
+        { label: 'Production', badgeClass: 'badge-green' }
+    ];
+
+    function buildSelectField(fieldName, currentValue, currentBadgeClass, options) {
+        let optionsHtml = options.map(o =>
+            `<div class="field-select-option${o.label === currentValue ? ' selected' : ''}" data-badge-class="${o.badgeClass}" onclick="selectOption(this, '${fieldName}')">${o.label}</div>`
+        ).join('');
+        return `<div class="field-select" data-field="${fieldName}">
+            <div class="field-select-value" onclick="toggleSelect(this)">
+                <span class="badge ${currentBadgeClass}" id="val-${fieldName}">${currentValue}</span>
+                <span class="field-select-arrow">▾</span>
+            </div>
+            <div class="field-select-dropdown" id="dropdown-${fieldName}">
+                ${optionsHtml}
+            </div>
+        </div>`;
+    }
+
+    return `
+        <div class="detail-section">
+            <h4 class="detail-section-title">Informations</h4>
+            <div class="detail-field">
+                <div class="detail-field-label">Nom de l'idée</div>
+                <div class="detail-field-value">
+                    <div class="field-text" onclick="editText(this)">
+                        <span class="field-text-display">${data.nom}</span>
+                        <input class="field-text-input" type="text" value="${data.nom}" style="display:none" onblur="saveText(this)" onkeydown="if(event.key==='Enter') this.blur()">
+                    </div>
+                </div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-field-label">Description</div>
+                <div class="detail-field-value">
+                    <div class="field-textarea" onclick="editTextarea(this)">
+                        <div class="field-textarea-display">${data.description}</div>
+                        <textarea class="field-textarea-input" style="display:none; min-height:80px;" onblur="saveTextarea(this)">${data.description}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-field-label">Famille de développement</div>
+                <div class="detail-field-value">
+                    ${buildSelectField('famille', data.famille, data.familleClass, familleOptions)}
+                </div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-field-label">Priorité</div>
+                <div class="detail-field-value">
+                    ${buildSelectField('priorite', data.priorite, data.prioriteClass, prioriteOptions)}
+                </div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-field-label">Statut</div>
+                <div class="detail-field-value">
+                    ${buildSelectField('statut', data.statut, data.statutClass, statutOptions)}
+                </div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-field-label">Phase de développement</div>
+                <div class="detail-field-value">
+                    ${buildSelectField('phase', data.phase, phaseOptions.find(o => o.label === data.phase)?.badgeClass || 'badge-gray', phaseOptions)}
+                </div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-field-label">Commentaires</div>
+                <div class="detail-field-value">
+                    <div class="field-textarea" onclick="editTextarea(this)">
+                        <div class="field-textarea-display">${data.commentaires}</div>
+                        <textarea class="field-textarea-input" style="display:none; min-height:60px;" onblur="saveTextarea(this)">${data.commentaires}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-field-label">Date de création</div>
+                <div class="detail-field-value"><span class="field-text-display">${data.dateCreation}</span></div>
+            </div>
+        </div>
+    `;
+}
+
+// ─── OPEN / CLOSE RECORD ──────────────────────────────────
+function openRecord(el) {
+    const name = el.getAttribute('data-record-name') || '—';
+    document.getElementById('detail-panel-title').textContent = name;
+    const data = recordData[name];
+    document.getElementById('detail-panel-body').innerHTML = buildIdeePanel(data);
+    document.getElementById('detail-panel').classList.add('open');
+}
+
+function closeDetailPanel() {
+    document.getElementById('detail-panel').classList.remove('open');
+}
+
+// ─── TABS ─────────────────────────────────────────────────
+function switchTab(tabEl, filterStatut) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    tabEl.classList.add('active');
+
+    const rows = document.querySelectorAll('#table-body tr.list-row');
+    rows.forEach(row => {
+        const statut = row.getAttribute('data-statut');
+        const visible = filterStatut === 'all' || statut === filterStatut;
+        row.style.display = visible ? '' : 'none';
+    });
+}
+
+// ─── INTERACTIVE FIELDS JS ───────────────────────────────
+function toggleSelect(trigger) {
+    const dropdown = trigger.nextElementSibling;
+    const isOpen = dropdown.classList.contains('open');
+    document.querySelectorAll('.field-select-dropdown.open').forEach(d => d.classList.remove('open'));
+    if (!isOpen) {
+        dropdown.classList.add('open');
+        const currentText = trigger.querySelector('[id^="val-"]')?.textContent;
+        dropdown.querySelectorAll('.field-select-option').forEach(opt => {
+            opt.classList.toggle('selected', opt.textContent.trim() === currentText?.trim());
+        });
+    }
+}
+
+function selectOption(option, fieldName) {
+    const text = option.textContent.trim();
+    const badgeClass = option.getAttribute('data-badge-class') || 'badge-gray';
+    const valueEl = document.getElementById('val-' + fieldName);
+    if (valueEl) {
+        valueEl.textContent = text;
+        valueEl.className = 'badge ' + badgeClass;
+    }
+    option.closest('.field-select-dropdown').classList.remove('open');
+}
+
+function toggleMultiSelect(trigger) {
+    const dropdown = trigger.nextElementSibling;
+    const isOpen = dropdown.classList.contains('open');
+    document.querySelectorAll('.field-select-dropdown.open').forEach(d => d.classList.remove('open'));
+    if (!isOpen) dropdown.classList.add('open');
+}
+
+function updateMultiSelect(fieldName, checkbox, badgeClass, label) {
+    const container = document.getElementById('vals-' + fieldName);
+    if (!container) return;
+    container.querySelectorAll('.badge').forEach(b => {
+        if (b.textContent.trim() === label) b.remove();
+    });
+    if (checkbox.checked) {
+        const arrow = container.querySelector('.field-select-arrow');
+        const badge = document.createElement('span');
+        badge.className = 'badge ' + badgeClass;
+        badge.textContent = label;
+        container.insertBefore(badge, arrow);
+    }
+}
+
+function editText(wrapper) {
+    const display = wrapper.querySelector('.field-text-display');
+    const input = wrapper.querySelector('.field-text-input');
+    if (!input) return;
+    display.style.display = 'none';
+    input.style.display = 'block';
+    input.focus();
+    input.select();
+    wrapper.style.borderColor = '#166ee1';
+}
+
+function saveText(input) {
+    const wrapper = input.closest('.field-text');
+    const display = wrapper.querySelector('.field-text-display');
+    display.textContent = input.value || '—';
+    display.style.display = 'block';
+    input.style.display = 'none';
+    wrapper.style.borderColor = 'transparent';
+}
+
+function editTextarea(wrapper) {
+    const display = wrapper.querySelector('.field-textarea-display');
+    const input = wrapper.querySelector('.field-textarea-input');
+    if (!input) return;
+    display.style.display = 'none';
+    input.style.display = 'block';
+    input.focus();
+    wrapper.style.borderColor = '#166ee1';
+}
+
+function saveTextarea(input) {
+    const wrapper = input.closest('.field-textarea');
+    const display = wrapper.querySelector('.field-textarea-display');
+    display.textContent = input.value || '—';
+    display.style.display = 'block';
+    input.style.display = 'none';
+    wrapper.style.borderColor = 'transparent';
+}
+
+// ─── CLOSE DROPDOWNS ON CLICK OUTSIDE ────────────────────
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.field-select') && !e.target.closest('.field-multiselect')) {
+        document.querySelectorAll('.field-select-dropdown.open').forEach(d => d.classList.remove('open'));
+    }
+});
+
+// ─── ESCAPE CASCADE ──────────────────────────────────────
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+        closeDetailPanel();
+    }
+});
+</script>
+</body>
+</html>

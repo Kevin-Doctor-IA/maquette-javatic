@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1440">
+    <title>JAVATIC — Liste des contacts</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="has-disclaimer">
+<div class="disclaimer-banner">Interfaces à usage visuel uniquement — Aperçu non fonctionnel, données fictives</div>
+<div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <span class="sidebar-logo">🍺</span>
+            <span class="sidebar-app-name">JAVATIC CRM</span>
+            <span class="sidebar-chevron">▾</span>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">📊</span>
+                    <span class="sidebar-section-label">Pilotage</span>
+                </div>
+                <a href="../pilotage/dashboard.html" class="sidebar-item">Dashboard financier</a>
+                <a href="../pilotage/zones-potentiel.html" class="sidebar-item">Zones à fort potentiel</a>
+                <a href="../pilotage/todo.html" class="sidebar-item">TODO</a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">💼</span>
+                    <span class="sidebar-section-label">CRM et suivi commercial</span>
+                </div>
+                <a href="../crm/sites.html" class="sidebar-item">Liste des sites</a>
+                <a href="../crm/contacts.html" class="sidebar-item active">Liste des contacts</a>
+                <a href="../crm/pipeline.html" class="sidebar-item">Pipeline commercial</a>
+                <a href="../crm/calendrier.html" class="sidebar-item">Calendrier des RDV</a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">⚙️</span>
+                    <span class="sidebar-section-label">Production</span>
+                </div>
+                <a href="../production/idees-rd.html" class="sidebar-item">Idées R&D</a>
+                <a href="../production/fabrication.html" class="sidebar-item">Suivi fabrication</a>
+                <a href="../production/machines.html" class="sidebar-item">Liste des machines</a>
+                <a href="../production/demandes-validees.html" class="sidebar-item">Demandes clients validées</a>
+                <a href="../production/suivi-operationnel.html" class="sidebar-item">Suivi opérationnel</a>
+            </div>
+        </nav>
+        <div class="sidebar-footer">
+            <span class="sidebar-footer-icon">👤</span>
+            <span class="sidebar-footer-text">Yoann RUAUD</span>
+        </div>
+    </aside>
+
+    <!-- MAIN AREA -->
+    <div class="main-area">
+
+        <!-- PAGE HEADER -->
+        <div class="page-header">
+            <div class="header-left">
+                <div class="breadcrumb">
+                    <span class="breadcrumb-parent">CRM et suivi commercial</span>
+                    <span class="breadcrumb-sep">›</span>
+                    <span class="breadcrumb-current">Liste des contacts</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="header-btn">🔍 Rechercher</button>
+                <button class="header-btn">🗂 Filtrer</button>
+                <button class="header-btn">↕ Trier</button>
+                <button class="btn-primary" onclick="alert('Ajouter un contact')">+ Ajouter un contact</button>
+            </div>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content-area content-white">
+            <div class="list-table-wrapper">
+                <table class="list-table">
+                    <thead>
+                        <tr>
+                            <th class="col-checkbox"><input type="checkbox"></th>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Fonction</th>
+                            <th>Email</th>
+                            <th>Téléphone</th>
+                            <th>Site(s)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="list-row" onclick="openRecord(this)" data-record-name="Jean Dupont">
+                            <td class="col-checkbox"><input type="checkbox"></td>
+                            <td class="col-primary">Dupont</td>
+                            <td>Jean</td>
+                            <td>Directeur commercial</td>
+                            <td class="col-email">j.dupont@zenith-pau.fr</td>
+                            <td class="col-phone">05 59 12 34 56</td>
+                            <td><span class="detail-linked-record" onclick="event.stopPropagation(); alert('Fonctionnalité disponible dans Airtable')">Zénith de Pau</span></td>
+                        </tr>
+                        <tr class="list-row" onclick="openRecord(this)" data-record-name="Sophie Martin">
+                            <td class="col-checkbox"><input type="checkbox"></td>
+                            <td class="col-primary">Martin</td>
+                            <td>Sophie</td>
+                            <td>Resp. événementiel</td>
+                            <td class="col-email">s.martin@arena-bordeaux.fr</td>
+                            <td class="col-phone">05 56 98 76 54</td>
+                            <td><span class="detail-linked-record" onclick="event.stopPropagation(); alert('Fonctionnalité disponible dans Airtable')">Arena de Bordeaux</span></td>
+                        </tr>
+                        <tr class="list-row" onclick="openRecord(this)" data-record-name="Pierre Durand">
+                            <td class="col-checkbox"><input type="checkbox"></td>
+                            <td class="col-primary">Durand</td>
+                            <td>Pierre</td>
+                            <td>Directeur technique</td>
+                            <td class="col-email">p.durand@matmut-atlantique.fr</td>
+                            <td class="col-phone">05 56 11 22 33</td>
+                            <td><span class="detail-linked-record" onclick="event.stopPropagation(); alert('Fonctionnalité disponible dans Airtable')">Stade Matmut Atlantique</span></td>
+                        </tr>
+                        <tr class="list-row" onclick="openRecord(this)" data-record-name="Claire Bernard">
+                            <td class="col-checkbox"><input type="checkbox"></td>
+                            <td class="col-primary">Bernard</td>
+                            <td>Claire</td>
+                            <td>Cheffe de projet</td>
+                            <td class="col-email">c.bernard@eurockeennes.fr</td>
+                            <td class="col-phone">03 84 22 33 44</td>
+                            <td><span class="detail-linked-record" onclick="event.stopPropagation(); alert('Fonctionnalité disponible dans Airtable')">Eurockéennes</span></td>
+                        </tr>
+                        <tr class="list-row" onclick="openRecord(this)" data-record-name="Thomas Moreau">
+                            <td class="col-checkbox"><input type="checkbox"></td>
+                            <td class="col-primary">Moreau</td>
+                            <td>Thomas</td>
+                            <td>Directeur</td>
+                            <td class="col-email">t.moreau@garorock.com</td>
+                            <td class="col-phone">05 53 98 76 54</td>
+                            <td><span class="detail-linked-record" onclick="event.stopPropagation(); alert('Fonctionnalité disponible dans Airtable')">Garorock</span></td>
+                        </tr>
+                        <tr class="list-row" onclick="openRecord(this)" data-record-name="Laura Petit">
+                            <td class="col-checkbox"><input type="checkbox"></td>
+                            <td class="col-primary">Petit</td>
+                            <td>Laura</td>
+                            <td>Resp. partenariats</td>
+                            <td class="col-email">l.petit@vieillescharrues.asso.fr</td>
+                            <td class="col-phone">02 98 93 00 93</td>
+                            <td><span class="detail-linked-record" onclick="event.stopPropagation(); alert('Fonctionnalité disponible dans Airtable')">Vieilles Charrues</span></td>
+                        </tr>
+                        <tr class="list-row" onclick="openRecord(this)" data-record-name="Antoine Roux">
+                            <td class="col-checkbox"><input type="checkbox"></td>
+                            <td class="col-primary">Roux</td>
+                            <td>Antoine</td>
+                            <td>Dir. opérations</td>
+                            <td class="col-email">a.roux@hellfest.fr</td>
+                            <td class="col-phone">02 40 54 00 00</td>
+                            <td><span class="detail-linked-record" onclick="event.stopPropagation(); alert('Fonctionnalité disponible dans Airtable')">Hellfest</span></td>
+                        </tr>
+                        <tr class="list-row" onclick="openRecord(this)" data-record-name="Camille Lefebvre">
+                            <td class="col-checkbox"><input type="checkbox"></td>
+                            <td class="col-primary">Lefebvre</td>
+                            <td>Camille</td>
+                            <td>Régisseuse</td>
+                            <td class="col-email">c.lefebvre@rockenseine.com</td>
+                            <td class="col-phone">01 45 67 89 01</td>
+                            <td><span class="detail-linked-record" onclick="event.stopPropagation(); alert('Fonctionnalité disponible dans Airtable')">Rock en Seine</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- DETAIL PANEL -->
+<div class="detail-panel" id="detailPanel">
+    <div class="detail-panel-header">
+        <span class="detail-panel-title" id="detailTitle">—</span>
+        <div class="detail-panel-actions">
+            <button class="detail-panel-expand" title="Agrandir">⤢</button>
+            <button class="detail-panel-close" onclick="closeDetailPanel()">✕</button>
+        </div>
+    </div>
+    <div class="detail-panel-body" id="detailBody"></div>
+</div>
+
+
+<script>
+/* ============================================
+   DATA
+   ============================================ */
+const contactData = {
+    'Jean Dupont': { nom: 'Dupont', prenom: 'Jean', fonction: 'Directeur commercial', email: 'j.dupont@zenith-pau.fr', telephone: '05 59 12 34 56', linkedin: 'linkedin.com/in/jeandupont', source: 'Salon / Événement', commentaires: 'Contact principal pour le Zénith de Pau', dateCreation: '12/01/2026', sitesLies: ['Zénith de Pau'], affairesLiees: ['Zénith de Pau — Avril 2026'] },
+    'Sophie Martin': { nom: 'Martin', prenom: 'Sophie', fonction: 'Responsable événementiel', email: 's.martin@arena-bordeaux.fr', telephone: '05 56 98 76 54', linkedin: '', source: 'Email', commentaires: '', dateCreation: '05/02/2026', sitesLies: ['Arena de Bordeaux'], affairesLiees: ['Arena de Bordeaux — Mars 2026'] },
+    'Pierre Durand': { nom: 'Durand', prenom: 'Pierre', fonction: 'Directeur technique', email: 'p.durand@matmut-atlantique.fr', telephone: '05 56 11 22 33', linkedin: 'linkedin.com/in/pierredurand', source: 'LinkedIn', commentaires: 'Intéressé par solution pour matchs de rugby', dateCreation: '20/01/2026', sitesLies: ['Stade Matmut Atlantique'], affairesLiees: ['Stade Matmut — Mai 2026'] },
+    'Claire Bernard': { nom: 'Bernard', prenom: 'Claire', fonction: 'Cheffe de projet', email: 'c.bernard@eurockeennes.fr', telephone: '03 84 22 33 44', linkedin: '', source: 'Email', commentaires: '', dateCreation: '18/02/2026', sitesLies: ['Eurockéennes'], affairesLiees: ['Eurockéennes — Juillet 2026'] },
+    'Thomas Moreau': { nom: 'Moreau', prenom: 'Thomas', fonction: 'Directeur', email: 't.moreau@garorock.com', telephone: '05 53 98 76 54', linkedin: 'linkedin.com/in/thomasmoreau', source: 'Recommandation', commentaires: 'Rencontré au MaMA Festival', dateCreation: '10/11/2025', sitesLies: ['Garorock'], affairesLiees: ['Garorock — Juin 2026'] },
+    'Laura Petit': { nom: 'Petit', prenom: 'Laura', fonction: 'Responsable partenariats', email: 'l.petit@vieillescharrues.asso.fr', telephone: '02 98 93 00 93', linkedin: '', source: 'Salon / Événement', commentaires: '', dateCreation: '22/12/2025', sitesLies: ['Vieilles Charrues'], affairesLiees: ['Vieilles Charrues — Juillet 2026'] },
+    'Antoine Roux': { nom: 'Roux', prenom: 'Antoine', fonction: 'Directeur opérations', email: 'a.roux@hellfest.fr', telephone: '02 40 54 00 00', linkedin: 'linkedin.com/in/antoineroux', source: 'Recommandation', commentaires: 'Client historique, très satisfait', dateCreation: '01/09/2025', sitesLies: ['Hellfest'], affairesLiees: ['Hellfest — Juin 2026'] },
+    'Camille Lefebvre': { nom: 'Lefebvre', prenom: 'Camille', fonction: 'Régisseuse', email: 'c.lefebvre@rockenseine.com', telephone: '01 45 67 89 01', linkedin: '', source: 'LinkedIn', commentaires: 'Premier contact, à relancer', dateCreation: '03/03/2026', sitesLies: ['Rock en Seine'], affairesLiees: [] }
+};
+
+
+/* ============================================
+   BUILD CONTACT PANEL (main, interactive)
+   ============================================ */
+function buildContactPanel(d) {
+    const esc = s => (s || '—').toString().replace(/</g,'&lt;');
+    const textField = (label, value) => `<div class="detail-field">
+        <div class="detail-field-label">${label}</div>
+        <div class="field-text" onclick="editText(this)"><span class="field-text-display">${esc(value)}</span></div>
+    </div>`;
+    const displayField = (label, value) => `<div class="detail-field">
+        <div class="detail-field-label">${label}</div>
+        <div class="detail-field-value">${esc(value)}</div>
+    </div>`;
+    const selectField = (label, value, badgeClass, options) => {
+        const opts = options.map(o => `<div class="field-select-option${o===value?' selected':''}" onclick="selectOption(this,'${badgeClass}')">${o}</div>`).join('');
+        return `<div class="detail-field">
+            <div class="detail-field-label">${label}</div>
+            <div class="field-select" onclick="toggleSelect(this)">
+                <div class="field-select-value"><span class="badge ${badgeClass}">${esc(value)}</span><span class="field-select-arrow">▾</span></div>
+                <div class="field-select-dropdown">${opts}</div>
+            </div>
+        </div>`;
+    };
+    const textareaField = (label, value) => `<div class="detail-field">
+        <div class="detail-field-label">${label}</div>
+        <div class="field-textarea" onclick="editTextarea(this)"><div class="field-textarea-display">${esc(value)}</div></div>
+    </div>`;
+
+    let html = '';
+
+    // Section: Informations
+    html += `<div class="detail-section"><div class="detail-section-title">Informations</div>`;
+    html += textField('Nom', d.nom);
+    html += textField('Prénom', d.prenom);
+    html += textField('Fonction', d.fonction);
+    html += textField('Email', d.email);
+    html += textField('Téléphone', d.telephone);
+    html += textField('Profil LinkedIn', d.linkedin);
+    html += selectField('Source d\'entrée', d.source, 'badge-gray', ['Formulaire', 'Email', 'LinkedIn', 'Salon / Événement', 'Recommandation', 'Autre']);
+    html += textareaField('Commentaires', d.commentaires);
+    html += displayField('Date de création', d.dateCreation);
+    html += `</div>`;
+
+    // Section: Enregistrements liés
+    html += `<div class="detail-section"><div class="detail-section-title">Enregistrements liés</div>`;
+    html += `<div class="detail-field"><div class="detail-field-label">Sites liés</div><div class="detail-field-value">`;
+    (d.sitesLies || []).forEach(s => { html += `<span class="detail-linked-record" onclick="alert('Fonctionnalité disponible dans Airtable')">${s}</span>`; });
+    html += `<span class="field-add-link">+ Ajouter</span></div></div>`;
+
+    html += `<div class="detail-field"><div class="detail-field-label">Affaires liées</div><div class="detail-field-value">`;
+    if (d.affairesLiees && d.affairesLiees.length) {
+        d.affairesLiees.forEach(a => {
+            html += `<span class="detail-linked-record" onclick="alert('Fonctionnalité disponible dans Airtable')">${a}</span>`;
+        });
+    } else {
+        html += `<span style="color:#999;">Aucune affaire liée</span>`;
+    }
+    html += `<span class="field-add-link">+ Ajouter</span></div></div>`;
+    html += `</div>`;
+
+    return html;
+}
+
+
+/* ============================================
+   OPEN / CLOSE
+   ============================================ */
+function openRecord(el) {
+    const name = el.dataset.recordName;
+    const d = contactData[name];
+    if (!d) return;
+    document.getElementById('detailTitle').textContent = d.prenom + ' ' + d.nom;
+    document.getElementById('detailBody').innerHTML = buildContactPanel(d);
+    document.getElementById('detailPanel').classList.add('open');
+}
+
+function closeDetailPanel() {
+    document.getElementById('detailPanel').classList.remove('open');
+}
+
+/* ============================================
+   INTERACTIVE FIELDS
+   ============================================ */
+function toggleSelect(el) {
+    const dd = el.querySelector('.field-select-dropdown');
+    closeAllDropdowns();
+    dd.classList.toggle('open');
+    event.stopPropagation();
+}
+
+function selectOption(optEl, badgeClass) {
+    const sel = optEl.closest('.field-select');
+    const val = optEl.textContent.trim();
+    sel.querySelector('.field-select-value .badge').textContent = val;
+    sel.querySelector('.field-select-value .badge').className = 'badge ' + badgeClass;
+    sel.querySelectorAll('.field-select-option').forEach(o => o.classList.remove('selected'));
+    optEl.classList.add('selected');
+    sel.querySelector('.field-select-dropdown').classList.remove('open');
+    event.stopPropagation();
+}
+
+function toggleMultiSelect(el) {
+    const dd = el.querySelector('.field-select-dropdown');
+    closeAllDropdowns();
+    dd.classList.toggle('open');
+    event.stopPropagation();
+}
+
+function updateMultiSelect(optEl) {
+    event.stopPropagation();
+    const cb = optEl.querySelector('input[type="checkbox"]');
+    cb.checked = !cb.checked;
+    const ms = optEl.closest('.field-multiselect');
+    const vals = [];
+    ms.querySelectorAll('.field-multiselect-option input:checked').forEach(c => {
+        vals.push(c.parentElement.textContent.trim());
+    });
+    const container = ms.querySelector('.field-multiselect-values');
+    const arrow = '<span class="field-select-arrow">▾</span>';
+    if (vals.length) {
+        container.innerHTML = vals.map(v => `<span class="badge badge-blue">${v}</span>`).join(' ') + arrow;
+    } else {
+        container.innerHTML = '<span style="color:#999;">Aucun</span>' + arrow;
+    }
+}
+
+function editText(el) {
+    const display = el.querySelector('.field-text-display');
+    if (!display) return;
+    const val = display.textContent === '—' ? '' : display.textContent;
+    el.innerHTML = `<input class="field-text-input" value="${val.replace(/"/g,'&quot;')}" onblur="saveText(this)" onkeydown="if(event.key==='Enter')this.blur()">`;
+    el.querySelector('input').focus();
+}
+
+function saveText(input) {
+    const val = input.value || '—';
+    input.parentElement.innerHTML = `<span class="field-text-display">${val.replace(/</g,'&lt;')}</span>`;
+}
+
+function editTextarea(el) {
+    const display = el.querySelector('.field-textarea-display');
+    if (!display) return;
+    const val = display.textContent === '—' ? '' : display.textContent;
+    el.innerHTML = `<textarea class="field-textarea-input" rows="4" onblur="saveTextarea(this)">${val.replace(/</g,'&lt;')}</textarea>`;
+    el.querySelector('textarea').focus();
+}
+
+function saveTextarea(ta) {
+    const val = ta.value || '—';
+    ta.parentElement.innerHTML = `<div class="field-textarea-display">${val.replace(/</g,'&lt;')}</div>`;
+}
+
+function closeAllDropdowns() {
+    document.querySelectorAll('.field-select-dropdown.open').forEach(d => d.classList.remove('open'));
+}
+
+/* ============================================
+   GLOBAL EVENTS
+   ============================================ */
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.field-select') && !e.target.closest('.field-multiselect')) {
+        closeAllDropdowns();
+    }
+});
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeDetailPanel();
+});
+</script>
+</body>
+</html>

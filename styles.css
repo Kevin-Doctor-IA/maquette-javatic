@@ -1494,6 +1494,16 @@ a {
     background: #fff;
     border-bottom: 1px solid #e5e5e5;
     flex-shrink: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: thin;
+}
+.record-modal-tabs::-webkit-scrollbar {
+    height: 4px;
+}
+.record-modal-tabs::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 2px;
 }
 
 .record-modal-tab {
@@ -1506,6 +1516,8 @@ a {
     cursor: pointer;
     border-bottom: 2px solid transparent;
     transition: all 0.15s;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .record-modal-tab:hover {

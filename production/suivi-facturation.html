@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1440">
+    <title>JAVATIC — Suivi facturation</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="has-disclaimer">
+<div class="disclaimer-banner">Interfaces à usage visuel uniquement — Aperçu non fonctionnel, données fictives</div>
+<div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <span class="sidebar-logo">🍺</span>
+            <span class="sidebar-app-name">JAVATIC CRM</span>
+            <span class="sidebar-chevron">▾</span>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">📊</span>
+                    <span class="sidebar-section-label">Pilotage</span>
+                </div>
+                <a href="../pilotage/dashboard.html" class="sidebar-item">Dashboard financier</a>
+                <a href="../pilotage/zones-potentiel.html" class="sidebar-item">Zones à fort potentiel</a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">💼</span>
+                    <span class="sidebar-section-label">CRM et suivi commercial</span>
+                </div>
+                <a href="../crm/sites.html" class="sidebar-item">Liste des sites</a>
+                <a href="../crm/contacts.html" class="sidebar-item">Liste des contacts</a>
+                <a href="../crm/pipeline.html" class="sidebar-item">Pipeline commercial</a>
+                <a href="../crm/previsionnel-commercial.html" class="sidebar-item">Prévisionnel commercial</a>
+                <a href="../crm/calendrier.html" class="sidebar-item">Calendrier des RDV</a>
+                <a href="../pilotage/todo-commercial.html" class="sidebar-item">TODO Commercial</a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <span class="sidebar-section-icon">⚙️</span>
+                    <span class="sidebar-section-label">Production</span>
+                </div>
+                <a href="../production/idees-rd.html" class="sidebar-item">Idées R&D</a>
+                <a href="../production/fabrication.html" class="sidebar-item">Suivi fabrication</a>
+                <a href="../production/machines.html" class="sidebar-item">Liste des machines</a>
+                <a href="../production/suivi-operationnel.html" class="sidebar-item">Suivi opérationnel</a>
+                <a href="../production/demandes-validees.html" class="sidebar-item">Demandes clients validées</a>
+                <a href="../production/suivi-facturation.html" class="sidebar-item active">Suivi facturation</a>
+                <a href="../pilotage/todo-prod.html" class="sidebar-item">TODO Production</a>
+            </div>
+        </nav>
+        <div class="sidebar-footer">
+            <span class="sidebar-footer-icon">👤</span>
+            <span class="sidebar-footer-text">Yoann RUAUD</span>
+        </div>
+    </aside>
+
+    <!-- MAIN AREA -->
+    <div class="main-area">
+
+        <!-- PAGE HEADER -->
+        <div class="page-header">
+            <div class="header-left">
+                <div class="breadcrumb">
+                    <span class="breadcrumb-parent">Production</span>
+                    <span class="breadcrumb-sep">›</span>
+                    <span class="breadcrumb-current">Suivi facturation</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <span style="font-size:12px; color:#999; padding:4px 10px; background:#f0f0f0; border-radius:4px;">Filtre : Statut commercial = Validé</span>
+            </div>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content-area content-kanban">
+            <div class="kanban-board">
+
+                <!-- A Préfacturer 30% -->
+                <div class="kanban-column">
+                    <div class="kanban-column-header">
+                        <span class="badge badge-yellow">A Préfacturer 30%</span>
+                        <span class="kanban-count">1</span>
+                    </div>
+                    <div class="kanban-cards">
+                        <div class="kanban-card" onclick="alert('Fonctionnalité disponible dans Airtable')">
+                            <div class="kanban-card-title">Eurockéennes — Juillet 2026</div>
+                            <div class="kanban-card-field">
+                                <span class="kanban-card-label">Site</span>
+                                <span class="kanban-card-value">Eurockéennes</span>
+                            </div>
+                            <div class="kanban-card-field">
+                                <span class="kanban-card-label">Montant facturé</span>
+                                <span class="kanban-card-value">—</span>
+                            </div>
+                            <div class="kanban-card-badges">
+                                <span class="detail-linked-record" onclick="event.stopPropagation(); alert('Fonctionnalité disponible dans Airtable')">D-001</span>
+                                <span class="detail-linked-record" onclick="event.stopPropagation(); alert('Fonctionnalité disponible dans Airtable')">D-003</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- A Préfacturer 70% -->
+                <div class="kanban-column">
+                    <div class="kanban-column-header">
+                        <span class="badge badge-orange">A Préfacturer 70%</span>
+                        <span class="kanban-count">0</span>
+                    </div>
+                    <div class="kanban-cards">
+                        <!-- Empty -->
+                    </div>
+                </div>
+
+                <!-- A réaliser -->
+                <div class="kanban-column">
+                    <div class="kanban-column-header">
+                        <span class="badge badge-blue">A réaliser</span>
+                        <span class="kanban-count">1</span>
+                    </div>
+                    <div class="kanban-cards">
+                        <div class="kanban-card" onclick="alert('Fonctionnalité disponible dans Airtable')">
+                            <div class="kanban-card-title">Arena de Bordeaux — Mars 2026</div>
+                            <div class="kanban-card-field">
+                                <span class="kanban-card-label">Site</span>
+                                <span class="kanban-card-value">Arena de Bordeaux</span>
+                            </div>
+                            <div class="kanban-card-field">
+                                <span class="kanban-card-label">Montant facturé</span>
+                                <span class="kanban-card-value">12 000 €</span>
+                            </div>
+                            <div class="kanban-card-badges">
+                                <span class="detail-linked-record" onclick="event.stopPropagation(); alert('Fonctionnalité disponible dans Airtable')">D-001</span>
+                                <span class="detail-linked-record" onclick="event.stopPropagation(); alert('Fonctionnalité disponible dans Airtable')">D-003</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Réalisé -->
+                <div class="kanban-column">
+                    <div class="kanban-column-header">
+                        <span class="badge badge-cyan">Réalisé</span>
+                        <span class="kanban-count">0</span>
+                    </div>
+                    <div class="kanban-cards">
+                        <!-- Empty -->
+                    </div>
+                </div>
+
+                <!-- En paiement -->
+                <div class="kanban-column">
+                    <div class="kanban-column-header">
+                        <span class="badge badge-purple">En paiement</span>
+                        <span class="kanban-count">0</span>
+                    </div>
+                    <div class="kanban-cards">
+                        <!-- Empty -->
+                    </div>
+                </div>
+
+                <!-- Payé -->
+                <div class="kanban-column" style="background:#f0faf0; border-radius:8px; padding:8px;">
+                    <div class="kanban-column-header">
+                        <span class="badge badge-green">Payé</span>
+                        <span class="kanban-count">1</span>
+                    </div>
+                    <div class="kanban-cards">
+                        <div class="kanban-card" onclick="alert('Fonctionnalité disponible dans Airtable')">
+                            <div class="kanban-card-title">Hellfest — Juin 2026</div>
+                            <div class="kanban-card-field">
+                                <span class="kanban-card-label">Site</span>
+                                <span class="kanban-card-value">Hellfest</span>
+                            </div>
+                            <div class="kanban-card-field">
+                                <span class="kanban-card-label">Montant facturé</span>
+                                <span class="kanban-card-value">25 000 €</span>
+                            </div>
+                            <div class="kanban-card-badges">
+                                <span class="detail-linked-record" onclick="event.stopPropagation(); alert('Fonctionnalité disponible dans Airtable')">D-001</span>
+                                <span class="detail-linked-record" onclick="event.stopPropagation(); alert('Fonctionnalité disponible dans Airtable')">D-003</span>
+                                <span class="detail-linked-record" onclick="event.stopPropagation(); alert('Fonctionnalité disponible dans Airtable')">D-004</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

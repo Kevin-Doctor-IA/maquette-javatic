@@ -25,7 +25,6 @@
                 </div>
                 <a href="../pilotage/dashboard.html" class="sidebar-item">Dashboard financier</a>
                 <a href="../pilotage/zones-potentiel.html" class="sidebar-item">Zones à fort potentiel</a>
-                <a href="../pilotage/todo.html" class="sidebar-item">TODO</a>
             </div>
             <div class="sidebar-section">
                 <div class="sidebar-section-header">
@@ -35,7 +34,9 @@
                 <a href="../crm/sites.html" class="sidebar-item active">Liste des sites</a>
                 <a href="../crm/contacts.html" class="sidebar-item">Liste des contacts</a>
                 <a href="../crm/pipeline.html" class="sidebar-item">Pipeline commercial</a>
+                <a href="../crm/previsionnel-commercial.html" class="sidebar-item">Prévisionnel commercial</a>
                 <a href="../crm/calendrier.html" class="sidebar-item">Calendrier des RDV</a>
+                <a href="../pilotage/todo-commercial.html" class="sidebar-item">TODO Commercial</a>
             </div>
             <div class="sidebar-section">
                 <div class="sidebar-section-header">
@@ -45,8 +46,10 @@
                 <a href="../production/idees-rd.html" class="sidebar-item">Idées R&D</a>
                 <a href="../production/fabrication.html" class="sidebar-item">Suivi fabrication</a>
                 <a href="../production/machines.html" class="sidebar-item">Liste des machines</a>
-                <a href="../production/demandes-validees.html" class="sidebar-item">Demandes clients validées</a>
                 <a href="../production/suivi-operationnel.html" class="sidebar-item">Suivi opérationnel</a>
+                <a href="../production/demandes-validees.html" class="sidebar-item">Demandes clients validées</a>
+                <a href="../production/suivi-facturation.html" class="sidebar-item">Suivi facturation</a>
+                <a href="../pilotage/todo-prod.html" class="sidebar-item">TODO Production</a>
             </div>
         </nav>
         <div class="sidebar-footer">
@@ -98,6 +101,8 @@
                             <th>Email</th>
                             <th>Téléphone</th>
                             <th>Nb affaires</th>
+                            <th style="text-align:right;">CA HT validé (prév.)</th>
+                            <th style="text-align:right;">CA HT payé</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -111,6 +116,8 @@
                             <td class="col-email">contact@zenith-pau.fr</td>
                             <td class="col-phone">05 59 12 34 56</td>
                             <td class="col-number">1</td>
+                            <td class="col-number">8 500 €</td>
+                            <td class="col-number">—</td>
                         </tr>
                         <tr class="list-row" data-statut="client" onclick="openRecord(this)" data-record-name="Arena de Bordeaux">
                             <td class="col-checkbox"><input type="checkbox"></td>
@@ -122,6 +129,8 @@
                             <td class="col-email">info@arena-bordeaux.fr</td>
                             <td class="col-phone">05 56 98 76 54</td>
                             <td class="col-number">2</td>
+                            <td class="col-number">12 000 €</td>
+                            <td class="col-number">12 000 €</td>
                         </tr>
                         <tr class="list-row" data-statut="interesse" onclick="openRecord(this)" data-record-name="Stade Matmut Atlantique">
                             <td class="col-checkbox"><input type="checkbox"></td>
@@ -133,6 +142,8 @@
                             <td class="col-email">contact@matmut-atlantique.fr</td>
                             <td class="col-phone">05 56 11 22 33</td>
                             <td class="col-number">1</td>
+                            <td class="col-number">15 000 €</td>
+                            <td class="col-number">—</td>
                         </tr>
                         <tr class="list-row" data-statut="froid" onclick="openRecord(this)" data-record-name="Stade Marcel Michelin">
                             <td class="col-checkbox"><input type="checkbox"></td>
@@ -144,6 +155,8 @@
                             <td>—</td>
                             <td>—</td>
                             <td class="col-number">0</td>
+                            <td class="col-number">—</td>
+                            <td class="col-number">—</td>
                         </tr>
                         <tr class="list-row" data-statut="client" onclick="openRecord(this)" data-record-name="Eurockéennes">
                             <td class="col-checkbox"><input type="checkbox"></td>
@@ -155,6 +168,8 @@
                             <td class="col-email">contact@eurockeennes.fr</td>
                             <td class="col-phone">03 84 22 33 44</td>
                             <td class="col-number">1</td>
+                            <td class="col-number">18 000 €</td>
+                            <td class="col-number">12 600 €</td>
                         </tr>
                         <tr class="list-row" data-statut="interesse" onclick="openRecord(this)" data-record-name="Garorock">
                             <td class="col-checkbox"><input type="checkbox"></td>
@@ -166,6 +181,8 @@
                             <td class="col-email">info@garorock.com</td>
                             <td class="col-phone">05 53 98 76 54</td>
                             <td class="col-number">1</td>
+                            <td class="col-number">—</td>
+                            <td class="col-number">—</td>
                         </tr>
                         <tr class="list-row" data-statut="interesse" onclick="openRecord(this)" data-record-name="Vieilles Charrues">
                             <td class="col-checkbox"><input type="checkbox"></td>
@@ -177,6 +194,8 @@
                             <td class="col-email">contact@vieillescharrues.asso.fr</td>
                             <td class="col-phone">02 98 93 00 93</td>
                             <td class="col-number">1</td>
+                            <td class="col-number">15 000 €</td>
+                            <td class="col-number">—</td>
                         </tr>
                         <tr class="list-row" data-statut="froid" onclick="openRecord(this)" data-record-name="Rock en Seine">
                             <td class="col-checkbox"><input type="checkbox"></td>
@@ -188,6 +207,8 @@
                             <td>—</td>
                             <td>—</td>
                             <td class="col-number">0</td>
+                            <td class="col-number">—</td>
+                            <td class="col-number">—</td>
                         </tr>
                         <tr class="list-row" data-statut="client" onclick="openRecord(this)" data-record-name="Hellfest">
                             <td class="col-checkbox"><input type="checkbox"></td>
@@ -199,6 +220,8 @@
                             <td class="col-email">contact@hellfest.fr</td>
                             <td class="col-phone">02 40 54 00 00</td>
                             <td class="col-number">1</td>
+                            <td class="col-number">25 000 €</td>
+                            <td class="col-number">25 000 €</td>
                         </tr>
                         <tr class="list-row" data-statut="froid" onclick="openRecord(this)" data-record-name="Zénith de Toulouse">
                             <td class="col-checkbox"><input type="checkbox"></td>
@@ -210,6 +233,8 @@
                             <td>—</td>
                             <td>—</td>
                             <td class="col-number">0</td>
+                            <td class="col-number">—</td>
+                            <td class="col-number">—</td>
                         </tr>
                         <tr class="list-row" data-statut="interesse" onclick="openRecord(this)" data-record-name="Arena Montpellier">
                             <td class="col-checkbox"><input type="checkbox"></td>
@@ -221,6 +246,8 @@
                             <td class="col-email">info@arena-montpellier.fr</td>
                             <td class="col-phone">04 67 12 34 56</td>
                             <td class="col-number">1</td>
+                            <td class="col-number">—</td>
+                            <td class="col-number">—</td>
                         </tr>
                         <tr class="list-row" data-statut="froid" onclick="openRecord(this)" data-record-name="Stade Pierre Mauroy">
                             <td class="col-checkbox"><input type="checkbox"></td>
@@ -232,6 +259,8 @@
                             <td>—</td>
                             <td>—</td>
                             <td class="col-number">0</td>
+                            <td class="col-number">—</td>
+                            <td class="col-number">—</td>
                         </tr>
                     </tbody>
                 </table>
@@ -259,6 +288,7 @@
             <button class="record-modal-tab active" onclick="switchModalTab(this, 'general')">Général</button>
             <button class="record-modal-tab" onclick="switchModalTab(this, 'caracteristiques')">Caractéristiques</button>
             <button class="record-modal-tab" onclick="switchModalTab(this, 'relations')">Relations</button>
+            <button class="record-modal-tab" onclick="switchModalTab(this, 'rdv')">RDV</button>
         </div>
         <div class="record-modal-body" id="record-modal-body">
             <!-- Generated dynamically by buildSiteModal(data) -->
@@ -288,6 +318,11 @@ const siteData = {
         contacts: ['Jean Dupont'],
         affaires: [
             { nom: 'Zénith de Pau — Avril 2026', statut: 'A Soumettre', statutClass: 'badge-orange', montant: '8 500 €' }
+        ],
+        interactions: [
+            { date: '15/01/2026', type: 'RDV', objet: 'Visite terrain — audit bar', contact: 'Jean Dupont' },
+            { date: '28/02/2026', type: 'Appel', objet: 'Suivi proposition commerciale', contact: 'Jean Dupont' },
+            { date: '12/03/2026', type: 'Email', objet: 'Envoi devis révisé', contact: 'Jean Dupont' }
         ]
     },
     'Arena de Bordeaux': {
@@ -307,6 +342,12 @@ const siteData = {
         contacts: ['Sophie Martin'],
         affaires: [
             { nom: 'Arena de Bordeaux — Mars 2026', statut: 'Validé', statutClass: 'badge-green', montant: '12 000 €' }
+        ],
+        interactions: [
+            { date: '05/12/2025', type: 'RDV', objet: 'Premier contact — présentation Javatic', contact: 'Sophie Martin' },
+            { date: '10/01/2026', type: 'RDV', objet: 'Audit terrain — bars Arena', contact: 'Sophie Martin' },
+            { date: '20/02/2026', type: 'Email', objet: 'Validation contrat mars 2026', contact: 'Sophie Martin' },
+            { date: '25/03/2026', type: 'RDV', objet: 'Installation machines — J-1', contact: 'Sophie Martin' }
         ]
     },
     'Stade Matmut Atlantique': {
@@ -326,6 +367,9 @@ const siteData = {
         contacts: ['Pierre Durand'],
         affaires: [
             { nom: 'Stade Matmut — Mai 2026', statut: 'Prospection', statutClass: 'badge-gray', montant: '15 000 €' }
+        ],
+        interactions: [
+            { date: '20/01/2026', type: 'Appel', objet: 'Premier contact téléphonique', contact: 'Pierre Durand' }
         ]
     },
     'Stade Marcel Michelin': {
@@ -343,7 +387,8 @@ const siteData = {
         genreProgrammation: '', typeEquipFestival: '',
         ratioJauge: '3', moyenneEvenements: '2,5', potentielJoursLocation: '30', moyenneVisiteursJour: '13 333', nbAffairesLiees: 0,
         contacts: [],
-        affaires: []
+        affaires: [],
+        interactions: []
     },
     'Eurockéennes': {
         nom: 'Eurockéennes', type: 'Festival', typeClass: 'badge-green',
@@ -362,6 +407,10 @@ const siteData = {
         contacts: ['Claire Bernard'],
         affaires: [
             { nom: 'Eurockéennes — Juillet 2026', statut: 'Validé', statutClass: 'badge-green', montant: '18 000 €' }
+        ],
+        interactions: [
+            { date: '18/02/2026', type: 'RDV', objet: 'Présentation solution + visite site', contact: 'Claire Bernard' },
+            { date: '05/03/2026', type: 'Email', objet: 'Envoi proposition 4 machines', contact: 'Claire Bernard' }
         ]
     },
     'Garorock': {
@@ -381,6 +430,9 @@ const siteData = {
         contacts: ['Thomas Moreau'],
         affaires: [
             { nom: 'Garorock — Juin 2026', statut: 'A Chiffrer', statutClass: 'badge-yellow', montant: '—' }
+        ],
+        interactions: [
+            { date: '10/11/2025', type: 'RDV', objet: 'Rencontre MaMA Festival', contact: 'Thomas Moreau' }
         ]
     },
     'Vieilles Charrues': {
@@ -400,6 +452,9 @@ const siteData = {
         contacts: ['Laura Petit'],
         affaires: [
             { nom: 'Vieilles Charrues — Juillet 2026', statut: 'Qualification', statutClass: 'badge-blue', montant: '14 000 €' }
+        ],
+        interactions: [
+            { date: '22/12/2025', type: 'RDV', objet: 'Salon — premier échange', contact: 'Laura Petit' }
         ]
     },
     'Rock en Seine': {
@@ -417,7 +472,8 @@ const siteData = {
         genreProgrammation: 'Rock, Pop, Indé', typeEquipFestival: 'Plein air',
         ratioJauge: '6', moyenneEvenements: '—', potentielJoursLocation: '3', moyenneVisiteursJour: '40 000', nbAffairesLiees: 0,
         contacts: [],
-        affaires: []
+        affaires: [],
+        interactions: []
     },
     'Hellfest': {
         nom: 'Hellfest', type: 'Festival', typeClass: 'badge-green',
@@ -436,6 +492,11 @@ const siteData = {
         contacts: ['Antoine Roux'],
         affaires: [
             { nom: 'Hellfest — Juin 2026', statut: 'Validé', statutClass: 'badge-green', montant: '25 000 €' }
+        ],
+        interactions: [
+            { date: '01/09/2025', type: 'RDV', objet: 'Bilan post-Hellfest 2025', contact: 'Antoine Roux' },
+            { date: '15/11/2025', type: 'Appel', objet: 'Renouvellement 2026 — 5 machines', contact: 'Antoine Roux' },
+            { date: '10/01/2026', type: 'Email', objet: 'Confirmation contrat 2026', contact: 'Antoine Roux' }
         ]
     },
     'Zénith de Toulouse': {
@@ -453,7 +514,8 @@ const siteData = {
         genreProgrammation: '', typeEquipFestival: '',
         ratioJauge: '2', moyenneEvenements: '7,5', potentielJoursLocation: '90', moyenneVisiteursJour: '5 000', nbAffairesLiees: 0,
         contacts: [],
-        affaires: []
+        affaires: [],
+        interactions: []
     },
     'Arena Montpellier': {
         nom: 'Arena Montpellier', type: 'Salle', typeClass: 'badge-blue',
@@ -472,7 +534,8 @@ const siteData = {
         contacts: [],
         affaires: [
             { nom: 'Arena Montpellier — Sept 2026', statut: 'Prospection', statutClass: 'badge-gray', montant: '9 000 €' }
-        ]
+        ],
+        interactions: []
     },
     'Stade Pierre Mauroy': {
         nom: 'Stade Pierre Mauroy', type: 'Stade', typeClass: 'badge-orange',
@@ -489,7 +552,8 @@ const siteData = {
         genreProgrammation: '', typeEquipFestival: '',
         ratioJauge: '7', moyenneEvenements: '4,2', potentielJoursLocation: '50', moyenneVisiteursJour: '30 000', nbAffairesLiees: 0,
         contacts: [],
-        affaires: []
+        affaires: [],
+        interactions: []
     }
 };
 
@@ -719,7 +783,34 @@ function buildSiteModal(d) {
 
     tabRelations += `</div>`;
 
-    return tabGeneral + tabCarac + tabRelations;
+    // ─── TAB 4: RDV ───
+    let tabRdv = `<div class="record-modal-tab-content" id="modal-tab-rdv">`;
+    const interactions = d.interactions || [];
+    tabRdv += `<div class="detail-section"><h4 class="detail-section-title">Interactions / RDV liés</h4>`;
+    if (interactions.length > 0) {
+        tabRdv += `<table style="width:100%;border-collapse:collapse;font-size:13px;margin-top:8px;">
+            <thead><tr style="border-bottom:2px solid #e5e5e5;">
+                <th style="text-align:left;padding:6px 8px;font-weight:500;color:#999;font-size:11px;text-transform:uppercase;">Date</th>
+                <th style="text-align:left;padding:6px 8px;font-weight:500;color:#999;font-size:11px;text-transform:uppercase;">Type</th>
+                <th style="text-align:left;padding:6px 8px;font-weight:500;color:#999;font-size:11px;text-transform:uppercase;">Objet</th>
+                <th style="text-align:left;padding:6px 8px;font-weight:500;color:#999;font-size:11px;text-transform:uppercase;">Contact</th>
+            </tr></thead><tbody>`;
+        interactions.forEach(i => {
+            const typeBadge = i.type === 'RDV' ? 'badge-blue' : (i.type === 'Appel' ? 'badge-teal' : 'badge-gray');
+            tabRdv += `<tr style="border-bottom:1px solid #f0f0f0;cursor:pointer;" onclick="alert('Fonctionnalité disponible dans Airtable')">
+                <td style="padding:8px;">${i.date}</td>
+                <td style="padding:8px;"><span class="badge ${typeBadge}">${i.type}</span></td>
+                <td style="padding:8px;">${i.objet}</td>
+                <td style="padding:8px;">${i.contact}</td>
+            </tr>`;
+        });
+        tabRdv += `</tbody></table>`;
+    } else {
+        tabRdv += `<p style="color:#999;font-size:13px;">Aucune interaction enregistrée pour ce site.</p>`;
+    }
+    tabRdv += `</div></div>`;
+
+    return tabGeneral + tabCarac + tabRelations + tabRdv;
 }
 
 /* ============================================

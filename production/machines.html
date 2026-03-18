@@ -25,7 +25,6 @@
                 </div>
                 <a href="../pilotage/dashboard.html" class="sidebar-item">Dashboard financier</a>
                 <a href="../pilotage/zones-potentiel.html" class="sidebar-item">Zones à fort potentiel</a>
-                <a href="../pilotage/todo.html" class="sidebar-item">TODO</a>
             </div>
             <div class="sidebar-section">
                 <div class="sidebar-section-header">
@@ -35,7 +34,9 @@
                 <a href="../crm/sites.html" class="sidebar-item">Liste des sites</a>
                 <a href="../crm/contacts.html" class="sidebar-item">Liste des contacts</a>
                 <a href="../crm/pipeline.html" class="sidebar-item">Pipeline commercial</a>
+                <a href="../crm/previsionnel-commercial.html" class="sidebar-item">Prévisionnel commercial</a>
                 <a href="../crm/calendrier.html" class="sidebar-item">Calendrier des RDV</a>
+                <a href="../pilotage/todo-commercial.html" class="sidebar-item">TODO Commercial</a>
             </div>
             <div class="sidebar-section">
                 <div class="sidebar-section-header">
@@ -45,8 +46,10 @@
                 <a href="../production/idees-rd.html" class="sidebar-item">Idées R&D</a>
                 <a href="../production/fabrication.html" class="sidebar-item">Suivi fabrication</a>
                 <a href="../production/machines.html" class="sidebar-item active">Liste des machines</a>
-                <a href="../production/demandes-validees.html" class="sidebar-item">Demandes clients validées</a>
                 <a href="../production/suivi-operationnel.html" class="sidebar-item">Suivi opérationnel</a>
+                <a href="../production/demandes-validees.html" class="sidebar-item">Demandes clients validées</a>
+                <a href="../production/suivi-facturation.html" class="sidebar-item">Suivi facturation</a>
+                <a href="../pilotage/todo-prod.html" class="sidebar-item">TODO Production</a>
             </div>
         </nav>
         <div class="sidebar-footer">
@@ -87,52 +90,46 @@
                     <thead>
                         <tr>
                             <th style="width:40px;" class="col-checkbox"><input type="checkbox"></th>
-                            <th>Référence</th>
-                            <th>Nom</th>
-                            <th>Statut</th>
-                            <th>Container</th>
-                            <th style="text-align:right;">Nb affaires</th>
+                            <th>Nom de la machine</th>
+                            <th>Famille</th>
+                            <th>Modèle</th>
+                            <th style="text-align:right;">Cumul jours loc</th>
                         </tr>
                     </thead>
                     <tbody id="table-body">
                         <tr class="list-row" data-statut="Disponible" data-record-name="DIST-001" onclick="openRecord(this)">
                             <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
-                            <td class="col-primary">DIST-001</td>
-                            <td>JAvATIC Alpha</td>
-                            <td><span class="badge badge-green">Disponible</span></td>
-                            <td>CONT-A1</td>
-                            <td class="col-number">2</td>
+                            <td class="col-primary">D-001</td>
+                            <td>distributeur</td>
+                            <td>J3V12</td>
+                            <td class="col-number">8</td>
                         </tr>
                         <tr class="list-row" data-statut="En fabrication" data-record-name="DIST-002" onclick="openRecord(this)">
                             <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
-                            <td class="col-primary">DIST-002</td>
-                            <td>JAvATIC Beta</td>
-                            <td><span class="badge badge-blue">En fabrication</span></td>
-                            <td>CONT-A2</td>
+                            <td class="col-primary">D-002</td>
+                            <td>distributeur</td>
+                            <td>J3V9</td>
                             <td class="col-number">0</td>
                         </tr>
                         <tr class="list-row" data-statut="Disponible" data-record-name="DIST-003" onclick="openRecord(this)">
                             <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
-                            <td class="col-primary">DIST-003</td>
-                            <td>JAvATIC Gamma</td>
-                            <td><span class="badge badge-green">Disponible</span></td>
-                            <td>CONT-A1</td>
-                            <td class="col-number">3</td>
+                            <td class="col-primary">D-003</td>
+                            <td>distributeur</td>
+                            <td>S6V24</td>
+                            <td class="col-number">12</td>
                         </tr>
                         <tr class="list-row" data-statut="En maintenance" data-record-name="DIST-004" onclick="openRecord(this)">
                             <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
-                            <td class="col-primary">DIST-004</td>
-                            <td>JAvATIC Delta</td>
-                            <td><span class="badge badge-orange">En maintenance</span></td>
-                            <td>CONT-B1</td>
-                            <td class="col-number">1</td>
+                            <td class="col-primary">D-004</td>
+                            <td>distributeur</td>
+                            <td>J3V12</td>
+                            <td class="col-number">3</td>
                         </tr>
                         <tr class="list-row" data-statut="En fabrication" data-record-name="DIST-005" onclick="openRecord(this)">
                             <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
-                            <td class="col-primary">DIST-005</td>
-                            <td>JAvATIC Epsilon</td>
-                            <td><span class="badge badge-blue">En fabrication</span></td>
-                            <td>CONT-B1</td>
+                            <td class="col-primary">D-005</td>
+                            <td>contenaire</td>
+                            <td>—</td>
                             <td class="col-number">0</td>
                         </tr>
                     </tbody>
@@ -163,7 +160,8 @@
 // ─── DATA ──────────────────────────────────────────────────
 const machineData = {
     'DIST-001': {
-        ref: 'DIST-001', nom: 'JAvATIC Alpha', photo: '[Photo du distributeur]',
+        ref: 'DIST-001', nom: 'D-001', photo: '[Photo du distributeur]',
+        famille: 'distributeur', modele: 'J3V12', cumulJours: 8,
         description: 'Premier distributeur de bière pression JAvATIC. Modèle historique avec 4 becs de tirage, système de refroidissement standard.',
         statut: 'Disponible', statutClass: 'badge-green',
         container: 'CONT-A1', dateMiseEnService: '15/09/2025', nbAffaires: 2,
@@ -171,7 +169,8 @@ const machineData = {
         tachesFab: []
     },
     'DIST-002': {
-        ref: 'DIST-002', nom: 'JAvATIC Beta', photo: '[Photo du distributeur]',
+        ref: 'DIST-002', nom: 'D-002', photo: '[Photo du distributeur]',
+        famille: 'distributeur', modele: 'J3V9', cumulJours: 0,
         description: 'Distributeur de 2ème génération avec système de refroidissement amélioré et nouveau module de paiement sans contact.',
         statut: 'En fabrication', statutClass: 'badge-blue',
         container: 'CONT-A2', dateMiseEnService: '20/04/2026', nbAffaires: 0,
@@ -179,7 +178,8 @@ const machineData = {
         tachesFab: ['Assemblage châssis', 'Câblage électronique']
     },
     'DIST-003': {
-        ref: 'DIST-003', nom: 'JAvATIC Gamma', photo: '[Photo du distributeur]',
+        ref: 'DIST-003', nom: 'D-003', photo: '[Photo du distributeur]',
+        famille: 'distributeur', modele: 'S6V24', cumulJours: 12,
         description: 'Distributeur à 6 becs avec écran tactile intégré. Optimisé pour les grands événements et festivals.',
         statut: 'Disponible', statutClass: 'badge-green',
         container: 'CONT-A1', dateMiseEnService: '10/01/2026', nbAffaires: 3,
@@ -187,7 +187,8 @@ const machineData = {
         tachesFab: []
     },
     'DIST-004': {
-        ref: 'DIST-004', nom: 'JAvATIC Delta', photo: '[Photo du distributeur]',
+        ref: 'DIST-004', nom: 'D-004', photo: '[Photo du distributeur]',
+        famille: 'distributeur', modele: 'J3V12', cumulJours: 3,
         description: 'Distributeur standard en maintenance préventive. Remplacement du compresseur et recalibrage des capteurs de niveau.',
         statut: 'En maintenance', statutClass: 'badge-orange',
         container: 'CONT-B1', dateMiseEnService: '05/11/2025', nbAffaires: 1,
@@ -195,7 +196,8 @@ const machineData = {
         tachesFab: []
     },
     'DIST-005': {
-        ref: 'DIST-005', nom: 'JAvATIC Epsilon', photo: '[Photo du distributeur]',
+        ref: 'DIST-005', nom: 'D-005', photo: '[Photo du distributeur]',
+        famille: 'contenaire', modele: null, cumulJours: 0,
         description: 'Distributeur compact pour festivals de taille moyenne. Conception allégée, 2 becs de tirage.',
         statut: 'En fabrication', statutClass: 'badge-blue',
         container: 'CONT-B1', dateMiseEnService: '05/04/2026', nbAffaires: 0,
@@ -216,6 +218,19 @@ function buildMachinePanel(data) {
         { label: 'Indisponible', badgeClass: 'badge-red' }
     ];
 
+    const familleOptions = [
+        { label: 'distributeur', badgeClass: 'badge-blue' },
+        { label: 'contenaire', badgeClass: 'badge-teal' },
+        { label: 'borne de commande', badgeClass: 'badge-purple' },
+        { label: 'TPE', badgeClass: 'badge-orange' }
+    ];
+
+    const modeleOptions = [
+        { label: 'J3V12', badgeClass: 'badge-blue' },
+        { label: 'J3V9', badgeClass: 'badge-teal' },
+        { label: 'S6V24', badgeClass: 'badge-purple' }
+    ];
+
     function buildSelectField(fieldName, currentValue, currentBadgeClass, options) {
         let optionsHtml = options.map(o =>
             `<div class="field-select-option${o.label === currentValue ? ' selected' : ''}" data-badge-class="${o.badgeClass}" onclick="selectOption(this, '${fieldName}')">${o.label}</div>`
@@ -230,6 +245,10 @@ function buildMachinePanel(data) {
             </div>
         </div>`;
     }
+
+    // Badge class lookup for famille and modele
+    const familleMatch = familleOptions.find(o => o.label === data.famille) || { badgeClass: 'badge-gray' };
+    const modeleMatch = modeleOptions.find(o => o.label === data.modele) || { badgeClass: 'badge-gray' };
 
     // Affaires linked records
     const affairesHtml = (data.affaires || []).length > 0
@@ -260,6 +279,18 @@ function buildMachinePanel(data) {
                         <span class="field-text-display">${data.nom}</span>
                         <input class="field-text-input" type="text" value="${data.nom}" style="display:none" onblur="saveText(this)" onkeydown="if(event.key==='Enter') this.blur()">
                     </div>
+                </div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-field-label">Famille de machine</div>
+                <div class="detail-field-value">
+                    ${buildSelectField('famille', data.famille, familleMatch.badgeClass, familleOptions)}
+                </div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-field-label">Modèle de distributeur</div>
+                <div class="detail-field-value">
+                    ${buildSelectField('modele', data.modele || '—', modeleMatch.badgeClass, modeleOptions)}
                 </div>
             </div>
             <div class="detail-field">
@@ -305,6 +336,10 @@ function buildMachinePanel(data) {
             <div class="detail-field">
                 <div class="detail-field-label">Nb affaires liées</div>
                 <div class="detail-field-value"><span class="field-text-display">${data.nbAffaires}</span></div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-field-label">Cumul jour de loc</div>
+                <div class="detail-field-value"><span class="field-text-display">${data.cumulJours}</span></div>
             </div>
         </div>
         <div class="detail-section">

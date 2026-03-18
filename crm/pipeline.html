@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=1440">
     <title>JAVATIC — Pipeline commercial</title>
     <link rel="stylesheet" href="../styles.css">
+    <style>
+        .record-modal-tabs { display: flex; overflow-x: auto; white-space: nowrap; gap: 0; scrollbar-width: thin; }
+        .record-modal-tabs::-webkit-scrollbar { height: 4px; }
+        .record-modal-tabs::-webkit-scrollbar-thumb { background: #ccc; border-radius: 2px; }
+        .record-modal-tab { flex-shrink: 0; font-size: 12px; padding: 8px 12px; }
+    </style>
 </head>
 <body class="has-disclaimer">
 <div class="disclaimer-banner">Interfaces à usage visuel uniquement — Aperçu non fonctionnel, données fictives</div>
@@ -25,7 +31,6 @@
                 </div>
                 <a href="../pilotage/dashboard.html" class="sidebar-item">Dashboard financier</a>
                 <a href="../pilotage/zones-potentiel.html" class="sidebar-item">Zones à fort potentiel</a>
-                <a href="../pilotage/todo.html" class="sidebar-item">TODO</a>
             </div>
             <div class="sidebar-section">
                 <div class="sidebar-section-header">
@@ -35,7 +40,9 @@
                 <a href="../crm/sites.html" class="sidebar-item">Liste des sites</a>
                 <a href="../crm/contacts.html" class="sidebar-item">Liste des contacts</a>
                 <a href="../crm/pipeline.html" class="sidebar-item active">Pipeline commercial</a>
+                <a href="../crm/previsionnel-commercial.html" class="sidebar-item">Prévisionnel commercial</a>
                 <a href="../crm/calendrier.html" class="sidebar-item">Calendrier des RDV</a>
+                <a href="../pilotage/todo-commercial.html" class="sidebar-item">TODO Commercial</a>
             </div>
             <div class="sidebar-section">
                 <div class="sidebar-section-header">
@@ -45,8 +52,10 @@
                 <a href="../production/idees-rd.html" class="sidebar-item">Idées R&D</a>
                 <a href="../production/fabrication.html" class="sidebar-item">Suivi fabrication</a>
                 <a href="../production/machines.html" class="sidebar-item">Liste des machines</a>
-                <a href="../production/demandes-validees.html" class="sidebar-item">Demandes clients validées</a>
                 <a href="../production/suivi-operationnel.html" class="sidebar-item">Suivi opérationnel</a>
+                <a href="../production/demandes-validees.html" class="sidebar-item">Demandes clients validées</a>
+                <a href="../production/suivi-facturation.html" class="sidebar-item">Suivi facturation</a>
+                <a href="../pilotage/todo-prod.html" class="sidebar-item">TODO Production</a>
             </div>
         </nav>
         <div class="sidebar-footer">
@@ -204,9 +213,13 @@
             </div>
         </div>
         <div class="record-modal-tabs">
-            <button class="record-modal-tab active" onclick="switchModalTab(this, 'general')">Général</button>
-            <button class="record-modal-tab" onclick="switchModalTab(this, 'terrain')">Analyse terrain</button>
-            <button class="record-modal-tab" onclick="switchModalTab(this, 'chiffrage')">Chiffrage</button>
+            <button class="record-modal-tab active" onclick="switchModalTab(this, 'general')">Informations g&eacute;n&eacute;rales</button>
+            <button class="record-modal-tab" onclick="switchModalTab(this, 'p0-orga')">P0 : Organisation</button>
+            <button class="record-modal-tab" onclick="switchModalTab(this, 'p1-affluence')">P1 : Affluence</button>
+            <button class="record-modal-tab" onclick="switchModalTab(this, 'p2-volume')">P2 : Volume Bi&egrave;re</button>
+            <button class="record-modal-tab" onclick="switchModalTab(this, 'p3-proportion')">P3 : Proportion</button>
+            <button class="record-modal-tab" onclick="switchModalTab(this, 'p4-objectif')">P4 : Objectif</button>
+            <button class="record-modal-tab" onclick="switchModalTab(this, 'p5-distrib')">P5 : Distributeurs</button>
             <button class="record-modal-tab" onclick="switchModalTab(this, 'relations')">Relations</button>
         </div>
         <div class="record-modal-body" id="record-modal-body">
@@ -223,14 +236,15 @@
 const affaireData = {
     'Garorock — Juin 2026': {
         nom: 'Garorock — Juin 2026',
+        detailNom: '',
         statutCommercial: 'A Chiffrer', statutCommercialClass: 'badge-yellow',
         statutOperationnel: '—', statutOperationnelClass: 'badge-gray',
         dateDebut: '2026-06-25', dateFin: '2026-06-28', nbJours: 4, nbMachines: 0,
         problemeFiles: false, convictionJavatic: false,
         bars: [
-            { ml: 12, serveurs: 4, doubleBecs: 2, futs: 4, tpe: 2, soft: 1 },
-            { ml: 10, serveurs: 3, doubleBecs: 2, futs: 3, tpe: 1, soft: 1 },
-            { ml: 8, serveurs: 2, doubleBecs: 1, futs: 2, tpe: 1, soft: 1 },
+            { ml: 12, serveurs: 4, doubleBecs: 2, futs: 4, tpe: 2, soft: 1, nomBar: 'Scène principale', nbRefBiere: 6, typeTireuses: 'Colonne', problemeFileAttente: false, proportionVisiteurs: '40', volumeBiere: 800 },
+            { ml: 10, serveurs: 3, doubleBecs: 2, futs: 3, tpe: 1, soft: 1, nomBar: 'Espace VIP', nbRefBiere: 4, typeTireuses: 'Colonne', problemeFileAttente: false, proportionVisiteurs: '35', volumeBiere: 600 },
+            { ml: 8, serveurs: 2, doubleBecs: 1, futs: 2, tpe: 1, soft: 1, nomBar: 'Village food', nbRefBiere: 3, typeTireuses: 'Pompe', problemeFileAttente: false, proportionVisiteurs: '25', volumeBiere: 400 },
             { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 },
             { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 }
         ],
@@ -264,18 +278,20 @@ const affaireData = {
             coutSolutionJavatic: '—', gainCAEvenement: '—', gainCANetMois: '—', gainCANetAn: '—', gainCASupp: '—',
             typeClientLookup: 'Festival'
         },
-        siteLie: 'Garorock', contactsLies: ['Thomas Moreau'], machinesLiees: []
+        siteLie: 'Garorock', contactsLies: ['Thomas Moreau'], machinesLiees: [],
+        interactions: [{date:'10/11/2025',type:'RDV',objet:'Rencontre MaMA Festival',contact:'Thomas Moreau'}]
     },
     'Stade Matmut — Mai 2026': {
         nom: 'Stade Matmut — Mai 2026',
+        detailNom: 'Match Top 14',
         statutCommercial: 'A Chiffrer', statutCommercialClass: 'badge-yellow',
         statutOperationnel: '—', statutOperationnelClass: 'badge-gray',
         dateDebut: '2026-05-10', dateFin: '2026-05-11', nbJours: 2, nbMachines: 0,
         problemeFiles: true, convictionJavatic: false,
         bars: [
-            { ml: 20, serveurs: 8, doubleBecs: 4, futs: 8, tpe: 4, soft: 2 },
-            { ml: 15, serveurs: 6, doubleBecs: 3, futs: 6, tpe: 3, soft: 2 },
-            { ml: 12, serveurs: 4, doubleBecs: 2, futs: 4, tpe: 2, soft: 1 },
+            { ml: 20, serveurs: 8, doubleBecs: 4, futs: 8, tpe: 4, soft: 2, nomBar: 'Tribune Nord', nbRefBiere: 8, typeTireuses: 'Colonne', problemeFileAttente: true, proportionVisiteurs: '45', volumeBiere: 1200 },
+            { ml: 15, serveurs: 6, doubleBecs: 3, futs: 6, tpe: 3, soft: 2, nomBar: 'Tribune Sud', nbRefBiere: 6, typeTireuses: 'Colonne', problemeFileAttente: true, proportionVisiteurs: '35', volumeBiere: 900 },
+            { ml: 12, serveurs: 4, doubleBecs: 2, futs: 4, tpe: 2, soft: 1, nomBar: 'Parvis', nbRefBiere: 4, typeTireuses: 'Pompe', problemeFileAttente: false, proportionVisiteurs: '20', volumeBiere: 600 },
             { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 },
             { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 }
         ],
@@ -309,17 +325,19 @@ const affaireData = {
             coutSolutionJavatic: '—', gainCAEvenement: '—', gainCANetMois: '—', gainCANetAn: '—', gainCASupp: '—',
             typeClientLookup: 'Stade'
         },
-        siteLie: 'Stade Matmut Atlantique', contactsLies: ['Pierre Durand'], machinesLiees: []
+        siteLie: 'Stade Matmut Atlantique', contactsLies: ['Pierre Durand'], machinesLiees: [],
+        interactions: [{date:'20/01/2026',type:'Appel',objet:'Premier contact téléphonique',contact:'Pierre Durand'}]
     },
     'Arena Montpellier — Sept 2026': {
         nom: 'Arena Montpellier — Sept 2026',
+        detailNom: 'Concert principal',
         statutCommercial: 'A Chiffrer', statutCommercialClass: 'badge-yellow',
         statutOperationnel: '—', statutOperationnelClass: 'badge-gray',
         dateDebut: '2026-09-15', dateFin: '2026-09-17', nbJours: 3, nbMachines: 0,
         problemeFiles: false, convictionJavatic: false,
         bars: [
-            { ml: 10, serveurs: 4, doubleBecs: 2, futs: 4, tpe: 2, soft: 1 },
-            { ml: 8, serveurs: 3, doubleBecs: 1, futs: 3, tpe: 1, soft: 1 },
+            { ml: 10, serveurs: 4, doubleBecs: 2, futs: 4, tpe: 2, soft: 1, nomBar: 'Foyer principal', nbRefBiere: 5, typeTireuses: 'Colonne', problemeFileAttente: false, proportionVisiteurs: '55', volumeBiere: 450 },
+            { ml: 8, serveurs: 3, doubleBecs: 1, futs: 3, tpe: 1, soft: 1, nomBar: 'Mezzanine', nbRefBiere: 3, typeTireuses: 'Pompe', problemeFileAttente: false, proportionVisiteurs: '45', volumeBiere: 300 },
             { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 },
             { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 },
             { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 }
@@ -354,17 +372,19 @@ const affaireData = {
             coutSolutionJavatic: '—', gainCAEvenement: '—', gainCANetMois: '—', gainCANetAn: '—', gainCASupp: '—',
             typeClientLookup: 'Salle'
         },
-        siteLie: 'Arena Montpellier', contactsLies: [], machinesLiees: []
+        siteLie: 'Arena Montpellier', contactsLies: [], machinesLiees: [],
+        interactions: []
     },
     'Zénith de Pau — Avril 2026': {
         nom: 'Zénith de Pau — Avril 2026',
+        detailNom: 'Soirée électro',
         statutCommercial: 'A Soumettre', statutCommercialClass: 'badge-orange',
         statutOperationnel: 'A Préfacturer 30%', statutOperationnelClass: 'badge-blue',
         dateDebut: '2026-04-15', dateFin: '2026-04-17', nbJours: 3, nbMachines: 2,
         problemeFiles: true, convictionJavatic: true,
         bars: [
-            { ml: 8, serveurs: 3, doubleBecs: 2, futs: 3, tpe: 2, soft: 1 },
-            { ml: 6, serveurs: 2, doubleBecs: 1, futs: 2, tpe: 1, soft: 1 },
+            { ml: 8, serveurs: 3, doubleBecs: 2, futs: 3, tpe: 2, soft: 1, nomBar: 'Hall principal', nbRefBiere: 5, typeTireuses: 'Colonne', problemeFileAttente: true, proportionVisiteurs: '60', volumeBiere: 350 },
+            { ml: 6, serveurs: 2, doubleBecs: 1, futs: 2, tpe: 1, soft: 1, nomBar: 'Balcon', nbRefBiere: 3, typeTireuses: 'Pompe', problemeFileAttente: false, proportionVisiteurs: '40', volumeBiere: 200 },
             { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 },
             { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 },
             { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 }
@@ -399,18 +419,20 @@ const affaireData = {
             coutSolutionJavatic: '8 500 €', gainCAEvenement: '2 100 €', gainCANetMois: '10 500 €', gainCANetAn: '126 000 €', gainCASupp: '37 800 €',
             typeClientLookup: 'Salle'
         },
-        siteLie: 'Zénith de Pau', contactsLies: ['Jean Dupont'], machinesLiees: []
+        siteLie: 'Zénith de Pau', contactsLies: ['Jean Dupont'], machinesLiees: [],
+        interactions: [{date:'15/01/2026',type:'RDV',objet:'Visite terrain — audit bar',contact:'Jean Dupont'},{date:'28/02/2026',type:'Appel',objet:'Suivi proposition commerciale',contact:'Jean Dupont'},{date:'12/03/2026',type:'Email',objet:'Envoi devis révisé',contact:'Jean Dupont'}]
     },
     'Vieilles Charrues — Juillet 2026': {
         nom: 'Vieilles Charrues — Juillet 2026',
+        detailNom: 'Scène principale',
         statutCommercial: 'A Soumettre', statutCommercialClass: 'badge-orange',
         statutOperationnel: 'A Préfacturer 30%', statutOperationnelClass: 'badge-blue',
         dateDebut: '2026-07-16', dateFin: '2026-07-19', nbJours: 4, nbMachines: 4,
         problemeFiles: true, convictionJavatic: true,
         bars: [
-            { ml: 20, serveurs: 8, doubleBecs: 4, futs: 8, tpe: 3, soft: 2 },
-            { ml: 15, serveurs: 6, doubleBecs: 3, futs: 6, tpe: 2, soft: 2 },
-            { ml: 12, serveurs: 5, doubleBecs: 2, futs: 5, tpe: 2, soft: 1 },
+            { ml: 20, serveurs: 8, doubleBecs: 4, futs: 8, tpe: 3, soft: 2, nomBar: 'Grande scène', nbRefBiere: 8, typeTireuses: 'Colonne', problemeFileAttente: true, proportionVisiteurs: '40', volumeBiere: 1500 },
+            { ml: 15, serveurs: 6, doubleBecs: 3, futs: 6, tpe: 2, soft: 2, nomBar: 'Scène Kerouac', nbRefBiere: 6, typeTireuses: 'Colonne', problemeFileAttente: true, proportionVisiteurs: '35', volumeBiere: 1100 },
+            { ml: 12, serveurs: 5, doubleBecs: 2, futs: 5, tpe: 2, soft: 1, nomBar: 'Village artisans', nbRefBiere: 4, typeTireuses: 'Pompe', problemeFileAttente: false, proportionVisiteurs: '25', volumeBiere: 800 },
             { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 },
             { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 }
         ],
@@ -444,18 +466,20 @@ const affaireData = {
             coutSolutionJavatic: '15 000 €', gainCAEvenement: '42 000 €', gainCANetMois: '3 500 €', gainCANetAn: '42 000 €', gainCASupp: '84 000 €',
             typeClientLookup: 'Festival'
         },
-        siteLie: 'Vieilles Charrues', contactsLies: ['Laura Petit'], machinesLiees: []
+        siteLie: 'Vieilles Charrues', contactsLies: ['Laura Petit'], machinesLiees: [],
+        interactions: [{date:'22/12/2025',type:'RDV',objet:'Salon — premier échange',contact:'Laura Petit'}]
     },
     'Arena de Bordeaux — Mars 2026': {
         nom: 'Arena de Bordeaux — Mars 2026',
+        detailNom: 'Finale coupe',
         statutCommercial: 'Validé', statutCommercialClass: 'badge-green',
         statutOperationnel: 'Réalisé', statutOperationnelClass: 'badge-green',
         dateDebut: '2026-03-20', dateFin: '2026-03-22', nbJours: 3, nbMachines: 3,
         problemeFiles: true, convictionJavatic: true,
         bars: [
-            { ml: 15, serveurs: 6, doubleBecs: 3, futs: 6, tpe: 3, soft: 2 },
-            { ml: 12, serveurs: 5, doubleBecs: 2, futs: 5, tpe: 2, soft: 1 },
-            { ml: 10, serveurs: 4, doubleBecs: 2, futs: 4, tpe: 2, soft: 1 },
+            { ml: 15, serveurs: 6, doubleBecs: 3, futs: 6, tpe: 3, soft: 2, nomBar: 'Hall A', nbRefBiere: 6, typeTireuses: 'Colonne', problemeFileAttente: true, proportionVisiteurs: '45', volumeBiere: 700 },
+            { ml: 12, serveurs: 5, doubleBecs: 2, futs: 5, tpe: 2, soft: 1, nomBar: 'Hall B', nbRefBiere: 5, typeTireuses: 'Colonne', problemeFileAttente: true, proportionVisiteurs: '35', volumeBiere: 550 },
+            { ml: 10, serveurs: 4, doubleBecs: 2, futs: 4, tpe: 2, soft: 1, nomBar: 'Terrasse', nbRefBiere: 4, typeTireuses: 'Pompe', problemeFileAttente: false, proportionVisiteurs: '20', volumeBiere: 400 },
             { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 },
             { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 }
         ],
@@ -489,18 +513,20 @@ const affaireData = {
             coutSolutionJavatic: '12 000 €', gainCAEvenement: '4 620 €', gainCANetMois: '30 940 €', gainCANetAn: '371 280 €', gainCASupp: '92 820 €',
             typeClientLookup: 'Salle'
         },
-        siteLie: 'Arena de Bordeaux', contactsLies: ['Sophie Martin'], machinesLiees: ['JAV-003', 'JAV-004', 'JAV-005']
+        siteLie: 'Arena de Bordeaux', contactsLies: ['Sophie Martin'], machinesLiees: ['JAV-003', 'JAV-004', 'JAV-005'],
+        interactions: [{date:'05/12/2025',type:'RDV',objet:'Présentation Javatic',contact:'Sophie Martin'},{date:'10/01/2026',type:'RDV',objet:'Audit terrain — bars Arena',contact:'Sophie Martin'},{date:'25/03/2026',type:'RDV',objet:'Installation machines',contact:'Sophie Martin'}]
     },
     'Eurockéennes — Juillet 2026': {
         nom: 'Eurockéennes — Juillet 2026',
+        detailNom: '',
         statutCommercial: 'Validé', statutCommercialClass: 'badge-green',
         statutOperationnel: 'A Préfacturer 30%', statutOperationnelClass: 'badge-blue',
         dateDebut: '2026-07-02', dateFin: '2026-07-05', nbJours: 4, nbMachines: 4,
         problemeFiles: true, convictionJavatic: true,
         bars: [
-            { ml: 18, serveurs: 7, doubleBecs: 4, futs: 7, tpe: 3, soft: 2 },
-            { ml: 14, serveurs: 5, doubleBecs: 3, futs: 5, tpe: 2, soft: 2 },
-            { ml: 10, serveurs: 4, doubleBecs: 2, futs: 4, tpe: 2, soft: 1 },
+            { ml: 18, serveurs: 7, doubleBecs: 4, futs: 7, tpe: 3, soft: 2, nomBar: 'Scène des Eurocks', nbRefBiere: 7, typeTireuses: 'Colonne', problemeFileAttente: true, proportionVisiteurs: '40', volumeBiere: 1100 },
+            { ml: 14, serveurs: 5, doubleBecs: 3, futs: 5, tpe: 2, soft: 2, nomBar: 'Plage', nbRefBiere: 5, typeTireuses: 'Colonne', problemeFileAttente: true, proportionVisiteurs: '35', volumeBiere: 800 },
+            { ml: 10, serveurs: 4, doubleBecs: 2, futs: 4, tpe: 2, soft: 1, nomBar: 'Camping', nbRefBiere: 3, typeTireuses: 'Tireuse portable', problemeFileAttente: false, proportionVisiteurs: '25', volumeBiere: 500 },
             { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 },
             { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 }
         ],
@@ -534,18 +560,20 @@ const affaireData = {
             coutSolutionJavatic: '18 000 €', gainCAEvenement: '27 720 €', gainCANetMois: '2 310 €', gainCANetAn: '27 720 €', gainCASupp: '55 440 €',
             typeClientLookup: 'Festival'
         },
-        siteLie: 'Eurockéennes', contactsLies: ['Claire Bernard'], machinesLiees: ['JAV-006', 'JAV-007', 'JAV-008', 'JAV-009']
+        siteLie: 'Eurockéennes', contactsLies: ['Claire Bernard'], machinesLiees: ['JAV-006', 'JAV-007', 'JAV-008', 'JAV-009'],
+        interactions: [{date:'18/02/2026',type:'RDV',objet:'Présentation + visite site',contact:'Claire Bernard'},{date:'05/03/2026',type:'Email',objet:'Envoi proposition 4 machines',contact:'Claire Bernard'}]
     },
     'Hellfest — Juin 2026': {
         nom: 'Hellfest — Juin 2026',
+        detailNom: 'Main Stage',
         statutCommercial: 'Validé', statutCommercialClass: 'badge-green',
         statutOperationnel: 'A Préfacturer 30%', statutOperationnelClass: 'badge-blue',
         dateDebut: '2026-06-18', dateFin: '2026-06-21', nbJours: 4, nbMachines: 5,
         problemeFiles: true, convictionJavatic: true,
         bars: [
-            { ml: 25, serveurs: 10, doubleBecs: 5, futs: 10, tpe: 4, soft: 3 },
-            { ml: 20, serveurs: 8, doubleBecs: 4, futs: 8, tpe: 3, soft: 2 },
-            { ml: 18, serveurs: 7, doubleBecs: 3, futs: 7, tpe: 3, soft: 2 },
+            { ml: 25, serveurs: 10, doubleBecs: 5, futs: 10, tpe: 4, soft: 3, nomBar: 'Main Stage Bar', nbRefBiere: 10, typeTireuses: 'Colonne', problemeFileAttente: true, proportionVisiteurs: '35', volumeBiere: 2000 },
+            { ml: 20, serveurs: 8, doubleBecs: 4, futs: 8, tpe: 3, soft: 2, nomBar: 'Temple Bar', nbRefBiere: 8, typeTireuses: 'Colonne', problemeFileAttente: true, proportionVisiteurs: '35', volumeBiere: 1600 },
+            { ml: 18, serveurs: 7, doubleBecs: 3, futs: 7, tpe: 3, soft: 2, nomBar: 'Valley Bar', nbRefBiere: 6, typeTireuses: 'Colonne', problemeFileAttente: true, proportionVisiteurs: '30', volumeBiere: 1400 },
             { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 },
             { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 }
         ],
@@ -579,18 +607,20 @@ const affaireData = {
             coutSolutionJavatic: '25 000 €', gainCAEvenement: '63 000 €', gainCANetMois: '5 250 €', gainCANetAn: '63 000 €', gainCASupp: '126 000 €',
             typeClientLookup: 'Festival'
         },
-        siteLie: 'Hellfest', contactsLies: ['Antoine Roux'], machinesLiees: ['JAV-001', 'JAV-002', 'JAV-003', 'JAV-010', 'JAV-011']
+        siteLie: 'Hellfest', contactsLies: ['Antoine Roux'], machinesLiees: ['JAV-001', 'JAV-002', 'JAV-003', 'JAV-010', 'JAV-011'],
+        interactions: [{date:'01/09/2025',type:'RDV',objet:'Bilan post-Hellfest 2025',contact:'Antoine Roux'},{date:'15/11/2025',type:'Appel',objet:'Renouvellement 2026',contact:'Antoine Roux'},{date:'10/01/2026',type:'Email',objet:'Confirmation contrat 2026',contact:'Antoine Roux'}]
     },
     'Stade Pierre Mauroy — Oct 2026': {
         nom: 'Stade Pierre Mauroy — Oct 2026',
+        detailNom: 'Match Ligue 1',
         statutCommercial: 'Refusé', statutCommercialClass: 'badge-red',
         statutOperationnel: '—', statutOperationnelClass: 'badge-gray',
         dateDebut: '2026-10-10', dateFin: '2026-10-11', nbJours: 2, nbMachines: 0,
         problemeFiles: true, convictionJavatic: false,
         bars: [
-            { ml: 18, serveurs: 6, doubleBecs: 3, futs: 6, tpe: 3, soft: 2 },
-            { ml: 15, serveurs: 5, doubleBecs: 2, futs: 5, tpe: 2, soft: 1 },
-            { ml: 12, serveurs: 4, doubleBecs: 2, futs: 4, tpe: 2, soft: 1 },
+            { ml: 18, serveurs: 6, doubleBecs: 3, futs: 6, tpe: 3, soft: 2, nomBar: 'Tribune Ouest', nbRefBiere: 7, typeTireuses: 'Colonne', problemeFileAttente: true, proportionVisiteurs: '40', volumeBiere: 1000 },
+            { ml: 15, serveurs: 5, doubleBecs: 2, futs: 5, tpe: 2, soft: 1, nomBar: 'Tribune Est', nbRefBiere: 5, typeTireuses: 'Colonne', problemeFileAttente: true, proportionVisiteurs: '35', volumeBiere: 800 },
+            { ml: 12, serveurs: 4, doubleBecs: 2, futs: 4, tpe: 2, soft: 1, nomBar: 'Corner Sud', nbRefBiere: 4, typeTireuses: 'Pompe', problemeFileAttente: false, proportionVisiteurs: '25', volumeBiere: 600 },
             { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 },
             { ml: 0, serveurs: 0, doubleBecs: 0, futs: 0, tpe: 0, soft: 0 }
         ],
@@ -624,17 +654,19 @@ const affaireData = {
             coutSolutionJavatic: '10 000 €', gainCAEvenement: '14 625 €', gainCANetMois: '30 469 €', gainCANetAn: '365 625 €', gainCASupp: '146 250 €',
             typeClientLookup: 'Stade'
         },
-        siteLie: 'Stade Pierre Mauroy', contactsLies: [], machinesLiees: []
+        siteLie: 'Stade Pierre Mauroy', contactsLies: [], machinesLiees: [],
+        interactions: []
     }
 };
 
 
 /* ============================================
-   BUILD AFFAIRE MODAL (4 tabs)
+   BUILD AFFAIRE MODAL (8 tabs)
    ============================================ */
 function buildAffaireModal(d) {
     if (!d) return '<p style="padding:20px;color:#999;">Données non disponibles</p>';
     const esc = s => (s === undefined || s === null || s === '') ? '—' : s.toString().replace(/</g,'&lt;');
+    const c = d.calculs || {};
 
     const statutCommercialOptions = [
         { label: 'Prospection', badgeClass: 'badge-gray' },
@@ -669,22 +701,16 @@ function buildAffaireModal(d) {
         </div>`;
     }
 
-    const futOuBouteilleOptions = [
-        { label: 'Fût', badgeClass: 'badge-blue' },
-        { label: 'Bouteille', badgeClass: 'badge-orange' },
-        { label: 'Les deux', badgeClass: 'badge-teal' }
-    ];
-
     const problemeFilesOptions = [
         { label: 'Oui', badgeClass: 'badge-red' },
         { label: 'Non', badgeClass: 'badge-green' },
         { label: 'Ne sait pas', badgeClass: 'badge-gray' }
     ];
 
-    const convictionOptions = [
-        { label: 'Convaincu', badgeClass: 'badge-green' },
-        { label: 'A convaincre', badgeClass: 'badge-yellow' },
-        { label: 'Réticent', badgeClass: 'badge-red' }
+    const typeTireusesOptions = [
+        { label: 'Colonne', badgeClass: 'badge-blue' },
+        { label: 'Pompe', badgeClass: 'badge-orange' },
+        { label: 'Tireuse portable', badgeClass: 'badge-teal' }
     ];
 
     const textField = (label, value, type) => {
@@ -699,6 +725,11 @@ function buildAffaireModal(d) {
             </div>
         </div>`;
     };
+
+    const formulaField = (label, value) => `<div class="detail-field">
+        <div class="detail-field-label"><span style="background:#f0f0f0;color:#666;font-size:10px;padding:1px 4px;border-radius:3px;margin-right:4px;">fx</span>${label}</div>
+        <div class="detail-field-value" style="color:#666;font-style:italic;">${esc(value)}</div>
+    </div>`;
 
     const displayField = (label, value) => `<div class="detail-field">
         <div class="detail-field-label">${label}</div>
@@ -717,108 +748,95 @@ function buildAffaireModal(d) {
 
     let html = '';
 
-    // ─── TAB 1: Général ───
+    // ─── TAB 1: Informations générales ───
     html += `<div class="record-modal-tab-content active" id="modal-tab-general">`;
-
-    // Section Statuts
-    html += `<div class="detail-section"><h4 class="detail-section-title">Statuts</h4>`;
+    html += formulaField('Nom de l\'affaire', d.detailNom ? (d.siteLie + ' - ' + new Date(d.dateDebut).toLocaleDateString('fr-FR', {month:'long', year:'numeric'}) + ' - ' + d.detailNom) : d.nom);
+    html += textField('Détail nom de l\'affaire', d.detailNom || '');
+    html += `<div class="detail-field"><div class="detail-field-label">Site lié</div><div class="detail-field-value"><span class="detail-linked-record" onclick="alert('Fonctionnalité disponible dans Airtable')">${esc(d.siteLie)}</span></div></div>`;
+    html += displayField('Type de client', c.typeClientLookup || '—');
     html += `<div class="detail-field"><div class="detail-field-label">Statut commercial</div><div class="detail-field-value">${buildSelectField('statut-commercial', d.statutCommercial, d.statutCommercialClass, statutCommercialOptions)}</div></div>`;
     html += `<div class="detail-field"><div class="detail-field-label">Statut opérationnel</div><div class="detail-field-value">${buildSelectField('statut-operationnel', d.statutOperationnel, d.statutOperationnelClass, statutOperationnelOptions)}</div></div>`;
-    html += `</div>`;
-
-    // Section Événement
-    html += `<div class="detail-section"><h4 class="detail-section-title">Événement</h4>`;
     html += textField('Date début', d.dateDebut, 'date');
     html += textField('Date fin', d.dateFin, 'date');
-    html += textField('Nombre de jours de location', d.nbJours, 'number');
+    html += formulaField('Nombre de jours', d.nbJours);
+    html += textField('Nombre de bars', d.nbBars || (d.bars ? d.bars.filter(b => b.ml > 0).length : 0), 'number');
     html += textField('Nombre de machines demandées', d.nbMachines, 'number');
+    html += textField('Montant HT (€)', d.montantEstime);
+    html += textField('Montant facturé HT (€)', d.montantFacture);
+    html += textareaField('Notes / commentaires', d.commentaires);
     html += `</div>`;
 
-    // Section Montants
-    html += `<div class="detail-section"><h4 class="detail-section-title">Montants</h4>`;
-    html += textField('Montant estimé HT', d.montantEstime);
-    html += textField('Montant facturé HT', d.montantFacture);
-    html += `</div>`;
-
-    // Section Commercial
-    html += `<div class="detail-section"><h4 class="detail-section-title">Commercial</h4>`;
-    html += textareaField('Obstacle identifié', d.obstacleIdentifie);
-    html += textareaField('Commentaires', d.commentaires);
-    html += textareaField('Email commercial généré', d.emailCommercial);
-    html += `</div>`;
-
-    html += `</div>`;
-
-    // ─── TAB 2: Analyse terrain ───
-    html += `<div class="record-modal-tab-content" id="modal-tab-terrain">`;
-
-    // Section Organisation existante
-    html += `<div class="detail-section"><h4 class="detail-section-title">Organisation existante</h4>`;
-    const problemeVal = d.problemeFiles === true ? 'Oui' : (d.problemeFiles === false ? 'Non' : 'Ne sait pas');
-    const problemeBadge = d.problemeFiles === true ? 'badge-red' : (d.problemeFiles === false ? 'badge-green' : 'badge-gray');
-    html += `<div class="detail-field"><div class="detail-field-label">Problème files d'attente</div><div class="detail-field-value">${buildSelectField('probleme-files', problemeVal, problemeBadge, problemeFilesOptions)}</div></div>`;
-    const convictionVal = d.convictionJavatic === true ? 'Convaincu' : (d.convictionJavatic === false ? 'Réticent' : 'A convaincre');
-    const convictionBadge = d.convictionJavatic === true ? 'badge-green' : (d.convictionJavatic === false ? 'badge-red' : 'badge-yellow');
-    html += `<div class="detail-field"><div class="detail-field-label">Conviction solution</div><div class="detail-field-value">${buildSelectField('conviction-solution', convictionVal, convictionBadge, convictionOptions)}</div></div>`;
-
-    // Bars 1-5
+    // ─── TAB 2: Partie 0 — Organisation Existante ───
+    html += `<div class="record-modal-tab-content" id="modal-tab-p0-orga">`;
     const bars = d.bars || [];
     for (let i = 0; i < 5; i++) {
         const b = bars[i] || {};
-        const hasData = b.nom || b.nbTireuses || (b.ml && b.ml > 0);
-        html += `<div style="margin:16px 0 8px; font-size:13px; font-weight:600; color:#444; border-bottom:1px solid #eee; padding-bottom:4px;">Bar ${i+1}</div>`;
-        html += textField('Nom bar', b.nom || (b.ml > 0 ? ('Bar ' + (i+1)) : ''));
-        html += textField('Nb tireuses', b.nbTireuses || b.doubleBecs || '', 'number');
-        html += textField('Type de bière', b.typeBiere || '');
-        const futVal = b.futOuBouteille || (b.futs > 0 ? 'Fût' : '');
-        const futBadge = futVal === 'Fût' ? 'badge-blue' : (futVal === 'Bouteille' ? 'badge-orange' : (futVal === 'Les deux' ? 'badge-teal' : 'badge-gray'));
-        html += `<div class="detail-field"><div class="detail-field-label">Fût ou bouteille</div><div class="detail-field-value">${buildSelectField('fut-bouteille-' + i, futVal || '—', futBadge, futOuBouteilleOptions)}</div></div>`;
-        html += textField('Commentaire bar', b.commentaire || '');
+        const hasData = b.ml && b.ml > 0;
+        const barName = b.nomBar || (hasData ? ('Bar ' + (i+1)) : '');
+        html += `<div style="margin:${i===0?'0':'20'}px 0 10px;padding:8px 12px;background:#f0f3f9;border-radius:6px;font-size:13px;font-weight:600;color:#333;">Bar ${i+1}${barName ? ' — ' + barName : ''}</div>`;
+        html += textField('Nom du bar', barName);
+        html += textField('Nombre de tireuses existantes', b.doubleBecs || '', 'number');
+        html += textField('Nombre de références de bière', b.nbRefBiere || '', 'number');
+        const typeVal = b.typeTireuses || 'Colonne';
+        const typeBadge = typeVal === 'Colonne' ? 'badge-blue' : (typeVal === 'Pompe' ? 'badge-orange' : 'badge-teal');
+        html += `<div class="detail-field"><div class="detail-field-label">Type de tireuses</div><div class="detail-field-value">${buildSelectField('type-tireuses-' + i, typeVal, typeBadge, typeTireusesOptions)}</div></div>`;
+        const pfVal = b.problemeFileAttente === true ? 'Oui' : (b.problemeFileAttente === false ? 'Non' : 'Ne sait pas');
+        const pfBadge = b.problemeFileAttente === true ? 'badge-red' : (b.problemeFileAttente === false ? 'badge-green' : 'badge-gray');
+        html += `<div class="detail-field"><div class="detail-field-label">Problème de file d'attente</div><div class="detail-field-value">${buildSelectField('probleme-file-bar-' + i, pfVal, pfBadge, problemeFilesOptions)}</div></div>`;
+        html += textField('Proportion de visiteurs (%)', b.proportionVisiteurs || '', 'number');
+        html += textField('Volume total de bière vendu (L)', b.volumeBiere || '', 'number');
+        html += textField('Nombre de fûts moyen par événement', b.futs || '', 'number');
     }
     html += `</div>`;
 
-    // Section Affluence
+    // ─── TAB 3: Partie 1 — Affluence ───
+    html += `<div class="record-modal-tab-content" id="modal-tab-p1-affluence">`;
     html += `<div class="detail-section"><h4 class="detail-section-title">Affluence</h4>`;
-    html += textField('Jauge max assis', d.jaugeAssis, 'number');
-    html += textField('Jauge max debout', d.jaugeDebout, 'number');
-    html += textField('% remplissage moyen', d.remplissage, 'number');
-    html += textField('Nb événements', d.nbEvenementsMajeurs || d.nbEvenements, 'number');
-    html += textField('Horaires', d.horaires || (d.heureOuverture ? (d.heureOuverture + 'h - ' + d.heureEvacuation + 'h') : ''));
-    html += textField('Panier moyen', d.panierMoyen);
-    html += textField('Coût moyen verre', d.coutVerre || d.coutConsommationMoyenne);
-    html += textField('Nb visiteurs confirmé', d.nbVisiteursConfirme || d.jaugeConfirmee || d.visiteursAnnee, 'number');
+    html += textField('Capacité d\'accueil (jauge max)', d.jaugeConfirmee || d.jaugeDebout, 'number');
+    html += textField('Fréquentation annuelle', d.visiteursAnnee, 'number');
+    html += formulaField('Nombre moyen de visiteurs par événement', c.jaugeUtilisee || '—');
+    html += textField('Taux de remplissage moyen (%)', d.remplissage);
+    html += formulaField('Nombre de visiteurs alcoolisés', c.nbVerresToutesBoissons ? Math.round(parseInt(c.nbVerresToutesBoissons.replace(/\s/g,'')) * 0.7).toLocaleString('fr-FR') : '—');
+    html += textField('Nombre d\'événements par an', d.nbEvenementsMajeurs, 'number');
+    html += `</div></div>`;
+
+    // ─── TAB 4: Partie 2 — Volume Bière ───
+    html += `<div class="record-modal-tab-content" id="modal-tab-p2-volume">`;
+    html += `<div class="detail-section"><h4 class="detail-section-title">Volume Bière</h4>`;
+    html += textField('Part de la bière dans les boissons alcoolisées (%)', d.pctVerresBieres);
+    html += textField('Volume moyen de bière par visiteur alcoolisé (cL)', d.volumeGrand ? (parseFloat(d.volumeGrand.replace(',','.')) * 100).toFixed(0) : '');
+    html += formulaField('Volume de bière par événement (L)', c.nbMoyenFutsEvenement ? (parseInt(c.nbMoyenFutsEvenement.replace(/\s/g,'')) * 50).toLocaleString('fr-FR') + ' L' : '—');
+    html += `</div></div>`;
+
+    // ─── TAB 5: Partie 3 — Proportion Bière ───
+    html += `<div class="record-modal-tab-content" id="modal-tab-p3-proportion">`;
+    html += `<div class="detail-section"><h4 class="detail-section-title">Proportion Bière</h4>`;
+    html += textField('Part bière pression vs bouteille/canette (%)', d.partBierePression || '75');
+    html += formulaField('Volume bière pression par événement (L)', c.nbMoyenFutsEvenement ? Math.round(parseInt(c.nbMoyenFutsEvenement.replace(/\s/g,'')) * 50 * 0.75).toLocaleString('fr-FR') + ' L' : '—');
+    html += `</div></div>`;
+
+    // ─── TAB 6: Partie 4 — Objectif commun ───
+    html += `<div class="record-modal-tab-content" id="modal-tab-p4-objectif">`;
+    html += `<div class="detail-section"><h4 class="detail-section-title">Objectif commun</h4>`;
+    html += textField('Objectif de part de marché Javatic (%)', d.objectifPartMarche || '30');
+    html += formulaField('Volume cible Javatic par événement (L)', c.nbFutsAvecJavatic ? (parseInt(c.nbFutsAvecJavatic.replace(/\s/g,'')) * 50).toLocaleString('fr-FR') + ' L' : '—');
+    html += formulaField('Volume cible Javatic annuel (L)', c.nbFutsAvecJavatic && d.nbEvenementsMajeurs ? (parseInt(c.nbFutsAvecJavatic.replace(/\s/g,'')) * 50 * d.nbEvenementsMajeurs).toLocaleString('fr-FR') + ' L' : '—');
+    html += `</div></div>`;
+
+    // ─── TAB 7: Partie 5 — Nombre de distributeurs ───
+    html += `<div class="record-modal-tab-content" id="modal-tab-p5-distrib">`;
+    html += `<div class="detail-section"><h4 class="detail-section-title">Nombre de distributeurs</h4>`;
+    html += textField('Débit par distributeur Javatic (L/min)', d.debitDistributeur || '2,5');
+    html += textField('Temps de service moyen (secondes)', d.tempsServiceMoyen || '15');
+    html += textField('Durée d\'un événement type (heures)', c.nbHeuresDistribution || (d.heureEvacuation && d.heureOuverture ? Math.abs(d.heureEvacuation - d.heureOuverture + (d.heureEvacuation < d.heureOuverture ? 24 : 0)) : ''));
+    html += formulaField('Nombre de distributeurs nécessaires', c.nbDistribPropA || '—');
     html += `</div>`;
-
-    html += `</div>`;
-
-    // ─── TAB 3: Chiffrage ───
-    html += `<div class="record-modal-tab-content" id="modal-tab-chiffrage">`;
-
-    // Section Volume bière
-    html += `<div class="detail-section"><h4 class="detail-section-title">Volume bière</h4>`;
-    html += textField('Nb fûts estimé', d.nbFuts || (d.calculs ? d.calculs.nbMoyenFutsEvenement : ''), 'number');
-    html += textField('Nb tireuses existantes', d.nbTireusesExistantes || (d.calculs ? d.calculs.nbTireuses2Becs : ''), 'number');
-    html += textField('% verres bière', d.pctVerresBiere || d.pctVerresBieres, 'number');
-    html += `</div>`;
-
-    // Section Propositions (display only)
-    const c = d.calculs || {};
-    html += `<div class="detail-section"><h4 class="detail-section-title">Propositions (calculés)</h4>`;
-    html += displayField('Proposition A - Nb distributeurs', d.propA_nbDist || c.nbDistribPropA || '—');
-    html += displayField('Proposition A - Gain CA estimé', d.propA_gainCA || c.gainCAEvenement || '—');
-    html += displayField('Proposition B - Nb distributeurs', d.propB_nbDist || c.nbDistribPropB || '—');
-    html += displayField('Proposition B - Gain CA estimé', d.propB_gainCA || c.gainCASupp || '—');
-    html += `</div>`;
-
-    // Section Décision
     html += `<div class="detail-section"><h4 class="detail-section-title">Décision</h4>`;
     html += textField('Nb distributeurs retenus', d.nbDistributeursRetenus, 'number');
-    html += displayField('Gains CA retenus', d.gainsCA || d.gainCABiereActuel || '—');
-    html += `</div>`;
+    html += displayField('Gains CA estimé', d.gainCABiereActuel || '—');
+    html += `</div></div>`;
 
-    html += `</div>`;
-
-    // ─── TAB 4: Relations ───
+    // ─── TAB 8: Relations ───
     html += `<div class="record-modal-tab-content" id="modal-tab-relations">`;
 
     // Site lié
@@ -847,21 +865,41 @@ function buildAffaireModal(d) {
     }
     html += `<span class="field-add-link" style="margin-top:8px;display:inline-block;">+ Ajouter</span></div>`;
 
-    // Machines assignées
-    const machines = d.machinesLiees || d.machines || [];
-    html += `<div class="detail-section"><h4 class="detail-section-title">Machines assignées</h4>`;
-    if (machines.length) {
-        html += `<div class="detail-linked-cards">`;
-        machines.forEach(mName => {
-            html += `<div class="detail-linked-card" onclick="alert('Fonctionnalité disponible dans Airtable')">
-                <div class="detail-linked-card-title">${esc(mName)}</div>
-            </div>`;
-        });
-        html += `</div>`;
-    } else {
-        html += `<div class="detail-field"><div class="detail-field-value"><span style="color:#999;">Aucune</span></div></div>`;
+    // Machines par bar
+    const machines = d.machinesLiees || [];
+    html += `<div class="detail-section"><h4 class="detail-section-title">Machines par bar</h4>`;
+    for (let i = 0; i < 5; i++) {
+        const mach = machines[i] || '';
+        html += `<div class="detail-field"><div class="detail-field-label">Machine liée - Bar ${i+1}</div>
+            <div class="detail-field-value">${mach ? '<span class="detail-linked-record" onclick="alert(\'Fonctionnalité disponible dans Airtable\')">' + esc(mach) + '</span>' : '<span style="color:#999;">—</span>'}</div></div>`;
     }
-    html += `<span class="field-add-link" style="margin-top:8px;display:inline-block;">+ Ajouter</span></div>`;
+    html += `</div>`;
+
+    // Interactions / RDV liés
+    const interactions = d.interactions || [];
+    html += `<div class="detail-section"><h4 class="detail-section-title">Interactions / RDV liés</h4>`;
+    if (interactions.length > 0) {
+        html += `<table style="width:100%;border-collapse:collapse;font-size:13px;margin-top:8px;">
+            <thead><tr style="border-bottom:2px solid #e5e5e5;">
+                <th style="text-align:left;padding:6px 8px;font-weight:500;color:#999;font-size:11px;text-transform:uppercase;">Date</th>
+                <th style="text-align:left;padding:6px 8px;font-weight:500;color:#999;font-size:11px;text-transform:uppercase;">Type</th>
+                <th style="text-align:left;padding:6px 8px;font-weight:500;color:#999;font-size:11px;text-transform:uppercase;">Objet</th>
+                <th style="text-align:left;padding:6px 8px;font-weight:500;color:#999;font-size:11px;text-transform:uppercase;">Contact</th>
+            </tr></thead><tbody>`;
+        interactions.forEach(inter => {
+            const typeBadge = inter.type === 'RDV' ? 'badge-blue' : (inter.type === 'Appel' ? 'badge-teal' : 'badge-gray');
+            html += `<tr style="border-bottom:1px solid #f0f0f0;cursor:pointer;" onclick="alert('Fonctionnalité disponible dans Airtable')">
+                <td style="padding:8px;">${inter.date}</td>
+                <td style="padding:8px;"><span class="badge ${typeBadge}">${inter.type}</span></td>
+                <td style="padding:8px;">${inter.objet}</td>
+                <td style="padding:8px;">${inter.contact || '—'}</td>
+            </tr>`;
+        });
+        html += `</tbody></table>`;
+    } else {
+        html += `<p style="color:#999;font-size:13px;">Aucune interaction enregistrée pour cette affaire.</p>`;
+    }
+    html += `</div>`;
 
     html += `</div>`;
 

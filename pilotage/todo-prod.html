@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=1440">
-    <title>JAVATIC — TODO</title>
+    <title>JAVATIC — TODO Production</title>
     <link rel="stylesheet" href="../styles.css">
 </head>
 <body class="has-disclaimer">
@@ -49,7 +49,7 @@
                 <a href="../production/suivi-operationnel.html" class="sidebar-item">Suivi opérationnel</a>
                 <a href="../production/demandes-validees.html" class="sidebar-item">Demandes clients validées</a>
                 <a href="../production/suivi-facturation.html" class="sidebar-item">Suivi facturation</a>
-                <a href="../pilotage/todo-prod.html" class="sidebar-item">TODO Production</a>
+                <a href="../pilotage/todo-prod.html" class="sidebar-item active">TODO Production</a>
             </div>
         </nav>
         <div class="sidebar-footer">
@@ -67,8 +67,9 @@
                 <div class="breadcrumb">
                     <span class="breadcrumb-parent">Pilotage</span>
                     <span class="breadcrumb-sep">›</span>
-                    <span class="breadcrumb-current">TODO</span>
+                    <span class="breadcrumb-current">TODO Production</span>
                 </div>
+                <span class="badge badge-blue" style="margin-left:8px;">Production</span>
             </div>
             <div class="header-right">
                 <button class="btn-primary" onclick="alert('Fonctionnalité disponible dans Airtable')">+ Ajouter une tâche</button>
@@ -99,84 +100,24 @@
                         </tr>
                     </thead>
                     <tbody id="table-body">
-                        <tr class="list-row" data-statut="A faire" data-record-name="Relancer M. Dupont pour devis Zénith Pau" onclick="openRecord(this)">
-                            <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
-                            <td class="col-primary">Relancer M. Dupont pour devis Zénith Pau</td>
-                            <td><span class="badge badge-red">Haute</span></td>
-                            <td>18/03/2026</td>
-                            <td><span class="badge badge-yellow">Relance commerciale</span></td>
-                            <td>Yoann</td>
-                            <td><span class="col-link">Zénith de Pau — Avril 2026</span></td>
-                            <td><span class="col-link">Jean Dupont</span></td>
-                        </tr>
-                        <tr class="list-row" data-statut="A faire" data-record-name="Préparer démo Arena Bordeaux" onclick="openRecord(this)">
-                            <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
-                            <td class="col-primary">Préparer démo Arena Bordeaux</td>
-                            <td><span class="badge badge-red">Haute</span></td>
-                            <td>15/03/2026</td>
-                            <td><span class="badge badge-blue">Action affaire</span></td>
-                            <td>Yoann</td>
-                            <td><span class="col-link">Arena Bordeaux — Mars 2026</span></td>
-                            <td><span class="col-link">Sophie Martin</span></td>
-                        </tr>
                         <tr class="list-row" data-statut="A faire" data-record-name="Mettre à jour base festivals Nouvelle-Aquitaine" onclick="openRecord(this)">
                             <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
                             <td class="col-primary">Mettre à jour base festivals Nouvelle-Aquitaine</td>
                             <td><span class="badge badge-orange">Moyenne</span></td>
                             <td>20/03/2026</td>
-                            <td><span class="badge badge-purple">Tâche interne</span></td>
+                            <td><span class="badge badge-blue">Production</span></td>
                             <td>Yoann</td>
                             <td>—</td>
                             <td>—</td>
-                        </tr>
-                        <tr class="list-row" data-statut="A faire" data-record-name="Envoyer proposition Garorock" onclick="openRecord(this)">
-                            <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
-                            <td class="col-primary">Envoyer proposition Garorock</td>
-                            <td><span class="badge badge-red">Haute</span></td>
-                            <td>17/03/2026</td>
-                            <td><span class="badge badge-yellow">Relance commerciale</span></td>
-                            <td>Yoann</td>
-                            <td><span class="col-link">Garorock — Juin 2026</span></td>
-                            <td><span class="col-link">Thomas Moreau</span></td>
                         </tr>
                         <tr class="list-row" data-statut="En cours" data-record-name="Commander pièces DIST-002" onclick="openRecord(this)">
                             <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
                             <td class="col-primary">Commander pièces DIST-002</td>
                             <td><span class="badge badge-red">Haute</span></td>
                             <td>10/03/2026</td>
-                            <td><span class="badge badge-blue">Action affaire</span></td>
+                            <td><span class="badge badge-blue">Production</span></td>
                             <td>Yoann</td>
                             <td>—</td>
-                            <td>—</td>
-                        </tr>
-                        <tr class="list-row" data-statut="A faire" data-record-name="Relancer Festival Vieilles Charrues" onclick="openRecord(this)">
-                            <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
-                            <td class="col-primary">Relancer Festival Vieilles Charrues</td>
-                            <td><span class="badge badge-orange">Moyenne</span></td>
-                            <td>22/03/2026</td>
-                            <td><span class="badge badge-yellow">Relance commerciale</span></td>
-                            <td>Yoann</td>
-                            <td><span class="col-link">Vieilles Charrues — Juillet 2026</span></td>
-                            <td><span class="col-link">Laura Petit</span></td>
-                        </tr>
-                        <tr class="list-row" data-statut="A faire" data-record-name="Préparer présentation stade Matmut" onclick="openRecord(this)">
-                            <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
-                            <td class="col-primary">Préparer présentation stade Matmut</td>
-                            <td><span class="badge badge-orange">Moyenne</span></td>
-                            <td>19/03/2026</td>
-                            <td><span class="badge badge-blue">Action affaire</span></td>
-                            <td>Yoann</td>
-                            <td><span class="col-link">Stade Matmut — Mai 2026</span></td>
-                            <td><span class="col-link">Pierre Durand</span></td>
-                        </tr>
-                        <tr class="list-row" data-statut="A faire" data-record-name="Répondre email Arena Montpellier" onclick="openRecord(this)">
-                            <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
-                            <td class="col-primary">Répondre email Arena Montpellier</td>
-                            <td><span class="badge badge-gray">Basse</span></td>
-                            <td>21/03/2026</td>
-                            <td><span class="badge badge-gray">Autre</span></td>
-                            <td>Yoann</td>
-                            <td><span class="col-link">Arena Montpellier — Sept 2026</span></td>
                             <td>—</td>
                         </tr>
                         <tr class="list-row" data-statut="Fait" data-record-name="Vérifier stock containers" onclick="openRecord(this)">
@@ -184,20 +125,10 @@
                             <td class="col-primary">Vérifier stock containers</td>
                             <td><span class="badge badge-gray">Basse</span></td>
                             <td>25/03/2026</td>
-                            <td><span class="badge badge-purple">Tâche interne</span></td>
+                            <td><span class="badge badge-blue">Production</span></td>
                             <td>Yoann</td>
                             <td>—</td>
                             <td>—</td>
-                        </tr>
-                        <tr class="list-row" data-statut="En cours" data-record-name="Appeler Hellfest pour planning" onclick="openRecord(this)">
-                            <td class="col-checkbox"><input type="checkbox" onclick="event.stopPropagation()"></td>
-                            <td class="col-primary">Appeler Hellfest pour planning</td>
-                            <td><span class="badge badge-orange">Moyenne</span></td>
-                            <td>16/03/2026</td>
-                            <td><span class="badge badge-yellow">Relance commerciale</span></td>
-                            <td>Yoann</td>
-                            <td><span class="col-link">Hellfest — Juin 2026</span></td>
-                            <td><span class="col-link">Antoine Roux</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -226,125 +157,41 @@
 <script>
 // ─── DATA ──────────────────────────────────────────────────
 const todoData = {
-    'Relancer M. Dupont pour devis Zénith Pau': {
-        titre: 'Relancer M. Dupont pour devis Zénith Pau',
-        statut: 'A faire', statutClass: 'badge-gray',
-        priorite: 'Haute', prioriteClass: 'badge-red',
-        echeance: '2026-03-18', echeanceDisplay: '18/03/2026',
-        type: 'Relance commerciale', typeClass: 'badge-yellow',
-        responsable: 'Yoann', responsableClass: 'badge-blue',
-        description: 'Relancer Jean Dupont suite à notre rencontre au salon. Il semblait intéressé par notre solution de distribution pour le Zénith. Envoyer le devis personnalisé avec options containers.',
-        affaire: 'Zénith de Pau — Avril 2026',
-        contact: 'Jean Dupont',
-        site: 'Zénith de Pau'
-    },
-    'Préparer démo Arena Bordeaux': {
-        titre: 'Préparer démo Arena Bordeaux',
-        statut: 'A faire', statutClass: 'badge-gray',
-        priorite: 'Haute', prioriteClass: 'badge-red',
-        echeance: '2026-03-15', echeanceDisplay: '15/03/2026',
-        type: 'Action affaire', typeClass: 'badge-blue',
-        responsable: 'Yoann', responsableClass: 'badge-blue',
-        description: 'Préparer la démonstration technique de notre distributeur DIST-003 pour la présentation à l\'Arena de Bordeaux. Prévoir vidéo et documentation technique.',
-        affaire: 'Arena Bordeaux — Mars 2026',
-        contact: 'Sophie Martin',
-        site: 'Arena Bordeaux'
-    },
     'Mettre à jour base festivals Nouvelle-Aquitaine': {
         titre: 'Mettre à jour base festivals Nouvelle-Aquitaine',
         statut: 'A faire', statutClass: 'badge-gray',
         priorite: 'Moyenne', prioriteClass: 'badge-orange',
         echeance: '2026-03-20', echeanceDisplay: '20/03/2026',
-        type: 'Tâche interne', typeClass: 'badge-purple',
+        type: 'Production', typeClass: 'badge-blue',
         responsable: 'Yoann', responsableClass: 'badge-blue',
         description: 'Mettre à jour la liste des festivals de la région Nouvelle-Aquitaine pour la saison 2026. Vérifier capacités, dates et contacts.',
         affaire: '',
         contact: '',
         site: ''
     },
-    'Envoyer proposition Garorock': {
-        titre: 'Envoyer proposition Garorock',
-        statut: 'A faire', statutClass: 'badge-gray',
-        priorite: 'Haute', prioriteClass: 'badge-red',
-        echeance: '2026-03-17', echeanceDisplay: '17/03/2026',
-        type: 'Relance commerciale', typeClass: 'badge-yellow',
-        responsable: 'Yoann', responsableClass: 'badge-blue',
-        description: 'Envoyer la proposition commerciale complète pour le festival Garorock. Inclure 2 distributeurs + containers logistique.',
-        affaire: 'Garorock — Juin 2026',
-        contact: 'Thomas Moreau',
-        site: 'Garorock'
-    },
     'Commander pièces DIST-002': {
         titre: 'Commander pièces DIST-002',
         statut: 'En cours', statutClass: 'badge-blue',
         priorite: 'Haute', prioriteClass: 'badge-red',
         echeance: '2026-03-10', echeanceDisplay: '10/03/2026',
-        type: 'Action affaire', typeClass: 'badge-blue',
+        type: 'Production', typeClass: 'badge-blue',
         responsable: 'Yoann', responsableClass: 'badge-blue',
         description: 'Commander les pièces de rechange pour le distributeur DIST-002. Robinets, joints et pompes à remplacer avant la saison.',
         affaire: '',
         contact: '',
         site: ''
     },
-    'Relancer Festival Vieilles Charrues': {
-        titre: 'Relancer Festival Vieilles Charrues',
-        statut: 'A faire', statutClass: 'badge-gray',
-        priorite: 'Moyenne', prioriteClass: 'badge-orange',
-        echeance: '2026-03-22', echeanceDisplay: '22/03/2026',
-        type: 'Relance commerciale', typeClass: 'badge-yellow',
-        responsable: 'Yoann', responsableClass: 'badge-blue',
-        description: 'Relancer Laura Petit pour le dossier Vieilles Charrues. Le festival a lieu en juillet, il faut avancer sur la logistique.',
-        affaire: 'Vieilles Charrues — Juillet 2026',
-        contact: 'Laura Petit',
-        site: 'Vieilles Charrues'
-    },
-    'Préparer présentation stade Matmut': {
-        titre: 'Préparer présentation stade Matmut',
-        statut: 'A faire', statutClass: 'badge-gray',
-        priorite: 'Moyenne', prioriteClass: 'badge-orange',
-        echeance: '2026-03-19', echeanceDisplay: '19/03/2026',
-        type: 'Action affaire', typeClass: 'badge-blue',
-        responsable: 'Yoann', responsableClass: 'badge-blue',
-        description: 'Préparer la présentation commerciale pour le stade Matmut Atlantique. Adapter l\'offre au contexte stade (volumes plus importants).',
-        affaire: 'Stade Matmut — Mai 2026',
-        contact: 'Pierre Durand',
-        site: 'Stade Matmut Atlantique'
-    },
-    'Répondre email Arena Montpellier': {
-        titre: 'Répondre email Arena Montpellier',
-        statut: 'A faire', statutClass: 'badge-gray',
-        priorite: 'Basse', prioriteClass: 'badge-gray',
-        echeance: '2026-03-21', echeanceDisplay: '21/03/2026',
-        type: 'Autre', typeClass: 'badge-gray',
-        responsable: 'Yoann', responsableClass: 'badge-blue',
-        description: 'Répondre au mail de demande d\'informations de l\'Arena Montpellier. Questions sur les spécifications techniques et les délais.',
-        affaire: 'Arena Montpellier — Sept 2026',
-        contact: '',
-        site: 'Arena Montpellier'
-    },
     'Vérifier stock containers': {
         titre: 'Vérifier stock containers',
         statut: 'Fait', statutClass: 'badge-green',
         priorite: 'Basse', prioriteClass: 'badge-gray',
         echeance: '2026-03-25', echeanceDisplay: '25/03/2026',
-        type: 'Tâche interne', typeClass: 'badge-purple',
+        type: 'Production', typeClass: 'badge-blue',
         responsable: 'Yoann', responsableClass: 'badge-blue',
         description: 'Faire l\'inventaire des containers disponibles en stock. Vérifier l\'état et la disponibilité pour la saison estivale.',
         affaire: '',
         contact: '',
         site: ''
-    },
-    'Appeler Hellfest pour planning': {
-        titre: 'Appeler Hellfest pour planning',
-        statut: 'En cours', statutClass: 'badge-blue',
-        priorite: 'Moyenne', prioriteClass: 'badge-orange',
-        echeance: '2026-03-16', echeanceDisplay: '16/03/2026',
-        type: 'Relance commerciale', typeClass: 'badge-yellow',
-        responsable: 'Yoann', responsableClass: 'badge-blue',
-        description: 'Appeler Antoine Roux pour caler le planning d\'installation sur le site du Hellfest. Besoin de confirmer les dates d\'accès au site.',
-        affaire: 'Hellfest — Juin 2026',
-        contact: 'Antoine Roux',
-        site: 'Hellfest'
     }
 };
 
@@ -364,10 +211,7 @@ function buildTodoPanel(data) {
         { label: 'Basse', badgeClass: 'badge-gray' }
     ];
     const typeOptions = [
-        { label: 'Relance commerciale', badgeClass: 'badge-yellow' },
-        { label: 'Action affaire', badgeClass: 'badge-blue' },
-        { label: 'Tâche interne', badgeClass: 'badge-purple' },
-        { label: 'Autre', badgeClass: 'badge-gray' }
+        { label: 'Production', badgeClass: 'badge-blue' }
     ];
     const responsableOptions = [
         { label: 'Yoann', badgeClass: 'badge-blue' }
@@ -527,28 +371,6 @@ function selectOption(option, fieldName) {
         valueEl.className = 'badge ' + badgeClass;
     }
     option.closest('.field-select-dropdown').classList.remove('open');
-}
-
-function toggleMultiSelect(trigger) {
-    const dropdown = trigger.nextElementSibling;
-    const isOpen = dropdown.classList.contains('open');
-    document.querySelectorAll('.field-select-dropdown.open').forEach(d => d.classList.remove('open'));
-    if (!isOpen) dropdown.classList.add('open');
-}
-
-function updateMultiSelect(fieldName, checkbox, badgeClass, label) {
-    const container = document.getElementById('vals-' + fieldName);
-    if (!container) return;
-    container.querySelectorAll('.badge').forEach(b => {
-        if (b.textContent.trim() === label) b.remove();
-    });
-    if (checkbox.checked) {
-        const arrow = container.querySelector('.field-select-arrow');
-        const badge = document.createElement('span');
-        badge.className = 'badge ' + badgeClass;
-        badge.textContent = label;
-        container.insertBefore(badge, arrow);
-    }
 }
 
 function editText(wrapper) {

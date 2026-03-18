@@ -5,6 +5,50 @@
     <meta name="viewport" content="width=1440">
     <title>JAVATIC — Suivi opérationnel</title>
     <link rel="stylesheet" href="../styles.css">
+    <style>
+        .page-description {
+            padding: 16px 20px 0;
+            background: #fff;
+        }
+        .page-description p {
+            font-size: 13px;
+            color: #666;
+            margin: 0;
+        }
+        .filter-bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: #fff;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .filter-badge {
+            font-size: 12px;
+            color: #999;
+            padding: 4px 10px;
+            background: #f0f0f0;
+            border-radius: 4px;
+        }
+        .machine-cell {
+            font-size: 12px;
+            color: #555;
+            font-family: 'SF Mono', 'Consolas', 'Menlo', monospace;
+            letter-spacing: 0.3px;
+        }
+        .machine-cell.empty {
+            color: #ccc;
+            font-family: inherit;
+        }
+        .badge-ok {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .badge-attention {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+    </style>
 </head>
 <body class="has-disclaimer">
 <div class="disclaimer-banner">Interfaces à usage visuel uniquement — Aperçu non fonctionnel, données fictives</div>
@@ -25,17 +69,18 @@
                 </div>
                 <a href="../pilotage/dashboard.html" class="sidebar-item">Dashboard financier</a>
                 <a href="../pilotage/zones-potentiel.html" class="sidebar-item">Zones à fort potentiel</a>
-                <a href="../pilotage/todo.html" class="sidebar-item">TODO</a>
             </div>
             <div class="sidebar-section">
                 <div class="sidebar-section-header">
                     <span class="sidebar-section-icon">💼</span>
                     <span class="sidebar-section-label">CRM et suivi commercial</span>
                 </div>
-                <a href="../crm/sites.html" class="sidebar-item">Liste des sites</a>
-                <a href="../crm/contacts.html" class="sidebar-item">Liste des contacts</a>
-                <a href="../crm/pipeline.html" class="sidebar-item">Pipeline commercial</a>
+                <a href="../crm/sites.html" class="sidebar-item">Sites</a>
+                <a href="../crm/contacts.html" class="sidebar-item">Contacts</a>
+                <a href="../crm/pipeline.html" class="sidebar-item">Pipeline</a>
+                <a href="../crm/previsionnel-commercial.html" class="sidebar-item">Prévisionnel commercial</a>
                 <a href="../crm/calendrier.html" class="sidebar-item">Calendrier des RDV</a>
+                <a href="../pilotage/todo-commercial.html" class="sidebar-item">TODO Commercial</a>
             </div>
             <div class="sidebar-section">
                 <div class="sidebar-section-header">
@@ -45,8 +90,10 @@
                 <a href="../production/idees-rd.html" class="sidebar-item">Idées R&D</a>
                 <a href="../production/fabrication.html" class="sidebar-item">Suivi fabrication</a>
                 <a href="../production/machines.html" class="sidebar-item">Liste des machines</a>
-                <a href="../production/demandes-validees.html" class="sidebar-item">Demandes clients validées</a>
                 <a href="../production/suivi-operationnel.html" class="sidebar-item active">Suivi opérationnel</a>
+                <a href="../production/demandes-validees.html" class="sidebar-item">Demandes clients validées</a>
+                <a href="../production/suivi-facturation.html" class="sidebar-item">Suivi facturation</a>
+                <a href="../pilotage/todo-prod.html" class="sidebar-item">TODO Production</a>
             </div>
         </nav>
         <div class="sidebar-footer">
@@ -68,555 +115,112 @@
                 </div>
             </div>
             <div class="header-right">
-                <span style="font-size:12px; color:#999; padding:4px 10px; background:#f0f0f0; border-radius:4px;">Filtre : Statut commercial = Validé</span>
+                <span style="font-size:12px; color:#999; padding:4px 10px; background:#f0f0f0; border-radius:4px;">Filtre : Statut opérationnel ≠ Désinstallé</span>
             </div>
+        </div>
+
+        <!-- DESCRIPTION -->
+        <div class="page-description">
+            <p>Suivi de l'allocation des machines aux affaires validées</p>
         </div>
 
         <!-- CONTENT -->
-        <div class="content-area content-kanban">
-            <div class="kanban-board">
-
-                <!-- A Préfacturer 30% -->
-                <div class="kanban-column">
-                    <div class="kanban-column-header">
-                        <span class="badge badge-yellow">A Préfacturer 30%</span>
-                        <span class="kanban-count">1</span>
-                    </div>
-                    <div class="kanban-cards">
-                        <div class="kanban-card" onclick="openRecord('Eurockéennes — Juillet 2026')">
-                            <div class="kanban-card-title">Eurockéennes — Juillet 2026</div>
-                            <div class="kanban-card-field">
-                                <span class="kanban-card-label">Site</span>
-                                <span class="kanban-card-value">Eurockéennes</span>
-                            </div>
-                            <div class="kanban-card-field">
-                                <span class="kanban-card-label">Montant facturé</span>
-                                <span class="kanban-card-value">—</span>
-                            </div>
-                            <div class="kanban-card-badges">
-                                <span class="detail-linked-record" onclick="event.stopPropagation(); alert('Fonctionnalité disponible dans Airtable')">DIST-001</span>
-                                <span class="detail-linked-record" onclick="event.stopPropagation(); alert('Fonctionnalité disponible dans Airtable')">DIST-003</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- A Préfacturer 70% -->
-                <div class="kanban-column">
-                    <div class="kanban-column-header">
-                        <span class="badge badge-orange">A Préfacturer 70%</span>
-                        <span class="kanban-count">0</span>
-                    </div>
-                    <div class="kanban-cards">
-                        <!-- Empty -->
-                    </div>
-                </div>
-
-                <!-- A réaliser -->
-                <div class="kanban-column">
-                    <div class="kanban-column-header">
-                        <span class="badge badge-blue">A réaliser</span>
-                        <span class="kanban-count">1</span>
-                    </div>
-                    <div class="kanban-cards">
-                        <div class="kanban-card" onclick="openRecord('Arena de Bordeaux — Mars 2026')">
-                            <div class="kanban-card-title">Arena de Bordeaux — Mars 2026</div>
-                            <div class="kanban-card-field">
-                                <span class="kanban-card-label">Site</span>
-                                <span class="kanban-card-value">Arena de Bordeaux</span>
-                            </div>
-                            <div class="kanban-card-field">
-                                <span class="kanban-card-label">Montant facturé</span>
-                                <span class="kanban-card-value">12 000 €</span>
-                            </div>
-                            <div class="kanban-card-badges">
-                                <span class="detail-linked-record" onclick="event.stopPropagation(); alert('Fonctionnalité disponible dans Airtable')">DIST-001</span>
-                                <span class="detail-linked-record" onclick="event.stopPropagation(); alert('Fonctionnalité disponible dans Airtable')">DIST-003</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Réalisé -->
-                <div class="kanban-column">
-                    <div class="kanban-column-header">
-                        <span class="badge badge-cyan">Réalisé</span>
-                        <span class="kanban-count">0</span>
-                    </div>
-                    <div class="kanban-cards">
-                        <!-- Empty -->
-                    </div>
-                </div>
-
-                <!-- En paiement -->
-                <div class="kanban-column">
-                    <div class="kanban-column-header">
-                        <span class="badge badge-purple">En paiement</span>
-                        <span class="kanban-count">0</span>
-                    </div>
-                    <div class="kanban-cards">
-                        <!-- Empty -->
-                    </div>
-                </div>
-
-                <!-- Payé -->
-                <div class="kanban-column" style="background:#f0faf0; border-radius:8px; padding:8px;">
-                    <div class="kanban-column-header">
-                        <span class="badge badge-green">Payé</span>
-                        <span class="kanban-count">1</span>
-                    </div>
-                    <div class="kanban-cards">
-                        <div class="kanban-card" onclick="openRecord('Hellfest — Juin 2026')">
-                            <div class="kanban-card-title">Hellfest — Juin 2026</div>
-                            <div class="kanban-card-field">
-                                <span class="kanban-card-label">Site</span>
-                                <span class="kanban-card-value">Hellfest</span>
-                            </div>
-                            <div class="kanban-card-field">
-                                <span class="kanban-card-label">Montant facturé</span>
-                                <span class="kanban-card-value">25 000 €</span>
-                            </div>
-                            <div class="kanban-card-badges">
-                                <span class="detail-linked-record" onclick="event.stopPropagation(); alert('Fonctionnalité disponible dans Airtable')">DIST-001</span>
-                                <span class="detail-linked-record" onclick="event.stopPropagation(); alert('Fonctionnalité disponible dans Airtable')">DIST-003</span>
-                                <span class="detail-linked-record" onclick="event.stopPropagation(); alert('Fonctionnalité disponible dans Airtable')">DIST-004</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+        <div class="content-area content-white">
+            <div class="list-table-wrapper">
+                <table class="list-table" id="main-table">
+                    <thead>
+                        <tr>
+                            <th>Affaire</th>
+                            <th>Site</th>
+                            <th>Type de client</th>
+                            <th style="text-align:right;">Nb machines demandées</th>
+                            <th>Machines Bar 1</th>
+                            <th>Machines Bar 2</th>
+                            <th>Machines Bar 3</th>
+                            <th>Machines Bar 4</th>
+                            <th>Machines Bar 5</th>
+                            <th style="text-align:right;">Nb machines liées</th>
+                            <th>Indicateur</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Row 1: Garorock -->
+                        <tr class="list-row" onclick="alert('Fonctionnalité disponible dans Airtable')">
+                            <td class="col-primary">Garorock — Juin 2026</td>
+                            <td>Garorock</td>
+                            <td><span class="badge badge-purple">Festival</span></td>
+                            <td class="col-number">3</td>
+                            <td class="machine-cell">JAV-001</td>
+                            <td class="machine-cell">JAV-002</td>
+                            <td class="machine-cell">JAV-003</td>
+                            <td class="machine-cell empty">—</td>
+                            <td class="machine-cell empty">—</td>
+                            <td class="col-number">3</td>
+                            <td><span class="badge badge-ok">OK</span></td>
+                        </tr>
+                        <!-- Row 2: Stade Matmut -->
+                        <tr class="list-row" onclick="alert('Fonctionnalité disponible dans Airtable')">
+                            <td class="col-primary">Stade Matmut — Mai 2026</td>
+                            <td>Stade Matmut Atlantique</td>
+                            <td><span class="badge badge-green">Stade</span></td>
+                            <td class="col-number">2</td>
+                            <td class="machine-cell">JAV-004</td>
+                            <td class="machine-cell">JAV-005</td>
+                            <td class="machine-cell empty">—</td>
+                            <td class="machine-cell empty">—</td>
+                            <td class="machine-cell empty">—</td>
+                            <td class="col-number">2</td>
+                            <td><span class="badge badge-ok">OK</span></td>
+                        </tr>
+                        <!-- Row 3: Eurockéennes -->
+                        <tr class="list-row" onclick="alert('Fonctionnalité disponible dans Airtable')">
+                            <td class="col-primary">Eurockéennes — Juillet 2026</td>
+                            <td>Eurockéennes</td>
+                            <td><span class="badge badge-purple">Festival</span></td>
+                            <td class="col-number">4</td>
+                            <td class="machine-cell">JAV-006</td>
+                            <td class="machine-cell">JAV-007</td>
+                            <td class="machine-cell empty">—</td>
+                            <td class="machine-cell empty">—</td>
+                            <td class="machine-cell empty">—</td>
+                            <td class="col-number">2</td>
+                            <td><span class="badge badge-attention">Attention</span></td>
+                        </tr>
+                        <!-- Row 4: Arena Montpellier -->
+                        <tr class="list-row" onclick="alert('Fonctionnalité disponible dans Airtable')">
+                            <td class="col-primary">Arena Montpellier — Sept 2026</td>
+                            <td>Arena Montpellier</td>
+                            <td><span class="badge badge-blue">Salle</span></td>
+                            <td class="col-number">1</td>
+                            <td class="machine-cell empty">—</td>
+                            <td class="machine-cell empty">—</td>
+                            <td class="machine-cell empty">—</td>
+                            <td class="machine-cell empty">—</td>
+                            <td class="machine-cell empty">—</td>
+                            <td class="col-number">0</td>
+                            <td><span class="badge badge-attention">Attention</span></td>
+                        </tr>
+                        <!-- Row 5: Vieilles Charrues -->
+                        <tr class="list-row" onclick="alert('Fonctionnalité disponible dans Airtable')">
+                            <td class="col-primary">Vieilles Charrues — Juillet 2026</td>
+                            <td>Vieilles Charrues</td>
+                            <td><span class="badge badge-purple">Festival</span></td>
+                            <td class="col-number">3</td>
+                            <td class="machine-cell">JAV-008</td>
+                            <td class="machine-cell">JAV-009</td>
+                            <td class="machine-cell">JAV-010</td>
+                            <td class="machine-cell empty">—</td>
+                            <td class="machine-cell empty">—</td>
+                            <td class="col-number">3</td>
+                            <td><span class="badge badge-ok">OK</span></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
     </div>
-
-    <!-- RECORD MODAL -->
-    <div class="record-modal" id="record-modal">
-        <div class="record-modal-overlay" onclick="closeRecordModal()"></div>
-        <div class="record-modal-content">
-            <div class="record-modal-header">
-                <div class="record-modal-nav">
-                    <button class="record-modal-back" onclick="closeRecordModal()">&#8592; Retour</button>
-                </div>
-                <h2 class="record-modal-title" id="record-modal-title">—</h2>
-                <div class="record-modal-header-actions">
-                    <button class="detail-panel-close" onclick="closeRecordModal()">&#10005;</button>
-                </div>
-            </div>
-            <div class="record-modal-tabs">
-                <button class="record-modal-tab active" onclick="switchModalTab(this, 'general')">Général</button>
-                <button class="record-modal-tab" onclick="switchModalTab(this, 'terrain')">Analyse terrain</button>
-                <button class="record-modal-tab" onclick="switchModalTab(this, 'chiffrage')">Chiffrage</button>
-                <button class="record-modal-tab" onclick="switchModalTab(this, 'relations')">Relations</button>
-            </div>
-            <div class="record-modal-body" id="record-modal-body">
-                <!-- Generated dynamically by buildAffaireModal(data) -->
-            </div>
-        </div>
-    </div>
-
 
 </div>
-
-<script>
-// ─── DATA ──────────────────────────────────────────────────
-const affaireData = {
-    'Arena de Bordeaux — Mars 2026': {
-        nom: 'Arena de Bordeaux — Mars 2026',
-        statutCommercial: 'Validé', statutCommercialClass: 'badge-green',
-        statutOperationnel: 'A réaliser', statutOperationnelClass: 'badge-yellow',
-        dateDebut: '2026-03-20', dateFin: '2026-03-22', nbJours: 3, nbMachines: 3,
-        montantEstime: '12 000 €', montantFacture: '12 000 €',
-        obstacleIdentifie: '', commentaires: 'Première prestation réalisée avec succès. Client très satisfait.',
-        emailCommercial: '',
-        problemeFiles: true, convictionJavatic: true,
-        bars: [
-            { nom: 'Bar Hall A', nbTireuses: 3, typeBiere: 'Blonde / IPA', futOuBouteille: 'Fût', commentaire: 'Bar principal' },
-            { nom: 'Bar Hall B', nbTireuses: 2, typeBiere: 'Blonde', futOuBouteille: 'Fût', commentaire: '' },
-            { nom: 'Bar VIP', nbTireuses: 2, typeBiere: 'Craft', futOuBouteille: 'Les deux', commentaire: 'Accès restreint' },
-            { nom: '', nbTireuses: 0, typeBiere: '', futOuBouteille: '', commentaire: '' },
-            { nom: '', nbTireuses: 0, typeBiere: '', futOuBouteille: '', commentaire: '' }
-        ],
-        jaugeAssis: 8000, jaugeDebout: 11300, remplissage: '80%',
-        nbEvenements: 80, horaires: '19h - 23h', panierMoyen: '15,00 €',
-        coutVerre: '6,50 €', nbVisiteursConfirme: 10000,
-        nbFuts: 35, nbTireusesExistantes: 5, pctVerresBiere: '35%',
-        propA_nbDist: '3', propA_gainCA: '4 620 €',
-        propB_nbDist: '4', propB_gainCA: '92 820 €',
-        nbDistributeursRetenus: 3, gainsCA: '280 000 €',
-        site: 'Arena de Bordeaux', contacts: ['Marc Lefèvre'], machines: ['DIST-001', 'DIST-003']
-    },
-    'Eurockéennes — Juillet 2026': {
-        nom: 'Eurockéennes — Juillet 2026',
-        statutCommercial: 'Validé', statutCommercialClass: 'badge-green',
-        statutOperationnel: 'A Préfacturer 30%', statutOperationnelClass: 'badge-cyan',
-        dateDebut: '2026-07-02', dateFin: '2026-07-05', nbJours: 4, nbMachines: 4,
-        montantEstime: '18 000 €', montantFacture: '—',
-        obstacleIdentifie: '', commentaires: 'Contrat validé. 4 machines prévues. Livraison et installation à planifier.',
-        emailCommercial: '',
-        problemeFiles: true, convictionJavatic: true,
-        bars: [
-            { nom: 'Bar Scène 1', nbTireuses: 4, typeBiere: 'Blonde / Blanche', futOuBouteille: 'Fût', commentaire: 'Plus gros bar du festival' },
-            { nom: 'Bar Scène 2', nbTireuses: 3, typeBiere: 'Blonde / IPA', futOuBouteille: 'Fût', commentaire: '' },
-            { nom: 'Bar Camping', nbTireuses: 2, typeBiere: 'Blonde', futOuBouteille: 'Fût', commentaire: 'Ouvert 24h' },
-            { nom: '', nbTireuses: 0, typeBiere: '', futOuBouteille: '', commentaire: '' },
-            { nom: '', nbTireuses: 0, typeBiere: '', futOuBouteille: '', commentaire: '' }
-        ],
-        jaugeAssis: 0, jaugeDebout: 32000, remplissage: '90%',
-        nbEvenements: 1, horaires: '14h - 2h', panierMoyen: '38,00 €',
-        coutVerre: '6,50 €', nbVisiteursConfirme: 32000,
-        nbFuts: 220, nbTireusesExistantes: 8, pctVerresBiere: '42%',
-        propA_nbDist: '4', propA_gainCA: '27 720 €',
-        propB_nbDist: '5', propB_gainCA: '55 440 €',
-        nbDistributeursRetenus: 4, gainsCA: '350 000 €',
-        site: 'Eurockéennes', contacts: ['Claire Bernard'], machines: ['DIST-001', 'DIST-003']
-    },
-    'Hellfest — Juin 2026': {
-        nom: 'Hellfest — Juin 2026',
-        statutCommercial: 'Validé', statutCommercialClass: 'badge-green',
-        statutOperationnel: 'Payé', statutOperationnelClass: 'badge-green',
-        dateDebut: '2026-06-18', dateFin: '2026-06-21', nbJours: 4, nbMachines: 5,
-        montantEstime: '25 000 €', montantFacture: '25 000 €',
-        obstacleIdentifie: '', commentaires: 'Client historique. 5 machines confirmées. Augmentation par rapport à 2025.',
-        emailCommercial: '',
-        problemeFiles: true, convictionJavatic: true,
-        bars: [
-            { nom: 'Main Stage Bar', nbTireuses: 5, typeBiere: 'Blonde / Ambrée / IPA', futOuBouteille: 'Fût', commentaire: 'Bar principal 25m linéaires' },
-            { nom: 'Temple Bar', nbTireuses: 4, typeBiere: 'Blonde / Stout', futOuBouteille: 'Fût', commentaire: '' },
-            { nom: 'Valley Bar', nbTireuses: 3, typeBiere: 'Blonde / Craft', futOuBouteille: 'Les deux', commentaire: 'Zone craft beer' },
-            { nom: '', nbTireuses: 0, typeBiere: '', futOuBouteille: '', commentaire: '' },
-            { nom: '', nbTireuses: 0, typeBiere: '', futOuBouteille: '', commentaire: '' }
-        ],
-        jaugeAssis: 0, jaugeDebout: 60000, remplissage: '90%',
-        nbEvenements: 1, horaires: '12h - 3h', panierMoyen: '50,00 €',
-        coutVerre: '7,00 €', nbVisiteursConfirme: 60000,
-        nbFuts: 600, nbTireusesExistantes: 18, pctVerresBiere: '55%',
-        propA_nbDist: '5', propA_gainCA: '63 000 €',
-        propB_nbDist: '7', propB_gainCA: '126 000 €',
-        nbDistributeursRetenus: 5, gainsCA: '800 000 €',
-        site: 'Hellfest', contacts: ['Sophie Martin'], machines: ['DIST-001', 'DIST-003', 'DIST-004']
-    }
-};
-
-
-// ─── BUILD AFFAIRE MODAL (4 tabs) ─────────────────────────
-function buildAffaireModal(d) {
-    if (!d) return '<p style="padding:20px;color:#999;">Données non disponibles</p>';
-    const esc = s => (s === undefined || s === null || s === '') ? '—' : s.toString().replace(/</g,'&lt;');
-
-    const statutCommercialOptions = [
-        { label: 'Prospection', badgeClass: 'badge-gray' },
-        { label: 'Qualification', badgeClass: 'badge-blue' },
-        { label: 'A Chiffrer', badgeClass: 'badge-yellow' },
-        { label: 'A Soumettre', badgeClass: 'badge-orange' },
-        { label: 'Validé', badgeClass: 'badge-green' },
-        { label: 'Refusé', badgeClass: 'badge-red' }
-    ];
-    const statutOperationnelOptions = [
-        { label: '—', badgeClass: 'badge-gray' },
-        { label: 'A Préfacturer 30%', badgeClass: 'badge-cyan' },
-        { label: 'A Préfacturer 70%', badgeClass: 'badge-blue' },
-        { label: 'A réaliser', badgeClass: 'badge-yellow' },
-        { label: 'Réalisé', badgeClass: 'badge-teal' },
-        { label: 'En paiement', badgeClass: 'badge-orange' },
-        { label: 'Payé', badgeClass: 'badge-green' }
-    ];
-
-    function buildSelectField(fieldName, currentValue, currentBadgeClass, options) {
-        let optionsHtml = options.map(o =>
-            `<div class="field-select-option${o.label === currentValue ? ' selected' : ''}" data-badge-class="${o.badgeClass}" onclick="selectOption(this, '${fieldName}')">${o.label}</div>`
-        ).join('');
-        return `<div class="field-select" data-field="${fieldName}">
-            <div class="field-select-value" onclick="toggleSelect(this)">
-                <span class="badge ${currentBadgeClass}" id="val-${fieldName}">${esc(currentValue)}</span>
-                <span class="field-select-arrow">▾</span>
-            </div>
-            <div class="field-select-dropdown" id="dropdown-${fieldName}">
-                ${optionsHtml}
-            </div>
-        </div>`;
-    }
-
-    const futOuBouteilleOptions = [
-        { label: 'Fût', badgeClass: 'badge-blue' },
-        { label: 'Bouteille', badgeClass: 'badge-orange' },
-        { label: 'Les deux', badgeClass: 'badge-teal' }
-    ];
-    const problemeFilesOptions = [
-        { label: 'Oui', badgeClass: 'badge-red' },
-        { label: 'Non', badgeClass: 'badge-green' },
-        { label: 'Ne sait pas', badgeClass: 'badge-gray' }
-    ];
-    const convictionOptions = [
-        { label: 'Convaincu', badgeClass: 'badge-green' },
-        { label: 'A convaincre', badgeClass: 'badge-yellow' },
-        { label: 'Réticent', badgeClass: 'badge-red' }
-    ];
-
-    const textField = (label, value, type) => {
-        const t = type || 'text';
-        return `<div class="detail-field">
-            <div class="detail-field-label">${label}</div>
-            <div class="detail-field-value">
-                <div class="field-text" onclick="editText(this)">
-                    <span class="field-text-display">${esc(value)}</span>
-                    <input class="field-text-input" type="${t}" value="${esc(value) === '—' ? '' : esc(value)}" style="display:none" onblur="saveText(this)" onkeydown="if(event.key==='Enter') this.blur()">
-                </div>
-            </div>
-        </div>`;
-    };
-    const displayField = (label, value) => `<div class="detail-field">
-        <div class="detail-field-label">${label}</div>
-        <div class="detail-field-value">${esc(value)}</div>
-    </div>`;
-    const textareaField = (label, value) => `<div class="detail-field">
-        <div class="detail-field-label">${label}</div>
-        <div class="detail-field-value">
-            <div class="field-textarea" onclick="editTextarea(this)">
-                <div class="field-textarea-display">${esc(value)}</div>
-                <textarea class="field-textarea-input" style="display:none" onblur="saveTextarea(this)">${esc(value) === '—' ? '' : esc(value)}</textarea>
-            </div>
-        </div>
-    </div>`;
-
-    let html = '';
-
-    // ─── TAB 1: Général ───
-    html += `<div class="record-modal-tab-content active" id="modal-tab-general">`;
-    html += `<div class="detail-section"><h4 class="detail-section-title">Statuts</h4>`;
-    html += `<div class="detail-field"><div class="detail-field-label">Statut commercial</div><div class="detail-field-value">${buildSelectField('statut-commercial', d.statutCommercial, d.statutCommercialClass, statutCommercialOptions)}</div></div>`;
-    html += `<div class="detail-field"><div class="detail-field-label">Statut opérationnel</div><div class="detail-field-value">${buildSelectField('statut-operationnel', d.statutOperationnel, d.statutOperationnelClass, statutOperationnelOptions)}</div></div>`;
-    html += `</div>`;
-    html += `<div class="detail-section"><h4 class="detail-section-title">Événement</h4>`;
-    html += textField('Date début', d.dateDebut, 'date');
-    html += textField('Date fin', d.dateFin, 'date');
-    html += textField('Nombre de jours de location', d.nbJours, 'number');
-    html += textField('Nombre de machines demandées', d.nbMachines, 'number');
-    html += `</div>`;
-    html += `<div class="detail-section"><h4 class="detail-section-title">Montants</h4>`;
-    html += textField('Montant estimé HT', d.montantEstime);
-    html += textField('Montant facturé HT', d.montantFacture);
-    html += `</div>`;
-    html += `<div class="detail-section"><h4 class="detail-section-title">Commercial</h4>`;
-    html += textareaField('Obstacle identifié', d.obstacleIdentifie);
-    html += textareaField('Commentaires', d.commentaires);
-    html += textareaField('Email commercial généré', d.emailCommercial);
-    html += `</div>`;
-    html += `</div>`;
-
-    // ─── TAB 2: Analyse terrain ───
-    html += `<div class="record-modal-tab-content" id="modal-tab-terrain">`;
-    html += `<div class="detail-section"><h4 class="detail-section-title">Organisation existante</h4>`;
-    const problemeVal = d.problemeFiles === true ? 'Oui' : (d.problemeFiles === false ? 'Non' : 'Ne sait pas');
-    const problemeBadge = d.problemeFiles === true ? 'badge-red' : (d.problemeFiles === false ? 'badge-green' : 'badge-gray');
-    html += `<div class="detail-field"><div class="detail-field-label">Problème files d'attente</div><div class="detail-field-value">${buildSelectField('probleme-files', problemeVal, problemeBadge, problemeFilesOptions)}</div></div>`;
-    const convictionVal = d.convictionJavatic === true ? 'Convaincu' : (d.convictionJavatic === false ? 'Réticent' : 'A convaincre');
-    const convictionBadge = d.convictionJavatic === true ? 'badge-green' : (d.convictionJavatic === false ? 'badge-red' : 'badge-yellow');
-    html += `<div class="detail-field"><div class="detail-field-label">Conviction solution</div><div class="detail-field-value">${buildSelectField('conviction-solution', convictionVal, convictionBadge, convictionOptions)}</div></div>`;
-    const bars = d.bars || [];
-    for (let i = 0; i < 5; i++) {
-        const b = bars[i] || {};
-        html += `<div style="margin:16px 0 8px; font-size:13px; font-weight:600; color:#444; border-bottom:1px solid #eee; padding-bottom:4px;">Bar ${i+1}</div>`;
-        html += textField('Nom bar', b.nom);
-        html += textField('Nb tireuses', b.nbTireuses, 'number');
-        html += textField('Type de bière', b.typeBiere);
-        const futVal = b.futOuBouteille || '—';
-        const futBadge = futVal === 'Fût' ? 'badge-blue' : (futVal === 'Bouteille' ? 'badge-orange' : (futVal === 'Les deux' ? 'badge-teal' : 'badge-gray'));
-        html += `<div class="detail-field"><div class="detail-field-label">Fût ou bouteille</div><div class="detail-field-value">${buildSelectField('fut-bouteille-' + i, futVal, futBadge, futOuBouteilleOptions)}</div></div>`;
-        html += textField('Commentaire bar', b.commentaire);
-    }
-    html += `</div>`;
-    html += `<div class="detail-section"><h4 class="detail-section-title">Affluence</h4>`;
-    html += textField('Jauge max assis', d.jaugeAssis, 'number');
-    html += textField('Jauge max debout', d.jaugeDebout, 'number');
-    html += textField('% remplissage moyen', d.remplissage, 'number');
-    html += textField('Nb événements', d.nbEvenements, 'number');
-    html += textField('Horaires', d.horaires);
-    html += textField('Panier moyen', d.panierMoyen);
-    html += textField('Coût moyen verre', d.coutVerre);
-    html += textField('Nb visiteurs confirmé', d.nbVisiteursConfirme, 'number');
-    html += `</div>`;
-    html += `</div>`;
-
-    // ─── TAB 3: Chiffrage ───
-    html += `<div class="record-modal-tab-content" id="modal-tab-chiffrage">`;
-    html += `<div class="detail-section"><h4 class="detail-section-title">Volume bière</h4>`;
-    html += textField('Nb fûts estimé', d.nbFuts, 'number');
-    html += textField('Nb tireuses existantes', d.nbTireusesExistantes, 'number');
-    html += textField('% verres bière', d.pctVerresBiere, 'number');
-    html += `</div>`;
-    html += `<div class="detail-section"><h4 class="detail-section-title">Propositions (calculés)</h4>`;
-    html += displayField('Proposition A - Nb distributeurs', d.propA_nbDist);
-    html += displayField('Proposition A - Gain CA estimé', d.propA_gainCA);
-    html += displayField('Proposition B - Nb distributeurs', d.propB_nbDist);
-    html += displayField('Proposition B - Gain CA estimé', d.propB_gainCA);
-    html += `</div>`;
-    html += `<div class="detail-section"><h4 class="detail-section-title">Décision</h4>`;
-    html += textField('Nb distributeurs retenus', d.nbDistributeursRetenus, 'number');
-    html += displayField('Gains CA retenus', d.gainsCA);
-    html += `</div>`;
-    html += `</div>`;
-
-    // ─── TAB 4: Relations ───
-    html += `<div class="record-modal-tab-content" id="modal-tab-relations">`;
-    const siteName = d.site || '';
-    html += `<div class="detail-section"><h4 class="detail-section-title">Site lié</h4>`;
-    if (siteName) {
-        html += `<div class="detail-field"><div class="detail-field-value"><span class="detail-linked-record" onclick="alert('Fonctionnalité disponible dans Airtable')">${siteName}</span></div></div>`;
-    } else {
-        html += `<div class="detail-field"><div class="detail-field-value"><span style="color:#999;">Aucun</span></div></div>`;
-    }
-    html += `</div>`;
-    const contacts = d.contacts || [];
-    html += `<div class="detail-section"><h4 class="detail-section-title">Contacts associés</h4>`;
-    if (contacts.length) {
-        html += `<div class="detail-linked-cards">`;
-        contacts.forEach(cName => {
-            html += `<div class="detail-linked-card" onclick="alert('Fonctionnalité disponible dans Airtable')">
-                <div class="detail-linked-card-title">${esc(cName)}</div>
-            </div>`;
-        });
-        html += `</div>`;
-    } else {
-        html += `<div class="detail-field"><div class="detail-field-value"><span style="color:#999;">Aucun</span></div></div>`;
-    }
-    html += `<span class="field-add-link" style="margin-top:8px;display:inline-block;">+ Ajouter</span></div>`;
-    const machines = d.machines || [];
-    html += `<div class="detail-section"><h4 class="detail-section-title">Machines assignées</h4>`;
-    if (machines.length) {
-        html += `<div class="detail-linked-cards">`;
-        machines.forEach(mName => {
-            html += `<div class="detail-linked-card" onclick="alert('Fonctionnalité disponible dans Airtable')">
-                <div class="detail-linked-card-title">${esc(mName)}</div>
-            </div>`;
-        });
-        html += `</div>`;
-    } else {
-        html += `<div class="detail-field"><div class="detail-field-value"><span style="color:#999;">Aucune</span></div></div>`;
-    }
-    html += `<span class="field-add-link" style="margin-top:8px;display:inline-block;">+ Ajouter</span></div>`;
-    html += `</div>`;
-
-    return html;
-}
-
-
-// ─── OPEN / CLOSE RECORD MODAL ───────────────────────────
-function openRecord(name) {
-    const data = affaireData[name];
-    document.getElementById('record-modal-title').textContent = name;
-    document.getElementById('record-modal-body').innerHTML = buildAffaireModal(data);
-    document.querySelectorAll('.record-modal-tab').forEach((t, i) => t.classList.toggle('active', i === 0));
-    document.getElementById('record-modal').classList.add('open');
-}
-
-function closeRecordModal() {
-    document.getElementById('record-modal').classList.remove('open');
-}
-
-function switchModalTab(btn, tabId) {
-    btn.closest('.record-modal-tabs').querySelectorAll('.record-modal-tab').forEach(t => t.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('.record-modal-tab-content').forEach(c => c.classList.remove('active'));
-    document.getElementById('modal-tab-' + tabId).classList.add('active');
-}
-
-
-// ─── INTERACTIVE FIELDS JS ───────────────────────────────
-function toggleSelect(trigger) {
-    const dropdown = trigger.nextElementSibling;
-    const isOpen = dropdown.classList.contains('open');
-    document.querySelectorAll('.field-select-dropdown.open').forEach(d => d.classList.remove('open'));
-    if (!isOpen) {
-        dropdown.classList.add('open');
-        const currentText = trigger.querySelector('[id^="val-"]')?.textContent;
-        dropdown.querySelectorAll('.field-select-option').forEach(opt => {
-            opt.classList.toggle('selected', opt.textContent.trim() === currentText?.trim());
-        });
-    }
-}
-
-function selectOption(option, fieldName) {
-    const text = option.textContent.trim();
-    const badgeClass = option.getAttribute('data-badge-class') || 'badge-gray';
-    const valueEl = document.getElementById('val-' + fieldName);
-    if (valueEl) {
-        valueEl.textContent = text;
-        valueEl.className = 'badge ' + badgeClass;
-    }
-    option.closest('.field-select-dropdown').classList.remove('open');
-}
-
-function toggleMultiSelect(trigger) {
-    const dropdown = trigger.nextElementSibling;
-    const isOpen = dropdown.classList.contains('open');
-    document.querySelectorAll('.field-select-dropdown.open').forEach(d => d.classList.remove('open'));
-    if (!isOpen) dropdown.classList.add('open');
-}
-
-function updateMultiSelect(fieldName, checkbox, badgeClass, label) {
-    const container = document.getElementById('vals-' + fieldName);
-    if (!container) return;
-    container.querySelectorAll('.badge').forEach(b => { if (b.textContent.trim() === label) b.remove(); });
-    if (checkbox.checked) {
-        const arrow = container.querySelector('.field-select-arrow');
-        const badge = document.createElement('span');
-        badge.className = 'badge ' + badgeClass;
-        badge.textContent = label;
-        container.insertBefore(badge, arrow);
-    }
-}
-
-function editText(wrapper) {
-    const display = wrapper.querySelector('.field-text-display');
-    const input = wrapper.querySelector('.field-text-input');
-    if (!input) return;
-    display.style.display = 'none';
-    input.style.display = 'block';
-    input.focus();
-    input.select();
-    wrapper.style.borderColor = '#166ee1';
-}
-
-function saveText(input) {
-    const wrapper = input.closest('.field-text');
-    const display = wrapper.querySelector('.field-text-display');
-    display.textContent = input.value || '—';
-    display.style.display = 'block';
-    input.style.display = 'none';
-    wrapper.style.borderColor = 'transparent';
-}
-
-function editTextarea(wrapper) {
-    const display = wrapper.querySelector('.field-textarea-display');
-    const input = wrapper.querySelector('.field-textarea-input');
-    if (!input) return;
-    display.style.display = 'none';
-    input.style.display = 'block';
-    input.focus();
-    wrapper.style.borderColor = '#166ee1';
-}
-
-function saveTextarea(input) {
-    const wrapper = input.closest('.field-textarea');
-    const display = wrapper.querySelector('.field-textarea-display');
-    display.textContent = input.value || '—';
-    display.style.display = 'block';
-    input.style.display = 'none';
-    wrapper.style.borderColor = 'transparent';
-}
-
-// ─── CLOSE DROPDOWNS ON CLICK OUTSIDE ────────────────────
-document.addEventListener('click', function(e) {
-    if (!e.target.closest('.field-select') && !e.target.closest('.field-multiselect')) {
-        document.querySelectorAll('.field-select-dropdown.open').forEach(d => d.classList.remove('open'));
-    }
-});
-
-// ─── ESCAPE ──────────────────────────────────────────────
-document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeRecordModal();
-});
-</script>
 </body>
 </html>

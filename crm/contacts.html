@@ -25,7 +25,6 @@
                 </div>
                 <a href="../pilotage/dashboard.html" class="sidebar-item">Dashboard financier</a>
                 <a href="../pilotage/zones-potentiel.html" class="sidebar-item">Zones à fort potentiel</a>
-                <a href="../pilotage/todo.html" class="sidebar-item">TODO</a>
             </div>
             <div class="sidebar-section">
                 <div class="sidebar-section-header">
@@ -35,7 +34,9 @@
                 <a href="../crm/sites.html" class="sidebar-item">Liste des sites</a>
                 <a href="../crm/contacts.html" class="sidebar-item active">Liste des contacts</a>
                 <a href="../crm/pipeline.html" class="sidebar-item">Pipeline commercial</a>
+                <a href="../crm/previsionnel-commercial.html" class="sidebar-item">Prévisionnel commercial</a>
                 <a href="../crm/calendrier.html" class="sidebar-item">Calendrier des RDV</a>
+                <a href="../pilotage/todo-commercial.html" class="sidebar-item">TODO Commercial</a>
             </div>
             <div class="sidebar-section">
                 <div class="sidebar-section-header">
@@ -45,8 +46,10 @@
                 <a href="../production/idees-rd.html" class="sidebar-item">Idées R&D</a>
                 <a href="../production/fabrication.html" class="sidebar-item">Suivi fabrication</a>
                 <a href="../production/machines.html" class="sidebar-item">Liste des machines</a>
-                <a href="../production/demandes-validees.html" class="sidebar-item">Demandes clients validées</a>
                 <a href="../production/suivi-operationnel.html" class="sidebar-item">Suivi opérationnel</a>
+                <a href="../production/demandes-validees.html" class="sidebar-item">Demandes clients validées</a>
+                <a href="../production/suivi-facturation.html" class="sidebar-item">Suivi facturation</a>
+                <a href="../pilotage/todo-prod.html" class="sidebar-item">TODO Production</a>
             </div>
         </nav>
         <div class="sidebar-footer">
@@ -190,14 +193,14 @@
    DATA
    ============================================ */
 const contactData = {
-    'Jean Dupont': { nom: 'Dupont', prenom: 'Jean', fonction: 'Directeur commercial', email: 'j.dupont@zenith-pau.fr', telephone: '05 59 12 34 56', linkedin: 'linkedin.com/in/jeandupont', source: 'Salon / Événement', commentaires: 'Contact principal pour le Zénith de Pau', dateCreation: '12/01/2026', sitesLies: ['Zénith de Pau'], affairesLiees: ['Zénith de Pau — Avril 2026'] },
-    'Sophie Martin': { nom: 'Martin', prenom: 'Sophie', fonction: 'Responsable événementiel', email: 's.martin@arena-bordeaux.fr', telephone: '05 56 98 76 54', linkedin: '', source: 'Email', commentaires: '', dateCreation: '05/02/2026', sitesLies: ['Arena de Bordeaux'], affairesLiees: ['Arena de Bordeaux — Mars 2026'] },
-    'Pierre Durand': { nom: 'Durand', prenom: 'Pierre', fonction: 'Directeur technique', email: 'p.durand@matmut-atlantique.fr', telephone: '05 56 11 22 33', linkedin: 'linkedin.com/in/pierredurand', source: 'LinkedIn', commentaires: 'Intéressé par solution pour matchs de rugby', dateCreation: '20/01/2026', sitesLies: ['Stade Matmut Atlantique'], affairesLiees: ['Stade Matmut — Mai 2026'] },
-    'Claire Bernard': { nom: 'Bernard', prenom: 'Claire', fonction: 'Cheffe de projet', email: 'c.bernard@eurockeennes.fr', telephone: '03 84 22 33 44', linkedin: '', source: 'Email', commentaires: '', dateCreation: '18/02/2026', sitesLies: ['Eurockéennes'], affairesLiees: ['Eurockéennes — Juillet 2026'] },
-    'Thomas Moreau': { nom: 'Moreau', prenom: 'Thomas', fonction: 'Directeur', email: 't.moreau@garorock.com', telephone: '05 53 98 76 54', linkedin: 'linkedin.com/in/thomasmoreau', source: 'Recommandation', commentaires: 'Rencontré au MaMA Festival', dateCreation: '10/11/2025', sitesLies: ['Garorock'], affairesLiees: ['Garorock — Juin 2026'] },
-    'Laura Petit': { nom: 'Petit', prenom: 'Laura', fonction: 'Responsable partenariats', email: 'l.petit@vieillescharrues.asso.fr', telephone: '02 98 93 00 93', linkedin: '', source: 'Salon / Événement', commentaires: '', dateCreation: '22/12/2025', sitesLies: ['Vieilles Charrues'], affairesLiees: ['Vieilles Charrues — Juillet 2026'] },
-    'Antoine Roux': { nom: 'Roux', prenom: 'Antoine', fonction: 'Directeur opérations', email: 'a.roux@hellfest.fr', telephone: '02 40 54 00 00', linkedin: 'linkedin.com/in/antoineroux', source: 'Recommandation', commentaires: 'Client historique, très satisfait', dateCreation: '01/09/2025', sitesLies: ['Hellfest'], affairesLiees: ['Hellfest — Juin 2026'] },
-    'Camille Lefebvre': { nom: 'Lefebvre', prenom: 'Camille', fonction: 'Régisseuse', email: 'c.lefebvre@rockenseine.com', telephone: '01 45 67 89 01', linkedin: '', source: 'LinkedIn', commentaires: 'Premier contact, à relancer', dateCreation: '03/03/2026', sitesLies: ['Rock en Seine'], affairesLiees: [] }
+    'Jean Dupont': { nom: 'Dupont', prenom: 'Jean', fonction: 'Directeur commercial', email: 'j.dupont@zenith-pau.fr', telephone: '05 59 12 34 56', linkedin: 'linkedin.com/in/jeandupont', source: 'Salon / Événement', commentaires: 'Contact principal pour le Zénith de Pau', dateCreation: '12/01/2026', sitesLies: ['Zénith de Pau'], affairesLiees: ['Zénith de Pau — Avril 2026'], interactions: [{date:'15/01/2026',type:'RDV',objet:'Visite terrain — audit bar',site:'Zénith de Pau'},{date:'28/02/2026',type:'Appel',objet:'Suivi proposition commerciale',site:'Zénith de Pau'},{date:'12/03/2026',type:'Email',objet:'Envoi devis révisé',site:'Zénith de Pau'}] },
+    'Sophie Martin': { nom: 'Martin', prenom: 'Sophie', fonction: 'Responsable événementiel', email: 's.martin@arena-bordeaux.fr', telephone: '05 56 98 76 54', linkedin: '', source: 'Email', commentaires: '', dateCreation: '05/02/2026', sitesLies: ['Arena de Bordeaux'], affairesLiees: ['Arena de Bordeaux — Mars 2026'], interactions: [{date:'05/12/2025',type:'RDV',objet:'Premier contact — présentation Javatic',site:'Arena de Bordeaux'},{date:'10/01/2026',type:'RDV',objet:'Audit terrain — bars Arena',site:'Arena de Bordeaux'},{date:'25/03/2026',type:'RDV',objet:'Installation machines — J-1',site:'Arena de Bordeaux'}] },
+    'Pierre Durand': { nom: 'Durand', prenom: 'Pierre', fonction: 'Directeur technique', email: 'p.durand@matmut-atlantique.fr', telephone: '05 56 11 22 33', linkedin: 'linkedin.com/in/pierredurand', source: 'LinkedIn', commentaires: 'Intéressé par solution pour matchs de rugby', dateCreation: '20/01/2026', sitesLies: ['Stade Matmut Atlantique'], affairesLiees: ['Stade Matmut — Mai 2026'], interactions: [{date:'20/01/2026',type:'Appel',objet:'Premier contact téléphonique',site:'Stade Matmut Atlantique'}] },
+    'Claire Bernard': { nom: 'Bernard', prenom: 'Claire', fonction: 'Cheffe de projet', email: 'c.bernard@eurockeennes.fr', telephone: '03 84 22 33 44', linkedin: '', source: 'Email', commentaires: '', dateCreation: '18/02/2026', sitesLies: ['Eurockéennes'], affairesLiees: ['Eurockéennes — Juillet 2026'], interactions: [{date:'18/02/2026',type:'RDV',objet:'Présentation solution + visite site',site:'Eurockéennes'},{date:'05/03/2026',type:'Email',objet:'Envoi proposition 4 machines',site:'Eurockéennes'}] },
+    'Thomas Moreau': { nom: 'Moreau', prenom: 'Thomas', fonction: 'Directeur', email: 't.moreau@garorock.com', telephone: '05 53 98 76 54', linkedin: 'linkedin.com/in/thomasmoreau', source: 'Recommandation', commentaires: 'Rencontré au MaMA Festival', dateCreation: '10/11/2025', sitesLies: ['Garorock'], affairesLiees: ['Garorock — Juin 2026'], interactions: [{date:'10/11/2025',type:'RDV',objet:'Rencontre MaMA Festival',site:'Garorock'}] },
+    'Laura Petit': { nom: 'Petit', prenom: 'Laura', fonction: 'Responsable partenariats', email: 'l.petit@vieillescharrues.asso.fr', telephone: '02 98 93 00 93', linkedin: '', source: 'Salon / Événement', commentaires: '', dateCreation: '22/12/2025', sitesLies: ['Vieilles Charrues'], affairesLiees: ['Vieilles Charrues — Juillet 2026'], interactions: [{date:'22/12/2025',type:'RDV',objet:'Salon — premier échange',site:'Vieilles Charrues'}] },
+    'Antoine Roux': { nom: 'Roux', prenom: 'Antoine', fonction: 'Directeur opérations', email: 'a.roux@hellfest.fr', telephone: '02 40 54 00 00', linkedin: 'linkedin.com/in/antoineroux', source: 'Recommandation', commentaires: 'Client historique, très satisfait', dateCreation: '01/09/2025', sitesLies: ['Hellfest'], affairesLiees: ['Hellfest — Juin 2026'], interactions: [{date:'01/09/2025',type:'RDV',objet:'Bilan post-Hellfest 2025',site:'Hellfest'},{date:'15/11/2025',type:'Appel',objet:'Renouvellement 2026',site:'Hellfest'},{date:'10/01/2026',type:'Email',objet:'Confirmation contrat 2026',site:'Hellfest'}] },
+    'Camille Lefebvre': { nom: 'Lefebvre', prenom: 'Camille', fonction: 'Régisseuse', email: 'c.lefebvre@rockenseine.com', telephone: '01 45 67 89 01', linkedin: '', source: 'LinkedIn', commentaires: 'Premier contact, à relancer', dateCreation: '03/03/2026', sitesLies: ['Rock en Seine'], affairesLiees: [], interactions: [] }
 };
 
 
@@ -259,6 +262,32 @@ function buildContactPanel(d) {
         html += `<span style="color:#999;">Aucune affaire liée</span>`;
     }
     html += `<span class="field-add-link">+ Ajouter</span></div></div>`;
+    html += `</div>`;
+
+    // Section: Interactions / RDV
+    const interactions = d.interactions || [];
+    html += `<div class="detail-section"><div class="detail-section-title">Interactions / RDV liés</div>`;
+    if (interactions.length > 0) {
+        html += `<table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:4px;">
+            <thead><tr style="border-bottom:2px solid #e5e5e5;">
+                <th style="text-align:left;padding:4px 6px;font-weight:500;color:#999;font-size:10px;text-transform:uppercase;">Date</th>
+                <th style="text-align:left;padding:4px 6px;font-weight:500;color:#999;font-size:10px;text-transform:uppercase;">Type</th>
+                <th style="text-align:left;padding:4px 6px;font-weight:500;color:#999;font-size:10px;text-transform:uppercase;">Objet</th>
+                <th style="text-align:left;padding:4px 6px;font-weight:500;color:#999;font-size:10px;text-transform:uppercase;">Site</th>
+            </tr></thead><tbody>`;
+        interactions.forEach(i => {
+            const typeBadge = i.type === 'RDV' ? 'badge-blue' : (i.type === 'Appel' ? 'badge-teal' : 'badge-gray');
+            html += `<tr style="border-bottom:1px solid #f0f0f0;cursor:pointer;" onclick="alert('Fonctionnalité disponible dans Airtable')">
+                <td style="padding:6px;">${i.date}</td>
+                <td style="padding:6px;"><span class="badge ${typeBadge}" style="font-size:10px;">${i.type}</span></td>
+                <td style="padding:6px;">${i.objet}</td>
+                <td style="padding:6px;">${i.site || '—'}</td>
+            </tr>`;
+        });
+        html += `</tbody></table>`;
+    } else {
+        html += `<span style="color:#999;font-size:12px;">Aucune interaction enregistrée</span>`;
+    }
     html += `</div>`;
 
     return html;
